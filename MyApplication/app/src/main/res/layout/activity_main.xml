@@ -19,4 +19,17 @@
         tools:layout_editor_absoluteX="147dp"
         tools:layout_editor_absoluteY="329dp" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:text="MUSCLE UPPPPPP"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:typeface="sans"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="113dp" />
+
 </android.support.constraint.ConstraintLayout>
