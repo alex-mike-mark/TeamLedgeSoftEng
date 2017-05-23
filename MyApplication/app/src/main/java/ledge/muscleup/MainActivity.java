@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Open the Workout Screen
     public void openWorkouts(View view) {
         Intent intent = new Intent(this, WorkoutActivity.class);
         startActivity(intent);
