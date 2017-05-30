@@ -37,4 +37,12 @@ public class Workout {
             exercises.add(e[i]);
         }
     }
+
+    public void addExercise(){
+
+    }
+
+    public void removeExercise(){
+
+    }
 }

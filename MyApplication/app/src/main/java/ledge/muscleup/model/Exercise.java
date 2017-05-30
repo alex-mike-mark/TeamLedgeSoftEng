@@ -42,7 +42,5 @@ public class Exercise {
         return intensity;
     }
 
-    public String getMusclesWorked(){
-        return muscles;
-    }
+    public String getMusclesWorked(){ return muscles; }
 }
