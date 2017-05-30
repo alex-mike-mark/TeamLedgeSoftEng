@@ -27,7 +27,7 @@ import java.util.Map;
  */
 
 public class Workout {
-    static int nextID;
+    private static int nextID = 0;
     private int workoutID;
     private String name;
     private boolean isCustom;
