@@ -18,7 +18,9 @@
 
 package ledge.muscleup.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Alexander on 2017-05-27.
@@ -30,7 +32,7 @@ public class Workout {
     private String name;
     boolean isCustom;
     boolean isFavourite;
-    private Map<Exercise, ExerciseQuantity> exercises;
+    private HashMap<Exercise, ExerciseQuantity> exercises;
 
     /**
      *
@@ -41,10 +43,9 @@ public class Workout {
         workoutID = nextID;
         nextID++;
         this.name = name;
-        contents = null;
         this.isCustom = isCustom;
         isFavourite = false;
-        exerecises = null;
+        exercises = new HashMap<Exercise, ExerciseQuantity>();
     }
 
     /**

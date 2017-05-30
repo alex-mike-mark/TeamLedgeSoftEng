@@ -4,9 +4,8 @@ package ledge.muscleup;
  * Created by koope on 2017-05-29.
  */
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import ledge.muscleup.ExerciseSetsAndReps;
+import ledge.muscleup.model.ExerciseSetsAndReps;
 
 public class ExerciseSetsAndRepsTest extends TestCase{
 

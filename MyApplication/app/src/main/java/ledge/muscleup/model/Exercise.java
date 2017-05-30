@@ -22,25 +22,52 @@ public class Exercise {
         isFavourite = false;
     }
 
+    /**
+     * equals
+     * Current equals method, just checks exercise name is all.
+     *
+     * @param other is the other exercise.
+     * @return returns if the exercise is equal.
+     */
     public boolean equals(Exercise other){
         return this.name.equalsIgnoreCase(other.name);
     }
 
+    /**
+     * Method to change the value of isFavourite.
+     */
     public void toggleFavourite(){
         isFavourite=!isFavourite;
     }
 
+    /**
+     * Returns if the workout is a favourite.
+     * @return
+     */
     public boolean isFavourite(){
         return isFavourite;
     }
 
+    /**
+     * This is literally a getter
+     * @return
+     */
     public String getName(){
         return name;
     }
 
+    /**
+     * This is literally a getter
+     * @return
+     */
     public int getIntensity(){
         return intensity;
     }
 
+
+    /**
+     * This is literally a getter
+     * @return
+     */
     public String getMusclesWorked(){ return muscles; }
 }

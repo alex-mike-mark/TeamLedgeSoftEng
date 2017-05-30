@@ -5,7 +5,7 @@ package ledge.muscleup;
  */
 import junit.framework.TestCase;
 
-import ledge.muscleup.ExerciseDistance;
+import ledge.muscleup.model.ExerciseDistance;
 
 public class ExerciseDistanceTest extends TestCase {
 
