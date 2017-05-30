@@ -30,7 +30,7 @@ public class Exercise {
      * @return returns if the exercise is equal.
      */
     public boolean equals(Exercise other){
-        return this.name.equalsIgnoreCase(other.name);
+        return this.id==other.id;
     }
 
     /**
