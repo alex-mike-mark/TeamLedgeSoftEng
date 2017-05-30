@@ -12,7 +12,7 @@ public class WorkoutTest extends TestCase {
     Workout testWorkout;
     @Before
     public void testInit(){
-        testWorkout = new Workout();
+        testWorkout = new Workout("LOL",true);
     }
 
     public void initializeTest(){
