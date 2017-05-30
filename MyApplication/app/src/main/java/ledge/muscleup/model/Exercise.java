@@ -69,5 +69,7 @@ public class Exercise {
      * This is literally a getter
      * @return
      */
-    public String getMusclesWorked(){ return muscles; }
+    public String getMusclesWorked(){
+        return muscles;
+    }
 }
