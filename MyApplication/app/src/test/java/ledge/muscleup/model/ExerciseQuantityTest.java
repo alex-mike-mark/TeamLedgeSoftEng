@@ -1,4 +1,4 @@
-package ledge.muscleup;
+package ledge.muscleup.model;
 
 /**
  * Created by koope on 2017-05-29.

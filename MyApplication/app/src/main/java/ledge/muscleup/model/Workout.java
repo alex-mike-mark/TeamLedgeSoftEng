@@ -32,7 +32,7 @@ public class Workout {
     private String name;
     boolean isCustom;
     boolean isFavourite;
-    private HashMap<Exercise, ExerciseQuantity> exercises;
+    private Map<Exercise, ExerciseQuantity> exercises;
 
     /**
      *

@@ -1,4 +1,4 @@
-package ledge.muscleup;
+package ledge.muscleup.model;
 
 import org.junit.Test;
 
