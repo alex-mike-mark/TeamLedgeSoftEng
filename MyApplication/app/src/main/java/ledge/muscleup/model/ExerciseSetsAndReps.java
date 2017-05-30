@@ -1,4 +1,4 @@
-package ledge.muscleup;
+package ledge.muscleup.model;
 
 /*
     ExerciseSetsAndReps used to track the number of sets and the number of reps in each set

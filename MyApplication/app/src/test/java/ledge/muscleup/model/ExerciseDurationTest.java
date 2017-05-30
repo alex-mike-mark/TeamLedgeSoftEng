@@ -1,11 +1,11 @@
-package ledge.muscleup;
+package ledge.muscleup.model;
 
 /**
  * Created by koope on 2017-05-29.
  */
 import junit.framework.TestCase;
 
-import ledge.muscleup.ExerciseDuration;
+import ledge.muscleup.model.ExerciseDuration;
 public class ExerciseDurationTest extends TestCase {
 
     public ExerciseDurationTest (String arg0) {
