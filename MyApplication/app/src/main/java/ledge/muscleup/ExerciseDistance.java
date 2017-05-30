@@ -2,6 +2,9 @@ package ledge.muscleup;
 
 import java.text.DecimalFormat;
 
+/*
+    ExerciseDistance used to track distance metrics for exercises such as running
+*/
 public class ExerciseDistance implements ExerciseQuantity {
     private double distance;
     private String unitOfMeasure;

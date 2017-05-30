@@ -1,8 +1,18 @@
 package ledge.muscleup;
 
+/*
+    ExerciseSetsAndReps used to track the number of sets and the number of reps in each set
+    for strength-building exercises such as bicep curls, lunges, etc.
+*/
+
 public class ExerciseSetsAndReps implements ExerciseQuantity {
     private int sets;
     private int reps;
+
+    public ExerciseSetsAndReps (int sets, int reps) {
+        this.sets = sets;
+        this.reps = reps;
+    }
 
     public int getSets() {
         return sets;
@@ -17,11 +27,6 @@ public class ExerciseSetsAndReps implements ExerciseQuantity {
     }
 
     public void setReps(int reps) {
-        this.reps = reps;
-    }
-
-    public ExerciseSetsAndReps (int sets, int reps) {
-        this.sets = sets;
         this.reps = reps;
     }
 
