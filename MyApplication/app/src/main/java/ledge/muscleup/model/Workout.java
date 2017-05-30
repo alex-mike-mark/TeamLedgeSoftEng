@@ -28,9 +28,9 @@ public class Workout {
     static int nextID;
     int workoutID;
     private String name;
-    WorkoutContents contents;
     boolean isCustom;
     boolean isFavourite;
+    private Map<Exercise, ExerciseQuantity> exercises;
 
     /**
      *
@@ -44,6 +44,7 @@ public class Workout {
         contents = null;
         this.isCustom = isCustom;
         isFavourite = false;
+        exerecises = null;
     }
 
     /**
