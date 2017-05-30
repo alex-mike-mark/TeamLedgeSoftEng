@@ -25,24 +25,40 @@ import java.util.List;
  */
 
 public class Workout {
-    private List<Exercise> exercises;
+    static int nextID;
+    int workoutID;
+    private String name;
+    WorkoutContents contents;
+    boolean isCustom;
+    boolean isFavourite;
+
     /**
-     * This is the constructor. Passing any number of exercises generates a workout.
-     * @param e The exercises. Length is variable for (hopefully) ease of use. I'm pretty sure this
-     *          means you can also pass Collections of Exercises in there and it'll work fine.
+     *
+     * @param name
+     * @param isCustom
      */
-    public Workout(Exercise... e){
-
-        for(int i = 0;i<e.length;i++){
-            exercises.add(e[i]);
-        }
+    public Workout(String name, boolean isCustom){
+        workoutID = nextID;
+        nextID++;
+        this.name = name;
+        contents = null;
+        this.isCustom = isCustom;
+        isFavourite = false;
     }
 
-    public void addExercise(){
+    /**
+     *
+     * @param exercise
+     */
+    public void addExercise(Exercise exercise){
 
     }
 
-    public void removeExercise(){
+    /**
+     *
+     * @param exercise
+     */
+    public void removeExercise(Exercise exercise){
 
     }
 }
