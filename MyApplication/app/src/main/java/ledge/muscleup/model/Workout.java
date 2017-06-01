@@ -28,10 +28,10 @@ import java.util.Map;
 
 public class Workout {
     static int nextID;
-    int workoutID;
+    private int workoutID;
     private String name;
-    boolean isCustom;
-    boolean isFavourite;
+    private boolean isCustom;
+    private boolean isFavourite;
     private Map<Exercise, ExerciseQuantity> exercises;
 
     /**
@@ -45,15 +45,51 @@ public class Workout {
         this.name = name;
         this.isCustom = isCustom;
         isFavourite = false;
-        exercises = new HashMap<Exercise, ExerciseQuantity>();
+        exercises = new HashMap<>();
+    }
+
+    public int getWorkoutID() {
+        return workoutID;
+    }
+
+    public void setWorkoutID(int workoutID) {
+        this.workoutID = workoutID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isCustom() {
+        return isCustom;
+    }
+
+    public void setCustom(boolean custom) {
+        isCustom = custom;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
+    }
+
+    public Map<Exercise, ExerciseQuantity> getExercises() {
+        return exercises;
     }
 
     /**
      *
      * @param exercise
      */
-    public void addExercise(Exercise exercise){
-
+    public void addExercise(Exercise exercise, ExerciseQuantity quantity){
+        exercises.put(exercise, quantity);
     }
 
     /**
@@ -61,6 +97,6 @@ public class Workout {
      * @param exercise
      */
     public void removeExercise(Exercise exercise){
-
+        exercises.remove(exercise);
     }
 }

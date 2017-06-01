@@ -64,6 +64,13 @@ public class Exercise {
         return intensity;
     }
 
+    /**
+     * This is literally a getter
+     * @return
+     */
+    public int getId() {
+        return id;
+    }
 
     /**
      * This is literally a getter
