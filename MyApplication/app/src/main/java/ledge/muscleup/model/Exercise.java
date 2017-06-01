@@ -9,17 +9,17 @@ package ledge.muscleup.model;
  */
 public class Exercise {
     private String name;
-    private Intensity intensity;
+    private ExerciseIntensity intensity;
     private ExerciseType exerciseType;
     private boolean isFavourite;
 
     /**
      * Constructor for an Exercise
      * @param name the name of the exercise
-     * @param intensity the intensity of the exercise, of enumerated type Intensity
+     * @param intensity the intensity of the exercise, of enumerated type ExerciseIntensity
      * @param exerciseType the type of the exercise, of enumerated type ExerciseType
      */
-    public Exercise(String name, Intensity intensity, ExerciseType exerciseType){
+    public Exercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType){
         this.name = name;
         this.intensity = intensity;
         this.exerciseType = exerciseType;
@@ -64,7 +64,7 @@ public class Exercise {
      * This returns the intensity of the exercise, either LOW, MEDIUM, or HIGH
      * @return the intensity of the exercise, as an enum
      */
-    public Intensity getIntensity(){
+    public ExerciseIntensity getIntensity(){
         return intensity;
     }
 

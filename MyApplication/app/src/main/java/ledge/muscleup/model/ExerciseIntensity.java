@@ -7,7 +7,7 @@ package ledge.muscleup.model;
  * @version 1.0
  * @since 2017-05-31
  */
-public enum Intensity {
+public enum ExerciseIntensity {
     LOW,
     MEDIUM,
     HIGH
