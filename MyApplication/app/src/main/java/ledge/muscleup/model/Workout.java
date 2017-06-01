@@ -68,14 +68,6 @@ public class Workout {
     }
 
     /**
-     * This sets whether the workout is custom or not
-     * @param custom a boolean indicating whether the workout is a custom workout or not
-     */
-    public void setCustom(boolean custom) {
-        isCustom = custom;
-    }
-
-    /**
      * This returns a boolean indicating whether this workout is a favourited workout
      * @return true if workout is a favourite workout, false otherwise
      */
