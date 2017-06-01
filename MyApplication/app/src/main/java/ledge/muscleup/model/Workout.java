@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Alexander on 2017-05-27.
+ * A workout, which consists of a workout name and set of exercises
  */
 
 public class Workout {
@@ -94,7 +94,7 @@ public class Workout {
     /**
      * This returns the exercises in the workout, along with the quantities of each to be done in
      * the workout in the form of a map
-     * @return A map with exercises in the workout as the keys, and the quantities of them to be done
+     * @return a map with exercises in the workout as the keys, and the quantities of them to be done
      * as the values
      */
     public Map<Exercise, ExerciseQuantity> getExercises() {
@@ -112,7 +112,7 @@ public class Workout {
 
     /**
      * Removes an exercise from the workout, if it exists
-     * @param exercise- the exercise to remove from the workout
+     * @param exercise the exercise to remove from the workout
      */
     public void removeExercise(Exercise exercise){
         exercises.remove(exercise);

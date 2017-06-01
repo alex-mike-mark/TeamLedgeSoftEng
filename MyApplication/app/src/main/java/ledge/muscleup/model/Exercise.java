@@ -1,7 +1,7 @@
 package ledge.muscleup.model;
 
 /**
- * Created by Alexander on 2017-05-25.
+ * An exercise as part of a workout, which consists of an exercise name, type and intensity
  */
 
 public class Exercise {
@@ -28,23 +28,23 @@ public class Exercise {
      * Checks if this exercise is equal to the other exercise passed as parameter. They are equal
      * if they have the same name, as exercise names are unique
      *
-     * @param other is the other exercise.
-     * @return returns if the exercise is equal.
+     * @param other is the other exercise
+     * @return a boolean representing if the exercise is equal
      */
     public boolean equals(Exercise other){
         return this.name.equals(other.name);
     }
 
     /**
-     * Method to change the value of isFavourite.
+     * Method to change the value of isFavourite
      */
     public void toggleFavourite(){
         isFavourite=!isFavourite;
     }
 
     /**
-     * Returns if the workout is a favourite.
-     * @return isFavourite a boolean specifying whether this exercise is a favourite exercise or not
+     * Returns if the workout is a favourite
+     * @return a boolean specifying whether this exercise is a favourite exercise or not
      */
     public boolean isFavourite(){
         return isFavourite;
