@@ -3,8 +3,12 @@ package ledge.muscleup.model;
 import java.text.DecimalFormat;
 
 /**
-    Used to track the length in minutes for exercises to be done for a certain
-    length of time, such as cycling for 30 minutes
+ * Used to track the length in minutes for exercises to be done for a certain
+ * length of time, such as cycling for 30 minutes
+ *
+ * @author Ryan Koop
+ * @version 1.0
+ * @since 2017-05-29
 */
 public class ExerciseDuration implements ExerciseQuantity {
     private double minutes;

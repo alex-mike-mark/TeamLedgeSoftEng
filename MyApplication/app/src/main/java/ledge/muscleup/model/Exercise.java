@@ -2,8 +2,11 @@ package ledge.muscleup.model;
 
 /**
  * An exercise as part of a workout, which consists of an exercise name, type and intensity
+ *
+ * @author Alexander Mark
+ * @version 1.0
+ * @since 2017-05-25
  */
-
 public class Exercise {
     private String name;
     private Intensity intensity;

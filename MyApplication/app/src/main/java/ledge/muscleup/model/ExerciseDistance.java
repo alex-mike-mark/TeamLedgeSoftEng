@@ -3,7 +3,11 @@ package ledge.muscleup.model;
 import java.text.DecimalFormat;
 
 /**
-    Used to track distance metrics for exercises such as running
+ * Used to track distance metrics for exercises such as running
+ *
+ * @author Ryan Koop
+ * @version 1.0
+ * @since 2017-05-29
 */
 public class ExerciseDistance implements ExerciseQuantity {
     private double distance;
