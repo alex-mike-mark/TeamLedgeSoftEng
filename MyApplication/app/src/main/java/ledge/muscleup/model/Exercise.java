@@ -24,7 +24,6 @@ public class Exercise {
     }
 
     /**
-     * equals
      * Checks if this exercise is equal to the other exercise passed as parameter. They are equal
      * if they have the same name, as exercise names are unique
      *
