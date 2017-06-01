@@ -2,6 +2,7 @@ package ledge.muscleup.persistence;
 
 import java.util.List;
 import ledge.muscleup.model.Exercise;
+import ledge.muscleup.model.ExerciseQuantity;
 import ledge.muscleup.model.Workout;
 
 /**
@@ -14,11 +15,13 @@ public interface DataAccess {
     void close();
     List<Exercise> getExercisesList();
     List<Workout> getWorkoutsList();
-    Exercise getExerciseById(int exerciseId);
-    Workout getWorkoutById(int workoutId);
+    Exercise getExercise(String exerciseName);
+    Workout getWorkout(String workoutName);
     void insertExercise(Exercise exercise);
     void insertWorkout(Workout workout);
     void removeExercise(Exercise exercise);
     void removeWorkout(Workout workout);
+    void addExerciseToWorkout (Workout workout, Exercise exercise,
+                               ExerciseQuantity exerciseQuantity);
 
 }
