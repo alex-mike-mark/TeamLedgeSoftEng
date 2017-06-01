@@ -15,7 +15,7 @@ import ledge.muscleup.model.Intensity;
 import ledge.muscleup.model.Workout;
 
 /**
- * DataAccessStub- An implementation of the DataAccess interface as a Stub database for Iteration 1
+ * An implementation of the DataAccess interface as a Stub database for Iteration 1
  */
 public class DataAccessStub implements DataAccess{
     private String dbName;
