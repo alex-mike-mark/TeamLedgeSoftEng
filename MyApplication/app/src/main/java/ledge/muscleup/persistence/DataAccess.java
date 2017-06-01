@@ -11,15 +11,20 @@ import ledge.muscleup.model.Workout;
  */
 public interface DataAccess {
 
+    //generic methods to open and close database access
     void open(String dbName);
     void close();
+
+    //methods to access exercise data
     List<Exercise> getExercisesList();
-    List<Workout> getWorkoutsList();
     Exercise getExercise(String exerciseName);
-    Workout getWorkout(String workoutName);
     void insertExercise(Exercise exercise);
-    void insertWorkout(Workout workout);
     void removeExercise(Exercise exercise);
+
+    //methods to access workout data
+    List<Workout> getWorkoutsList();
+    Workout getWorkout(String workoutName);
+    void insertWorkout(Workout workout);
     void removeWorkout(Workout workout);
     void addExerciseToWorkout (Workout workout, Exercise exercise,
                                ExerciseQuantity exerciseQuantity);
