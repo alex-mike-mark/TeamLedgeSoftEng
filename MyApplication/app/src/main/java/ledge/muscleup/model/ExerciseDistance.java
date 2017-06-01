@@ -26,10 +26,6 @@ public class ExerciseDistance implements ExerciseQuantity {
         return unitOfMeasure;
     }
 
-    public void setUnitOfMeasure(String unitOfMeasure) {
-        this.unitOfMeasure = unitOfMeasure;
-    }
-
     public boolean equals (ExerciseQuantity other) {
         ExerciseDistance otherDistance;
         boolean isEqual = false;
