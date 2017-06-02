@@ -1,75 +1,78 @@
 package ledge.muscleup.model;
 
 /**
- * Created by Alexander on 2017-05-25.
+ * An exercise as part of a workout, which consists of an exercise name, type and intensity
+ *
+ * @author Alexander Mark
+ * @version 1.0
+ * @since 2017-05-25
  */
-
 public class Exercise {
-    static private int nextID = 0;
-
-    private int id;
     private String name;
-    private int intensity;
-    private String muscles;
+    private ExerciseIntensity intensity;
+    private ExerciseType exerciseType;
     private boolean isFavourite;
 
-    public Exercise(String name, int intensity, String muscles){
-        id = nextID;
-        nextID++;
+    /**
+     * Constructor for an Exercise
+     * @param name the name of the exercise
+     * @param intensity the intensity of the exercise, of enumerated type ExerciseIntensity
+     * @param exerciseType the type of the exercise, of enumerated type ExerciseType
+     */
+    public Exercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType){
         this.name = name;
         this.intensity = intensity;
-        this.muscles = muscles;
+        this.exerciseType = exerciseType;
         isFavourite = false;
     }
 
     /**
-     * equals
-     * Current equals method, just checks exercise name is all.
+     * Checks if this exercise is equal to the other exercise passed as parameter. They are equal
+     * if they have the same name, as exercise names are unique
      *
-     * @param other is the other exercise.
-     * @return returns if the exercise is equal.
+     * @param other is the other exercise
+     * @return a boolean representing if the exercise is equal
      */
     public boolean equals(Exercise other){
-        return this.id==other.id;
+        return this.name.equals(other.name);
     }
 
     /**
-     * Method to change the value of isFavourite.
+     * Method to change the value of isFavourite
      */
     public void toggleFavourite(){
         isFavourite=!isFavourite;
     }
 
     /**
-     * Returns if the workout is a favourite.
-     * @return
+     * Returns if the workout is a favourite
+     * @return a boolean specifying whether this exercise is a favourite exercise or not
      */
     public boolean isFavourite(){
         return isFavourite;
     }
 
     /**
-     * This is literally a getter
-     * @return
+     * This returns the name of the exercise
+     * @return the name of the exercise
      */
     public String getName(){
         return name;
     }
 
     /**
-     * This is literally a getter
-     * @return
+     * This returns the intensity of the exercise, either LOW, MEDIUM, or HIGH
+     * @return the intensity of the exercise, as an enum
      */
-    public int getIntensity(){
+    public ExerciseIntensity getIntensity(){
         return intensity;
     }
 
-
     /**
-     * This is literally a getter
-     * @return
+     * This returns the type of the exercise, such as ARM, LEG, CORE, etc.
+     * @return the type of the exercise, as an enum
      */
-    public String getMusclesWorked(){
-        return muscles;
+    public ExerciseType getExerciseType() {
+        return exerciseType;
     }
 }
