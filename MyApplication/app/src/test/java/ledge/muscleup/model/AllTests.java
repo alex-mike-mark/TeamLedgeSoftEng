@@ -1,7 +1,10 @@
 package ledge.muscleup.model;
-
 /**
- * Created by matthewsmidt on 2017-05-30.
+ * AllTests.java used to run all the tests in all the suite classes.
+ *
+ * @author Matthew Smidt
+ * @version 1.0
+ * @since 2017-05-30
  */
 
 import org.junit.runner.RunWith;
@@ -9,7 +12,6 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        ExampleUnitTest.class,
         ExerciseDistanceTest.class,
         ExerciseDurationTest.class,
         ExerciseQuantityTest.class,
