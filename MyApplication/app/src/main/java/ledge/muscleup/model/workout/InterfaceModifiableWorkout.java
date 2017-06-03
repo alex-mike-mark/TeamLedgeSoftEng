@@ -39,7 +39,7 @@ public interface InterfaceModifiableWorkout extends InterfaceWorkout {
     void toggleFavourite();
 
     /**
-     * Adds a new exercise to the workout at the given position
+     * Adds a new exercise to the workout
      * @param exercise the exercise to add to the workout
      */
     void addExercise(InterfaceSuggestedExercise exercise);
@@ -55,7 +55,7 @@ public interface InterfaceModifiableWorkout extends InterfaceWorkout {
     /**
      * Removes an exercise from the list of exercises
      * @param exercise the exercise to remove from the list
-     * @return the exercise that was removed, or {@code null} if the exercise couldn't be found
+     * @return a boolean representing if the exercise was removed
      */
-    InterfaceSuggestedExercise removeExercise(InterfaceSuggestedExercise exercise);
+    boolean removeExercise(InterfaceSuggestedExercise exercise);
 }
