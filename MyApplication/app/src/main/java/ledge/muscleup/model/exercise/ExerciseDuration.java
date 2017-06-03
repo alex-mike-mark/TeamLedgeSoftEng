@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
  * @version 1.0
  * @since 2017-05-29
 */
-public class ExerciseDuration implements InterfaceExerciseQuantity {
+public class ExerciseDuration implements InterfaceExerciseDuration {
     private double minutes;
 
     /**

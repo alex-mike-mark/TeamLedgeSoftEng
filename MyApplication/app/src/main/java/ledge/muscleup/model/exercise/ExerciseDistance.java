@@ -9,7 +9,7 @@ import java.text.DecimalFormat;
  * @version 1.0
  * @since 2017-05-29
 */
-public class ExerciseDistance implements InterfaceExerciseQuantity {
+public class ExerciseDistance implements InterfaceExerciseDistance {
     private double distance;
     private UnitOfMeasure unitOfMeasure;
 
