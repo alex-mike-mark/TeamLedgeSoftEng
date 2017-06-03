@@ -32,7 +32,7 @@ public interface InterfaceExercise {
      * Returns the recommended quantity of exercise for the exercise
      * @return the recommended quantity of exercise
      */
-    ExerciseQuantity getRecommendedQuantity();
+    InterfaceExerciseQuantity getRecommendedQuantity();
 
     /**
      * Compares the current InterfaceExercise to another instance of InterfaceExercise

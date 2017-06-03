@@ -18,7 +18,7 @@ public class ExerciseQuantityTest  extends TestCase{
     }
 
     public void testExerciseQuantity() {
-        ExerciseQuantity quantity1, quantity2, quantity3, quantity4;
+        InterfaceExerciseQuantity quantity1, quantity2, quantity3, quantity4;
 
         System.out.println ("Starting testExerciseQuantity");
 

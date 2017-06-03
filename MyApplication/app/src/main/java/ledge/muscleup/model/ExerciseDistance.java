@@ -9,7 +9,7 @@ import java.text.DecimalFormat;
  * @version 1.0
  * @since 2017-05-29
 */
-public class ExerciseDistance implements ExerciseQuantity {
+public class ExerciseDistance implements InterfaceExerciseQuantity {
     private double distance;
     private UnitOfMeasure unitOfMeasure;
 
@@ -32,14 +32,6 @@ public class ExerciseDistance implements ExerciseQuantity {
     }
 
     /**
-     * Sets the distance for which an exercise is completed
-     * @param distance the distance for which an exercise is completed
-     */
-    public void setDistance(double distance) {
-        this.distance = distance;
-    }
-
-    /**
      * Returns the unit of measurement for the distance
      * @return the unit of measurement
      */
@@ -48,11 +40,11 @@ public class ExerciseDistance implements ExerciseQuantity {
     }
 
     /**
-     * Compares the current ExerciseDistance to another instance of ExerciseQuantity
-     * @param other the instance of ExerciseQuantity to compare to
+     * Compares the current ExerciseDistance to another instance of InterfaceExerciseQuantity
+     * @param other the instance of InterfaceExerciseQuantity to compare to
      * @return a boolean representing whether the two instances were equal
      */
-    public boolean equals (ExerciseQuantity other) {
+    public boolean equals (InterfaceExerciseQuantity other) {
         ExerciseDistance otherDistance;
         boolean isEqual = false;
 

@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
  * @version 1.0
  * @since 2017-05-29
 */
-public class ExerciseDuration implements ExerciseQuantity {
+public class ExerciseDuration implements InterfaceExerciseQuantity {
     private double minutes;
 
     /**
@@ -30,19 +30,11 @@ public class ExerciseDuration implements ExerciseQuantity {
     }
 
     /**
-     * Sets the number of minutes exercised
-     * @param minutes the number of minutes exercised
-     */
-    public void setMinutes(double minutes) {
-        this.minutes = minutes;
-    }
-
-    /**
-     * Compares the current ExerciseDuration to another instance of ExerciseQuantity
-     * @param other the instance of ExerciseQuantity to compare to
+     * Compares the current ExerciseDuration to another instance of InterfaceExerciseQuantity
+     * @param other the instance of InterfaceExerciseQuantity to compare to
      * @return a boolean representing whether the two instances were equal
      */
-    public boolean equals (ExerciseQuantity other) {
+    public boolean equals (InterfaceExerciseQuantity other) {
         ExerciseDuration otherDuration;
         boolean isEqual = false;
 

@@ -9,7 +9,7 @@ package ledge.muscleup.model;
  * @since 2017-05-29
 */
 
-public class ExerciseSetsAndReps implements ExerciseQuantity {
+public class ExerciseSetsAndReps implements InterfaceExerciseQuantity {
     private int sets;
     private int reps;
 
@@ -32,14 +32,6 @@ public class ExerciseSetsAndReps implements ExerciseQuantity {
     }
 
     /**
-     * Sets the number of sets for an exercise
-     * @param sets the number of sets for an exercise
-     */
-    public void setSets(int sets) {
-        this.sets = sets;
-    }
-
-    /**
      * Returns the number of reps for the exercise
      * @return the number of reps for the exercise
      */
@@ -48,19 +40,11 @@ public class ExerciseSetsAndReps implements ExerciseQuantity {
     }
 
     /**
-     * Sets the number of reps for an exercise
-     * @param reps the number of reps for an exercise
-     */
-    public void setReps(int reps) {
-        this.reps = reps;
-    }
-
-    /**
-     * Compares the current ExerciseSetsAndReps to another instance of ExerciseQuantity
-     * @param other the instance of ExerciseQuantity to compare to
+     * Compares the current ExerciseSetsAndReps to another instance of InterfaceExerciseQuantity
+     * @param other the instance of InterfaceExerciseQuantity to compare to
      * @return a boolean representing whether the two instances were equal
      */
-    public boolean equals(ExerciseQuantity other) {
+    public boolean equals(InterfaceExerciseQuantity other) {
         ExerciseSetsAndReps setsAndReps;
         boolean isEqual = false;
 
