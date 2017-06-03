@@ -1,9 +1,11 @@
 package ledge.muscleup.model.workout;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.NoSuchElementException;
 
-import ledge.muscleup.model.exercise.Exercise;
+import ledge.muscleup.model.exercise.InterfaceExercise;
 
 /**
  * Stores information about workouts, which consists of a set of exercises, a list of required
@@ -13,88 +15,57 @@ import ledge.muscleup.model.exercise.Exercise;
  * @version 1.0
  * @since 2017-05-27
  */
-public class Workout {
-    private String name;
-    private boolean isCustom;
-    private boolean isFavourite;
-    private Map<Exercise, ExerciseQuantity> exercises;
+public abstract class Workout implements InterfaceWorkout {
+    protected String name;
+    protected List<InterfaceExercise> exerciseList;
+    private Iterator<InterfaceExercise> exerciseListIterator;
 
-    /**
-     * Constructor for a Workout
-     * @param name the name of the workout
-     * @param isCustom true if workout is a custom created workout, false otherwise
-     */
-    public Workout(String name, boolean isCustom){
+    protected Workout(String name) {
         this.name = name;
-        this.isCustom = isCustom;
-        isFavourite = false;
-        exercises = new HashMap<>();
+        exerciseList = new ArrayList<>();
     }
 
     /**
-     * This returns the name of the workout
+     * Returns the name of the workout
+     *
      * @return the name of the workout
      */
+    @Override
     public String getName() {
         return name;
     }
 
     /**
-     * This sets the name of the workout to be parameter name
-     * @param name the new name of the workout
+     * Initializes the iterator for the list of exercises to the first InterfaceExercise in the list
      */
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public void initExerciseIteration() {
+        exerciseListIterator = exerciseList.iterator();
     }
 
     /**
-     * This returns a boolean indicating whether this workout is a custom created one or not
-     * @return true if workout is a custom workout, false otherwise
+     * Returns {@code true} if there is another InterfaceExercise in the list or {@code false} if not
+     *
+     * @return a boolean representing whether the iterator is at the end of the list or not
      */
-    public boolean isCustom() {
-        return isCustom;
+    @Override
+    public boolean hasNextExercise() {
+        return exerciseListIterator.hasNext();
     }
 
     /**
-     * This returns a boolean indicating whether this workout is a favourited workout
-     * @return true if workout is a favourite workout, false otherwise
+     * Returns the next InterfaceExercise in the list
+     *
+     * @return the next InterfaceExercise in the list
+     * @throws NoSuchElementException if the iterator is at the end of the list
      */
-    public boolean isFavourite() {
-        return isFavourite;
-    }
-
-    /**
-     * This toggles whether the workout is favourite or not. If it was not favourite, it becomes
-     * favourite and vice versa
-     */
-    public void toggleFavourite() {
-       this.isFavourite = !this.isFavourite;
-    }
-
-    /**
-     * This returns the exercises in the workout, along with the quantities of each to be done in
-     * the workout in the form of a map
-     * @return a map with exercises in the workout as the keys, and the quantities of them to be done
-     * as the values
-     */
-    public Map<Exercise, ExerciseQuantity> getExercises() {
-        return exercises;
-    }
-
-    /**
-     * Adds a new exercise to the workout, along with the quantity of the exercise to do
-     * @param exercise the exercise to be added
-     * @param quantity the quantity of this new exercise to do
-     */
-    public void addExercise(Exercise exercise, ExerciseQuantity quantity){
-        exercises.put(exercise, quantity);
-    }
-
-    /**
-     * Removes an exercise from the workout, if it exists
-     * @param exercise the exercise to remove from the workout
-     */
-    public void removeExercise(Exercise exercise){
-        exercises.remove(exercise);
+    @Override
+    public InterfaceExercise nextExercise() throws NoSuchElementException {
+        try {
+            return exerciseListIterator.next();
+        }
+        catch(NoSuchElementException nsee) {
+            throw nsee;
+        }
     }
 }

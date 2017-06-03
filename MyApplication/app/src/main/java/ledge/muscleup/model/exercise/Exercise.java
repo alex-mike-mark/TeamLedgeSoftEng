@@ -7,72 +7,50 @@ package ledge.muscleup.model.exercise;
  * @version 1.0
  * @since 2017-05-25
  */
-public class Exercise {
+public abstract class Exercise implements InterfaceExercise {
     private String name;
     private ExerciseIntensity intensity;
     private ExerciseType exerciseType;
-    private boolean isFavourite;
 
     /**
-     * Constructor for an Exercise
+     * The default constructor for the Exercise class
      * @param name the name of the exercise
-     * @param intensity the intensity of the exercise, of enumerated type ExerciseIntensity
-     * @param exerciseType the type of the exercise, of enumerated type ExerciseType
+     * @param intensity the intensity of the exercise
+     * @param exerciseType the type of the exercise
      */
-    public Exercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType){
+    protected Exercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType) {
         this.name = name;
         this.intensity = intensity;
         this.exerciseType = exerciseType;
-        isFavourite = false;
     }
 
     /**
-     * Checks if this exercise is equal to the other exercise passed as parameter. They are equal
-     * if they have the same name, as exercise names are unique
+     * Returns the name of the exercise
      *
-     * @param other is the other exercise
-     * @return a boolean representing if the exercise is equal
-     */
-    public boolean equals(Exercise other){
-        return this.name.equals(other.name);
-    }
-
-    /**
-     * Method to change the value of isFavourite
-     */
-    public void toggleFavourite(){
-        isFavourite=!isFavourite;
-    }
-
-    /**
-     * Returns if the workout is a favourite
-     * @return a boolean specifying whether this exercise is a favourite exercise or not
-     */
-    public boolean isFavourite(){
-        return isFavourite;
-    }
-
-    /**
-     * This returns the name of the exercise
      * @return the name of the exercise
      */
-    public String getName(){
+    @Override
+    public String getName() {
         return name;
     }
 
     /**
-     * This returns the intensity of the exercise, either LOW, MEDIUM, or HIGH
-     * @return the intensity of the exercise, as an enum
+     * Returns the intensity of the exercise
+     *
+     * @return the intensity of the exercise
      */
-    public ExerciseIntensity getIntensity(){
+    @Override
+    public ExerciseIntensity getIntensity() {
         return intensity;
     }
 
     /**
-     * This returns the type of the exercise, such as ARM, LEG, CORE, etc.
-     * @return the type of the exercise, as an enum
+     * Returns the type of the exercise
+     *
+     * @return the type of the exercise
      */
-    public ExerciseType getExerciseType() {
+    @Override
+    public ExerciseType getType() {
         return exerciseType;
     }
 }
