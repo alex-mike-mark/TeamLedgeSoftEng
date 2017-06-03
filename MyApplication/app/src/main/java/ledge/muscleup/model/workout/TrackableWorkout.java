@@ -35,9 +35,7 @@ public class TrackableWorkout extends Workout implements InterfaceTrackableWorko
      * @return the scheduled date of the workout
      */
     @Override
-    public Date getDate() {
-        return scheduledDate;
-    }
+    public Date getDate() { return scheduledDate; }
 
     /**
      * Sets the scheduled date of the workout
@@ -45,9 +43,7 @@ public class TrackableWorkout extends Workout implements InterfaceTrackableWorko
      * @param newDate the new date of the workout
      */
     @Override
-    public void setDate(Date newDate) {
-        scheduledDate = newDate;
-    }
+    public void setDate(Date newDate) { scheduledDate = newDate; }
 
     /**
      * Log a quantity of exercise for one of the exercises in the workout
