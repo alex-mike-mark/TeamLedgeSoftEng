@@ -19,6 +19,7 @@ public interface InterfaceSuggestedExercise extends InterfaceExercise {
     /**
      * Updates the exercise with the new recommended quantity
      * @param quantity the recommended quantity to update the exercise to
+     * @return a boolean representing if the suggested quantity could be updated
      */
-    void updateRecommendedQuantity(InterfaceExerciseQuantity quantity);
+    boolean updateRecommendedQuantity(InterfaceExerciseQuantity quantity);
 }
