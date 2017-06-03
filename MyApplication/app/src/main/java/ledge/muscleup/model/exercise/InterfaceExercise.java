@@ -40,4 +40,10 @@ public interface InterfaceExercise {
      * @return a boolean representing whether the two instances were equal
      */
     boolean equals(InterfaceExercise other);
+
+    /**
+     * Returns the InterfaceExercise as a String
+     * @return the InterfaceExercise as a String
+     */
+    String toString();
 }

@@ -43,4 +43,10 @@ public interface InterfaceWorkout {
      * @return a boolean representing whether the two instances were equal
      */
     boolean equals(InterfaceWorkout other);
+
+    /**
+     * Returns the InterfaceWorkout as a String
+     * @return the InterfaceWorkout as a String
+     */
+    String toString();
 }
