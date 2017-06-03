@@ -1,6 +1,8 @@
-package ledge.muscleup.model;
+package ledge.muscleup.model.workout;
 
 import java.util.Date;
+
+import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 
 /**
  * The interface for a workout for which progress can be logged

@@ -1,10 +1,11 @@
 package ledge.muscleup.model;
 
-import junit.*;
 import junit.framework.TestCase;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import ledge.muscleup.model.exercise.Exercise;
 
 /**
  * Created by Alexander on 2017-05-27.

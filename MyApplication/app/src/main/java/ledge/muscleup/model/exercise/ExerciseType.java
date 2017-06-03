@@ -1,4 +1,4 @@
-package ledge.muscleup.model;
+package ledge.muscleup.model.exercise;
 
 /**
  * The type of an exercise. Ex. Bicep Curls is of type ARM, while Running would be of type CARDIO

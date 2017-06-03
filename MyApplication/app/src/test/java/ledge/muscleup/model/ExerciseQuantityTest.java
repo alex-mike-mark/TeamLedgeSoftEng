@@ -6,10 +6,11 @@ package ledge.muscleup.model;
 
 import junit.framework.TestCase;
 
-import ledge.muscleup.model.ExerciseDistance;
-import ledge.muscleup.model.ExerciseDuration;
+import ledge.muscleup.model.exercise.ExerciseDistance;
+import ledge.muscleup.model.exercise.ExerciseDuration;
 import ledge.muscleup.model.ExerciseQuantity;
-import ledge.muscleup.model.ExerciseSetsAndReps;
+import ledge.muscleup.model.exercise.ExerciseSetsAndReps;
+import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 
 public class ExerciseQuantityTest  extends TestCase{
 

@@ -1,4 +1,4 @@
-package ledge.muscleup.model;
+package ledge.muscleup.model.exercise;
 
 import java.text.DecimalFormat;
 

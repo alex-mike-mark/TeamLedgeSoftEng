@@ -1,6 +1,8 @@
-package ledge.muscleup.model;
+package ledge.muscleup.model.workout;
 
 import java.util.NoSuchElementException;
+
+import ledge.muscleup.model.exercise.InterfaceExercise;
 
 /**
  * The interface for a workout, which consists of a workout name and a list of exercises

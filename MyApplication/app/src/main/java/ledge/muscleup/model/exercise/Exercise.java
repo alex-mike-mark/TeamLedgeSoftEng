@@ -1,4 +1,4 @@
-package ledge.muscleup.model;
+package ledge.muscleup.model.exercise;
 
 /**
  * An exercise as part of a workout, which consists of an exercise name, type and intensity

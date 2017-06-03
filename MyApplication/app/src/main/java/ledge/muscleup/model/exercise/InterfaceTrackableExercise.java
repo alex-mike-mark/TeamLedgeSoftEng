@@ -1,4 +1,4 @@
-package ledge.muscleup.model;
+package ledge.muscleup.model.exercise;
 
 /**
  * The interface for an exercise for which the amount of exercise is tracked

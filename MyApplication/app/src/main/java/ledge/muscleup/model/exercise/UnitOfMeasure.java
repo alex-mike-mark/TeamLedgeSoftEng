@@ -1,4 +1,4 @@
-package ledge.muscleup.model;
+package ledge.muscleup.model.exercise;
 
 /**
  * The unit of measure for an exercise that is measured in distance

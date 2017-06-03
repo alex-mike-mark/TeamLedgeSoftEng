@@ -5,7 +5,7 @@ package ledge.muscleup.model;
  */
 
 import junit.framework.TestCase;
-import ledge.muscleup.model.ExerciseSetsAndReps;
+import ledge.muscleup.model.exercise.ExerciseSetsAndReps;
 
 public class ExerciseSetsAndRepsTest extends TestCase{
 

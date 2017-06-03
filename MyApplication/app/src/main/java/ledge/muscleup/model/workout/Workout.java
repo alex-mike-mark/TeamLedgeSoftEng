@@ -1,7 +1,9 @@
-package ledge.muscleup.model;
+package ledge.muscleup.model.workout;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import ledge.muscleup.model.exercise.Exercise;
 
 /**
  * Stores information about workouts, which consists of a set of exercises, a list of required

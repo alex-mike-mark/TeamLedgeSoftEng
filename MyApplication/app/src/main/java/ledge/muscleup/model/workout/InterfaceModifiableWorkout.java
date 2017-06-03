@@ -1,4 +1,6 @@
-package ledge.muscleup.model;
+package ledge.muscleup.model.workout;
+
+import ledge.muscleup.model.exercise.InterfaceModifiableExercise;
 
 /**
  * The interface for a workout that can be modified, which includes methods to modify the name,
