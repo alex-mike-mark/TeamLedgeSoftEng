@@ -135,7 +135,7 @@ public class ModifiableWorkout extends Workout implements InterfaceModifiableWor
     public boolean removeExercise(InterfaceSuggestedExercise exercise) { return exerciseList.remove(exercise); }
 
     /**
-     * Compares the current InterfaceWorkout to another instance of InterfaceWorkout
+     * Compares the current ModifiableWorkout to another instance of InterfaceWorkout
      *
      * @param other the instance of InterfaceWorkout to compare to
      * @return a boolean representing whether the two instances were equal

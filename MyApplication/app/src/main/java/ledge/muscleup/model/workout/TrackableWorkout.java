@@ -69,7 +69,7 @@ public class TrackableWorkout extends Workout implements InterfaceTrackableWorko
     }
 
     /**
-     * Compares the current InterfaceWorkout to another instance of InterfaceWorkout
+     * Compares the current TrackableWorkout to another instance of InterfaceWorkout
      *
      * @param other the instance of InterfaceWorkout to compare to
      * @return a boolean representing whether the two instances were equal
