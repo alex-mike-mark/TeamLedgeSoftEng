@@ -154,19 +154,4 @@ public class ModifiableWorkout extends Workout implements InterfaceModifiableWor
 
         return isEqual;
     }
-
-    /**
-    * Returns the ModifiableWorkout as a String
-    * @return the ModifiableWorkout as a String
-    */
-    @Override
-    public String toString() {
-        String result = "";
-
-        result += name + "\n";
-        for (int i = 0; i < exerciseList.size(); i++)
-            result += " " + (i + 1) + ". " + exerciseList.get(i) + "\n";
-
-        return result;
-    }
 }

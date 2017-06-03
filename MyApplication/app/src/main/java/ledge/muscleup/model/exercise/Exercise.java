@@ -53,4 +53,13 @@ public abstract class Exercise implements InterfaceExercise {
     public ExerciseType getType() {
         return exerciseType;
     }
+
+    /**
+     * Returns the Exercise as a String
+     * @return the Exercise as a String
+     */
+    public String toString()
+    {
+        return name + " - " + intensity + " intensity " + exerciseType + " workout";
+    }
 }

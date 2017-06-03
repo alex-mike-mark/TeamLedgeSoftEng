@@ -96,12 +96,6 @@ public class TrackableWorkout extends Workout implements InterfaceTrackableWorko
     @Override
     public String toString()
     {
-        String result = "";
-
-        result += scheduledDate + ": " + name + "\n";
-        for (int i = 0; i < exerciseList.size(); i++)
-            result += " " + (i + 1) + ". " + exerciseList.get(i) + "\n";
-
-        return result;
+        return scheduledDate + ": " + super.toString();
     }
 }

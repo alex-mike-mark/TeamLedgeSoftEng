@@ -63,9 +63,24 @@ public abstract class Workout implements InterfaceWorkout {
     public InterfaceExercise nextExercise() throws NoSuchElementException {
         try {
             return exerciseListIterator.next();
-        }
-        catch(NoSuchElementException nsee) {
+        } catch (NoSuchElementException nsee) {
             throw nsee;
         }
+    }
+
+    /**
+     * Returns the Workout as a String
+     *
+     * @return the Workout as a String
+     */
+    @Override
+    public String toString() {
+        String result = "";
+
+        result += name + "\n";
+        for (int i = 0; i < exerciseList.size(); i++)
+            result += " " + (i + 1) + ". " + exerciseList.get(i) + "\n";
+
+        return result;
     }
 }
