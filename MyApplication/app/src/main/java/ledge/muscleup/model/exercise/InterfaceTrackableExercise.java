@@ -24,6 +24,7 @@ public interface InterfaceTrackableExercise extends InterfaceExercise {
     /**
      * Updates the exercise with the new quantity
      * @param quantity the quantity to update the exercise to
+     * @returns a boolean representing if the tracked quantity could be updated
      */
-    void updateTrackedQuantity(InterfaceExerciseQuantity quantity);
+    boolean updateTrackedQuantity(InterfaceExerciseQuantity quantity);
 }
