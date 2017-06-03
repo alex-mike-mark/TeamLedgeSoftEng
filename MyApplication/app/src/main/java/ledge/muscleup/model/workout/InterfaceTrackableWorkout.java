@@ -3,6 +3,7 @@ package ledge.muscleup.model.workout;
 import java.util.Date;
 
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
+import ledge.muscleup.model.exercise.InterfaceTrackableExercise;
 
 /**
  * The interface for a workout for which progress can be logged
@@ -27,8 +28,9 @@ public interface InterfaceTrackableWorkout extends InterfaceWorkout {
 
     /**
      * Log a quantity of exercise for one of the exercises in the workout
-     * @param name the name of the exercise to update
+     * @param exercise the exercise to update the quantity for
      * @param quantity the amount of exercise to log
+     * @return a boolean representing if the exercise was found and updated in the workout
      */
-    void logExercise(String name, InterfaceExerciseQuantity quantity);
+    boolean logExercise(InterfaceTrackableExercise exercise, InterfaceExerciseQuantity quantity);
 }

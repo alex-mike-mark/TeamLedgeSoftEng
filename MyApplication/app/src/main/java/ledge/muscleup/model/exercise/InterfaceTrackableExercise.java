@@ -10,6 +10,12 @@ package ledge.muscleup.model.exercise;
 
 public interface InterfaceTrackableExercise extends InterfaceExercise {
     /**
+     * Returns the recommended quantity of exercise for the exercise
+     * @return the recommended quantity of exercise
+     */
+    InterfaceExerciseQuantity getRecommendedQuantity();
+
+    /**
      * Returns the quantity of exercise logged for this exercise
      * @return the quantity of exercise logged
      */
