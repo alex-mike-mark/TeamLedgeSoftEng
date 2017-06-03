@@ -1,7 +1,8 @@
 package ledge.muscleup.model.exercise;
 
 /**
- * An exercise for which the amount of exercise can be tracked
+ * An exercise which contains a suggested amount of exercise and for which the amount of exercise
+ * can be tracked
  *
  * @author Cole Kehler
  * @version 1.0
@@ -90,11 +91,12 @@ public class TrackableExercise extends Exercise implements InterfaceTrackableExe
 
     /**
      * Returns the TrackableExercise as a String
+     *
      * @return the TrackableExercise as a String
      */
     @Override
     public String toString() {
         return super.toString() + "\n  Recommended: " + recommendedQuantity +
-                "\n  Logged: " + trackedQuantity + ")";
+                "\n  Logged: " + trackedQuantity;
     }
 }
