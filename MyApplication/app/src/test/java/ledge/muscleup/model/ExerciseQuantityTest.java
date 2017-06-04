@@ -6,9 +6,9 @@ package ledge.muscleup.model;
 
 import junit.framework.TestCase;
 
+import ledge.muscleup.model.exercise.DistanceUnit;
 import ledge.muscleup.model.exercise.ExerciseDistance;
 import ledge.muscleup.model.exercise.ExerciseDuration;
-import ledge.muscleup.model.ExerciseQuantity;
 import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 
@@ -26,7 +26,7 @@ public class ExerciseQuantityTest  extends TestCase{
         quantity1 = new ExerciseSets(3, 10);
         assertNotNull(quantity1);
 
-        quantity2 = new ExerciseDistance(2.5, "Miles");
+        quantity2 = new ExerciseDistance(2.5, DistanceUnit.MILES);
         assertNotNull(quantity2);
 
         quantity3 = new ExerciseDuration(45);
@@ -43,10 +43,10 @@ public class ExerciseQuantityTest  extends TestCase{
         assertNotNull(quantity4);
         assertTrue(quantity1.equals(quantity4));
 
-        quantity4 = new ExerciseDistance(1, "Km");
+        quantity4 = new ExerciseDistance(1, DistanceUnit.KILOMETERS);
         assertNotNull(quantity4);
         assertFalse(quantity2.equals(quantity4));
-        quantity4 = new ExerciseDistance(2.5, "Miles");
+        quantity4 = new ExerciseDistance(2.5, DistanceUnit.MILES);
         assertNotNull(quantity4);
         assertTrue(quantity2.equals(quantity4));
 

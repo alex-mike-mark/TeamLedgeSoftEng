@@ -5,6 +5,7 @@ package ledge.muscleup.model;
  */
 import junit.framework.TestCase;
 
+import ledge.muscleup.model.exercise.DistanceUnit;
 import ledge.muscleup.model.exercise.ExerciseDistance;
 
 public class ExerciseDistanceTest extends TestCase {
@@ -18,10 +19,10 @@ public class ExerciseDistanceTest extends TestCase {
 
         System.out.println ("Starting testExerciseDistance");
 
-        exerciseDistance = new ExerciseDistance(2.5, "Miles");
+        exerciseDistance = new ExerciseDistance(2.5, DistanceUnit.MILES);
         assertNotNull(exerciseDistance);
         assertTrue(exerciseDistance.getDistance() == 2.5);
-        assertTrue(exerciseDistance.getUnitOfMeasure().equals("Miles"));
+        assertTrue(exerciseDistance.getUnitOfMeasure() == DistanceUnit.MILES);
 
         System.out.println("Finished testExerciseDistance");
     }

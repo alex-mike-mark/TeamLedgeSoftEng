@@ -5,17 +5,17 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
-import ledge.muscleup.model.workout.Workout;
+import ledge.muscleup.model.workout.ModifiableWorkout;
 
 /**
  * Created by Alexander on 2017-05-27.
  */
 
-public class WorkoutTest extends TestCase {
-    Workout testWorkout;
+public class ModifiableWorkoutTest extends TestCase {
+    ModifiableWorkout testWorkout;
     @Before
     public void testInit(){
-        testWorkout = new Workout("LOL",true);
+        testWorkout = new ModifiableWorkout("Testerworkout");
     }
     @Test
     public void initializeTest(){

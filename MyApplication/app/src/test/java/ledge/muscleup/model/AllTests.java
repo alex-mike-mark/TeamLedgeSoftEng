@@ -15,9 +15,9 @@ import org.junit.runners.Suite;
         ExerciseDistanceTest.class,
         ExerciseDurationTest.class,
         ExerciseQuantityTest.class,
-        ExerciseSetsAndRepsTest.class,
-        ExerciseTest.class,
-        WorkoutTest.class
+        ExerciseSetsTest.class,
+        ListedExerciseTest.class,
+        ModifiableWorkoutTest.class
 })
 
 public class AllTests {
