@@ -1,8 +1,8 @@
 package ledge.muscleup.model.exercise;
 
 /**
- * The interface for tracking the number of sets and the number of reps in each set
- * for strength-building exercises such as bicep curls, lunges, etc.
+ * The interface for tracking the number of sets and the number of reps in each set for repetative
+ * exercises
  *
  * @author Cole Kehler
  * @version 1.0

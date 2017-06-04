@@ -2,7 +2,6 @@ package ledge.muscleup.model.exercise;
 
 /**
  * Used to track the number of sets and the number of reps in each set
- * for strength-building exercises such as bicep curls, lunges, etc.
  *
  * @author Ryan Koop
  * @version 1.0
@@ -63,6 +62,6 @@ public class ExerciseSetsAndReps implements InterfaceExerciseSetsAndReps {
      * @return the ExerciseSetsAndReps as a string
      */
     public String toString() {
-        return sets + " Sets of " + reps + " Reps";
+        return sets + " sets of " + reps + " reps";
     }
 }
