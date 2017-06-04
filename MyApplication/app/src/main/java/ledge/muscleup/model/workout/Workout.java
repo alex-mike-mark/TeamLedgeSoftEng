@@ -79,7 +79,7 @@ public abstract class Workout implements InterfaceWorkout {
 
         result += name + "\n";
         for (int i = 0; i < exerciseList.size(); i++)
-            result += " " + (i + 1) + ". " + exerciseList.get(i) + "\n";
+            result += " " + (i + 1) + ". " + exerciseList.get(i).toString() + "\n";
 
         return result;
     }

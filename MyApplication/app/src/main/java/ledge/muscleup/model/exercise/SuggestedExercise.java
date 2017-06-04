@@ -78,6 +78,6 @@ public class SuggestedExercise extends Exercise implements InterfaceSuggestedExe
      */
     @Override
     public String toString() {
-        return super.toString() + "\n  Recommended: " + recommendedQuantity;
+        return super.toString() + "\n  Recommended: " + recommendedQuantity.toString();
     }
 }

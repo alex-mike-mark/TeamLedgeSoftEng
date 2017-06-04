@@ -96,7 +96,7 @@ public class TrackableExercise extends Exercise implements InterfaceTrackableExe
      */
     @Override
     public String toString() {
-        return super.toString() + "\n  Recommended: " + recommendedQuantity +
-                "\n  Logged: " + trackedQuantity;
+        return super.toString() + "\n  Recommended: " + recommendedQuantity.toString() +
+                "\n  Logged: " + trackedQuantity.toString();
     }
 }

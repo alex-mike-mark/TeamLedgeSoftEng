@@ -1,5 +1,7 @@
 package ledge.muscleup.model.workout;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
@@ -14,6 +16,7 @@ import ledge.muscleup.model.exercise.InterfaceTrackableExercise;
  */
 
 public class TrackableWorkout extends Workout implements InterfaceTrackableWorkout {
+    private static final String DATE_FORMAT = "MM/dd/yyyy";
     private Date scheduledDate;
 
     /**
@@ -96,6 +99,8 @@ public class TrackableWorkout extends Workout implements InterfaceTrackableWorko
     @Override
     public String toString()
     {
-        return scheduledDate + ": " + super.toString();
+        DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+
+        return dateFormat.format(scheduledDate) + ": " + super.toString();
     }
 }
