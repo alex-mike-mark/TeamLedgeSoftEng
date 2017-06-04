@@ -9,17 +9,17 @@ package ledge.muscleup.model.exercise;
  * @since 2017-06-03
  */
 
-public class ExerciseWeight extends ExerciseSetsAndReps implements InterfaceExerciseWeight {
+public class ExerciseSetsAndWeight extends ExerciseSets implements InterfaceExerciseWeight {
     double weight;
     WeightUnit unitOfMeasure;
 
     /**
-     * The default constructor for the ExerciseSetsAndReps class
+     * The default constructor for the ExerciseSets class
      *
      * @param sets
      * @param reps
      */
-    public ExerciseWeight(int sets, int reps, double weight, WeightUnit unitOfMeasure) {
+    public ExerciseSetsAndWeight(int sets, int reps, double weight, WeightUnit unitOfMeasure) {
         super(sets, reps);
         this.weight = weight;
         this.unitOfMeasure = unitOfMeasure;
@@ -46,18 +46,18 @@ public class ExerciseWeight extends ExerciseSetsAndReps implements InterfaceExer
     }
 
     /**
-     * Compares the current ExerciseSetsAndReps to another instance of InterfaceExerciseQuantity
+     * Compares the current ExerciseSets to another instance of InterfaceExerciseQuantity
      *
      * @param other the instance of InterfaceExerciseQuantity to compare to
      * @return a boolean representing whether the two instances were equal
      */
     @Override
     public boolean equals(InterfaceExerciseQuantity other) {
-        ExerciseWeight weight;
+        ExerciseSetsAndWeight weight;
         boolean isEqual = false;
 
-        if (other instanceof ExerciseWeight) {
-            weight = (ExerciseWeight) other;
+        if (other instanceof ExerciseSetsAndWeight) {
+            weight = (ExerciseSetsAndWeight) other;
             if (this.getSets() == weight.getSets() && this.getReps() == weight.getReps() &&
                     this.weight == weight.getWeight()) {
                 isEqual = true;
@@ -68,9 +68,9 @@ public class ExerciseWeight extends ExerciseSetsAndReps implements InterfaceExer
     }
 
     /**
-     * Returns the ExerciseSetsAndReps as a string
+     * Returns the ExerciseSets as a string
      *
-     * @return the ExerciseSetsAndReps as a string
+     * @return the ExerciseSets as a string
      */
     @Override
     public String toString() {

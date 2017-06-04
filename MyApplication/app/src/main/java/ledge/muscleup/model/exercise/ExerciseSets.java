@@ -8,16 +8,16 @@ package ledge.muscleup.model.exercise;
  * @since 2017-05-29
 */
 
-public class ExerciseSetsAndReps implements InterfaceExerciseSetsAndReps {
+public class ExerciseSets implements InterfaceExerciseSetsAndReps {
     private int sets;
     private int reps;
 
     /**
-     * The default constructor for the ExerciseSetsAndReps class
+     * The default constructor for the ExerciseSets class
      * @param sets
      * @param reps
      */
-    public ExerciseSetsAndReps (int sets, int reps) {
+    public ExerciseSets(int sets, int reps) {
         this.sets = sets;
         this.reps = reps;
     }
@@ -41,17 +41,17 @@ public class ExerciseSetsAndReps implements InterfaceExerciseSetsAndReps {
     }
 
     /**
-     * Compares the current ExerciseSetsAndReps to another instance of InterfaceExerciseQuantity
+     * Compares the current ExerciseSets to another instance of InterfaceExerciseQuantity
      * @param other the instance of InterfaceExerciseQuantity to compare to
      * @return a boolean representing whether the two instances were equal
      */
     @Override
     public boolean equals(InterfaceExerciseQuantity other) {
-        ExerciseSetsAndReps setsAndReps;
+        ExerciseSets setsAndReps;
         boolean isEqual = false;
 
-        if (other instanceof ExerciseSetsAndReps) {
-            setsAndReps = (ExerciseSetsAndReps) other;
+        if (other instanceof ExerciseSets) {
+            setsAndReps = (ExerciseSets) other;
             if (this.sets == setsAndReps.getSets() && this.reps == setsAndReps.getReps()) {
                 isEqual = true;
             }
@@ -61,8 +61,8 @@ public class ExerciseSetsAndReps implements InterfaceExerciseSetsAndReps {
     }
 
     /**
-     * Returns the ExerciseSetsAndReps as a string
-     * @return the ExerciseSetsAndReps as a string
+     * Returns the ExerciseSets as a string
+     * @return the ExerciseSets as a string
      */
     @Override
     public String toString() {
