@@ -58,7 +58,7 @@ public class ModifiableWorkout extends Workout implements InterfaceModifiableWor
      * @return a boolean representing if the exercise was found and updated in the workout
      */
     @Override
-    public boolean setRecommended(InterfaceSuggestedExercise exercise, InterfaceExerciseQuantity quantity) {
+    public boolean setRecommendedQuantity(InterfaceSuggestedExercise exercise, InterfaceExerciseQuantity quantity) {
         boolean quantityUpdated = false;
         int exerciseIndex = exerciseList.indexOf(exercise);
         InterfaceSuggestedExercise listExercise;

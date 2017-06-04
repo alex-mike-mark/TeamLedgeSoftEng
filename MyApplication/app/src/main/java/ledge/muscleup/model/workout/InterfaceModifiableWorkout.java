@@ -25,7 +25,7 @@ public interface InterfaceModifiableWorkout extends InterfaceWorkout {
      * @param quantity the quantity to assign to the exercise
      * @return a boolean representing if the exercise was found and updated in the workout
      */
-    boolean setRecommended(InterfaceSuggestedExercise exercise, InterfaceExerciseQuantity quantity);
+    boolean setRecommendedQuantity(InterfaceSuggestedExercise exercise, InterfaceExerciseQuantity quantity);
 
     /**
      * Returns {@code true} if the workout is a favourite workout, and {@code false} otherwise
