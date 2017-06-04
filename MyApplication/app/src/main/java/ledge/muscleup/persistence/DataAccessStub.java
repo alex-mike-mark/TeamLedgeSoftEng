@@ -33,6 +33,7 @@ public class DataAccessStub implements DataAccess{
     private String dbName;
     private String dbType = "stub";
 
+
     private Map<String, InterfaceWorkout> workoutsByName;
     private Map<String, InterfaceExercise> exercisesByName;
 
@@ -49,6 +50,7 @@ public class DataAccessStub implements DataAccess{
      * @param dbName the name of the database to open
      */
     public void open(String dbName) {
+
         InterfaceExercise exercise;
         InterfaceWorkout workout;
 
@@ -100,6 +102,7 @@ public class DataAccessStub implements DataAccess{
                 new ExerciseSets(2, 25));
         addExerciseToWorkout(workout, exercisesByName.get("Bicycle Kicks"),
                 new ExerciseSets(2, 15));
+
         workoutsByName.put(workout.getName(), workout);
 
         System.out.println("Opened " + dbType + " database " + dbName);
@@ -124,6 +127,7 @@ public class DataAccessStub implements DataAccess{
      * Gets a list of all workouts in the database
      * @return a list of all workouts in the database
      */
+
     public List<InterfaceWorkout> getWorkoutsList() {
         return new ArrayList<>(workoutsByName.values());
     }
@@ -133,6 +137,7 @@ public class DataAccessStub implements DataAccess{
      * @param exerciseName- the name of the exercise to retrieve from the database
      * @return The exercise with name exerciseName, or null if no exercise exists with that name
      */
+
     public InterfaceExercise getExercise(String exerciseName) {
         return exercisesByName.get(exerciseName);
     }
@@ -150,6 +155,7 @@ public class DataAccessStub implements DataAccess{
      * Adds an exercise to the database
      * @param exercise the exercise to be added to the database
      */
+
     public void insertExercise(InterfaceExercise exercise) {
         exercisesByName.put(exercise.getName(), exercise);
     }
@@ -158,11 +164,13 @@ public class DataAccessStub implements DataAccess{
      * Adds a workout to the database
      * @param workout the workout to be added to the database
      */
+
     public void insertWorkout(InterfaceWorkout workout) {
         workoutsByName.put(workout.getName(), workout);
     }
 
     /**
+
      * Adds an exercise to a workout in the database, if both the workout and the exercise exist in
      * the database
      * @param workout the workout to add the exercise to
@@ -197,6 +205,7 @@ public class DataAccessStub implements DataAccess{
      * Removes an exercise from the database, if it exists
      * @param exercise the exercise to remove from the database
      */
+
     public void removeExercise(InterfaceExercise exercise) {
         exercisesByName.remove(exercise);
     }
@@ -205,6 +214,7 @@ public class DataAccessStub implements DataAccess{
      * Removes a workout from the database, if it exists
      * @param workout the workout to remove from the database
      */
+
     public void removeWorkout(InterfaceWorkout workout) {
         workoutsByName.remove(workout);
     }
