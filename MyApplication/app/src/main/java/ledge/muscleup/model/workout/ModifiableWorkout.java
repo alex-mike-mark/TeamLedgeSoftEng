@@ -29,11 +29,11 @@ public class ModifiableWorkout extends Workout implements InterfaceModifiableWor
     }
 
     /**
-     * The constructor for the ModifiableWorkout class which is not favourite by devault
+     * The constructor for the ModifiableWorkout class which is not favourite by default
      * @param name the name of the workout
      * @param exercises an array of SuggestedExercises for the workout
      */
-    protected ModifiableWorkout(String name, InterfaceSuggestedExercise[] exercises) {
+    public ModifiableWorkout(String name, InterfaceSuggestedExercise[] exercises) {
         super(name);
         this.isFavourite = false;
         for (int i = 0; i < exercises.length; i++)
