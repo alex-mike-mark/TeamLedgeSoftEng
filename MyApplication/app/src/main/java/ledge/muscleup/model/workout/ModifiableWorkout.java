@@ -41,6 +41,28 @@ public class ModifiableWorkout extends Workout implements InterfaceModifiableWor
     }
 
     /**
+     * The constructor for the ModifiableWorkout class which creates an empty workout that does not
+     * contain any exercises, and is not favourite by default
+     * @param name the name of the workout
+     */
+
+    public ModifiableWorkout(String name) {
+        super(name);
+        this.isFavourite = false;
+    }
+
+    /**
+     * The constructor for the ModifiableWorkout class which creates an empty workout that does not
+     * contain any exercises, and can be assigned favourite
+     * @param name the name of the workout
+     * @param isFavourite if the workout is a favourite workout
+     */
+    public ModifiableWorkout(String name, boolean isFavourite) {
+        super(name);
+        this.isFavourite = isFavourite;
+    }
+
+    /**
      * Set the name of the workout
      *
      * @param newName the new name for the workout
