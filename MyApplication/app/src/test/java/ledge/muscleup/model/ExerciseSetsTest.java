@@ -5,20 +5,20 @@ package ledge.muscleup.model;
  */
 
 import junit.framework.TestCase;
-import ledge.muscleup.model.ExerciseSetsAndReps;
+import ledge.muscleup.model.exercise.ExerciseSets;
 
-public class ExerciseSetsAndRepsTest extends TestCase{
+public class ExerciseSetsTest extends TestCase{
 
-    public ExerciseSetsAndRepsTest(String arg0) {
+    public ExerciseSetsTest(String arg0) {
         super(arg0);
     }
 
     public void testSetsAndReps1() {
-        ExerciseSetsAndReps setsAndReps;
+        ExerciseSets setsAndReps;
 
         System.out.println("\nStarting testSetsAndReps");
 
-        setsAndReps = new ExerciseSetsAndReps(3, 10);
+        setsAndReps = new ExerciseSets(3, 10);
         assertNotNull(setsAndReps);
         assertTrue(setsAndReps.getSets() == 3);
         assertTrue(setsAndReps.getReps() == 10);

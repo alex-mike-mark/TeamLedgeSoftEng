@@ -6,10 +6,11 @@ package ledge.muscleup.model;
 
 import junit.framework.TestCase;
 
-import ledge.muscleup.model.ExerciseDistance;
-import ledge.muscleup.model.ExerciseDuration;
+import ledge.muscleup.model.exercise.ExerciseDistance;
+import ledge.muscleup.model.exercise.ExerciseDuration;
 import ledge.muscleup.model.ExerciseQuantity;
-import ledge.muscleup.model.ExerciseSetsAndReps;
+import ledge.muscleup.model.exercise.ExerciseSets;
+import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 
 public class ExerciseQuantityTest  extends TestCase{
 
@@ -18,11 +19,11 @@ public class ExerciseQuantityTest  extends TestCase{
     }
 
     public void testExerciseQuantity() {
-        ExerciseQuantity quantity1, quantity2, quantity3, quantity4;
+        InterfaceExerciseQuantity quantity1, quantity2, quantity3, quantity4;
 
         System.out.println ("Starting testExerciseQuantity");
 
-        quantity1 = new ExerciseSetsAndReps(3, 10);
+        quantity1 = new ExerciseSets(3, 10);
         assertNotNull(quantity1);
 
         quantity2 = new ExerciseDistance(2.5, "Miles");
@@ -35,10 +36,10 @@ public class ExerciseQuantityTest  extends TestCase{
         assertFalse(quantity1.equals(quantity3));
         assertFalse(quantity2.equals(quantity3));
 
-        quantity4 = new ExerciseSetsAndReps(2, 15);
+        quantity4 = new ExerciseSets(2, 15);
         assertNotNull(quantity4);
         assertFalse(quantity1.equals(quantity4));
-        quantity4 = new ExerciseSetsAndReps(3, 10);
+        quantity4 = new ExerciseSets(3, 10);
         assertNotNull(quantity4);
         assertTrue(quantity1.equals(quantity4));
 
