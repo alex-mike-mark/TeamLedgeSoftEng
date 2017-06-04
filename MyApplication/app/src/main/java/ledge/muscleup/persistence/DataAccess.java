@@ -1,27 +1,32 @@
 package ledge.muscleup.persistence;
 
 import java.util.List;
-import ledge.muscleup.model.Exercise;
-import ledge.muscleup.model.ExerciseQuantity;
-import ledge.muscleup.model.Workout;
+
+import ledge.muscleup.model.exercise.InterfaceExercise;
+import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
+import ledge.muscleup.model.exercise.InterfaceSuggestedExercise;
+import ledge.muscleup.model.workout.InterfaceWorkout;
 
 /**
- * An interface for the application's database. All database implementations will implement this
- * interface, and other layers of the application will use this interface for accessing the database
+ * An interface for accessing the database, with abilities to retrieve, add, and remove data from
+ * the database, as well as open and close the database
+ *
+ * @author Ryan Koop
+ * @version 1.0
+ * @since 2017-06-04
  */
 public interface DataAccess {
 
     void open(String dbName);
     void close();
-    List<Exercise> getExercisesList();
-    List<Workout> getWorkoutsList();
-    Exercise getExercise(String exerciseName);
-    Workout getWorkout(String workoutName);
-    void insertExercise(Exercise exercise);
-    void insertWorkout(Workout workout);
-    void removeExercise(Exercise exercise);
-    void removeWorkout(Workout workout);
-    void addExerciseToWorkout (Workout workout, Exercise exercise,
-                               ExerciseQuantity exerciseQuantity);
-
+    List<InterfaceExercise> getExercisesList();
+    List<InterfaceWorkout> getWorkoutsList();
+    InterfaceExercise getExercise(String exerciseName);
+    InterfaceWorkout getWorkout(String workoutName);
+    void insertExercise(InterfaceExercise exercise);
+    void insertWorkout(InterfaceWorkout workout);
+    void removeExercise(InterfaceExercise exercise);
+    void removeWorkout(InterfaceWorkout workout);
+    boolean addExerciseToWorkout (InterfaceWorkout workout, InterfaceExercise exercise,
+                                  InterfaceExerciseQuantity quantity);
 }
