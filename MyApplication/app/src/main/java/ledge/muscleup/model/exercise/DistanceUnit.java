@@ -8,7 +8,7 @@ package ledge.muscleup.model.exercise;
  * @since 2017-05-31
  */
 
-public enum UnitOfMeasure {
+public enum DistanceUnit {
     KILOMETERS,
     METERS,
     MILES,

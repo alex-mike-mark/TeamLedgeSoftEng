@@ -19,5 +19,5 @@ public interface InterfaceExerciseDistance extends InterfaceExerciseQuantity {
      * Returns the unit of measurement for the distance
      * @return the unit of measurement
      */
-    UnitOfMeasure getUnitOfMeasure();
+    DistanceUnit getUnitOfMeasure();
 }

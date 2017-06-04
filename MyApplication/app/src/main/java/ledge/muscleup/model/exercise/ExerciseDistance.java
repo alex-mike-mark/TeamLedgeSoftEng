@@ -11,14 +11,14 @@ import java.text.DecimalFormat;
 */
 public class ExerciseDistance implements InterfaceExerciseDistance {
     private double distance;
-    private UnitOfMeasure unitOfMeasure;
+    private DistanceUnit unitOfMeasure;
 
     /**
      * Default constructor for the ExerciseDistance class
      * @param distance the distance for which an exercise is completed
      * @param unitOfMeasure the unit of measurement for the distance
      */
-    public ExerciseDistance (double distance, UnitOfMeasure unitOfMeasure) {
+    public ExerciseDistance (double distance, DistanceUnit unitOfMeasure) {
         this.distance = distance;
         this.unitOfMeasure = unitOfMeasure;
     }
@@ -35,7 +35,7 @@ public class ExerciseDistance implements InterfaceExerciseDistance {
      * Returns the unit of measurement for the distance
      * @return the unit of measurement
      */
-    public UnitOfMeasure getUnitOfMeasure() {
+    public DistanceUnit getUnitOfMeasure() {
         return unitOfMeasure;
     }
 
