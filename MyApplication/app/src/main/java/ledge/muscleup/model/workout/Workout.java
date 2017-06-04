@@ -8,8 +8,7 @@ import java.util.NoSuchElementException;
 import ledge.muscleup.model.exercise.InterfaceExercise;
 
 /**
- * Stores information about workouts, which consists of a set of exercises, a list of required
- * equipment, muscle groups worked, sets/reps or duration for each exercise and a workout type
+ * Stores information about workouts, which consists of a workout name and a set of exercises
  *
  * @author Alexander Mark
  * @version 1.0
