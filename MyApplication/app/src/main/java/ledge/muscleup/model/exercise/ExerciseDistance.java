@@ -27,6 +27,7 @@ public class ExerciseDistance implements InterfaceExerciseDistance {
      * Returns the distance for which an exercise is completed
      * @return the distance
      */
+    @Override
     public double getDistance() {
         return distance;
     }
@@ -35,6 +36,7 @@ public class ExerciseDistance implements InterfaceExerciseDistance {
      * Returns the unit of measurement for the distance
      * @return the unit of measurement
      */
+    @Override
     public DistanceUnit getUnitOfMeasure() {
         return unitOfMeasure;
     }
@@ -44,6 +46,7 @@ public class ExerciseDistance implements InterfaceExerciseDistance {
      * @param other the instance of InterfaceExerciseQuantity to compare to
      * @return a boolean representing whether the two instances were equal
      */
+    @Override
     public boolean equals (InterfaceExerciseQuantity other) {
         ExerciseDistance otherDistance;
         boolean isEqual = false;
@@ -63,6 +66,7 @@ public class ExerciseDistance implements InterfaceExerciseDistance {
      * Returns the ExerciseDistance as a string
      * @return the ExerciseDistance as a string
      */
+    @Override
     public String toString() {
         return new DecimalFormat("#.00").format(distance) + " " + unitOfMeasure;
     }

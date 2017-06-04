@@ -26,6 +26,7 @@ public class ExerciseSetsAndReps implements InterfaceExerciseSetsAndReps {
      * Returns the number of sets for the exercise
      * @return the number of sets for the exercise
      */
+    @Override
     public int getSets() {
         return sets;
     }
@@ -34,6 +35,7 @@ public class ExerciseSetsAndReps implements InterfaceExerciseSetsAndReps {
      * Returns the number of reps for the exercise
      * @return the number of reps for the exercise
      */
+    @Override
     public int getReps() {
         return reps;
     }
@@ -43,6 +45,7 @@ public class ExerciseSetsAndReps implements InterfaceExerciseSetsAndReps {
      * @param other the instance of InterfaceExerciseQuantity to compare to
      * @return a boolean representing whether the two instances were equal
      */
+    @Override
     public boolean equals(InterfaceExerciseQuantity other) {
         ExerciseSetsAndReps setsAndReps;
         boolean isEqual = false;
@@ -61,6 +64,7 @@ public class ExerciseSetsAndReps implements InterfaceExerciseSetsAndReps {
      * Returns the ExerciseSetsAndReps as a string
      * @return the ExerciseSetsAndReps as a string
      */
+    @Override
     public String toString() {
         return sets + " sets of " + reps + " reps";
     }

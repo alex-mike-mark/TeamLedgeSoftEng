@@ -25,6 +25,7 @@ public class ExerciseDuration implements InterfaceExerciseDuration {
      * Get the number of minutes exercised
      * @return the number of minutes exercised
      */
+    @Override
     public double getMinutes() {
         return minutes;
     }
@@ -34,6 +35,7 @@ public class ExerciseDuration implements InterfaceExerciseDuration {
      * @param other the instance of InterfaceExerciseQuantity to compare to
      * @return a boolean representing whether the two instances were equal
      */
+    @Override
     public boolean equals (InterfaceExerciseQuantity other) {
         ExerciseDuration otherDuration;
         boolean isEqual = false;
@@ -52,6 +54,7 @@ public class ExerciseDuration implements InterfaceExerciseDuration {
      * Returns the ExerciseDuration as a string
      * @return the ExerciseDuration as a string
      */
+    @Override
     public String toString() {
         return new DecimalFormat("#.00").format(minutes) + " minutes";
     }
