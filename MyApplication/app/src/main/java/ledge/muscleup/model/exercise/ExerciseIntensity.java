@@ -1,4 +1,4 @@
-package ledge.muscleup.model;
+package ledge.muscleup.model.exercise;
 
 /**
  * The intensity of an exercise/workout, i.e. how difficult the exercise/workout is

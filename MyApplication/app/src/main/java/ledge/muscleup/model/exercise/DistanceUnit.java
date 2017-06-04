@@ -1,4 +1,4 @@
-package ledge.muscleup.model;
+package ledge.muscleup.model.exercise;
 
 /**
  * The unit of measure for an exercise that is measured in distance
@@ -8,7 +8,7 @@ package ledge.muscleup.model;
  * @since 2017-05-31
  */
 
-public enum UnitOfMeasure {
+public enum DistanceUnit {
     KILOMETERS,
     METERS,
     MILES,
