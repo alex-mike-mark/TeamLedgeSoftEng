@@ -190,8 +190,8 @@ public class DataAccessStub implements DataAccess{
 
         if (workoutsByName.get(workout.getName()) != null) {
             InterfaceWorkout dbWorkout = workoutsByName.get(workout.getName());
-            Log.d("Workout", "Instance: " + dbWorkout.getClass().isInstance(ModifiableWorkout.class));
-            if (dbWorkout.getClass().isInstance(ModifiableWorkout.class)) {
+            Log.d("Workout", "Instance: " + (dbWorkout instanceof ModifiableWorkout));
+            if (dbWorkout instanceof ModifiableWorkout) {
                 Log.d("Workout", "Exercise: " + exercisesByName.get(exercise.getName()));
                 if (exercisesByName.get(exercise.getName()) != null) {
                     InterfaceSuggestedExercise suggestedExercise = new SuggestedExercise(
