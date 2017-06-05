@@ -62,8 +62,10 @@ public class WorkoutActivity extends Activity {
                 if (position == 1) {
                     workout = (Workout) workoutArray.get(1);
                     workout.initExerciseIteration();
-                    TextView filter = (TextView) findViewById(R.id.filter_title);
-                    filter.setText(workout.toString());
+                    if(workout.hasNextExercise()) {
+                        TextView filter = (TextView) findViewById(R.id.filter_title);
+                        filter.setText(workout.nextExercise().getName());
+                    }
                 }
             }
         });

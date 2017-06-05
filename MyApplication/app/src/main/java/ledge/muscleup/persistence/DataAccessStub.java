@@ -1,5 +1,7 @@
 package ledge.muscleup.persistence;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -77,6 +79,7 @@ public class DataAccessStub implements DataAccess{
         workoutsByName = new HashMap<>();
 
         workout = new ModifiableWorkout("Welcome to the Gun Show");
+        workoutsByName.put(workout.getName(), workout);
         addExerciseToWorkout(workout, exercisesByName.get("Bicep Curls"),
                 new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
         addExerciseToWorkout(workout, exercisesByName.get("Push-Ups"),
@@ -84,6 +87,7 @@ public class DataAccessStub implements DataAccess{
         workoutsByName.put(workout.getName(), workout);
 
         workout = new ModifiableWorkout("Never Skip Leg Day");
+        workoutsByName.put(workout.getName(), workout);
         addExerciseToWorkout(workout, exercisesByName.get("Squats"),
                 new ExerciseSets(4, 15));
         addExerciseToWorkout(workout, exercisesByName.get("Lunges"),
@@ -91,6 +95,7 @@ public class DataAccessStub implements DataAccess{
         workoutsByName.put(workout.getName(), workout);
 
         workout = new ModifiableWorkout("Marathon Training Starts Here");
+        workoutsByName.put(workout.getName(), workout);
         addExerciseToWorkout(workout, exercisesByName.get("Running"),
                 new ExerciseDistance(2.5, DistanceUnit.MILES));
         addExerciseToWorkout(workout, exercisesByName.get("Exercise Bike"),
@@ -98,11 +103,11 @@ public class DataAccessStub implements DataAccess{
         workoutsByName.put(workout.getName(), workout);
 
         workout = new ModifiableWorkout("Work that Core, Get that Score!");
+        workoutsByName.put(workout.getName(), workout);
         addExerciseToWorkout(workout, exercisesByName.get("Crunches"),
                 new ExerciseSets(2, 25));
         addExerciseToWorkout(workout, exercisesByName.get("Bicycle Kicks"),
                 new ExerciseSets(2, 15));
-
         workoutsByName.put(workout.getName(), workout);
 
         System.out.println("Opened " + dbType + " database " + dbName);
@@ -185,7 +190,9 @@ public class DataAccessStub implements DataAccess{
 
         if (workoutsByName.get(workout.getName()) != null) {
             InterfaceWorkout dbWorkout = workoutsByName.get(workout.getName());
+            Log.d("Workout", "Instance: " + dbWorkout.getClass().isInstance(ModifiableWorkout.class));
             if (dbWorkout.getClass().isInstance(ModifiableWorkout.class)) {
+                Log.d("Workout", "Exercise: " + exercisesByName.get(exercise.getName()));
                 if (exercisesByName.get(exercise.getName()) != null) {
                     InterfaceSuggestedExercise suggestedExercise = new SuggestedExercise(
                             exercise.getName(),
@@ -198,6 +205,7 @@ public class DataAccessStub implements DataAccess{
                 }
             }
         }
+        Log.d("Workout", "Added: " + added);
         return added;
     }
 
