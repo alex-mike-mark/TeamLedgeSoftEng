@@ -26,6 +26,15 @@ public class AccessExercises {
     }
 
     /**
+     * This method gets an exercise from the database with the given name
+     * @param exerciseName the name of the exercise
+     * @return an exercise from the database with the given name, or null if it does not exist
+     */
+    public InterfaceExercise getExercise(String exerciseName) {
+        return dataAccess.getExercise(exerciseName);
+    }
+
+    /**
      * This method gets exercises stored in the database in the form of a list
      * @return a list of exercises in the database
      */
