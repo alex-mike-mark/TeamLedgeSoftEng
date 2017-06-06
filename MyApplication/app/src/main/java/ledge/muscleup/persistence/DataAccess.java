@@ -21,6 +21,8 @@ public interface DataAccess {
     void close();
     List<InterfaceExercise> getExercisesList();
     List<InterfaceWorkout> getWorkoutsList();
+    List<String> getExerciseNamesList();
+    List<String> getWorkoutNamesList();
     InterfaceExercise getExercise(String exerciseName);
     InterfaceWorkout getWorkout(String workoutName);
     void insertExercise(InterfaceExercise exercise);

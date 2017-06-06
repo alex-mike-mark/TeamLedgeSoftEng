@@ -44,6 +44,14 @@ public class AccessWorkouts {
     }
 
     /**
+     * This method gets the names of all workouts in the database in the form of a list
+     * @return a list of workout names in the database
+     */
+    public List<String> getWorkoutNamesList() {
+        return dataAccess.getWorkoutNamesList();
+    }
+
+    /**
      * Adds a new workout to the database
      * @param workout the workout to be added to the database
      */

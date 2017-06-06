@@ -43,6 +43,13 @@ public class AccessExercises {
     }
 
     /**
+     * This method gets the names of all exercises in the database in the form of a list
+     * @return a list of exercise names in the database
+     */
+    public List<String> getExerciseNamesList() {
+        return dataAccess.getExerciseNamesList();
+    }
+    /**
      * This method inserts a new exercise into the database
      * @param exercise the exercise to be inserted
      */
