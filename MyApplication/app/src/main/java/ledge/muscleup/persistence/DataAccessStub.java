@@ -16,6 +16,7 @@ import ledge.muscleup.model.exercise.ExerciseType;
 import ledge.muscleup.model.exercise.ExerciseIntensity;
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.InterfaceSuggestedExercise;
+import ledge.muscleup.model.exercise.InterfaceTrackableExercise;
 import ledge.muscleup.model.exercise.ListedExercise;
 import ledge.muscleup.model.exercise.SuggestedExercise;
 import ledge.muscleup.model.exercise.WeightUnit;
@@ -129,12 +130,27 @@ public class DataAccessStub implements DataAccess{
     }
 
     /**
+     * Gets a list of names of all exercises in the database
+     * @return a list of names of all exercises in the database
+     */
+    public List<String> getExerciseNamesList() {
+        return new ArrayList<>(exercisesByName.keySet());
+    }
+
+    /**
      * Gets a list of all workouts in the database
      * @return a list of all workouts in the database
      */
-
     public List<InterfaceWorkout> getWorkoutsList() {
         return new ArrayList<>(workoutsByName.values());
+    }
+
+    /**
+     * Gets a list of names of all exercises in the database
+     * @return a list of names of all workouts in the database
+     */
+    public List<String> getWorkoutNamesList() {
+        return new ArrayList<>(exercisesByName.keySet());
     }
 
     /**
@@ -142,7 +158,6 @@ public class DataAccessStub implements DataAccess{
      * @param exerciseName- the name of the exercise to retrieve from the database
      * @return The exercise with name exerciseName, or null if no exercise exists with that name
      */
-
     public InterfaceExercise getExercise(String exerciseName) {
         return exercisesByName.get(exerciseName);
     }
@@ -215,7 +230,7 @@ public class DataAccessStub implements DataAccess{
      */
 
     public void removeExercise(InterfaceExercise exercise) {
-        exercisesByName.remove(exercise);
+        exercisesByName.remove(exercise.getName());
     }
 
     /**
@@ -224,6 +239,6 @@ public class DataAccessStub implements DataAccess{
      */
 
     public void removeWorkout(InterfaceWorkout workout) {
-        workoutsByName.remove(workout);
+        workoutsByName.remove(workout.getName());
     }
 }
