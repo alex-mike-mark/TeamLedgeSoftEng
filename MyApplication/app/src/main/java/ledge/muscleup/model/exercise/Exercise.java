@@ -19,6 +19,7 @@ public class Exercise implements InterfaceExercise {
      * @param name the name of the exercise
      * @param intensity the intensity of the exercise
      * @param exerciseType the type of the exercise
+     * @param isFavourite whether the exercise is favourite or not
      */
     public Exercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType,
                        boolean isFavourite) {
@@ -26,6 +27,19 @@ public class Exercise implements InterfaceExercise {
         this.intensity = intensity;
         this.exerciseType = exerciseType;
         this.isFavourite = isFavourite;
+    }
+
+    /**
+     * The default constructor for the Exercise class
+     * @param name the name of the exercise
+     * @param intensity the intensity of the exercise
+     * @param exerciseType the type of the exercise
+     */
+    public Exercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType) {
+        this.name = name;
+        this.intensity = intensity;
+        this.exerciseType = exerciseType;
+        this.isFavourite = false;
     }
 
     /**
