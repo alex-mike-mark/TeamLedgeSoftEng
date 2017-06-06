@@ -1,7 +1,7 @@
 package ledge.muscleup.model.exercise;
 
 /**
- * An exercise which contains a contains a suggested amount of exercise, which can be modified
+ * An exercise which contains a suggested amount of exercise, which can be modified
  *
  * @author Cole Kehler
  * @version 1.0
@@ -21,7 +21,14 @@ public class SuggestedExercise extends Exercise implements InterfaceSuggestedExe
     public SuggestedExercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType,
                                 InterfaceExerciseQuantity recommendedQuantity) {
         super(name, intensity, exerciseType);
-        this.recommendedQuantity = recommendedQuantity;
+
+        if(!(recommendedQuantity instanceof InterfaceExerciseQuantity) && recommendedQuantity == null){
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        }
+        else{
+            this.recommendedQuantity = recommendedQuantity;
+
+        }
     }
 
     /**
@@ -42,9 +49,12 @@ public class SuggestedExercise extends Exercise implements InterfaceSuggestedExe
     public boolean updateRecommendedQuantity(InterfaceExerciseQuantity quantity) {
         boolean quantityUpdated = false;
 
-        if (quantity.getClass().isInstance(recommendedQuantity.getClass())) {
+        if((quantity instanceof InterfaceExerciseQuantity) && quantity != null){
             recommendedQuantity = quantity;
             quantityUpdated = true;
+        }
+        else{
+            throw(new IllegalArgumentException("Invalid or null data passed to a method"));
         }
 
         return quantityUpdated;
