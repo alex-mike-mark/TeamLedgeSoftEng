@@ -207,7 +207,7 @@ public class DataAccessStub implements DataAccess{
      */
 
     public void removeExercise(InterfaceExercise exercise) {
-        exercisesByName.remove(exercise);
+        exercisesByName.remove(exercise.getName());
     }
 
     /**
@@ -216,6 +216,6 @@ public class DataAccessStub implements DataAccess{
      */
 
     public void removeWorkout(InterfaceWorkout workout) {
-        workoutsByName.remove(workout);
+        workoutsByName.remove(workout.getName());
     }
 }
