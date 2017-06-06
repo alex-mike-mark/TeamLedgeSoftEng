@@ -4,7 +4,6 @@ import java.util.List;
 
 import ledge.muscleup.model.exercise.InterfaceExercise;
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
-import ledge.muscleup.model.exercise.InterfaceSuggestedExercise;
 import ledge.muscleup.model.workout.InterfaceWorkout;
 
 /**

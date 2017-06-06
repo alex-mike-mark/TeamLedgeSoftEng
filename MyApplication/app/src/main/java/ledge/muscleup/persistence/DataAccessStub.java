@@ -14,8 +14,8 @@ import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
 import ledge.muscleup.model.exercise.ExerciseType;
 import ledge.muscleup.model.exercise.ExerciseIntensity;
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
-import ledge.muscleup.model.exercise.InterfaceSuggestedExercise;
-import ledge.muscleup.model.exercise.SuggestedExercise;
+import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
+import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WeightUnit;
 import ledge.muscleup.model.workout.ModifiableWorkout;
 import ledge.muscleup.model.exercise.InterfaceExercise;
@@ -201,7 +201,7 @@ public class DataAccessStub implements DataAccess{
             InterfaceWorkout dbWorkout = workoutsByName.get(workout.getName());
             if (dbWorkout.getClass().isInstance(ModifiableWorkout.class)) {
                 if (exercisesByName.get(exercise.getName()) != null) {
-                    InterfaceSuggestedExercise suggestedExercise = new SuggestedExercise(
+                    InterfaceWorkoutExercise suggestedExercise = new WorkoutExercise(
                             exercise.getName(),
                             exercise.getIntensity(),
                             exercise.getType(),
