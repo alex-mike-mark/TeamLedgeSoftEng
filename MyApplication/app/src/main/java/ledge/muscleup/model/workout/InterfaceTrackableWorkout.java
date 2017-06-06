@@ -1,6 +1,6 @@
 package ledge.muscleup.model.workout;
 
-import java.util.Date;
+import org.joda.time.LocalDate;
 
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.InterfaceTrackableExercise;
@@ -18,13 +18,13 @@ public interface InterfaceTrackableWorkout extends InterfaceWorkout {
      * Returns the scheduled date of the workout
      * @return the scheduled date of the workout
      */
-    Date getDate();
+    LocalDate getDate();
 
     /**
      * Sets the scheduled date of the workout
      * @param newDate the new date of the workout
      */
-    void setDate(Date newDate);
+    void setDate(LocalDate newDate);
 
     /**
      * Log a quantity of exercise for one of the exercises in the workout

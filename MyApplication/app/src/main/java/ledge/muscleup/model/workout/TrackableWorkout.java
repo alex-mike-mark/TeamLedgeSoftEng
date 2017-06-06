@@ -1,8 +1,8 @@
 package ledge.muscleup.model.workout;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.InterfaceTrackableExercise;
@@ -16,8 +16,8 @@ import ledge.muscleup.model.exercise.InterfaceTrackableExercise;
  */
 
 public class TrackableWorkout extends Workout implements InterfaceTrackableWorkout {
-    private static final String DATE_FORMAT = "MM/dd/yyyy";
-    private Date scheduledDate;
+    private static final DateTimeFormatter format = DateTimeFormat.forPattern("yyyy/MM/dd");
+    private LocalDate scheduledDate;
 
     /**
      * The default constructor for the TrackableWorkout class
@@ -25,7 +25,7 @@ public class TrackableWorkout extends Workout implements InterfaceTrackableWorko
      * @param scheduledDate the scheduled date of the workout
      * @param exercises an array of TrackableExercises for the workout
      */
-    public TrackableWorkout(String name, Date scheduledDate, InterfaceTrackableExercise[] exercises) {
+    public TrackableWorkout(String name, LocalDate scheduledDate, InterfaceTrackableExercise[] exercises) {
         super(name);
         this.scheduledDate = scheduledDate;
         for (int i = 0; i < exercises.length; i++)
@@ -38,7 +38,7 @@ public class TrackableWorkout extends Workout implements InterfaceTrackableWorko
      * @return the scheduled date of the workout
      */
     @Override
-    public Date getDate() { return scheduledDate; }
+    public LocalDate getDate() { return scheduledDate; }
 
     /**
      * Sets the scheduled date of the workout
@@ -46,7 +46,7 @@ public class TrackableWorkout extends Workout implements InterfaceTrackableWorko
      * @param newDate the new date of the workout
      */
     @Override
-    public void setDate(Date newDate) { scheduledDate = newDate; }
+    public void setDate(LocalDate newDate) { scheduledDate = newDate; }
 
     /**
      * Log a quantity of exercise for one of the exercises in the workout
@@ -99,8 +99,6 @@ public class TrackableWorkout extends Workout implements InterfaceTrackableWorko
     @Override
     public String toString()
     {
-        DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
-
-        return dateFormat.format(scheduledDate) + ": " + super.toString();
+        return format.print(scheduledDate) + ": " + super.toString();
     }
 }
