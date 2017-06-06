@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import ledge.muscleup.model.exercise.DistanceUnit;
+import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.ExerciseDistance;
 import ledge.muscleup.model.exercise.ExerciseDuration;
 import ledge.muscleup.model.exercise.ExerciseSets;
@@ -14,8 +15,6 @@ import ledge.muscleup.model.exercise.ExerciseType;
 import ledge.muscleup.model.exercise.ExerciseIntensity;
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.InterfaceSuggestedExercise;
-import ledge.muscleup.model.exercise.InterfaceTrackableExercise;
-import ledge.muscleup.model.exercise.ListedExercise;
 import ledge.muscleup.model.exercise.SuggestedExercise;
 import ledge.muscleup.model.exercise.WeightUnit;
 import ledge.muscleup.model.workout.ModifiableWorkout;
@@ -56,23 +55,23 @@ public class DataAccessStub implements DataAccess{
         InterfaceWorkout workout;
 
         exercisesByName = new HashMap<>();
-        exercise = new ListedExercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM, false);
+        exercise = new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM, false);
         exercisesByName.put(exercise.getName(), exercise);
-        exercise = new ListedExercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM, false);
+        exercise = new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM, false);
         exercisesByName.put(exercise.getName(), exercise);
-        exercise = new ListedExercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO, false);
+        exercise = new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO, false);
         exercisesByName.put(exercise.getName(), exercise);
-        exercise = new ListedExercise("Exercise Bike", ExerciseIntensity.MEDIUM,
+        exercise = new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM,
                 ExerciseType.CARDIO, false);
         exercisesByName.put(exercise.getName(), exercise);
-        exercise = new ListedExercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE, false);
+        exercise = new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE, false);
         exercisesByName.put(exercise.getName(), exercise);
-        exercise = new ListedExercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE,
+        exercise = new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE,
                 false);
         exercisesByName.put(exercise.getName(), exercise);
-        exercise = new ListedExercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false);
+        exercise = new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false);
         exercisesByName.put(exercise.getName(), exercise);
-        exercise = new ListedExercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false);
+        exercise = new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false);
         exercisesByName.put(exercise.getName(), exercise);
 
         workoutsByName = new HashMap<>();
