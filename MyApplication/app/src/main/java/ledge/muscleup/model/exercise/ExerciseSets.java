@@ -8,7 +8,7 @@ package ledge.muscleup.model.exercise;
  * @since 2017-05-29
 */
 
-public class ExerciseSets implements InterfaceExerciseSetsAndReps {
+public class ExerciseSets implements InterfaceExerciseSets {
     private int sets;
     private int reps;
 

@@ -9,7 +9,7 @@ package ledge.muscleup.model.exercise;
  * @since 2017-06-03
  */
 
-public class ExerciseSetsAndWeight extends ExerciseSets implements InterfaceExerciseWeight {
+public class ExerciseSetsAndWeight extends ExerciseSets implements InterfaceExerciseSetsAndWeight {
     double weight;
     WeightUnit unitOfMeasure;
 
