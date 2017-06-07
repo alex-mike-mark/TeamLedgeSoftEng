@@ -26,8 +26,14 @@ public class TrackableExercise extends Exercise implements InterfaceTrackableExe
                              InterfaceExerciseQuantity recommendedQuantity,
                              InterfaceExerciseQuantity trackedQuantity) {
         super(name, intensity, exerciseType);
-        this.recommendedQuantity = recommendedQuantity;
-        this.trackedQuantity = trackedQuantity;
+
+        if(recommendedQuantity == null || trackedQuantity == null){
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        }
+        else{
+            this.recommendedQuantity = recommendedQuantity;
+            this.trackedQuantity = trackedQuantity;
+        }
     }
 
     /**
@@ -60,9 +66,12 @@ public class TrackableExercise extends Exercise implements InterfaceTrackableExe
     public boolean updateTrackedQuantity(InterfaceExerciseQuantity quantity) {
         boolean quantityUpdated = false;
 
-        if (quantity.getClass().isInstance(trackedQuantity.getClass())) {
+        if((quantity instanceof InterfaceExerciseQuantity) && quantity != null){
             trackedQuantity = quantity;
             quantityUpdated = true;
+        }
+        else{
+            throw(new IllegalArgumentException("Invalid or null data passed to a method"));
         }
 
         return quantityUpdated;

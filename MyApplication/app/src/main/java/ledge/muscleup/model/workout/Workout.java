@@ -20,8 +20,13 @@ public abstract class Workout implements InterfaceWorkout {
     private Iterator<InterfaceExercise> exerciseListIterator;
 
     protected Workout(String name) {
-        this.name = name;
-        exerciseList = new ArrayList<>();
+        if(name == null){
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        }
+        else{
+            this.name = name;
+            exerciseList = new ArrayList<>();
+        }
     }
 
     /**

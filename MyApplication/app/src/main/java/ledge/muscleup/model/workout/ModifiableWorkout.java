@@ -23,9 +23,15 @@ public class ModifiableWorkout extends Workout implements InterfaceModifiableWor
      */
     protected ModifiableWorkout(String name, boolean isFavourite, InterfaceSuggestedExercise[] exercises) {
         super(name);
-        this.isFavourite = isFavourite;
-        for (int i = 0; i < exercises.length; i++)
-            exerciseList.add(exercises[i]);
+
+        if(exercises == null){
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        }
+        else{
+            this.isFavourite = isFavourite;
+            for (int i = 0; i < exercises.length; i++)
+                exerciseList.add(exercises[i]);
+        }
     }
 
     /**
@@ -35,9 +41,15 @@ public class ModifiableWorkout extends Workout implements InterfaceModifiableWor
      */
     public ModifiableWorkout(String name, InterfaceSuggestedExercise[] exercises) {
         super(name);
-        this.isFavourite = false;
-        for (int i = 0; i < exercises.length; i++)
-            exerciseList.add(exercises[i]);
+
+        if(exercises == null){
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        }
+        else{
+            this.isFavourite = false;
+            for (int i = 0; i < exercises.length; i++)
+                exerciseList.add(exercises[i]);
+        }
     }
 
     /**

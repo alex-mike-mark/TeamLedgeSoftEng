@@ -19,9 +19,15 @@ public abstract class Exercise implements InterfaceExercise {
      * @param exerciseType the type of the exercise
      */
     protected Exercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType) {
-        this.name = name;
-        this.intensity = intensity;
-        this.exerciseType = exerciseType;
+        if(name == null || intensity == null || exerciseType == null){
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        }
+        else{
+            this.name = name;
+            this.intensity = intensity;
+            this.exerciseType = exerciseType;
+        }
+
     }
 
     /**
