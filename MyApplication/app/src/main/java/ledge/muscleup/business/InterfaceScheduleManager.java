@@ -1,10 +1,11 @@
-package ledge.muscleup.model;
+package ledge.muscleup.business;
 
 import org.joda.time.LocalDate;
 
+import java.util.Enumeration;
 import java.util.NoSuchElementException;
 
-import ledge.muscleup.model.workout.InterfaceTrackableWorkout;
+import ledge.muscleup.model.workout.InterfaceWorkoutSession;
 
 /**
  * An interface for the schedule manager, which holds a week of scheduled workouts
@@ -25,6 +26,13 @@ public interface InterfaceScheduleManager {
     LocalDate getWeekday(int dayOfWeek) throws IllegalArgumentException;
 
     /**
+     * Returns the workout for a given day of the week
+     * @param dayOfWeek the day of the week to get the workout for
+     * @return the workout scheduled on that day of the week, or {@code null} if the day was empty
+     */
+    InterfaceWorkoutSession getScheduledWorkout(int dayOfWeek);
+
+    /**
      * Returns {@code true} if the given day of the week has no workouts scheduled, or {@code false}
      * otherwise
      *
@@ -32,7 +40,7 @@ public interface InterfaceScheduleManager {
      * @throws IllegalArgumentException if {@code dayOfWeek <= 0 || dayOfWeek > 7}
      * @return a boolean representing whether the given day has no scheduled workouts
      */
-    boolean dayEmpty(int dayOfWeek) throws IllegalArgumentException;
+    boolean isDayEmpty(int dayOfWeek) throws IllegalArgumentException;
 
     /**
      * Sets the manager to contain the scheduled workouts for the previous week
@@ -47,43 +55,21 @@ public interface InterfaceScheduleManager {
     /**
      * Adds a workout to a given day
      * @param workout the workout to add
-     * @param date the date to add the workout to
+     * @param dayOfWeek the day of the week to add the workout to
      */
-    void addWorkout(InterfaceTrackableWorkout workout, LocalDate date);
+    void addWorkout(InterfaceWorkoutSession workout, int dayOfWeek);
 
     /**
      * Removes a workout from a given day
-     * @param date the day to remove the workout from
+     * @param dayOfWeek the day to remove the workout from
      * @return a boolean representing if a workout was removed
      */
-    boolean removeExercise(LocalDate date);
+    boolean removeWorkout(int dayOfWeek);
 
     /**
-     * Initializes the iterator for the list of workouts to the first InterfaceTrackableWorkout in
-     * the list
-     */
-    void initWorkoutIteration();
-
-    /**
-     * Returns {@code true} if there is another InterfaceTrackableWorkout in the list or
-     * {@code false} if not
+     * Returns the current week as a String
      *
-     * @return a boolean representing whether the iterator is at the end of the list or not
-     */
-    boolean hasNextWorkout();
-
-    /**
-     * Returns the next InterfaceTrackableWorkout in the list
-     *
-     * @return the next InterfaceTrackableWorkout in the list
-     * @throws NoSuchElementException if the iterator is at the end of the list
-     */
-    InterfaceTrackableWorkout nextWorkout() throws NoSuchElementException;
-
-    /**
-     * Returns the InterfaceScheduleManager as a String
-     *
-     * @return the InterfaceScheduleManager as a String
+     * @return the current week as a String
      */
     String toString();
 }
