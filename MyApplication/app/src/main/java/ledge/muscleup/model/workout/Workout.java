@@ -1,13 +1,14 @@
 package ledge.muscleup.model.workout;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
-import java.util.NoSuchElementException;
 
-import ledge.muscleup.model.exercise.InterfaceExercise;
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
+
+import static java.util.Collections.enumeration;
 
 /**
  * Stores information about workouts, which consists of a workout name, a set of exercises, whether
@@ -92,6 +93,16 @@ public class Workout implements InterfaceWorkout {
     public void toggleFavourite() { isFavourite = !isFavourite; }
 
     /**
+     * Returns the number of exercises in the workout
+     *
+     * @return the number of exercises in the workout
+     */
+    @Override
+    public int numExercises() {
+        return exerciseList.size();
+    }
+
+    /**
      * Adds a new exercise to the workout
      *
      * @param exercise the exercise to add to the workout
@@ -139,38 +150,11 @@ public class Workout implements InterfaceWorkout {
     public boolean removeExercise(InterfaceWorkoutExercise exercise) { return exerciseList.remove(exercise); }
 
     /**
-     * Initializes the iterator for the list of exercises to the first InterfaceWorkoutExercise in
-     * the list
+     * Returns an enumeration for traversing over the exercises in the workout
      */
     @Override
-    public void initExerciseIteration() {
-        exerciseListIterator = exerciseList.iterator();
-    }
-
-    /**
-     * Returns {@code true} if there is another InterfaceWorkoutExercise in the list or
-     * {@code false} if not
-     *
-     * @return a boolean representing whether the iterator is at the end of the list or not
-     */
-    @Override
-    public boolean hasNextExercise() {
-        return exerciseListIterator.hasNext();
-    }
-
-    /**
-     * Returns the next InterfaceWorkoutExercise in the list
-     *
-     * @return the next InterfaceWorkoutExercise in the list
-     * @throws NoSuchElementException if the iterator is at the end of the list
-     */
-    @Override
-    public InterfaceWorkoutExercise nextExercise() throws NoSuchElementException {
-        try {
-            return exerciseListIterator.next();
-        } catch (NoSuchElementException nsee) {
-            throw nsee;
-        }
+    public Enumeration<InterfaceWorkoutExercise> getExerciseEnumeration() {
+        return enumeration(exerciseList);
     }
 
     /**

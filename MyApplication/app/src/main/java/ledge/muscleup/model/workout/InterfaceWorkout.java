@@ -1,11 +1,9 @@
 package ledge.muscleup.model.workout;
 
-import java.util.NoSuchElementException;
+import java.util.Enumeration;
 
-import ledge.muscleup.model.exercise.InterfaceExercise;
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
-
 /**
  * The interface for a workout, which consists of a workout name and a list of exercises
  *
@@ -48,6 +46,12 @@ public interface InterfaceWorkout {
     void toggleFavourite();
 
     /**
+     * Returns the number of exercises in the workout
+     * @return the number of exercises in the workout
+     */
+    int numExercises();
+
+    /**
      * Adds a new exercise to the workout
      * @param exercise the exercise to add to the workout
      */
@@ -69,24 +73,10 @@ public interface InterfaceWorkout {
     boolean removeExercise(InterfaceWorkoutExercise exercise);
 
     /**
-     * Initializes the iterator for the list of exercises to the first InterfaceWorkoutExercise in
-     * the list
+     * Returns an enumeration for traversing over the exercises in the workout
+     * @return an enumeration of the exercises
      */
-    void initExerciseIteration();
-
-    /**
-     * Returns {@code true} if there is another InterfaceWorkoutExercise in the list or
-     * {@code false} if not
-     * @return a boolean representing whether the iterator is at the end of the list or not
-     */
-    boolean hasNextExercise();
-
-    /**
-     * Returns the next InterfaceWorkoutExercise in the list
-     * @return the next InterfaceWorkoutExercise in the list
-     * @throws NoSuchElementException if the iterator is at the end of the list
-     */
-    InterfaceWorkoutExercise nextExercise() throws NoSuchElementException;
+    public Enumeration<InterfaceWorkoutExercise> getExerciseEnumeration();
 
     /**
      * Compares the current InterfaceWorkoutExercise to another instance of InterfaceWorkout
