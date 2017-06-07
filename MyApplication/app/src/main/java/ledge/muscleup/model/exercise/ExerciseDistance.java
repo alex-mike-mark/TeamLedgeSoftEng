@@ -17,8 +17,9 @@ public class ExerciseDistance implements InterfaceExerciseDistance {
      * Default constructor for the ExerciseDistance class
      * @param distance the distance for which an exercise is completed
      * @param unitOfMeasure the unit of measurement for the distance
+     * @throws IllegalArgumentException if {@code distance < 0} or if passed a {@code null} parameter
      */
-    public ExerciseDistance (double distance, DistanceUnit unitOfMeasure) {
+    public ExerciseDistance (double distance, DistanceUnit unitOfMeasure) throws IllegalArgumentException {
         if(distance < 0 || unitOfMeasure == null) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }

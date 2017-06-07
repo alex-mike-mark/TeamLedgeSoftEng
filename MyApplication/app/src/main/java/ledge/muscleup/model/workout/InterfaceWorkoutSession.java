@@ -31,8 +31,9 @@ public interface InterfaceWorkoutSession {
     /**
      * Sets the scheduled date of the workout
      * @param newDate the new date of the workout
+     * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    void setDate(LocalDate newDate);
+    void setDate(LocalDate newDate) throws IllegalArgumentException;
 
     /**
      * Returns {@code true} if the worokout has been completed, or {@code false} otherwise
@@ -54,9 +55,10 @@ public interface InterfaceWorkoutSession {
     /**
      * Log an exercise as complete
      * @param exercise the exercise to complete
+     * @throws IllegalArgumentException if passed a {@code null} parameter
      * @return a boolean representing whether the exercise was marked as completed or not
      */
-    boolean completeExercise(InterfaceWorkoutSessionExercise exercise, InterfaceExerciseQuantity quantity);
+    boolean completeExercise(InterfaceWorkoutSessionExercise exercise) throws IllegalArgumentException;
 
     /**
      * Returns an enumeration for traversing over the exercises in the workout

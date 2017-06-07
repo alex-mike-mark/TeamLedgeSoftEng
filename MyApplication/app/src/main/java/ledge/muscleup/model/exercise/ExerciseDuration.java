@@ -16,8 +16,9 @@ public class ExerciseDuration implements InterfaceExerciseDuration {
     /**
      * Default constructor for the ExerciseDuration class
      * @param minutes the number of minutes exercised
+     * @throws IllegalArgumentException if {@code minutes < 0}
      */
-    public ExerciseDuration (double minutes) {
+    public ExerciseDuration (double minutes) throws IllegalArgumentException {
         if(minutes < 0) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
