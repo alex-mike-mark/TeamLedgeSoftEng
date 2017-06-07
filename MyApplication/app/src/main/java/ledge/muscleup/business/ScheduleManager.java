@@ -48,7 +48,7 @@ public class ScheduleManager implements InterfaceScheduleManager {
         if (!isDayWithinWeek(dayOfWeek))
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else if (dayOfWeek != DateTimeConstants.MONDAY)
-            weekday = weekday.plusDays(dayOfWeek);
+            weekday = weekday.plusDays(dayOfWeek - 1);
 
         return weekday;
     }

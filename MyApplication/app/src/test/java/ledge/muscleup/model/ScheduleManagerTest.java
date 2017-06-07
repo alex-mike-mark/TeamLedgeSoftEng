@@ -63,9 +63,9 @@ public class ScheduleManagerTest {
      */
     @Test
     public void scheduledWorkoutsTest(){
-        Assert.assertTrue("Returned that day is empty when it isn't",
+        Assert.assertFalse("Returned that day is empty when it isn't",
                 scheduleManager.isDayEmpty(DateTimeConstants.MONDAY));
-        Assert.assertFalse("Returned that day isn't empty when it is",
+        Assert.assertTrue("Returned that day isn't empty when it is",
                 scheduleManager.isDayEmpty(DateTimeConstants.SATURDAY));
 
         Assert.assertEquals("Returned a workout for a day where there shouldn't be one",
@@ -112,9 +112,9 @@ public class ScheduleManagerTest {
         Assert.assertEquals("Improperly decremented week",
                 scheduleManager.getWeekday(DateTimeConstants.MONDAY), currWeekStart.minusWeeks(1));
         Assert.assertEquals("Returned unexpected workout",
-                scheduleManager.getScheduledWorkout(DateTimeConstants.MONDAY).getName(), null);
+                scheduleManager.getScheduledWorkout(DateTimeConstants.MONDAY), null);
         Assert.assertEquals("Returned unexpected workout",
-                scheduleManager.getScheduledWorkout(DateTimeConstants.SUNDAY).getName(), null);
+                scheduleManager.getScheduledWorkout(DateTimeConstants.SUNDAY), null);
 
         scheduleManager.nextWeek();
 
