@@ -115,7 +115,7 @@ public class WorkoutExercise implements InterfaceWorkoutExercise {
     public boolean equals(InterfaceWorkoutExercise other){
         return (other != null &&
                 getName().equals(other.getName()) &&
-                recommendedQuantity == other.getRecommendedQuantity());
+                recommendedQuantity.equals(other.getRecommendedQuantity()));
     }
 
     /**
