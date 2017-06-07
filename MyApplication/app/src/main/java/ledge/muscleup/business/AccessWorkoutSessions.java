@@ -46,6 +46,17 @@ public class AccessWorkoutSessions {
     }
 
     /**
+     * A method that returns a list of workout sessions scheduled in a date range
+     * @param startDate the first date of the date range
+     * @param endDate the last date of the date range
+     * @return a list of all workout sessions scheduled between startDate and endDate, inclusive
+     */
+    public List<InterfaceWorkoutSession> getSessionsInDateRange(LocalDate startDate,
+                                                                LocalDate endDate) {
+        return dataAccess.getSessionsInDateRange(startDate, endDate);
+    }
+
+    /**
      * Adds a new workout session to the database
      * @param workoutSession the workout session to be added to the database
      */
