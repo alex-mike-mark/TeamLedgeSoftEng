@@ -4,6 +4,7 @@ import java.util.List;
 
 import ledge.muscleup.model.exercise.InterfaceExercise;
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
+import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
 import ledge.muscleup.model.workout.InterfaceWorkout;
 
 /**
@@ -28,6 +29,5 @@ public interface DataAccess {
     void insertWorkout(InterfaceWorkout workout);
     void removeExercise(InterfaceExercise exercise);
     void removeWorkout(InterfaceWorkout workout);
-    boolean addExerciseToWorkout (InterfaceWorkout workout, InterfaceExercise exercise,
-                                  InterfaceExerciseQuantity quantity);
+    boolean addExerciseToWorkout (InterfaceWorkout workout, InterfaceWorkoutExercise exercise);
 }

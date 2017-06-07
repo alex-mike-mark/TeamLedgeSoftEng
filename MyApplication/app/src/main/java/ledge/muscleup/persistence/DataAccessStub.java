@@ -13,13 +13,12 @@ import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
 import ledge.muscleup.model.exercise.ExerciseType;
 import ledge.muscleup.model.exercise.ExerciseIntensity;
-import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WeightUnit;
-import ledge.muscleup.model.workout.ModifiableWorkout;
 import ledge.muscleup.model.exercise.InterfaceExercise;
 import ledge.muscleup.model.workout.InterfaceWorkout;
+import ledge.muscleup.model.workout.Workout;
 
 /**
  * A stub implementation of the database for Iteration 1
@@ -52,6 +51,7 @@ public class DataAccessStub implements DataAccess{
     public void open(String dbName) {
 
         InterfaceExercise exercise;
+        InterfaceWorkoutExercise workoutExercise;
         InterfaceWorkout workout;
 
         exercisesByName = new HashMap<>();
@@ -76,33 +76,40 @@ public class DataAccessStub implements DataAccess{
 
         workoutsByName = new HashMap<>();
 
-        workout = new ModifiableWorkout("Welcome to the Gun Show");
-        addExerciseToWorkout(workout, exercisesByName.get("Bicep Curls"),
+        workout = new Workout("Welcome to the Gun Show", false);
+        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Bicep Curls"),
                 new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
-        addExerciseToWorkout(workout, exercisesByName.get("Push-Ups"),
+        addExerciseToWorkout(workout, workoutExercise);
+        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Push-Ups"),
                 new ExerciseSets(2, 15));
+        addExerciseToWorkout(workout, workoutExercise);
         workoutsByName.put(workout.getName(), workout);
 
-        workout = new ModifiableWorkout("Never Skip Leg Day");
-        addExerciseToWorkout(workout, exercisesByName.get("Squats"),
+        workout = new Workout("Never Skip Leg Day", false);
+        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Squats"),
                 new ExerciseSets(4, 15));
-        addExerciseToWorkout(workout, exercisesByName.get("Lunges"),
+        addExerciseToWorkout(workout, workoutExercise);
+        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Lunges"),
                 new ExerciseSets(3, 10));
+        addExerciseToWorkout(workout, workoutExercise);
         workoutsByName.put(workout.getName(), workout);
 
-        workout = new ModifiableWorkout("Marathon Training Starts Here");
-        addExerciseToWorkout(workout, exercisesByName.get("Running"),
+        workout = new Workout("Marathon Training Starts Here", false);
+        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Running"),
                 new ExerciseDistance(2.5, DistanceUnit.MILES));
-        addExerciseToWorkout(workout, exercisesByName.get("Exercise Bike"),
+        addExerciseToWorkout(workout, workoutExercise);
+        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Exercise Bike"),
                 new ExerciseDuration(45));
+        addExerciseToWorkout(workout, workoutExercise);
         workoutsByName.put(workout.getName(), workout);
 
-        workout = new ModifiableWorkout("Work that Core, Get that Score!");
-        addExerciseToWorkout(workout, exercisesByName.get("Crunches"),
+        workout = new Workout("Work that Core, Get that Score!", false);
+        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Crunches"),
                 new ExerciseSets(2, 25));
-        addExerciseToWorkout(workout, exercisesByName.get("Bicycle Kicks"),
+        addExerciseToWorkout(workout, workoutExercise);
+        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Bicycle Kicks"),
                 new ExerciseSets(2, 15));
-
+        addExerciseToWorkout(workout, workoutExercise);
         workoutsByName.put(workout.getName(), workout);
 
         System.out.println("Opened " + dbType + " database " + dbName);
@@ -189,28 +196,19 @@ public class DataAccessStub implements DataAccess{
      * the database
      * @param workout the workout to add the exercise to
      * @param exercise the exercise to add to the workout
-     * @param quantity the quantity of the exercise to do in the workout
      *
      * @return a boolean indicating whether the exercise was properly added to the workout
      */
-    public boolean addExerciseToWorkout (InterfaceWorkout workout, InterfaceExercise exercise,
-                                      InterfaceExerciseQuantity quantity) {
+    public boolean addExerciseToWorkout (InterfaceWorkout workout, InterfaceWorkoutExercise exercise) {
         boolean added = false;
+        InterfaceWorkout dbWorkout;
 
-        if (workoutsByName.get(workout.getName()) != null) {
-            InterfaceWorkout dbWorkout = workoutsByName.get(workout.getName());
-            if (dbWorkout.getClass().isInstance(ModifiableWorkout.class)) {
-                if (exercisesByName.get(exercise.getName()) != null) {
-                    InterfaceWorkoutExercise suggestedExercise = new WorkoutExercise(
-                            exercise.getName(),
-                            exercise.getIntensity(),
-                            exercise.getType(),
-                            quantity
-                    );
-                    ((ModifiableWorkout) dbWorkout).addExercise(suggestedExercise);
+        if (workoutsByName.containsKey(workout.getName())) {
+            dbWorkout = workoutsByName.get(workout.getName());
+                if (exercisesByName.containsKey(exercise.getName())) {
+                    dbWorkout.addExercise(exercise);
                     added = true;
                 }
-            }
         }
         return added;
     }
