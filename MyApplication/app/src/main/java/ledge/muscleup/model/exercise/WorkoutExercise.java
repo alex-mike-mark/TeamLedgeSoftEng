@@ -22,8 +22,13 @@ public class WorkoutExercise implements InterfaceWorkoutExercise {
      */
     public WorkoutExercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType,
                            InterfaceExerciseQuantity recommendedQuantity) {
-        exercise = new Exercise(name, intensity, exerciseType);
-        this.recommendedQuantity = recommendedQuantity;
+        if(name == null || intensity == null || exerciseType == null || recommendedQuantity == null) {
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        }
+        else {
+            exercise = new Exercise(name, intensity, exerciseType);
+            this.recommendedQuantity = recommendedQuantity;
+        }
     }
 
     /**
@@ -33,8 +38,13 @@ public class WorkoutExercise implements InterfaceWorkoutExercise {
      * @param recommendedQuantity the quantity of exercise recommended for the exercise
      */
     public WorkoutExercise(Exercise exercise, InterfaceExerciseQuantity recommendedQuantity) {
-        this.exercise = exercise;
-        this.recommendedQuantity = recommendedQuantity;
+        if(exercise == null || recommendedQuantity == null) {
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        }
+        else {
+            this.exercise = exercise;
+            this.recommendedQuantity = recommendedQuantity;
+        }
     }
 
     /**
@@ -85,7 +95,9 @@ public class WorkoutExercise implements InterfaceWorkoutExercise {
     public boolean updateRecommendedQuantity(InterfaceExerciseQuantity quantity) {
         boolean quantityUpdated = false;
 
-        if (recommendedQuantity.getClass().isInstance(quantity)) {
+        if (quantity == null)
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        else if (recommendedQuantity.getClass().isInstance(quantity)) {
             recommendedQuantity = quantity;
             quantityUpdated = true;
         }
@@ -101,8 +113,9 @@ public class WorkoutExercise implements InterfaceWorkoutExercise {
      */
     @Override
     public boolean equals(InterfaceWorkoutExercise other){
-        return (getName().equals(other.getName()) &&
-                recommendedQuantity.equals(other.getRecommendedQuantity()));
+        return (other != null &&
+                getName().equals(other.getName()) &&
+                recommendedQuantity == other.getRecommendedQuantity());
     }
 
     /**

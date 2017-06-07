@@ -23,10 +23,15 @@ public class Exercise implements InterfaceExercise {
      */
     public Exercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType,
                        boolean isFavourite) {
-        this.name = name;
-        this.intensity = intensity;
-        this.exerciseType = exerciseType;
-        this.isFavourite = isFavourite;
+        if(name == null || intensity == null || exerciseType == null) {
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        }
+        else {
+            this.name = name;
+            this.intensity = intensity;
+            this.exerciseType = exerciseType;
+            this.isFavourite = isFavourite;
+        }
     }
 
     /**
@@ -36,10 +41,15 @@ public class Exercise implements InterfaceExercise {
      * @param exerciseType the type of the exercise
      */
     public Exercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType) {
-        this.name = name;
-        this.intensity = intensity;
-        this.exerciseType = exerciseType;
-        this.isFavourite = false;
+        if(name == null || intensity == null || exerciseType == null) {
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        }
+        else {
+            this.name = name;
+            this.intensity = intensity;
+            this.exerciseType = exerciseType;
+        	this.isFavourite = false;
+        }
     }
 
     /**
@@ -94,7 +104,7 @@ public class Exercise implements InterfaceExercise {
      */
     @Override
     public boolean equals(InterfaceExercise other) {
-        return name.equals(other.getName());
+        return other != null && name.equals(other.getName());
     }
 
     /**

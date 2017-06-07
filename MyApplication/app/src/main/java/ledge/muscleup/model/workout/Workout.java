@@ -25,18 +25,28 @@ public class Workout implements InterfaceWorkout {
     private boolean isFavourite;
 
     public Workout(String name, boolean isFavourite) {
-        this.name = name;
-        this.isFavourite = isFavourite;
-        exerciseList = new ArrayList<>();
+        if(name == null) {
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        }
+        else {
+            this.name = name;
+            this.isFavourite = isFavourite;
+            exerciseList = new ArrayList<>();
+        }
     }
 
     public Workout(String name, boolean isFavourite, InterfaceWorkoutExercise[] exercises) {
-        this.name = name;
-        this.isFavourite = isFavourite;
+        if (name == null || exercises == null) {
+            throw (new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        }
+        else {
+            this.name = name;
+            this.isFavourite = isFavourite;
 
-        exerciseList = new ArrayList<>();
-        for (int i = 0; i < exercises.length; i++)
-            exerciseList.add(exercises[i]);
+            exerciseList = new ArrayList<>();
+            for (int i = 0; i < exercises.length; i++)
+                exerciseList.add(exercises[i]);
+        }
     }
 
     /**
@@ -69,11 +79,17 @@ public class Workout implements InterfaceWorkout {
     @Override
     public boolean setRecommendedQuantity(InterfaceWorkoutExercise exercise, InterfaceExerciseQuantity quantity) {
         boolean quantityUpdated = false;
-        int exerciseIndex = exerciseList.indexOf(exercise);
+        int exerciseIndex;
 
-        //ensure the exercise exists in the list
-        if (exerciseIndex != -1)
-            quantityUpdated = exerciseList.get(exerciseIndex).updateRecommendedQuantity(quantity);
+        if (exercise == null || quantity == null)
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        else {
+            exerciseIndex = exerciseList.indexOf(exercise);
+
+            //ensure the exercise exists in the list
+            if (exerciseIndex != -1)
+                quantityUpdated = exerciseList.get(exerciseIndex).updateRecommendedQuantity(quantity);
+        }
 
         return quantityUpdated;
     }
@@ -108,7 +124,12 @@ public class Workout implements InterfaceWorkout {
      * @param exercise the exercise to add to the workout
      */
     @Override
-    public void addExercise(InterfaceWorkoutExercise exercise) { exerciseList.add(exercise); }
+    public void addExercise(InterfaceWorkoutExercise exercise) {
+        if (exercise == null)
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        else
+            exerciseList.add(exercise);
+    }
 
     /**
      * Move the position of an exercise in the list of exercises
@@ -120,23 +141,28 @@ public class Workout implements InterfaceWorkout {
     @Override
     public boolean moveExercise(InterfaceWorkoutExercise exercise, int index) {
         boolean exerciseMoved = false;
-        int exerciseIndex = exerciseList.indexOf(exercise);
+        int exerciseIndex;
         InterfaceWorkoutExercise listExercise;
 
-        //ensure the exercise exists in the list and the index is inside the bounds of the list
-        if (exerciseIndex != -1 && (index >= 0 && index <= exerciseList.size())) {
-            //only move the exercise if we're given a new place to move to
-            if (exerciseIndex != index) {
-                //if the exercise is moving down the list, removing the exercise changes the target
-                //index, so adjust accordingly
-                if (exerciseIndex < index)
-                    index--;
-                listExercise = exerciseList.remove(exerciseIndex);
-                exerciseList.add(index, listExercise);
-            }
-            exerciseMoved = true;
-        }
+        if (exercise == null || (index >= 0 && index < numExercises()))
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        else {
+            exerciseIndex = exerciseList.indexOf(exercise);
 
+            //ensure the exercise exists in the list
+            if (exerciseIndex != -1) {
+                //only move the exercise if we're given a new place to move to
+                if (exerciseIndex != index) {
+                    //if the exercise is moving down the list, removing the exercise changes the target
+                    //index, so adjust accordingly
+                    if (exerciseIndex < index)
+                        index--;
+                    listExercise = exerciseList.remove(exerciseIndex);
+                    exerciseList.add(index, listExercise);
+                }
+                exerciseMoved = true;
+            }
+        }
         return exerciseMoved;
     }
 
@@ -147,7 +173,12 @@ public class Workout implements InterfaceWorkout {
      * @return the exercise that was removed, or {@code null} if the exercise couldn't be found
      */
     @Override
-    public boolean removeExercise(InterfaceWorkoutExercise exercise) { return exerciseList.remove(exercise); }
+    public boolean removeExercise(InterfaceWorkoutExercise exercise) {
+        if (exercise == null)
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        else
+            return exerciseList.remove(exercise);
+    }
 
     /**
      * Returns an enumeration for traversing over the exercises in the workout
@@ -165,7 +196,7 @@ public class Workout implements InterfaceWorkout {
      */
     @Override
     public boolean equals(InterfaceWorkout other) {
-        return this.name.equals(other.getName());
+        return other != null && this.name.equals(other.getName());
     }
 
     /**

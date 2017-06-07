@@ -18,7 +18,12 @@ public class ExerciseDuration implements InterfaceExerciseDuration {
      * @param minutes the number of minutes exercised
      */
     public ExerciseDuration (double minutes) {
-        this.minutes = minutes;
+        if(minutes < 0) {
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        }
+        else {
+            this.minutes = minutes;
+        }
     }
 
     /**

@@ -21,8 +21,13 @@ public class ExerciseSetsAndWeight extends ExerciseSets implements InterfaceExer
      */
     public ExerciseSetsAndWeight(int sets, int reps, double weight, WeightUnit unitOfMeasure) {
         super(sets, reps);
-        this.weight = weight;
-        this.unitOfMeasure = unitOfMeasure;
+        if(unitOfMeasure == null) {
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        }
+        else {
+            this.weight = weight;
+            this.unitOfMeasure = unitOfMeasure;
+        }
     }
 
     /**

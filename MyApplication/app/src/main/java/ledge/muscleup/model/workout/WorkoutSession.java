@@ -40,13 +40,19 @@ public class WorkoutSession implements InterfaceWorkoutSession {
      * @param isComplete whether the session has been completed or not
      */
     public WorkoutSession(Workout workout, LocalDate scheduledDate, boolean isComplete) {
-        this.name = workout.getName();
-        this.scheduledDate = scheduledDate;
-        this.isComplete = isComplete;
+        if (workout == null || scheduledDate == null) {
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        }
+        else {
+            this.name = workout.getName();
+            this.scheduledDate = scheduledDate;
+            this.isComplete = isComplete;
 
-        Enumeration<InterfaceWorkoutExercise> enumeration = workout.getExerciseEnumeration();
-        while(enumeration.hasMoreElements())
-            exerciseList.add(new WorkoutSessionExercise((WorkoutExercise) enumeration.nextElement(), false));
+            Enumeration<InterfaceWorkoutExercise> enumeration = workout.getExerciseEnumeration();
+            while(enumeration.hasMoreElements())
+                exerciseList.add(new WorkoutSessionExercise((WorkoutExercise) enumeration.nextElement(), false));
+        }
+
     }
 
     /**
@@ -73,7 +79,12 @@ public class WorkoutSession implements InterfaceWorkoutSession {
      * @param newDate the new date of the workout
      */
     @Override
-    public void setDate(LocalDate newDate) { scheduledDate = newDate; }
+    public void setDate(LocalDate newDate) {
+        if (newDate == null)
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        else
+            scheduledDate = newDate;
+    }
 
     /**
      * Returns {@code true} if the worokout has been completed, or {@code false} otherwise
@@ -112,16 +123,20 @@ public class WorkoutSession implements InterfaceWorkoutSession {
     @Override
     public boolean completeExercise(InterfaceWorkoutSessionExercise exercise, InterfaceExerciseQuantity quantity) {
         boolean exerciseCompleted = false;
-        int exerciseIndex = exerciseList.indexOf(exercise);
+        int exerciseIndex;
         InterfaceWorkoutSessionExercise listExercise;
 
-        //ensure the exercise exists in the list
-        if (exerciseIndex != -1)
-        {
-            listExercise = exerciseList.get(exerciseIndex);
-            if (!listExercise.isComplete()) {
-                listExercise.toggleCompleted();
-                exerciseCompleted = true;
+        if (exercise == null || quantity == null)
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        else {
+            exerciseIndex = exerciseList.indexOf(exercise);
+            //ensure the exercise exists in the list
+            if (exerciseIndex != -1) {
+                listExercise = exerciseList.get(exerciseIndex);
+                if (!listExercise.isComplete()) {
+                    listExercise.toggleCompleted();
+                    exerciseCompleted = true;
+                }
             }
         }
 
@@ -146,19 +161,25 @@ public class WorkoutSession implements InterfaceWorkoutSession {
      */
     @Override
     public boolean equals(InterfaceWorkoutSession other) {
-        Enumeration<InterfaceWorkoutSessionExercise> thisEnumeration = getExerciseEnumeration();
-        Enumeration<InterfaceWorkoutSessionExercise> otherEnumeration = other.getExerciseEnumeration();
+        Enumeration<InterfaceWorkoutSessionExercise> thisEnumeration;
+        Enumeration<InterfaceWorkoutSessionExercise> otherEnumeration;
+        boolean isEqual = false;
         boolean exercisesEqual = true;
 
-        if(numExercises() != other.numExercises())
-            exercisesEqual = false;
-        while(thisEnumeration.hasMoreElements() && otherEnumeration.hasMoreElements() && exercisesEqual)
-            exercisesEqual = thisEnumeration.nextElement().equals(otherEnumeration.nextElement());
+        if (other != null && numExercises() == other.numExercises()) {
+            thisEnumeration = getExerciseEnumeration();
+            otherEnumeration = other.getExerciseEnumeration();
 
-        return (exercisesEqual &&
-                name.equals(other.getName()) &&
-                this.scheduledDate.equals(other.getDate()) &&
-                this.isComplete == other.isComplete());
+            while (thisEnumeration.hasMoreElements() && otherEnumeration.hasMoreElements() && exercisesEqual)
+                exercisesEqual = thisEnumeration.nextElement().equals(otherEnumeration.nextElement());
+
+            isEqual = (exercisesEqual &&
+                    name.equals(other.getName()) &&
+                    this.scheduledDate.equals(other.getDate()) &&
+                    this.isComplete == other.isComplete());
+        }
+
+        return isEqual;
     }
 
     /**

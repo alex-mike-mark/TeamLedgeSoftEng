@@ -24,8 +24,13 @@ public class WorkoutSessionExercise implements InterfaceWorkoutSessionExercise {
      */
     public WorkoutSessionExercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType,
                                   InterfaceExerciseQuantity recommendedQuantity, boolean isComplete) {
-        exercise = new WorkoutExercise(name, intensity, exerciseType, recommendedQuantity);
-        this.isComplete = isComplete;
+        if(name == null || intensity == null || exerciseType == null || recommendedQuantity == null){
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        }
+        else {
+            exercise = new WorkoutExercise(name, intensity, exerciseType, recommendedQuantity);
+            this.isComplete = isComplete;
+        }
     }
 
     /**
@@ -35,8 +40,13 @@ public class WorkoutSessionExercise implements InterfaceWorkoutSessionExercise {
      * @param isComplete whether the exercise has been completed
      */
     public WorkoutSessionExercise(WorkoutExercise exercise, boolean isComplete) {
-        this.exercise = exercise;
-        this.isComplete = isComplete;
+        if(exercise == null) {
+            throw (new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        }
+        else {
+            this.exercise = exercise;
+            this.isComplete = isComplete;
+        }
     }
 
     /**
@@ -106,7 +116,8 @@ public class WorkoutSessionExercise implements InterfaceWorkoutSessionExercise {
      */
     @Override
     public boolean equals(InterfaceWorkoutSessionExercise other) {
-        return (getName().equals(other.getName()) &&
+        return (other != null &&
+                getName().equals(other.getName()) &&
                 getRecommendedQuantity().equals(other.getRecommendedQuantity()) &&
                 isComplete == other.isComplete());
     }

@@ -18,8 +18,13 @@ public class ExerciseSets implements InterfaceExerciseSets {
      * @param reps
      */
     public ExerciseSets(int sets, int reps) {
-        this.sets = sets;
-        this.reps = reps;
+        if(sets < 0 || reps < 0) {
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        }
+        else {
+            this.sets = sets;
+            this.reps = reps;
+        }
     }
 
     /**
