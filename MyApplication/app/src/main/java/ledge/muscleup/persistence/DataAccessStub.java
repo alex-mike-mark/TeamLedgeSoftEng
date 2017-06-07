@@ -86,6 +86,7 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
 
         workout = new Workout("Welcome to the Gun Show", false);
         workoutsByName.put(workout.getName(), workout);
+
         workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Bicep Curls"),
         new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
         addExerciseToWorkout(workout, workoutExercise);
@@ -248,7 +249,6 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
                     added = true;
                 }
         }
-        Log.d("Workout", "Added: " + added);
         return added;
     }
 
