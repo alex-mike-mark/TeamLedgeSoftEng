@@ -25,11 +25,11 @@ import static java.util.Collections.enumeration;
 
 public class ScheduleManager implements InterfaceScheduleManager {
     private LocalDate firstDayOfWeek;
-    private InterfaceWorkoutSession[] workouts;
+    private InterfaceWorkoutSession[] workoutSessions;
 
     public ScheduleManager() {
         firstDayOfWeek = new LocalDate().withDayOfWeek(DateTimeConstants.MONDAY);
-        workouts = new InterfaceWorkoutSession[DateTimeConstants.DAYS_PER_WEEK];
+        workoutSessions = new InterfaceWorkoutSession[DateTimeConstants.DAYS_PER_WEEK];
         //TODO - requires database lookup
     }
 
@@ -66,7 +66,7 @@ public class ScheduleManager implements InterfaceScheduleManager {
         if (!isDayWithinWeek(dayOfWeek))
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else
-            return workouts[dayOfWeek - 1];
+            return workoutSessions[dayOfWeek - 1];
     }
 
     /**
@@ -83,7 +83,7 @@ public class ScheduleManager implements InterfaceScheduleManager {
         if (!isDayWithinWeek(dayOfWeek))
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else
-            return workouts[dayOfWeek - 1] != null;
+            return workoutSessions[dayOfWeek - 1] != null;
     }
 
     /**
@@ -113,11 +113,11 @@ public class ScheduleManager implements InterfaceScheduleManager {
      * > DateTimeConstants.SUNDAY}
      */
     @Override
-    public void addWorkout(InterfaceWorkoutSession workout, int dayOfWeek) throws IllegalArgumentException {
+    public void addWorkoutSession(InterfaceWorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException {
         if (!isDayWithinWeek(dayOfWeek))
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else {
-            workouts[dayOfWeek - 1] = workout;
+            workoutSessions[dayOfWeek - 1] = workoutSession;
             //TODO - requires database update
         }
     }
@@ -131,13 +131,13 @@ public class ScheduleManager implements InterfaceScheduleManager {
      * @return a boolean representing if a workout was removed
      */
     @Override
-    public boolean removeWorkout(int dayOfWeek) throws IllegalArgumentException {
+    public boolean removeWorkoutSession(int dayOfWeek) throws IllegalArgumentException {
         boolean removed = false;
 
         if (!isDayWithinWeek(dayOfWeek))
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        else if (workouts[dayOfWeek - 1] != null) {
-            workouts[dayOfWeek - 1] = null;
+        else if (workoutSessions[dayOfWeek - 1] != null) {
+            workoutSessions[dayOfWeek - 1] = null;
             removed = true;
             //TODO - requires database update
         }
@@ -153,8 +153,8 @@ public class ScheduleManager implements InterfaceScheduleManager {
     public String toString() {
         String result = "";
 
-        for (int i = 0; i < workouts.length; i++)
-            result += workouts[i].toString() + "\n";
+        for (int i = 0; i < workoutSessions.length; i++)
+            result += workoutSessions[i].toString() + "\n";
 
         return result;
     }

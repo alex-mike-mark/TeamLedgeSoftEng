@@ -63,14 +63,14 @@ public interface InterfaceScheduleManager {
      * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
      * > DateTimeConstants.SUNDAY}
      */
-    void addWorkout(InterfaceWorkoutSession workout, int dayOfWeek) throws IllegalArgumentException;
+    void addWorkoutSession(InterfaceWorkoutSession workout, int dayOfWeek) throws IllegalArgumentException;
 
     /**
      * Removes a workout from a given day
      * @param dayOfWeek the day to remove the workout from
      * @return a boolean representing if a workout was removed
      */
-    boolean removeWorkout(int dayOfWeek);
+    boolean removeWorkoutSession(int dayOfWeek);
 
     /**
      * Returns the current week as a String
