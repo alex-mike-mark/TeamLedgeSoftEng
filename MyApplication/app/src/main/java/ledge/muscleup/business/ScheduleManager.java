@@ -91,7 +91,7 @@ public class ScheduleManager implements InterfaceScheduleManager {
      */
     @Override
     public void lastWeek() {
-        firstDayOfWeek.minusWeeks(1);
+        firstDayOfWeek = firstDayOfWeek.minusWeeks(1);
         populateWorkoutList();
     }
 
@@ -100,7 +100,7 @@ public class ScheduleManager implements InterfaceScheduleManager {
      */
     @Override
     public void nextWeek() {
-        firstDayOfWeek.plusWeeks(1);
+        firstDayOfWeek = firstDayOfWeek.plusWeeks(1);
         populateWorkoutList();
     }
 
