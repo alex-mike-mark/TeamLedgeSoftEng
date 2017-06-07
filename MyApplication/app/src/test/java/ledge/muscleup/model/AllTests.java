@@ -22,6 +22,8 @@ import org.junit.runners.Suite;
         TrackableExerciseTest.class,
         ModifiableWorkoutTest.class,
         TrackableWorkoutTest.class
+        TrackableWorkoutTest.class,
+        ScheduleManagerTest.class
 })
 
 public class AllTests {

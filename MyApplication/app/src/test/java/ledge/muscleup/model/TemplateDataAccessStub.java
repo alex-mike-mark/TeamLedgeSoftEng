@@ -30,7 +30,7 @@ import ledge.muscleup.persistence.InterfaceDataAccess;
  * @since 2017-06-07
  */
 
-public class TemplateDataAccessStub implements InterfaceDataAccess {
+class TemplateDataAccessStub implements InterfaceDataAccess {
     private String dbName;
     private String dbType = "testing template";
 
@@ -119,7 +119,19 @@ public class TemplateDataAccessStub implements InterfaceDataAccess {
         workoutSessionsByDate = new HashMap<>();
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Welcome to the Gun Show")),
-                new LocalDate(2017, 06, 12),
+                new LocalDate(2017, 06, 8),
+                false);
+        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
+
+        workoutSession = new WorkoutSession(
+                (workoutsByName.get("Never Skip Leg Day")),
+                new LocalDate(2017, 06, 9),
+                false);
+        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
+
+        workoutSession = new WorkoutSession(
+                (workoutsByName.get("Work that Core, Get that Score!")),
+                new LocalDate(2017, 06, 10),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
@@ -130,20 +142,8 @@ public class TemplateDataAccessStub implements InterfaceDataAccess {
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
-                (workoutsByName.get("Work that Core, Get that Score!")),
-                new LocalDate(2017, 06, 14),
-                false);
-        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
-
-        workoutSession = new WorkoutSession(
-                (workoutsByName.get("Never Skip Leg Day")),
-                new LocalDate(2017, 06, 16),
-                false);
-        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
-
-        workoutSession = new WorkoutSession(
                 (workoutsByName.get("Marathon Training Starts Here")),
-                new LocalDate(2017, 06, 17),
+                new LocalDate(2017, 06, 15),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
