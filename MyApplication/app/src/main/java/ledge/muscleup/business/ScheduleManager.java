@@ -42,7 +42,7 @@ public class ScheduleManager implements InterfaceScheduleManager {
      * @return the day of the current week
      */
     @Override
-    public LocalDate getWeekday(int dayOfWeek) {
+    public LocalDate getWeekday(int dayOfWeek) throws IllegalArgumentException {
         LocalDate weekday = firstDayOfWeek;
 
         if (!isDayWithinWeek(dayOfWeek))
@@ -62,7 +62,7 @@ public class ScheduleManager implements InterfaceScheduleManager {
      * @return the workout scheduled on that day of the week, or {@code null} if the day was empty
      */
     @Override
-    public InterfaceWorkoutSession getScheduledWorkout(int dayOfWeek) {
+    public InterfaceWorkoutSession getScheduledWorkout(int dayOfWeek) throws IllegalArgumentException {
         if (!isDayWithinWeek(dayOfWeek))
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else
@@ -79,7 +79,7 @@ public class ScheduleManager implements InterfaceScheduleManager {
      * @return a boolean representing whether the given day has no scheduled workouts
      */
     @Override
-    public boolean isDayEmpty(int dayOfWeek) {
+    public boolean isDayEmpty(int dayOfWeek) throws IllegalArgumentException {
         if (!isDayWithinWeek(dayOfWeek))
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else
@@ -113,7 +113,7 @@ public class ScheduleManager implements InterfaceScheduleManager {
      * > DateTimeConstants.SUNDAY}
      */
     @Override
-    public void addWorkout(InterfaceWorkoutSession workout, int dayOfWeek) {
+    public void addWorkout(InterfaceWorkoutSession workout, int dayOfWeek) throws IllegalArgumentException {
         if (!isDayWithinWeek(dayOfWeek))
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else {
@@ -131,7 +131,7 @@ public class ScheduleManager implements InterfaceScheduleManager {
      * @return a boolean representing if a workout was removed
      */
     @Override
-    public boolean removeWorkout(int dayOfWeek) {
+    public boolean removeWorkout(int dayOfWeek) throws IllegalArgumentException {
         boolean removed = false;
 
         if (!isDayWithinWeek(dayOfWeek))

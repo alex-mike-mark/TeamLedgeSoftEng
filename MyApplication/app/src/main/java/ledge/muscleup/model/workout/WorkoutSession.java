@@ -38,8 +38,9 @@ public class WorkoutSession implements InterfaceWorkoutSession {
      * @param workout the workout to create a WorkoutSession for
      * @param scheduledDate the date to create the WorkoutSession for
      * @param isComplete whether the session has been completed or not
+     * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    public WorkoutSession(Workout workout, LocalDate scheduledDate, boolean isComplete) {
+    public WorkoutSession(Workout workout, LocalDate scheduledDate, boolean isComplete) throws IllegalArgumentException {
         if (workout == null || scheduledDate == null) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
@@ -77,13 +78,16 @@ public class WorkoutSession implements InterfaceWorkoutSession {
      * Sets the scheduled date of the workout
      *
      * @param newDate the new date of the workout
+     * @throws IllegalArgumentException if passed a {@code null} parameter
      */
     @Override
-    public void setDate(LocalDate newDate) {
+    public void setDate(LocalDate newDate) throws IllegalArgumentException {
         if (newDate == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        else
+        else {
             scheduledDate = newDate;
+            //TODO - requires database update
+        }
     }
 
     /**
@@ -102,6 +106,7 @@ public class WorkoutSession implements InterfaceWorkoutSession {
     @Override
     public void toggleCompleted() {
         isComplete = !isComplete;
+        //TODO - requires database update
     }
 
     /**
@@ -116,17 +121,17 @@ public class WorkoutSession implements InterfaceWorkoutSession {
 
     /**
      * Log an exercise as complete
-     *
      * @param exercise the exercise to complete
-     * @param quantity
+     * @throws IllegalArgumentException if passed a {@code null} parameter
+     * @return a boolean representing whether the exercise was marked as completed or not
      */
     @Override
-    public boolean completeExercise(InterfaceWorkoutSessionExercise exercise, InterfaceExerciseQuantity quantity) {
+    public boolean completeExercise(InterfaceWorkoutSessionExercise exercise) throws IllegalArgumentException {
         boolean exerciseCompleted = false;
         int exerciseIndex;
         InterfaceWorkoutSessionExercise listExercise;
 
-        if (exercise == null || quantity == null)
+        if (exercise == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else {
             exerciseIndex = exerciseList.indexOf(exercise);
@@ -135,6 +140,7 @@ public class WorkoutSession implements InterfaceWorkoutSession {
                 listExercise = exerciseList.get(exerciseIndex);
                 if (!listExercise.isComplete()) {
                     listExercise.toggleCompleted();
+                    //TODO - requires database update
                     exerciseCompleted = true;
                 }
             }
@@ -142,7 +148,6 @@ public class WorkoutSession implements InterfaceWorkoutSession {
 
         return exerciseCompleted;
     }
-
     /**
      * Returns an enumeration for traversing over the exercises in the workout
      *

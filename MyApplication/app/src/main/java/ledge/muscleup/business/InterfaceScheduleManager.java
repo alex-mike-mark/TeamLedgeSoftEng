@@ -20,7 +20,8 @@ public interface InterfaceScheduleManager {
      * Returns a Date representing the given day for the current week
      *
      * @param dayOfWeek the day of the current week to return
-     * @throws IllegalArgumentException if {@code dayOfWeek <= 0 || dayOfWeek > 7}
+     * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
+     * > DateTimeConstants.SUNDAY}
      * @return the day of the current week
      */
     LocalDate getWeekday(int dayOfWeek) throws IllegalArgumentException;
@@ -28,16 +29,19 @@ public interface InterfaceScheduleManager {
     /**
      * Returns the workout for a given day of the week
      * @param dayOfWeek the day of the week to get the workout for
+     * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
+     * > DateTimeConstants.SUNDAY}
      * @return the workout scheduled on that day of the week, or {@code null} if the day was empty
      */
-    InterfaceWorkoutSession getScheduledWorkout(int dayOfWeek);
+    InterfaceWorkoutSession getScheduledWorkout(int dayOfWeek) throws IllegalArgumentException;
 
     /**
      * Returns {@code true} if the given day of the week has no workouts scheduled, or {@code false}
      * otherwise
      *
      * @param dayOfWeek the day of the current week to check
-     * @throws IllegalArgumentException if {@code dayOfWeek <= 0 || dayOfWeek > 7}
+     * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
+     * > DateTimeConstants.SUNDAY}
      * @return a boolean representing whether the given day has no scheduled workouts
      */
     boolean isDayEmpty(int dayOfWeek) throws IllegalArgumentException;
@@ -56,8 +60,10 @@ public interface InterfaceScheduleManager {
      * Adds a workout to a given day
      * @param workout the workout to add
      * @param dayOfWeek the day of the week to add the workout to
+     * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
+     * > DateTimeConstants.SUNDAY}
      */
-    void addWorkout(InterfaceWorkoutSession workout, int dayOfWeek);
+    void addWorkout(InterfaceWorkoutSession workout, int dayOfWeek) throws IllegalArgumentException;
 
     /**
      * Removes a workout from a given day
