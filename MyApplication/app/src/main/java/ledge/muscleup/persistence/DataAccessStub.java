@@ -85,7 +85,6 @@ public class DataAccessStub implements DataAccess{
                 new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
         addExerciseToWorkout(workout, exercisesByName.get("Push-Ups"),
                 new ExerciseSets(2, 15));
-        workoutsByName.put(workout.getName(), workout);
 
         workout = new ModifiableWorkout("Never Skip Leg Day");
         workoutsByName.put(workout.getName(), workout);
@@ -93,7 +92,6 @@ public class DataAccessStub implements DataAccess{
                 new ExerciseSets(4, 15));
         addExerciseToWorkout(workout, exercisesByName.get("Lunges"),
                 new ExerciseSets(3, 10));
-        workoutsByName.put(workout.getName(), workout);
 
         workout = new ModifiableWorkout("Marathon Training Starts Here");
         workoutsByName.put(workout.getName(), workout);
@@ -101,7 +99,6 @@ public class DataAccessStub implements DataAccess{
                 new ExerciseDistance(2.5, DistanceUnit.MILES));
         addExerciseToWorkout(workout, exercisesByName.get("Exercise Bike"),
                 new ExerciseDuration(45));
-        workoutsByName.put(workout.getName(), workout);
 
         workout = new ModifiableWorkout("Work that Core, Get that Score!");
         workoutsByName.put(workout.getName(), workout);
@@ -109,7 +106,6 @@ public class DataAccessStub implements DataAccess{
                 new ExerciseSets(2, 25));
         addExerciseToWorkout(workout, exercisesByName.get("Bicycle Kicks"),
                 new ExerciseSets(2, 15));
-        workoutsByName.put(workout.getName(), workout);
 
         System.out.println("Opened " + dbType + " database " + dbName);
     }
