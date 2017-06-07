@@ -9,7 +9,6 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
-import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
 import ledge.muscleup.model.exercise.InterfaceWorkoutSessionExercise;
 import ledge.muscleup.model.exercise.WorkoutExercise;

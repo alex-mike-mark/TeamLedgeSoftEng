@@ -11,22 +11,20 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import ledge.muscleup.model.exercise.*;
-import ledge.muscleup.model.exercise.ExerciseDistanceTest;
-import ledge.muscleup.model.workout.ModifiableWorkoutTest;
-import ledge.muscleup.model.workout.TrackableWorkoutTest;
+import ledge.muscleup.model.workout.*;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         ExerciseDistanceTest.class,
         ExerciseDurationTest.class,
         ExerciseQuantityTest.class,
-        ExerciseSetsTest.class,
         ExerciseSetsAndWeightTest.class,
-        ListedExerciseTest.class,
-        SuggestedExerciseTest.class,
-        TrackableExerciseTest.class,
-        ModifiableWorkoutTest.class,
-        TrackableWorkoutTest.class
+        ExerciseSetsTest.class,
+        ExerciseTest.class,
+        WorkoutExerciseTest.class,
+        WorkoutSessionExerciseTest.class,
+        WorkoutSessionTest.class,
+        WorkoutTest.class
 })
 
 public class AllTests {

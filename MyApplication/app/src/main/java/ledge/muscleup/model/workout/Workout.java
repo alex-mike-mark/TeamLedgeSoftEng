@@ -93,12 +93,16 @@ public class Workout implements InterfaceWorkout {
     public boolean setRecommendedQuantity(InterfaceWorkoutExercise exercise,
                                           InterfaceExerciseQuantity quantity) throws IllegalArgumentException {
         boolean quantityUpdated = false;
-        int exerciseIndex;
+        int exerciseIndex = -1;
 
         if (exercise == null || quantity == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else {
-            exerciseIndex = exerciseList.indexOf(exercise);
+            for(int i = 0; i < exerciseList.size() && exerciseIndex < 0; i++){
+                if(exercise.equals(exerciseList.get(i))){
+                    exerciseIndex = i;
+                }
+            }
 
             //ensure the exercise exists in the list
             if (exerciseIndex != -1)
@@ -163,13 +167,18 @@ public class Workout implements InterfaceWorkout {
     public boolean moveExercise(InterfaceWorkoutExercise exercise,
                                 int index) throws IllegalArgumentException {
         boolean exerciseMoved = false;
-        int exerciseIndex;
+        int exerciseIndex = -1;
         InterfaceWorkoutExercise listExercise;
+        int listSize = exerciseList.size();
 
-        if (exercise == null || (index >= 0 && index < numExercises()))
+        if (exercise == null || index <= 0 || index > listSize)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else {
-            exerciseIndex = exerciseList.indexOf(exercise);
+            for(int i = 0; i < exerciseList.size() && exerciseIndex < 0; i++){
+                if(exercise.equals(exerciseList.get(i))){
+                    exerciseIndex = i;
+                }
+            }
 
             //ensure the exercise exists in the list
             if (exerciseIndex != -1) {
