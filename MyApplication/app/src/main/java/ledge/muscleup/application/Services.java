@@ -1,7 +1,7 @@
 package ledge.muscleup.application;
 
 import ledge.muscleup.persistence.DataAccessStub;
-import ledge.muscleup.persistence.InterfaceDataAccessStub;
+import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
  * A class containing static methods for creating, retrieving, and closing the DataAccessStub.
@@ -12,15 +12,15 @@ import ledge.muscleup.persistence.InterfaceDataAccessStub;
  * @since 2017-06-05
  */
 public class Services {
-    private static InterfaceDataAccessStub dataAccessService = null;
+    private static InterfaceDataAccess dataAccessService = null;
 
     /**
-     * Creates and opens the stub database, if it hasn't already been created. Returns the stub
+     * Creates and opens the database, if it hasn't already been created. Returns the stub
      * database
      * @param dbName the name of the database
      * @return the database
      */
-    public static InterfaceDataAccessStub createDataAccess(String dbName) {
+    public static InterfaceDataAccess createDataAccess(String dbName) {
         if (dataAccessService == null) {
             dataAccessService = new DataAccessStub(dbName);
             dataAccessService.open();
@@ -32,7 +32,7 @@ public class Services {
      * Retrieves the database
      * @return the database, if it exists
      */
-    public static InterfaceDataAccessStub getDataAccess() {
+    public static InterfaceDataAccess getDataAccess() {
         if (dataAccessService == null) {
             System.out.println("Connection to data access has not been established.");
             System.exit(1);

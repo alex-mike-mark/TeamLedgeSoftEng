@@ -28,17 +28,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="20dp"/>
     </RelativeLayout>
-
-    //bottom
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="bottom"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="0dp">
-
-
-    </RelativeLayout>
+    
 
 
 </android.support.constraint.ConstraintLayout>
