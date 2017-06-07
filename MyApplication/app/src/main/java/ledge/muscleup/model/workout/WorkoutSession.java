@@ -140,7 +140,6 @@ public class WorkoutSession implements InterfaceWorkoutSession {
                 listExercise = exerciseList.get(exerciseIndex);
                 if (!listExercise.isComplete()) {
                     listExercise.toggleCompleted();
-                    //TODO - requires database update
                     exerciseCompleted = true;
                 }
             }

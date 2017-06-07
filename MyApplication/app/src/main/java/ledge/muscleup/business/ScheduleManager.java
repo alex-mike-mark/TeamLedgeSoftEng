@@ -92,7 +92,7 @@ public class ScheduleManager implements InterfaceScheduleManager {
     @Override
     public void lastWeek() {
         firstDayOfWeek.minusWeeks(1);
-        //TODO - requires database update
+        //TODO - requires database lookup
     }
 
     /**
@@ -101,7 +101,7 @@ public class ScheduleManager implements InterfaceScheduleManager {
     @Override
     public void nextWeek() {
         firstDayOfWeek.plusWeeks(1);
-        //TODO - requires database update
+        //TODO - requires database lookup
     }
 
     /**

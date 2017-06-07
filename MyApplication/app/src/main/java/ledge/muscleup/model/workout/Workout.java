@@ -101,11 +101,8 @@ public class Workout implements InterfaceWorkout {
             exerciseIndex = exerciseList.indexOf(exercise);
 
             //ensure the exercise exists in the list
-            if (exerciseIndex != -1) {
+            if (exerciseIndex != -1)
                 quantityUpdated = exerciseList.get(exerciseIndex).updateRecommendedQuantity(quantity);
-                //if (quantityUpdated)
-                    //TODO - requires database update
-            }
         }
         return quantityUpdated;
     }
