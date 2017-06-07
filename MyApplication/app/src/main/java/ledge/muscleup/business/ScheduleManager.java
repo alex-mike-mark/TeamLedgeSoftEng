@@ -105,10 +105,10 @@ public class ScheduleManager implements InterfaceScheduleManager {
     }
 
     /**
-     * Adds a workout to a given day
+     * Adds a workout session to a given day
      *
-     * @param workout the workout to add
-     * @param dayOfWeek the day of the week to add the workout to
+     * @param workoutSession the workout session to add
+     * @param dayOfWeek the day of the week to add the workout session to
      * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
      * > DateTimeConstants.SUNDAY}
      */
