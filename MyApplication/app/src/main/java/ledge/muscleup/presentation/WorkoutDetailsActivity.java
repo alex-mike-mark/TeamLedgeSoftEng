@@ -54,9 +54,9 @@ public class WorkoutDetailsActivity extends Activity {
         workout = (Workout) db.getWorkout(workoutName);
 
         //fetch all exercises from workout
-        workoutEnum = workout.getExerciseEnumeration();
-        while(workoutEnum.hasMoreElements()){
-            exerciseList.add(workoutEnum.nextElement());
+        Enumeration<InterfaceWorkoutExercise> exercises = workout.getExerciseEnumeration();
+        while(exercises.hasMoreElements()){
+            exerciseList.add(exercises.nextElement());
         }
 
         TextView filter = (TextView) findViewById(R.id.filter_title);
