@@ -13,7 +13,7 @@ import ledge.muscleup.application.Services;
 import ledge.muscleup.persistence.DataAccessStub;
 
 /**
- * ExerciseActivity displays a list of exercises that the user can click on to view details
+ * ExerciseActivity displays a list of exercises, showing their name, intensity, and exercise type
  *
  * @author Jon Ingram
  * @version 1.0
