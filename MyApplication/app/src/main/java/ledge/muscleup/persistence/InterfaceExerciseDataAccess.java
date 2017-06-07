@@ -3,7 +3,6 @@ package ledge.muscleup.persistence;
 import java.util.List;
 
 import ledge.muscleup.model.exercise.Exercise;
-import ledge.muscleup.model.exercise.InterfaceExercise;
 
 /**
  * An interface for exercise database access, including methods for retrieving, inserting, and

@@ -2,9 +2,7 @@ package ledge.muscleup.persistence;
 
 import java.util.List;
 
-import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
 import ledge.muscleup.model.exercise.WorkoutExercise;
-import ledge.muscleup.model.workout.InterfaceWorkout;
 import ledge.muscleup.model.workout.Workout;
 
 /**

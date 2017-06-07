@@ -4,7 +4,6 @@ import org.joda.time.LocalDate;
 
 import java.util.List;
 
-import ledge.muscleup.model.workout.InterfaceWorkoutSession;
 import ledge.muscleup.model.workout.WorkoutSession;
 
 /**

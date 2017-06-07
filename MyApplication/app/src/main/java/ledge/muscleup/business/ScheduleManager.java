@@ -1,18 +1,9 @@
 package ledge.muscleup.business;
 
-import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 
-import java.util.Enumeration;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.NoSuchElementException;
-
-import ledge.muscleup.model.workout.InterfaceWorkoutSession;
 import ledge.muscleup.model.workout.WorkoutSession;
-
-import static java.util.Collections.enumeration;
 
 /**
  * Manages a week of scheduled workouts, which includes methods to increment or decrement the current

@@ -1,12 +1,5 @@
 package ledge.muscleup.persistence;
 
-import java.util.List;
-
-import ledge.muscleup.model.exercise.InterfaceExercise;
-import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
-import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
-import ledge.muscleup.model.workout.InterfaceWorkout;
-
 /**
  * An interface which database access, which includes methods for general database access, such as
  * opening or closing the database

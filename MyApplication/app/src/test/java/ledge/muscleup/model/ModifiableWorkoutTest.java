@@ -5,14 +5,9 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
-
 import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.ExerciseIntensity;
 import ledge.muscleup.model.exercise.ExerciseType;
-import ledge.muscleup.model.exercise.InterfaceExercise;
-import ledge.muscleup.model.exercise.ListedExercise;
-import ledge.muscleup.model.workout.ModifiableWorkout;
 import ledge.muscleup.model.workout.Workout;
 
 /**

@@ -3,11 +3,7 @@ package ledge.muscleup.business;
 import java.util.List;
 
 import ledge.muscleup.application.Services;
-import ledge.muscleup.model.exercise.InterfaceExercise;
-import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
-import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
 import ledge.muscleup.model.exercise.WorkoutExercise;
-import ledge.muscleup.model.workout.InterfaceWorkout;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.persistence.DataAccessStub;
 

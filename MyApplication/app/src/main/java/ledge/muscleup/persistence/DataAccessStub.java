@@ -1,7 +1,5 @@
 package ledge.muscleup.persistence;
 
-import android.util.Log;
-
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
@@ -17,12 +15,8 @@ import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
 import ledge.muscleup.model.exercise.ExerciseType;
 import ledge.muscleup.model.exercise.ExerciseIntensity;
-import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WeightUnit;
-import ledge.muscleup.model.exercise.InterfaceExercise;
-import ledge.muscleup.model.workout.InterfaceWorkout;
-import ledge.muscleup.model.workout.InterfaceWorkoutSession;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
 

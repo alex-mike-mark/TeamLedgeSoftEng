@@ -1,11 +1,9 @@
 package ledge.muscleup.business;
 
 import java.util.List;
-import java.util.Map;
 
 import ledge.muscleup.application.Services;
 import ledge.muscleup.model.exercise.Exercise;
-import ledge.muscleup.model.exercise.InterfaceExercise;
 import ledge.muscleup.persistence.DataAccessStub;
 
 /**

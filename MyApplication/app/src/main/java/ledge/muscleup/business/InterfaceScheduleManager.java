@@ -2,10 +2,6 @@ package ledge.muscleup.business;
 
 import org.joda.time.LocalDate;
 
-import java.util.Enumeration;
-import java.util.NoSuchElementException;
-
-import ledge.muscleup.model.workout.InterfaceWorkoutSession;
 import ledge.muscleup.model.workout.WorkoutSession;
 
 /**

@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ledge.muscleup.business.ScheduleManager;
-import ledge.muscleup.model.exercise.ExerciseDistance;
 /**
  * Tests for the ScheduleManager
  *
