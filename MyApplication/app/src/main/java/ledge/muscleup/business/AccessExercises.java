@@ -9,7 +9,7 @@ import ledge.muscleup.persistence.DataAccessStub;
 
 /**
  * This class contains methods for retrieving, adding, and removing exercises from the database, by
- * by calling the methods defined in the DataAccess interface.
+ * by calling the methods defined in the InterfaceDataAccess interface.
  *
  * @author Ryan Koop
  * @version 1.0
