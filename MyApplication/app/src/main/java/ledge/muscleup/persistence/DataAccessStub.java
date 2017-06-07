@@ -2,6 +2,8 @@ package ledge.muscleup.persistence;
 
 import android.util.Log;
 
+import org.joda.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +22,9 @@ import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WeightUnit;
 import ledge.muscleup.model.exercise.InterfaceExercise;
 import ledge.muscleup.model.workout.InterfaceWorkout;
+import ledge.muscleup.model.workout.InterfaceWorkoutSession;
 import ledge.muscleup.model.workout.Workout;
+import ledge.muscleup.model.workout.WorkoutSession;
 
 /**
  * A stub implementation of the database for Iteration 1
@@ -30,13 +34,14 @@ import ledge.muscleup.model.workout.Workout;
  * @since 2017-06-04
  */
 
-public class DataAccessStub implements DataAccess{
+public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDataAccess,
+        InterfaceWorkoutDataAccess, InterfaceWorkoutSessionDataAccess {
     private String dbName;
     private String dbType = "stub";
 
-
     private Map<String, InterfaceWorkout> workoutsByName;
     private Map<String, InterfaceExercise> exercisesByName;
+    private Map<LocalDate, InterfaceWorkoutSession> workoutSessionsByDate;
 
     /**
      * Constructor for DataAccessStub
@@ -55,6 +60,7 @@ public class DataAccessStub implements DataAccess{
         InterfaceExercise exercise;
         InterfaceWorkoutExercise workoutExercise;
         InterfaceWorkout workout;
+        InterfaceWorkoutSession workoutSession;
 
         exercisesByName = new HashMap<>();
         exercise = new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM, false);
@@ -113,6 +119,36 @@ public class DataAccessStub implements DataAccess{
         workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Bicycle Kicks"),
         new ExerciseSets(2, 15));
         addExerciseToWorkout(workout, workoutExercise);
+
+        workoutSession = new WorkoutSession(
+                ((Workout) workoutsByName.get("Welcome to the Gun Show")),
+                new LocalDate(2017, 06, 12),
+                false);
+        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
+
+        workoutSession = new WorkoutSession(
+                ((Workout) workoutsByName.get("Never Skip Leg Day")),
+                new LocalDate(2017, 06, 13),
+                false);
+        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
+
+        workoutSession = new WorkoutSession(
+                ((Workout) workoutsByName.get("Work that Core, Get that Score!")),
+                new LocalDate(2017, 06, 14),
+                false);
+        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
+
+        workoutSession = new WorkoutSession(
+                ((Workout) workoutsByName.get("Never Skip Leg Day")),
+                new LocalDate(2017, 06, 16),
+                false);
+        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
+
+        workoutSession = new WorkoutSession(
+                ((Workout) workoutsByName.get("Marathon Training Starts Here")),
+                new LocalDate(2017, 06, 17),
+                false);
+        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         System.out.println("Opened " + dbType + " database " + dbName);
     }
@@ -232,5 +268,35 @@ public class DataAccessStub implements DataAccess{
 
     public void removeWorkout(InterfaceWorkout workout) {
         workoutsByName.remove(workout.getName());
+    }
+
+    /**
+     * A method that returns a list of all workout sessions in the database
+     * @return a list of all workout sessions in the database
+     */
+    public List<InterfaceWorkoutSession> getWorkoutSessionsList() {
+        return new ArrayList<>(workoutSessionsByDate.values());
+    }
+
+    /**
+     * Retrieves a workout session scheduled on the given date from the database, if it exists. If
+     * no workout session is found for that date, returns null.
+     * @param dateOfSession the date to get the workout session for
+     * @return the workout session scheduled on the given date
+     */
+    public InterfaceWorkoutSession getWorkoutSession(LocalDate dateOfSession) {
+        return workoutSessionsByDate.get(dateOfSession);
+    }
+
+    /**
+     * Inserts a new workout session into the database
+     * @param workoutSession the new workout session to insert into the database
+     */
+    public void insertWorkoutSession(InterfaceWorkoutSession workoutSession) {
+        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
+    }
+
+    public void removeWorkoutSession(InterfaceWorkoutSession workoutSession) {
+        workoutSessionsByDate.remove(workoutSession.getDate());
     }
 }
