@@ -70,4 +70,6 @@ The log is found in [PLACE WHERE THE LOG IS FOUND].
 ###New Features and Where to Find Them###
 The major features implemented in this release are:
 The ability to view a list of Workouts, found by mashing the workouts button on the dashboard.
-The ability to view a list of Exercises,
+The ability to view a list of Exercises, found by mashing the exercises button on the dashboard.
+The ability to view details of workouts, found by mashing one of the workouts in the workouts list view.
+The ability to view your workout schedule, found by mashing the workout schedule button on the dashboard.
