@@ -10,11 +10,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import ledge.muscleup.R;
 import ledge.muscleup.application.Services;
 import ledge.muscleup.model.exercise.InterfaceExercise;
+import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.persistence.DataAccessStub;
 
@@ -39,6 +41,7 @@ public class WorkoutDetailsActivity extends Activity {
         Workout workout;
         DataAccessStub db = Services.getDataAccess();
         List exerciseList = new ArrayList();
+        Enumeration<InterfaceWorkoutExercise> workoutEnum;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_display);
@@ -51,9 +54,9 @@ public class WorkoutDetailsActivity extends Activity {
         workout = (Workout) db.getWorkout(workoutName);
 
         //fetch all exercises from workout
-        workout.initExerciseIteration();
-        while(workout.hasNextExercise()){
-            exerciseList.add(workout.nextExercise());
+        workoutEnum = workout.getExerciseEnumeration();
+        while(workoutEnum.hasMoreElements()){
+            exerciseList.add(workoutEnum.nextElement());
         }
 
         TextView filter = (TextView) findViewById(R.id.filter_title);
