@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import ledge.muscleup.application.Services;
+import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.InterfaceExercise;
 import ledge.muscleup.persistence.DataAccessStub;
 
@@ -30,7 +31,7 @@ public class AccessExercises {
      * @param exerciseName the name of the exercise
      * @return an exercise from the database with the given name, or null if it does not exist
      */
-    public InterfaceExercise getExercise(String exerciseName) {
+    public Exercise getExercise(String exerciseName) {
         return dataAccess.getExercise(exerciseName);
     }
 
@@ -38,7 +39,7 @@ public class AccessExercises {
      * This method gets exercises stored in the database in the form of a list
      * @return a list of exercises in the database
      */
-    public List<InterfaceExercise> getExercisesList() {
+    public List<Exercise> getExercisesList() {
         return dataAccess.getExercisesList();
     }
 
@@ -53,7 +54,7 @@ public class AccessExercises {
      * This method inserts a new exercise into the database
      * @param exercise the exercise to be inserted
      */
-    public void insertExercise(InterfaceExercise exercise) {
+    public void insertExercise(Exercise exercise) {
         dataAccess.insertExercise(exercise);
     }
 
@@ -61,7 +62,7 @@ public class AccessExercises {
      * This method removes an exercise from the database
      * @param exercise the exercise to be removed
      */
-    public void removeExercise(InterfaceExercise exercise) {
+    public void removeExercise(Exercise exercise) {
         dataAccess.removeExercise(exercise);
     }
 }

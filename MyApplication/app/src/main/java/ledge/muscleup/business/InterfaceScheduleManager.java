@@ -6,6 +6,7 @@ import java.util.Enumeration;
 import java.util.NoSuchElementException;
 
 import ledge.muscleup.model.workout.InterfaceWorkoutSession;
+import ledge.muscleup.model.workout.WorkoutSession;
 
 /**
  * An interface for the schedule manager, which holds a week of scheduled workouts
@@ -33,7 +34,7 @@ public interface InterfaceScheduleManager {
      * > DateTimeConstants.SUNDAY}
      * @return the workout scheduled on that day of the week, or {@code null} if the day was empty
      */
-    InterfaceWorkoutSession getScheduledWorkout(int dayOfWeek) throws IllegalArgumentException;
+    WorkoutSession getScheduledWorkout(int dayOfWeek) throws IllegalArgumentException;
 
     /**
      * Returns {@code true} if the given day of the week has no workouts scheduled, or {@code false}
@@ -63,7 +64,7 @@ public interface InterfaceScheduleManager {
      * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
      * > DateTimeConstants.SUNDAY}
      */
-    void addWorkoutSession(InterfaceWorkoutSession workout, int dayOfWeek) throws IllegalArgumentException;
+    void addWorkoutSession(WorkoutSession workout, int dayOfWeek) throws IllegalArgumentException;
 
     /**
      * Removes a workout from a given day

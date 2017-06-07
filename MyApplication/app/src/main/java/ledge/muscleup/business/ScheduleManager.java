@@ -25,11 +25,11 @@ import static java.util.Collections.enumeration;
 
 public class ScheduleManager implements InterfaceScheduleManager {
     private LocalDate firstDayOfWeek;
-    private InterfaceWorkoutSession[] workoutSessions;
+    private WorkoutSession[] workoutSessions;
 
     public ScheduleManager() {
         firstDayOfWeek = new LocalDate().withDayOfWeek(DateTimeConstants.MONDAY);
-        workoutSessions = new InterfaceWorkoutSession[DateTimeConstants.DAYS_PER_WEEK];
+        workoutSessions = new WorkoutSession[DateTimeConstants.DAYS_PER_WEEK];
         //TODO - requires database lookup
     }
 
@@ -62,7 +62,7 @@ public class ScheduleManager implements InterfaceScheduleManager {
      * @return the workout scheduled on that day of the week, or {@code null} if the day was empty
      */
     @Override
-    public InterfaceWorkoutSession getScheduledWorkout(int dayOfWeek) throws IllegalArgumentException {
+    public WorkoutSession getScheduledWorkout(int dayOfWeek) throws IllegalArgumentException {
         if (!isDayWithinWeek(dayOfWeek))
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else
@@ -113,7 +113,7 @@ public class ScheduleManager implements InterfaceScheduleManager {
      * > DateTimeConstants.SUNDAY}
      */
     @Override
-    public void addWorkoutSession(InterfaceWorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException {
+    public void addWorkoutSession(WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException {
         if (!isDayWithinWeek(dayOfWeek))
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else {

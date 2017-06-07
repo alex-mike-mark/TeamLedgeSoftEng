@@ -8,6 +8,7 @@ import ledge.muscleup.application.Services;
 import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
 import ledge.muscleup.model.workout.InterfaceWorkout;
 import ledge.muscleup.model.workout.InterfaceWorkoutSession;
+import ledge.muscleup.model.workout.WorkoutSession;
 import ledge.muscleup.persistence.DataAccessStub;
 
 /**
@@ -33,7 +34,7 @@ public class AccessWorkoutSessions {
      * @param dateOfSession the date of the workout session
      * @return a workout session from the database scheduled on the given date
      */
-    public InterfaceWorkoutSession getWorkoutSession(LocalDate dateOfSession) {
+    public WorkoutSession getWorkoutSession(LocalDate dateOfSession) {
         return dataAccess.getWorkoutSession(dateOfSession);
     }
 
@@ -41,7 +42,7 @@ public class AccessWorkoutSessions {
      * This method gets a list of workout sessions in the database
      * @return a list of the workout sessions stored in the database
      */
-    public List<InterfaceWorkoutSession> getWorkoutSessionsList() {
+    public List<WorkoutSession> getWorkoutSessionsList() {
         return dataAccess.getWorkoutSessionsList();
     }
 
@@ -51,7 +52,7 @@ public class AccessWorkoutSessions {
      * @param endDate the last date of the date range
      * @return a list of all workout sessions scheduled between startDate and endDate, inclusive
      */
-    public List<InterfaceWorkoutSession> getSessionsInDateRange(LocalDate startDate,
+    public List<WorkoutSession> getSessionsInDateRange(LocalDate startDate,
                                                                 LocalDate endDate) {
         return dataAccess.getSessionsInDateRange(startDate, endDate);
     }
@@ -60,7 +61,7 @@ public class AccessWorkoutSessions {
      * Adds a new workout session to the database
      * @param workoutSession the workout session to be added to the database
      */
-    public void insertWorkout(InterfaceWorkoutSession workoutSession) {
+    public void insertWorkout(WorkoutSession workoutSession) {
         dataAccess.insertWorkoutSession(workoutSession);
     }
 
@@ -68,7 +69,7 @@ public class AccessWorkoutSessions {
      * Removes a workout session from the database, if it exists
      * @param workoutSession the workout session to be removed
      */
-    public void removeWorkoutSession(InterfaceWorkoutSession workoutSession) {
+    public void removeWorkoutSession(WorkoutSession workoutSession) {
         dataAccess.removeWorkoutSession(workoutSession);
     }
 }

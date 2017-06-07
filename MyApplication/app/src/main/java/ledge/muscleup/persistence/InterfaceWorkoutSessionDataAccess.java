@@ -5,6 +5,7 @@ import org.joda.time.LocalDate;
 import java.util.List;
 
 import ledge.muscleup.model.workout.InterfaceWorkoutSession;
+import ledge.muscleup.model.workout.WorkoutSession;
 
 /**
  * An interface for workout session database access, including methods for retrieving, inserting,
@@ -20,7 +21,7 @@ public interface InterfaceWorkoutSessionDataAccess {
      * A method that returns a list of all workout sessions in the database
      * @return a list of all workout sessions in the database
      */
-    public List<InterfaceWorkoutSession> getWorkoutSessionsList();
+    public List<WorkoutSession> getWorkoutSessionsList();
 
     /**
      * Retrieves a workout session scheduled on the given date from the database, if it exists. If
@@ -28,7 +29,7 @@ public interface InterfaceWorkoutSessionDataAccess {
      * @param dateOfSession the date to get the workout session for
      * @return the workout session scheduled on the given date
      */
-    public InterfaceWorkoutSession getWorkoutSession(LocalDate dateOfSession);
+    public WorkoutSession getWorkoutSession(LocalDate dateOfSession);
 
     /**
      * A method that returns a list of workout sessions scheduled in a date range
@@ -36,18 +37,18 @@ public interface InterfaceWorkoutSessionDataAccess {
      * @param endDate the last date of the date range
      * @return a list of all workout sessions scheduled between startDate and endDate, inclusive
      */
-    public List<InterfaceWorkoutSession> getSessionsInDateRange(LocalDate startDate,
+    public List<WorkoutSession> getSessionsInDateRange(LocalDate startDate,
                                                                 LocalDate endDate);
 
     /**
      * Inserts a new workout session into the database
      * @param workoutSession the new workout session to insert into the database
      */
-    public void insertWorkoutSession(InterfaceWorkoutSession workoutSession);
+    public void insertWorkoutSession(WorkoutSession workoutSession);
 
     /**
      * Removes a workout session from the database, if it exists
      * @param workoutSession the workout session to remove from the database
      */
-    public void removeWorkoutSession(InterfaceWorkoutSession workoutSession);
+    public void removeWorkoutSession(WorkoutSession workoutSession);
 }
