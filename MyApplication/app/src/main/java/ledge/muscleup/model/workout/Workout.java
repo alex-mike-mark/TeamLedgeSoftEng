@@ -6,22 +6,36 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import ledge.muscleup.model.exercise.InterfaceExercise;
+import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
+import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
 
 /**
- * Stores information about workouts, which consists of a workout name and a set of exercises
+ * Stores information about workouts, which consists of a workout name, a set of exercises, whether
+ * the workout is a favourite workout and whether the workout is completed
  *
  * @author Alexander Mark
  * @version 1.0
  * @since 2017-05-27
  */
-public abstract class Workout implements InterfaceWorkout {
-    protected String name;
-    protected List<InterfaceExercise> exerciseList;
-    private Iterator<InterfaceExercise> exerciseListIterator;
+public class Workout implements InterfaceWorkout {
+    private String name;
+    private List<InterfaceWorkoutExercise> exerciseList;
+    private Iterator<InterfaceWorkoutExercise> exerciseListIterator;
+    private boolean isFavourite;
 
-    protected Workout(String name) {
+    public Workout(String name, boolean isFavourite) {
         this.name = name;
+        this.isFavourite = isFavourite;
         exerciseList = new ArrayList<>();
+    }
+
+    public Workout(String name, boolean isFavourite, InterfaceWorkoutExercise[] exercises) {
+        this.name = name;
+        this.isFavourite = isFavourite;
+
+        exerciseList = new ArrayList<>();
+        for (int i = 0; i < exercises.length; i++)
+            exerciseList.add(exercises[i]);
     }
 
     /**
@@ -35,7 +49,98 @@ public abstract class Workout implements InterfaceWorkout {
     }
 
     /**
-     * Initializes the iterator for the list of exercises to the first InterfaceExercise in the list
+     * Set the name of the workout
+     *
+     * @param newName the new name for the workout
+     */
+    @Override
+    public void setName(String newName) {
+        name = newName;
+    }
+
+    /**
+     * Sets the recommended quantity of exercise for a given exercise in the workout
+     *
+     * @param exercise the exercise to set the quantity for
+     * @param quantity the quantity to assign to the exercise
+     * @return a boolean representing if the exercise was found and updated in the workout
+     */
+    @Override
+    public boolean setRecommendedQuantity(InterfaceWorkoutExercise exercise, InterfaceExerciseQuantity quantity) {
+        boolean quantityUpdated = false;
+        int exerciseIndex = exerciseList.indexOf(exercise);
+
+        //ensure the exercise exists in the list
+        if (exerciseIndex != -1)
+            quantityUpdated = exerciseList.get(exerciseIndex).updateRecommendedQuantity(quantity);
+
+        return quantityUpdated;
+    }
+
+    /**
+     * Returns {@code true} if the workout is a favourite workout, and {@code false} otherwise
+     *
+     * @return a boolean represeting whether this workout is a favourite workout
+     */
+    @Override
+    public boolean isFavourite() { return isFavourite; }
+
+    /**
+     * Toggle the favourite status of this workout
+     */
+    @Override
+    public void toggleFavourite() { isFavourite = !isFavourite; }
+
+    /**
+     * Adds a new exercise to the workout
+     *
+     * @param exercise the exercise to add to the workout
+     */
+    @Override
+    public void addExercise(InterfaceWorkoutExercise exercise) { exerciseList.add(exercise); }
+
+    /**
+     * Move the position of an exercise in the list of exercises
+     *
+     * @param exercise the exercise to change the position of
+     * @param index    the index of the exercise to move
+     * @return a boolean representing if the exercise was found and moved to the new index
+     */
+    @Override
+    public boolean moveExercise(InterfaceWorkoutExercise exercise, int index) {
+        boolean exerciseMoved = false;
+        int exerciseIndex = exerciseList.indexOf(exercise);
+        InterfaceWorkoutExercise listExercise;
+
+        //ensure the exercise exists in the list and the index is inside the bounds of the list
+        if (exerciseIndex != -1 && (index >= 0 && index <= exerciseList.size())) {
+            //only move the exercise if we're given a new place to move to
+            if (exerciseIndex != index) {
+                //if the exercise is moving down the list, removing the exercise changes the target
+                //index, so adjust accordingly
+                if (exerciseIndex < index)
+                    index--;
+                listExercise = exerciseList.remove(exerciseIndex);
+                exerciseList.add(index, listExercise);
+            }
+            exerciseMoved = true;
+        }
+
+        return exerciseMoved;
+    }
+
+    /**
+     * Removes an exercise from the list of exercises
+     *
+     * @param exercise the exercise to remove from the list
+     * @return the exercise that was removed, or {@code null} if the exercise couldn't be found
+     */
+    @Override
+    public boolean removeExercise(InterfaceWorkoutExercise exercise) { return exerciseList.remove(exercise); }
+
+    /**
+     * Initializes the iterator for the list of exercises to the first InterfaceWorkoutExercise in
+     * the list
      */
     @Override
     public void initExerciseIteration() {
@@ -43,7 +148,8 @@ public abstract class Workout implements InterfaceWorkout {
     }
 
     /**
-     * Returns {@code true} if there is another InterfaceExercise in the list or {@code false} if not
+     * Returns {@code true} if there is another InterfaceWorkoutExercise in the list or
+     * {@code false} if not
      *
      * @return a boolean representing whether the iterator is at the end of the list or not
      */
@@ -53,18 +159,29 @@ public abstract class Workout implements InterfaceWorkout {
     }
 
     /**
-     * Returns the next InterfaceExercise in the list
+     * Returns the next InterfaceWorkoutExercise in the list
      *
-     * @return the next InterfaceExercise in the list
+     * @return the next InterfaceWorkoutExercise in the list
      * @throws NoSuchElementException if the iterator is at the end of the list
      */
     @Override
-    public InterfaceExercise nextExercise() throws NoSuchElementException {
+    public InterfaceWorkoutExercise nextExercise() throws NoSuchElementException {
         try {
             return exerciseListIterator.next();
         } catch (NoSuchElementException nsee) {
             throw nsee;
         }
+    }
+
+    /**
+     * Compares the current Workout to another instance of InterfaceWorkout
+     *
+     * @param other the instance of InterfaceWorkout to compare to
+     * @return a boolean representing whether the two instances were equal
+     */
+    @Override
+    public boolean equals(InterfaceWorkout other) {
+        return this.name.equals(other.getName());
     }
 
     /**
