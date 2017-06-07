@@ -8,7 +8,7 @@ package ledge.muscleup.model.exercise;
  * @version 1.0
  * @since 2017-05-25
  */
-public class Exercise implements InterfaceExercise {
+public class Exercise {
     private String name;
     private ExerciseIntensity intensity;
     private ExerciseType exerciseType;
@@ -60,7 +60,6 @@ public class Exercise implements InterfaceExercise {
      *
      * @return the name of the exercise
      */
-    @Override
     public String getName() {
         return name;
     }
@@ -70,7 +69,6 @@ public class Exercise implements InterfaceExercise {
      *
      * @return the intensity of the exercise
      */
-    @Override
     public ExerciseIntensity getIntensity() {
         return intensity;
     }
@@ -80,7 +78,6 @@ public class Exercise implements InterfaceExercise {
      *
      * @return the type of the exercise
      */
-    @Override
     public ExerciseType getType() {
         return exerciseType;
     }
@@ -90,13 +87,11 @@ public class Exercise implements InterfaceExercise {
      *
      * @return a boolean representing is the exercise is a favourite exercise
      */
-    @Override
     public boolean isFavourite() { return isFavourite; }
 
     /**
      * Toggle the favourite status of the exercise
      */
-    @Override
     public void toggleFavourite() {
         isFavourite = !isFavourite;
         //TODO - requires database update
@@ -108,8 +103,7 @@ public class Exercise implements InterfaceExercise {
      * @param other the instance of Exercise to compare to
      * @return a boolean representing whether the two instances were equal
      */
-    @Override
-    public boolean equals(InterfaceExercise other) {
+    public boolean equals(Exercise other) {
         return other != null && name.equals(other.getName());
     }
 

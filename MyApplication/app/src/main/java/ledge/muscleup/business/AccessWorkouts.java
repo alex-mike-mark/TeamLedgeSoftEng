@@ -3,10 +3,8 @@ package ledge.muscleup.business;
 import java.util.List;
 
 import ledge.muscleup.application.Services;
-import ledge.muscleup.model.exercise.InterfaceExercise;
-import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
-import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
-import ledge.muscleup.model.workout.InterfaceWorkout;
+import ledge.muscleup.model.exercise.WorkoutExercise;
+import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.persistence.DataAccessStub;
 
 /**
@@ -32,7 +30,7 @@ public class AccessWorkouts {
      * @param workoutName the name of the workout
      * @return a workout from the database with the given name, if it exists. Otherwise, returns null
      */
-    public InterfaceWorkout getWorkout(String workoutName) {
+    public Workout getWorkout(String workoutName) {
         return dataAccess.getWorkout(workoutName);
     }
 
@@ -40,7 +38,7 @@ public class AccessWorkouts {
      * This method gets a list of workouts in the database
      * @return a list of the workouts stored in the database
      */
-    public List<InterfaceWorkout> getWorkoutsList() {
+    public List<Workout> getWorkoutsList() {
         return dataAccess.getWorkoutsList();
     }
 
@@ -56,7 +54,7 @@ public class AccessWorkouts {
      * Adds a new workout to the database
      * @param workout the workout to be added to the database
      */
-    public void insertWorkout(InterfaceWorkout workout) {
+    public void insertWorkout(Workout workout) {
         dataAccess.insertWorkout(workout);
     }
 
@@ -64,7 +62,7 @@ public class AccessWorkouts {
      * Removes a workout from the database, if it exists
      * @param workout the workout to be removed
      */
-    public void removeWorkout(InterfaceWorkout workout) {
+    public void removeWorkout(Workout workout) {
         dataAccess.removeWorkout(workout);
     }
 
@@ -76,7 +74,7 @@ public class AccessWorkouts {
      *
      * @return true if exercise was added successfully, false otherwise
      */
-    public boolean addExerciseToWorkout (InterfaceWorkout workout, InterfaceWorkoutExercise exercise) {
+    public boolean addExerciseToWorkout (Workout workout, WorkoutExercise exercise) {
         return dataAccess.addExerciseToWorkout(workout, exercise);
     }
 

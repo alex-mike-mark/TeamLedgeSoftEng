@@ -2,8 +2,8 @@ package ledge.muscleup.persistence;
 
 import java.util.List;
 
-import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
-import ledge.muscleup.model.workout.InterfaceWorkout;
+import ledge.muscleup.model.exercise.WorkoutExercise;
+import ledge.muscleup.model.workout.Workout;
 
 /**
  * An interface for workout database access, including methods for retrieving, inserting, and
@@ -19,7 +19,7 @@ public interface InterfaceWorkoutDataAccess {
      * Gets a list of all workouts in the database
      * @return a list of all workouts in the database
      */
-    List<InterfaceWorkout> getWorkoutsList();
+    List<Workout> getWorkoutsList();
 
     /**
      * Gets a list of names of all exercises in the database
@@ -32,19 +32,19 @@ public interface InterfaceWorkoutDataAccess {
      * @param workoutName the name of the workout to retrieve from the database
      * @return The workout with name workoutName, or null if no workout exists with that name
      */
-    InterfaceWorkout getWorkout(String workoutName);
+    Workout getWorkout(String workoutName);
 
     /**
      * Adds a workout to the database
      * @param workout the workout to be added to the database
      */
-    void insertWorkout(InterfaceWorkout workout);
+    void insertWorkout(Workout workout);
 
     /**
      * Removes a workout from the database, if it exists
      * @param workout the workout to remove from the database
      */
-    void removeWorkout(InterfaceWorkout workout);
+    void removeWorkout(Workout workout);
 
     /**
      * Adds an exercise to a workout in the database, if both the workout and the exercise exist in
@@ -54,5 +54,5 @@ public interface InterfaceWorkoutDataAccess {
      *
      * @return a boolean indicating whether the exercise was properly added to the workout
      */
-    boolean addExerciseToWorkout (InterfaceWorkout workout, InterfaceWorkoutExercise exercise);
+    boolean addExerciseToWorkout (Workout workout, WorkoutExercise exercise);
 }

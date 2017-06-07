@@ -9,7 +9,7 @@ package ledge.muscleup.model.exercise;
  * @since 2017-06-03
  */
 
-public class WorkoutSessionExercise implements InterfaceWorkoutSessionExercise {
+public class WorkoutSessionExercise {
     private WorkoutExercise exercise;
     private boolean isComplete;
 
@@ -57,7 +57,6 @@ public class WorkoutSessionExercise implements InterfaceWorkoutSessionExercise {
      *
      * @return the name of the exercise
      */
-    @Override
     public String getName() {
         return exercise.getName();
     }
@@ -67,7 +66,6 @@ public class WorkoutSessionExercise implements InterfaceWorkoutSessionExercise {
      *
      * @return the intensity of the exercise
      */
-    @Override
     public ExerciseIntensity getIntensity() {
         return exercise.getIntensity();
     }
@@ -77,7 +75,6 @@ public class WorkoutSessionExercise implements InterfaceWorkoutSessionExercise {
      *
      * @return the type of the exercise
      */
-    @Override
     public ExerciseType getType() {
         return exercise.getType();
     }
@@ -87,7 +84,6 @@ public class WorkoutSessionExercise implements InterfaceWorkoutSessionExercise {
      *
      * @return the recommended quantity of exercise
      */
-    @Override
     public InterfaceExerciseQuantity getRecommendedQuantity() {
         return exercise.getRecommendedQuantity();
     }
@@ -97,7 +93,6 @@ public class WorkoutSessionExercise implements InterfaceWorkoutSessionExercise {
      *
      * @return a boolean representing if the exercise has been completed
      */
-    @Override
     public boolean isComplete() {
         return isComplete;
     }
@@ -105,21 +100,18 @@ public class WorkoutSessionExercise implements InterfaceWorkoutSessionExercise {
     /**
      * Toggles the completed state of this exercise
      */
-    @Override
     public void toggleCompleted() {
         isComplete = !isComplete;
         //TODO - requires database update
     }
 
     /**
-     * Compares the current WorkoutSessionExercise to another instance of
-     * InterfaceWorkoutSessionExercise
+     * Compares the current WorkoutSessionExercise to another instance of WorkoutSessionExercise
      *
-     * @param other the instance of InterfaceWorkoutSessionExercise to compare to
+     * @param other the instance of WorkoutSessionExercise to compare to
      * @return a boolean representing whether the two instances were equal
      */
-    @Override
-    public boolean equals(InterfaceWorkoutSessionExercise other) {
+    public boolean equals(WorkoutSessionExercise other) {
         return (other != null &&
                 getName().equals(other.getName()) &&
                 getRecommendedQuantity().equals(other.getRecommendedQuantity()) &&

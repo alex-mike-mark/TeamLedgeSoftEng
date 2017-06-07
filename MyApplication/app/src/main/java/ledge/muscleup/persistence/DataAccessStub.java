@@ -1,7 +1,5 @@
 package ledge.muscleup.persistence;
 
-import android.util.Log;
-
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
@@ -17,12 +15,8 @@ import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
 import ledge.muscleup.model.exercise.ExerciseType;
 import ledge.muscleup.model.exercise.ExerciseIntensity;
-import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WeightUnit;
-import ledge.muscleup.model.exercise.InterfaceExercise;
-import ledge.muscleup.model.workout.InterfaceWorkout;
-import ledge.muscleup.model.workout.InterfaceWorkoutSession;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
 
@@ -34,14 +28,13 @@ import ledge.muscleup.model.workout.WorkoutSession;
  * @since 2017-06-04
  */
 
-public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDataAccess,
-        InterfaceWorkoutDataAccess, InterfaceWorkoutSessionDataAccess {
+public class DataAccessStub implements InterfaceDataAccess {
     private String dbName;
     private String dbType = "stub";
 
-    private Map<String, InterfaceWorkout> workoutsByName;
-    private Map<String, InterfaceExercise> exercisesByName;
-    private Map<LocalDate, InterfaceWorkoutSession> workoutSessionsByDate;
+    private Map<String, Workout> workoutsByName;
+    private Map<String, Exercise> exercisesByName;
+    private Map<LocalDate, WorkoutSession> workoutSessionsByDate;
 
     /**
      * Constructor for DataAccessStub
@@ -57,10 +50,10 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
      */
     public void open(String dbName) {
 
-        InterfaceExercise exercise;
-        InterfaceWorkoutExercise workoutExercise;
-        InterfaceWorkout workout;
-        InterfaceWorkoutSession workoutSession;
+        Exercise exercise;
+        WorkoutExercise workoutExercise;
+        Workout workout;
+        WorkoutSession workoutSession;
 
         exercisesByName = new HashMap<>();
         exercise = new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM, false);
@@ -87,67 +80,67 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
         workout = new Workout("Welcome to the Gun Show");
         workoutsByName.put(workout.getName(), workout);
 
-        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Bicep Curls"),
+        workoutExercise = new WorkoutExercise(exercisesByName.get("Bicep Curls"),
         new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
         addExerciseToWorkout(workout, workoutExercise);
-        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Push-Ups"),
+        workoutExercise = new WorkoutExercise(exercisesByName.get("Push-Ups"),
         new ExerciseSets(2, 15));
         addExerciseToWorkout(workout, workoutExercise);
 
         workout = new Workout("Never Skip Leg Day");
         workoutsByName.put(workout.getName(), workout);
-        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Squats"),
+        workoutExercise = new WorkoutExercise(exercisesByName.get("Squats"),
         new ExerciseSets(4, 15));
         addExerciseToWorkout(workout, workoutExercise);
-        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Lunges"),
+        workoutExercise = new WorkoutExercise(exercisesByName.get("Lunges"),
         new ExerciseSets(3, 10));
         addExerciseToWorkout(workout, workoutExercise);
 
         workout = new Workout("Marathon Training Starts Here");
         workoutsByName.put(workout.getName(), workout);
-        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Running"),
+        workoutExercise = new WorkoutExercise(exercisesByName.get("Running"),
         new ExerciseDistance(2.5, DistanceUnit.MILES));
         addExerciseToWorkout(workout, workoutExercise);
-        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Exercise Bike"),
+        workoutExercise = new WorkoutExercise(exercisesByName.get("Exercise Bike"),
         new ExerciseDuration(45));
         addExerciseToWorkout(workout, workoutExercise);
 
         workout = new Workout("Work that Core, Get that Score!");
         workoutsByName.put(workout.getName(), workout);
-        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Crunches"),
+        workoutExercise = new WorkoutExercise(exercisesByName.get("Crunches"),
         new ExerciseSets(2, 25));
         addExerciseToWorkout(workout, workoutExercise);
-        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Bicycle Kicks"),
+        workoutExercise = new WorkoutExercise(exercisesByName.get("Bicycle Kicks"),
         new ExerciseSets(2, 15));
         addExerciseToWorkout(workout, workoutExercise);
 
         workoutSessionsByDate = new HashMap<>();
         workoutSession = new WorkoutSession(
-                ((Workout) workoutsByName.get("Welcome to the Gun Show")),
+                (workoutsByName.get("Welcome to the Gun Show")),
                 new LocalDate(2017, 06, 12),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
-                ((Workout) workoutsByName.get("Never Skip Leg Day")),
+                (workoutsByName.get("Never Skip Leg Day")),
                 new LocalDate(2017, 06, 13),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
-                ((Workout) workoutsByName.get("Work that Core, Get that Score!")),
+                (workoutsByName.get("Work that Core, Get that Score!")),
                 new LocalDate(2017, 06, 14),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
-                ((Workout) workoutsByName.get("Never Skip Leg Day")),
+                (workoutsByName.get("Never Skip Leg Day")),
                 new LocalDate(2017, 06, 16),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
-                ((Workout) workoutsByName.get("Marathon Training Starts Here")),
+                (workoutsByName.get("Marathon Training Starts Here")),
                 new LocalDate(2017, 06, 17),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
@@ -166,7 +159,7 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
      * Gets a list of all exercises in the database
      * @return a list of all exercises in the database
      */
-    public List<InterfaceExercise> getExercisesList() {
+    public List<Exercise> getExercisesList() {
         return new ArrayList<>(exercisesByName.values());
     }
 
@@ -182,7 +175,7 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
      * Gets a list of all workouts in the database
      * @return a list of all workouts in the database
      */
-    public List<InterfaceWorkout> getWorkoutsList() {
+    public List<Workout> getWorkoutsList() {
         return new ArrayList<>(workoutsByName.values());
     }
 
@@ -199,7 +192,7 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
      * @param exerciseName- the name of the exercise to retrieve from the database
      * @return The exercise with name exerciseName, or null if no exercise exists with that name
      */
-    public InterfaceExercise getExercise(String exerciseName) {
+    public Exercise getExercise(String exerciseName) {
         return exercisesByName.get(exerciseName);
     }
 
@@ -208,7 +201,7 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
      * @param workoutName the name of the workout to retrieve from the database
      * @return The workout with name workoutName, or null if no workout exists with that name
      */
-    public InterfaceWorkout getWorkout(String workoutName) {
+    public Workout getWorkout(String workoutName) {
         return workoutsByName.get(workoutName);
     }
 
@@ -217,7 +210,7 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
      * @param exercise the exercise to be added to the database
      */
 
-    public void insertExercise(InterfaceExercise exercise) {
+    public void insertExercise(Exercise exercise) {
         exercisesByName.put(exercise.getName(), exercise);
     }
 
@@ -226,7 +219,7 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
      * @param workout the workout to be added to the database
      */
 
-    public void insertWorkout(InterfaceWorkout workout) {
+    public void insertWorkout(Workout workout) {
         workoutsByName.put(workout.getName(), workout);
     }
 
@@ -239,9 +232,9 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
      *
      * @return a boolean indicating whether the exercise was properly added to the workout
      */
-    public boolean addExerciseToWorkout (InterfaceWorkout workout, InterfaceWorkoutExercise exercise) {
+    public boolean addExerciseToWorkout (Workout workout, WorkoutExercise exercise) {
         boolean added = false;
-        InterfaceWorkout dbWorkout;
+        Workout dbWorkout;
 
         if (workoutsByName.containsKey(workout.getName())) {
             dbWorkout = workoutsByName.get(workout.getName());
@@ -258,7 +251,7 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
      * @param exercise the exercise to remove from the database
      */
 
-    public void removeExercise(InterfaceExercise exercise) {
+    public void removeExercise(Exercise exercise) {
         exercisesByName.remove(exercise.getName());
     }
 
@@ -267,7 +260,7 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
      * @param workout the workout to remove from the database
      */
 
-    public void removeWorkout(InterfaceWorkout workout) {
+    public void removeWorkout(Workout workout) {
         workoutsByName.remove(workout.getName());
     }
 
@@ -275,7 +268,7 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
      * A method that returns a list of all workout sessions in the database
      * @return a list of all workout sessions in the database
      */
-    public List<InterfaceWorkoutSession> getWorkoutSessionsList() {
+    public List<WorkoutSession> getWorkoutSessionsList() {
         return new ArrayList<>(workoutSessionsByDate.values());
     }
 
@@ -285,9 +278,9 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
      * @param endDate the last date of the date range
      * @return a list of all workout sessions scheduled between startDate and endDate, inclusive
      */
-    public List<InterfaceWorkoutSession> getSessionsInDateRange(LocalDate startDate,
+    public List<WorkoutSession> getSessionsInDateRange(LocalDate startDate,
                                                                 LocalDate endDate) {
-        List<InterfaceWorkoutSession> sessionsInDateRange = new ArrayList<>();
+        List<WorkoutSession> sessionsInDateRange = new ArrayList<>();
 
         LocalDate currDate = startDate;
         while (!currDate.isAfter(endDate)) {
@@ -306,7 +299,7 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
      * @param dateOfSession the date to get the workout session for
      * @return the workout session scheduled on the given date
      */
-    public InterfaceWorkoutSession getWorkoutSession(LocalDate dateOfSession) {
+    public WorkoutSession getWorkoutSession(LocalDate dateOfSession) {
         return workoutSessionsByDate.get(dateOfSession);
     }
 
@@ -314,7 +307,7 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
      * Inserts a new workout session into the database
      * @param workoutSession the new workout session to insert into the database
      */
-    public void insertWorkoutSession(InterfaceWorkoutSession workoutSession) {
+    public void insertWorkoutSession(WorkoutSession workoutSession) {
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
     }
 
@@ -322,7 +315,7 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
      * Removes a workout session from the database, if it exists
      * @param workoutSession the workout session to remove from the database
      */
-    public void removeWorkoutSession(InterfaceWorkoutSession workoutSession) {
+    public void removeWorkoutSession(WorkoutSession workoutSession) {
         workoutSessionsByDate.remove(workoutSession.getDate());
     }
 }

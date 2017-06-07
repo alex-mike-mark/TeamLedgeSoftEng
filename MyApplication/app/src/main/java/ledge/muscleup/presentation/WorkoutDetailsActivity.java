@@ -3,8 +3,6 @@ package ledge.muscleup.presentation;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,10 +13,9 @@ import java.util.List;
 
 import ledge.muscleup.R;
 import ledge.muscleup.application.Services;
-import ledge.muscleup.model.exercise.InterfaceExercise;
-import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
+import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.workout.Workout;
-import ledge.muscleup.persistence.DataAccessStub;
+import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
  * WorkoutDetailsActivity displays a list of exercises for a workout
@@ -39,7 +36,7 @@ public class WorkoutDetailsActivity extends Activity {
         String workoutName;
         Intent intent;
         Workout workout;
-        DataAccessStub db = Services.getDataAccess();
+        InterfaceDataAccess db = Services.getDataAccess();
         List exerciseList = new ArrayList();
 
         super.onCreate(savedInstanceState);
@@ -53,7 +50,7 @@ public class WorkoutDetailsActivity extends Activity {
         workout = (Workout) db.getWorkout(workoutName);
 
         //fetch all exercises from workout
-        Enumeration<InterfaceWorkoutExercise> exercises = workout.getExerciseEnumeration();
+        Enumeration<WorkoutExercise> exercises = workout.getExerciseEnumeration();
         while(exercises.hasMoreElements()){
             exerciseList.add(exercises.nextElement());
         }
