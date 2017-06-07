@@ -15,7 +15,7 @@ import ledge.muscleup.R;
 import ledge.muscleup.application.Services;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.workout.Workout;
-import ledge.muscleup.persistence.InterfaceDataAccess;
+import ledge.muscleup.persistence.InterfaceDataAccessStub;
 
 /**
  * WorkoutDetailsActivity displays a list of exercises for a workout
@@ -36,7 +36,7 @@ public class WorkoutDetailsActivity extends Activity {
         String workoutName;
         Intent intent;
         Workout workout;
-        InterfaceDataAccess db = Services.getDataAccess();
+        InterfaceDataAccessStub db = Services.getDataAccess();
         List exerciseList = new ArrayList();
 
         super.onCreate(savedInstanceState);

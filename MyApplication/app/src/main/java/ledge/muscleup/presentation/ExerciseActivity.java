@@ -10,7 +10,7 @@ import java.util.List;
 
 import ledge.muscleup.R;
 import ledge.muscleup.application.Services;
-import ledge.muscleup.persistence.InterfaceDataAccess;
+import ledge.muscleup.persistence.InterfaceDataAccessStub;
 
 /**
  * ExerciseActivity displays a list of exercises, showing their name, intensity, and exercise type
@@ -28,7 +28,7 @@ public class ExerciseActivity extends Activity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        InterfaceDataAccess db = Services.getDataAccess();
+        InterfaceDataAccessStub db = Services.getDataAccess();
         List exerciseArray;
 
         super.onCreate(savedInstanceState);
