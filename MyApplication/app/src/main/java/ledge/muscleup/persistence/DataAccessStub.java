@@ -121,6 +121,7 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
         new ExerciseSets(2, 15));
         addExerciseToWorkout(workout, workoutExercise);
 
+        workoutSessionsByDate = new HashMap<>();
         workoutSession = new WorkoutSession(
                 ((Workout) workoutsByName.get("Welcome to the Gun Show")),
                 new LocalDate(2017, 06, 12),
