@@ -34,7 +34,7 @@ public class ScheduleManagerTest {
     @Before
     public void testInit(){
         dataAccess = new TemplateDataAccessStub("schedule manager test");
-        dataAccess.open("schedule manager test");
+        dataAccess.open();
         scheduleManager = new ScheduleManager(dataAccess);
     }
 

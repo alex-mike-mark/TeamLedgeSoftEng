@@ -11,9 +11,8 @@ public interface InterfaceDataAccess {
 
     /**
      * Opens the stub database and populates it with some default values
-     * @param dbName the name of the database to open
      */
-    void open(String dbName);
+    void open();
 
     /**
      * Close the stub database
