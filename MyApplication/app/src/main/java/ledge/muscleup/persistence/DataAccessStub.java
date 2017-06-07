@@ -84,7 +84,7 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
 
         workoutsByName = new HashMap<>();
 
-        workout = new Workout("Welcome to the Gun Show", false);
+        workout = new Workout("Welcome to the Gun Show");
         workoutsByName.put(workout.getName(), workout);
 
         workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Bicep Curls"),
@@ -94,7 +94,7 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
         new ExerciseSets(2, 15));
         addExerciseToWorkout(workout, workoutExercise);
 
-        workout = new Workout("Never Skip Leg Day", false);
+        workout = new Workout("Never Skip Leg Day");
         workoutsByName.put(workout.getName(), workout);
         workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Squats"),
         new ExerciseSets(4, 15));
@@ -103,7 +103,7 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
         new ExerciseSets(3, 10));
         addExerciseToWorkout(workout, workoutExercise);
 
-        workout = new Workout("Marathon Training Starts Here", false);
+        workout = new Workout("Marathon Training Starts Here");
         workoutsByName.put(workout.getName(), workout);
         workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Running"),
         new ExerciseDistance(2.5, DistanceUnit.MILES));
@@ -112,7 +112,7 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
         new ExerciseDuration(45));
         addExerciseToWorkout(workout, workoutExercise);
 
-        workout = new Workout("Work that Core, Get that Score!", false);
+        workout = new Workout("Work that Core, Get that Score!");
         workoutsByName.put(workout.getName(), workout);
         workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Crunches"),
         new ExerciseSets(2, 25));
@@ -121,6 +121,7 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
         new ExerciseSets(2, 15));
         addExerciseToWorkout(workout, workoutExercise);
 
+        workoutSessionsByDate = new HashMap<>();
         workoutSession = new WorkoutSession(
                 ((Workout) workoutsByName.get("Welcome to the Gun Show")),
                 new LocalDate(2017, 06, 12),

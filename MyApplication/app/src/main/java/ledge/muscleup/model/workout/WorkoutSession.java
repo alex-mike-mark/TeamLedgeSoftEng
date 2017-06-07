@@ -4,6 +4,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
@@ -48,7 +49,7 @@ public class WorkoutSession implements InterfaceWorkoutSession {
             this.name = workout.getName();
             this.scheduledDate = scheduledDate;
             this.isComplete = isComplete;
-
+            this.exerciseList = new ArrayList<>();
             Enumeration<InterfaceWorkoutExercise> enumeration = workout.getExerciseEnumeration();
             while(enumeration.hasMoreElements())
                 exerciseList.add(new WorkoutSessionExercise((WorkoutExercise) enumeration.nextElement(), false));
