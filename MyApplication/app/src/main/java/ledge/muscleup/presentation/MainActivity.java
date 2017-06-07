@@ -1,17 +1,26 @@
-package ledge.muscleup;
+package ledge.muscleup.presentation;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import ledge.muscleup.R;
+import ledge.muscleup.application.Services;
 
+public class MainActivity extends AppCompatActivity {
+    public static final String dbName="workout_till_you_dropout";
+
+    /**
+     * Setup for MainActivity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        startUp();
     }
 
     /**
@@ -21,5 +30,21 @@ public class MainActivity extends AppCompatActivity {
     public void openWorkouts(View view) {
         Intent intent = new Intent(this, WorkoutActivity.class);
         startActivity(intent);
+    }
+
+    /**
+     * Create the stub stub database
+     */
+    public static void startUp()
+    {
+        Services.createDataAccess(dbName);
+    }
+
+    /**
+     * Closes stub database connection
+     */
+    public static void shutDown()
+    {
+        Services.closeDataAccess();
     }
 }

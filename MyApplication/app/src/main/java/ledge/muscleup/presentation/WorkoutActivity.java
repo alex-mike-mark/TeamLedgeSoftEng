@@ -1,4 +1,4 @@
-package ledge.muscleup;
+package ledge.muscleup.presentation;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,12 +13,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import ledge.muscleup.R;
+import ledge.muscleup.application.Services;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.persistence.DataAccess;
 import ledge.muscleup.persistence.DataAccessStub;
 
 /**
- * WorkoutActivity displays a list of workouts
+ * WorkoutActivity displays a list of workouts that the user can click on to view list of exercises
  *
  * @author Jon Ingram
  * @version 1.0
@@ -26,9 +28,6 @@ import ledge.muscleup.persistence.DataAccessStub;
  */
 
 public class WorkoutActivity extends Activity {
-    DataAccessStub db = new DataAccessStub("workouts");
-    List workoutArray;
-    Workout workout;
 
     /**
      *  onCreate initializes WorkoutActivity
@@ -36,41 +35,42 @@ public class WorkoutActivity extends Activity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        DataAccessStub db = Services.getDataAccess();
+        List workoutArray;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout);
 
         db.open("workouts");
-        workoutArray = db.getWorkoutsList();
-
-        ListView listView = (ListView) findViewById(R.id.workout_list);
+        workoutArray = db.getWorkoutNamesList();
 
         TextView filter = (TextView) findViewById(R.id.filter_title);
         filter.setText("Filter: none");
 
         populateList(workoutArray);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                if (position == 0) {
-                    workout = (Workout) workoutArray.get(0);
-                    workout.initExerciseIteration();
-                    TextView filter = (TextView) findViewById(R.id.filter_title);
-                    filter.setText(workout.toString());
-                }
-
-                if (position == 1) {
-                    workout = (Workout) workoutArray.get(1);
-                    workout.initExerciseIteration();
-                    if(workout.hasNextExercise()) {
-                        TextView filter = (TextView) findViewById(R.id.filter_title);
-                        filter.setText(workout.nextExercise().getName());
-                    }
-                }
-            }
-        });
+        //this will be used to implement Workout Details
+//        ListView listView = (ListView) findViewById(R.id.workout_list);
+//
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            public void onItemClick(AdapterView<?> parent, View view,
+//                                    int position, long id) {
+//                if (position == 0) {
+//
+//                }
+//
+//                if (position == 1) {
+//
+//                    }
+//                }
+//            }
+//        });
     }
 
+    /**
+     *  Used to insert a List into a list pane defined in the xml as "workout_list"
+     * @param arrayList
+     */
     private void populateList(List arrayList) {
         ArrayAdapter adapter = new ArrayAdapter<String>(this,
                 R.layout.activity_listview, arrayList);

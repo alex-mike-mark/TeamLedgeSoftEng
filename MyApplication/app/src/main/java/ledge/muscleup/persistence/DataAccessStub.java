@@ -150,7 +150,7 @@ public class DataAccessStub implements DataAccess{
      * @return a list of names of all workouts in the database
      */
     public List<String> getWorkoutNamesList() {
-        return new ArrayList<>(exercisesByName.keySet());
+        return new ArrayList<>(workoutsByName.keySet());
     }
 
     /**
