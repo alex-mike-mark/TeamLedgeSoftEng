@@ -133,7 +133,10 @@ public class WorkoutSessionExercise implements InterfaceWorkoutSessionExercise {
      */
     @Override
     public String toString() {
-        return exercise.toString() + "\n  Recommended: " + getRecommendedQuantity().toString() +
-                "\n  Completed";
+        if (isComplete) {
+            return exercise.toString() + "\n  Completed";
+        } else {
+            return exercise.toString();
+        }
     }
 }
