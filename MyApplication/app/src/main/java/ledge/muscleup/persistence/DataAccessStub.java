@@ -8,21 +8,19 @@ import java.util.List;
 import java.util.Map;
 
 import ledge.muscleup.model.exercise.DistanceUnit;
+import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.ExerciseDistance;
 import ledge.muscleup.model.exercise.ExerciseDuration;
 import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
 import ledge.muscleup.model.exercise.ExerciseType;
 import ledge.muscleup.model.exercise.ExerciseIntensity;
-import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
-import ledge.muscleup.model.exercise.InterfaceSuggestedExercise;
-import ledge.muscleup.model.exercise.InterfaceTrackableExercise;
-import ledge.muscleup.model.exercise.ListedExercise;
-import ledge.muscleup.model.exercise.SuggestedExercise;
+import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
+import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WeightUnit;
-import ledge.muscleup.model.workout.ModifiableWorkout;
 import ledge.muscleup.model.exercise.InterfaceExercise;
 import ledge.muscleup.model.workout.InterfaceWorkout;
+import ledge.muscleup.model.workout.Workout;
 
 /**
  * A stub implementation of the database for Iteration 1
@@ -55,57 +53,67 @@ public class DataAccessStub implements DataAccess{
     public void open(String dbName) {
 
         InterfaceExercise exercise;
+        InterfaceWorkoutExercise workoutExercise;
         InterfaceWorkout workout;
 
         exercisesByName = new HashMap<>();
-        exercise = new ListedExercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM, false);
+        exercise = new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM, false);
         exercisesByName.put(exercise.getName(), exercise);
-        exercise = new ListedExercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM, false);
+        exercise = new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM, false);
         exercisesByName.put(exercise.getName(), exercise);
-        exercise = new ListedExercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO, false);
+        exercise = new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO, false);
         exercisesByName.put(exercise.getName(), exercise);
-        exercise = new ListedExercise("Exercise Bike", ExerciseIntensity.MEDIUM,
+        exercise = new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM,
                 ExerciseType.CARDIO, false);
         exercisesByName.put(exercise.getName(), exercise);
-        exercise = new ListedExercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE, false);
+        exercise = new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE, false);
         exercisesByName.put(exercise.getName(), exercise);
-        exercise = new ListedExercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE,
+        exercise = new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE,
                 false);
         exercisesByName.put(exercise.getName(), exercise);
-        exercise = new ListedExercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false);
+        exercise = new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false);
         exercisesByName.put(exercise.getName(), exercise);
-        exercise = new ListedExercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false);
+        exercise = new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false);
         exercisesByName.put(exercise.getName(), exercise);
 
         workoutsByName = new HashMap<>();
 
-        workout = new ModifiableWorkout("Welcome to the Gun Show");
+        workout = new Workout("Welcome to the Gun Show", false);
         workoutsByName.put(workout.getName(), workout);
-        addExerciseToWorkout(workout, exercisesByName.get("Bicep Curls"),
-                new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
-        addExerciseToWorkout(workout, exercisesByName.get("Push-Ups"),
-                new ExerciseSets(2, 15));
 
-        workout = new ModifiableWorkout("Never Skip Leg Day");
-        workoutsByName.put(workout.getName(), workout);
-        addExerciseToWorkout(workout, exercisesByName.get("Squats"),
-                new ExerciseSets(4, 15));
-        addExerciseToWorkout(workout, exercisesByName.get("Lunges"),
-                new ExerciseSets(3, 10));
+        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Bicep Curls"),
+        new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
+        addExerciseToWorkout(workout, workoutExercise);
+        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Push-Ups"),
+        new ExerciseSets(2, 15));
+        addExerciseToWorkout(workout, workoutExercise);
 
-        workout = new ModifiableWorkout("Marathon Training Starts Here");
+        workout = new Workout("Never Skip Leg Day", false);
         workoutsByName.put(workout.getName(), workout);
-        addExerciseToWorkout(workout, exercisesByName.get("Running"),
-                new ExerciseDistance(2.5, DistanceUnit.MILES));
-        addExerciseToWorkout(workout, exercisesByName.get("Exercise Bike"),
-                new ExerciseDuration(45));
+        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Squats"),
+        new ExerciseSets(4, 15));
+        addExerciseToWorkout(workout, workoutExercise);
+        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Lunges"),
+        new ExerciseSets(3, 10));
+        addExerciseToWorkout(workout, workoutExercise);
 
-        workout = new ModifiableWorkout("Work that Core, Get that Score!");
+        workout = new Workout("Marathon Training Starts Here", false);
         workoutsByName.put(workout.getName(), workout);
-        addExerciseToWorkout(workout, exercisesByName.get("Crunches"),
-                new ExerciseSets(2, 25));
-        addExerciseToWorkout(workout, exercisesByName.get("Bicycle Kicks"),
-                new ExerciseSets(2, 15));
+        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Running"),
+        new ExerciseDistance(2.5, DistanceUnit.MILES));
+        addExerciseToWorkout(workout, workoutExercise);
+        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Exercise Bike"),
+        new ExerciseDuration(45));
+        addExerciseToWorkout(workout, workoutExercise);
+
+        workout = new Workout("Work that Core, Get that Score!", false);
+        workoutsByName.put(workout.getName(), workout);
+        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Crunches"),
+        new ExerciseSets(2, 25));
+        addExerciseToWorkout(workout, workoutExercise);
+        workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Bicycle Kicks"),
+        new ExerciseSets(2, 15));
+        addExerciseToWorkout(workout, workoutExercise);
 
         System.out.println("Opened " + dbType + " database " + dbName);
     }
@@ -191,28 +199,19 @@ public class DataAccessStub implements DataAccess{
      * the database
      * @param workout the workout to add the exercise to
      * @param exercise the exercise to add to the workout
-     * @param quantity the quantity of the exercise to do in the workout
      *
      * @return a boolean indicating whether the exercise was properly added to the workout
      */
-    public boolean addExerciseToWorkout (InterfaceWorkout workout, InterfaceExercise exercise,
-                                      InterfaceExerciseQuantity quantity) {
+    public boolean addExerciseToWorkout (InterfaceWorkout workout, InterfaceWorkoutExercise exercise) {
         boolean added = false;
+        InterfaceWorkout dbWorkout;
 
-        if (workoutsByName.get(workout.getName()) != null) {
-            InterfaceWorkout dbWorkout = workoutsByName.get(workout.getName());
-            if (dbWorkout instanceof ModifiableWorkout) {
-                if (exercisesByName.get(exercise.getName()) != null) {
-                    InterfaceSuggestedExercise suggestedExercise = new SuggestedExercise(
-                            exercise.getName(),
-                            exercise.getIntensity(),
-                            exercise.getType(),
-                            quantity
-                    );
-                    ((ModifiableWorkout) dbWorkout).addExercise(suggestedExercise);
+        if (workoutsByName.containsKey(workout.getName())) {
+            dbWorkout = workoutsByName.get(workout.getName());
+                if (exercisesByName.containsKey(exercise.getName())) {
+                    dbWorkout.addExercise(exercise);
                     added = true;
                 }
-            }
         }
         return added;
     }

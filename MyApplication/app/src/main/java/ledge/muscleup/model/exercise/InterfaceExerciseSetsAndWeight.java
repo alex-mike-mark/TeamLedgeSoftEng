@@ -9,7 +9,7 @@ package ledge.muscleup.model.exercise;
  * @since 2017-06-03
  */
 
-public interface InterfaceExerciseWeight extends InterfaceExerciseSetsAndReps {
+public interface InterfaceExerciseSetsAndWeight extends InterfaceExerciseSets {
     /**
      * Returns the weight to use for each rep of the exercise
      * @return the weight to use

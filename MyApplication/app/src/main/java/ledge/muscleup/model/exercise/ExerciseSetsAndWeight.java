@@ -9,7 +9,7 @@ package ledge.muscleup.model.exercise;
  * @since 2017-06-03
  */
 
-public class ExerciseSetsAndWeight extends ExerciseSets implements InterfaceExerciseWeight {
+public class ExerciseSetsAndWeight extends ExerciseSets implements InterfaceExerciseSetsAndWeight {
     double weight;
     WeightUnit unitOfMeasure;
 
@@ -21,10 +21,10 @@ public class ExerciseSetsAndWeight extends ExerciseSets implements InterfaceExer
      */
     public ExerciseSetsAndWeight(int sets, int reps, double weight, WeightUnit unitOfMeasure) {
         super(sets, reps);
-        if(unitOfMeasure == null){
+        if(unitOfMeasure == null) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
-        else{
+        else {
             this.weight = weight;
             this.unitOfMeasure = unitOfMeasure;
         }

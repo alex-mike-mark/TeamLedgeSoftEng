@@ -8,7 +8,7 @@ package ledge.muscleup.model.exercise;
  * @since 2017-05-29
 */
 
-public class ExerciseSets implements InterfaceExerciseSetsAndReps {
+public class ExerciseSets implements InterfaceExerciseSets {
     private int sets;
     private int reps;
 
@@ -18,10 +18,10 @@ public class ExerciseSets implements InterfaceExerciseSetsAndReps {
      * @param reps
      */
     public ExerciseSets(int sets, int reps) {
-        if(sets < 0 || reps < 0){
+        if(sets < 0 || reps < 0) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
-        else{
+        else {
             this.sets = sets;
             this.reps = reps;
         }

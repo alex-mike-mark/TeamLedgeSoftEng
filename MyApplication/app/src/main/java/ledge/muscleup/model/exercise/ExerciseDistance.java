@@ -19,11 +19,10 @@ public class ExerciseDistance implements InterfaceExerciseDistance {
      * @param unitOfMeasure the unit of measurement for the distance
      */
     public ExerciseDistance (double distance, DistanceUnit unitOfMeasure) {
-
-        if(distance < 0 || unitOfMeasure == null){
+        if(distance < 0 || unitOfMeasure == null) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
-        else{
+        else {
             this.distance = distance;
             this.unitOfMeasure = unitOfMeasure;
         }
