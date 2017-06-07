@@ -1,7 +1,7 @@
 package ledge.muscleup.presentation;
 
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -12,15 +12,8 @@ import ledge.muscleup.R;
 import ledge.muscleup.application.Services;
 import ledge.muscleup.persistence.DataAccessStub;
 
-/**
- * Created by Alexander on 2017-06-07.
- */
+public class ScheduleActivity extends AppCompatActivity {
 
-public class ScheduleActivity extends AppCompatActivity{
-    /**
-     *  onCreate initializes ExerciseActivity
-     * @param savedInstanceState contains context from last activity (eg MainActivity)
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         DataAccessStub db = Services.getDataAccess();
@@ -31,11 +24,7 @@ public class ScheduleActivity extends AppCompatActivity{
 
         scheduleArray = db.getWorkoutSessionsList();
 
-        TextView filter = (TextView) findViewById(R.id.filter_title);
-        filter.setText("Filter: none");
-
         populateList(scheduleArray);
-
     }
 
     /**

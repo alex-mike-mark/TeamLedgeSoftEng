@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openSchedule(View view){
+    public void openSchedule(View view) {
         Intent intent = new Intent(this, ScheduleActivity.class);
         startActivity(intent);
     }
