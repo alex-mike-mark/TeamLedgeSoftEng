@@ -11,29 +11,32 @@ MuscleUp is an app intended to help people create and stick to their fitness goa
 				application
 					Services (Performs set up tasks. Currently linking db to app)
 				business
-					AccessExercises
-					AccessWorkouts
+					AccessExercises (performs actions on database regarding exercises)
+					AccessWorkouts  (performs actions on database regarding workouts)
 				model
 					exercise
-						DistanceUnit
-						Exercise
-						ExerciseDistance 
-						ExerciseDuration
-						ExerciseIntensity
-						ExerciseSets
-						ExerciseSetsAndWeight
-						WorkoutExercise
-						WorkoutSessionExercise
+						DistanceUnit (enum for units. Used in ExerciseDistance, Duration, Sets and SetsAndWeight classes)
+						Exercise (Stores and returns information about exercises)
+						ExerciseDistance (One of the quantities. WorkoutExercise contains one to plan workouts.)
+						ExerciseDuration 
+						ExerciseIntensity (enum for categorizing an exercise's stress on the human body.)
+						ExerciseSets (One of the quantities. WorkoutExercise contains one to plan workouts.)
+						ExerciseSetsAndWeight (One of the quantities. WorkoutExercise contains one to plan workouts.)
+						ExerciseType (enum for tracking how an exercise works the body.)
 						InterfaceExercise
 						InterfaceExerciseDistance 
 						InterfaceExerciseDuration
-						InterfaceExerciseIntensity
-						InterfaceExerciseSetsAndReps
-						InterfaceExerciseWeight
+						InterfaceExerciseQuantity
+						InterfaceExerciseSets
+						InterfaceExerciseSetsAndWeight
+						InterfaceWorkoutExercise
+						InterfaceWorkoutSessionExercise
 						WeightUnit
 						WorkoutExercise
 						WorkoutSessionExercise
 					workout
+						InterfaceWorkout
+						InterfaceWorkoutSession
 						Workout
 						WorkoutSession
 				persistence
@@ -42,6 +45,7 @@ MuscleUp is an app intended to help people create and stick to their fitness goa
 				presentation
 					Main Activity 
 					WorkoutActivity
+				MuscleUpApplication (sets up JODA for date, time tracking)
 	test
 		ledge.muscleup.model
 			AllTests
