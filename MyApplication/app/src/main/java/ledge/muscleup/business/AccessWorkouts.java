@@ -5,6 +5,7 @@ import java.util.List;
 import ledge.muscleup.application.Services;
 import ledge.muscleup.model.exercise.InterfaceExercise;
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
+import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
 import ledge.muscleup.model.workout.InterfaceWorkout;
 import ledge.muscleup.persistence.DataAccessStub;
 
@@ -72,13 +73,11 @@ public class AccessWorkouts {
      * quantity of the exercise to be done
      * @param workout the workout to add an exercise to
      * @param exercise the exercise to add to the workout
-     * @param quantity the quantity of the exercise to be done
      *
      * @return true if exercise was added successfully, false otherwise
      */
-    public boolean addExerciseToWorkout (InterfaceWorkout workout, InterfaceExercise exercise,
-                                  InterfaceExerciseQuantity quantity) {
-        return dataAccess.addExerciseToWorkout(workout, exercise, quantity);
+    public boolean addExerciseToWorkout (InterfaceWorkout workout, InterfaceWorkoutExercise exercise) {
+        return dataAccess.addExerciseToWorkout(workout, exercise);
     }
 
 }
