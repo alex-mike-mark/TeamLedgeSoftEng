@@ -6,7 +6,7 @@ import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
 /**
  * The interface for a workout, which consists of a workout name, a list of exercises and a boolean
- * that keeps track of if the workout is complete
+ * that keeps track of if this workout is a favourite workout
  *
  * @author Cole Kehler
  * @version 1.0
