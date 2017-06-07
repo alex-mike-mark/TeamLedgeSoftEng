@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import ledge.muscleup.business.ScheduleManager;
 import ledge.muscleup.persistence.InterfaceDataAccess;
-import ledge.muscleup.persistence.InterfaceDataAccessStub;
 
 /**
  * Tests for the ScheduleManager
@@ -21,7 +20,7 @@ import ledge.muscleup.persistence.InterfaceDataAccessStub;
 
 public class ScheduleManagerTest {
     private ScheduleManager scheduleManager;
-    InterfaceDataAccessStub dataAccess;
+    InterfaceDataAccess dataAccess;
 
     /**
      * Constructor for the ScheduleManagerTest
