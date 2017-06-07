@@ -66,7 +66,7 @@ public class ScheduleManager implements InterfaceScheduleManager {
         if (!isDayWithinWeek(dayOfWeek))
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else
-            return workouts[dayOfWeek];
+            return workouts[dayOfWeek - 1];
     }
 
     /**
@@ -136,8 +136,8 @@ public class ScheduleManager implements InterfaceScheduleManager {
 
         if (!isDayWithinWeek(dayOfWeek))
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        else if (workouts[dayOfWeek] != null) {
-            workouts[dayOfWeek] = null;
+        else if (workouts[dayOfWeek - 1] != null) {
+            workouts[dayOfWeek - 1] = null;
             removed = true;
             //TODO - requires database update
         }
