@@ -33,6 +33,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * opens the  ExerciseActivity
+     * @param view
+     */
+    public void openExercises(View view) {
+        Intent intent = new Intent(this, ExerciseActivity.class);
+        startActivity(intent);
+    }
+
+    /**
      * Create the stub stub database
      */
     public static void startUp()
