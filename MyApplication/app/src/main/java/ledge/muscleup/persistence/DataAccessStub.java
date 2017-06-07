@@ -218,7 +218,6 @@ public class DataAccessStub implements DataAccess{
                 }
             }
         }
-        Log.d("Workout", "Added: " + added);
         return added;
     }
 
