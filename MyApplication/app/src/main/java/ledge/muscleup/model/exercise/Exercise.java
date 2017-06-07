@@ -118,7 +118,7 @@ public class Exercise implements InterfaceExercise {
 
         if (isFavourite)
             result += " * ";
-        result += name + " - " + intensity + " intensity " + exerciseType + " workout";
+        result += name + " - " + intensity + " intensity " + exerciseType + " exercise";
 
         return result;
     }
