@@ -287,11 +287,15 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
     public List<InterfaceWorkoutSession> getSessionsInDateRange(LocalDate startDate,
                                                                 LocalDate endDate) {
         List<InterfaceWorkoutSession> sessionsInDateRange = new ArrayList<>();
-        for (InterfaceWorkoutSession session: workoutSessionsByDate.values()) {
-            if (!session.getDate().isBefore(startDate) && !session.getDate().isAfter(endDate)) {
-                sessionsInDateRange.add(session);
+
+        LocalDate currDate = startDate;
+        while (!currDate.isAfter(endDate)) {
+            if (workoutSessionsByDate.containsKey(currDate)) {
+                sessionsInDateRange.add(workoutSessionsByDate.get(currDate));
             }
+            currDate = currDate.plusDays(1);
         }
+
         return sessionsInDateRange;
     }
 
