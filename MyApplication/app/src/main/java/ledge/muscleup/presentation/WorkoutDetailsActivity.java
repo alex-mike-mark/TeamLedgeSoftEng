@@ -9,52 +9,57 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ledge.muscleup.R;
 import ledge.muscleup.application.Services;
+import ledge.muscleup.model.exercise.InterfaceExercise;
+import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.persistence.DataAccessStub;
 
 /**
- * WorkoutActivity displays a list of workouts that the user can click on to view list of exercises
+ * WorkoutDetailsActivity displays a list of exercises for a workout
  *
  * @author Jon Ingram
  * @version 1.0
  * @since 2017-06-04
  */
 
-public class WorkoutActivity extends Activity {
+public class WorkoutDetailsActivity extends Activity {
 
     /**
-     *  onCreate initializes WorkoutActivity
-     * @param savedInstanceState contains context from last activity (eg MainActivity)
+     *  onCreate initializes WorkoutDetailsActivity
+     * @param savedInstanceState contains context from last activity
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String workoutName;
+        Intent intent;
+        Workout workout;
         DataAccessStub db = Services.getDataAccess();
-        final List workoutArray;
+        List exerciseList = new ArrayList();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_display);
 
-        workoutArray = db.getWorkoutNamesList();
+        //get name of workout
+        intent = getIntent();
+        workoutName = intent.getStringExtra("workoutName");
+
+        //get Workout from db
+        workout = (Workout) db.getWorkout(workoutName);
+
+        //fetch all exercises from workout
+        workout.initExerciseIteration();
+        while(workout.hasNextExercise()){
+            exerciseList.add(workout.nextExercise());
+        }
 
         TextView filter = (TextView) findViewById(R.id.filter_title);
         filter.setText("Filter: none");
 
-        populateList(workoutArray);
-
-        ListView list = (ListView) findViewById(R.id.list_panel);
-
-        //will respond to clicks by opening a WorkoutDetails and passing the name of the workout clicked
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
-                Intent appInfo = new Intent(WorkoutActivity.this, WorkoutDetailsActivity.class);
-                appInfo.putExtra("workoutName", workoutArray.get(position).toString());
-                startActivity(appInfo);
-            }
-        });
+        populateList(exerciseList);
     }
 
     /**
