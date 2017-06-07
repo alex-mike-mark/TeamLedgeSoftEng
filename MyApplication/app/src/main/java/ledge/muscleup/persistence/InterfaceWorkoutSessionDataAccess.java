@@ -17,6 +17,8 @@ import ledge.muscleup.model.workout.InterfaceWorkoutSession;
 public interface InterfaceWorkoutSessionDataAccess {
     public List<InterfaceWorkoutSession> getWorkoutSessionsList();
     public InterfaceWorkoutSession getWorkoutSession(LocalDate dateOfSession);
+    public List<InterfaceWorkoutSession> getSessionsInDateRange(LocalDate startDate,
+                                                                LocalDate endDate);
     public void insertWorkoutSession(InterfaceWorkoutSession workoutSession);
     public void removeWorkoutSession(InterfaceWorkoutSession workoutSession);
 }

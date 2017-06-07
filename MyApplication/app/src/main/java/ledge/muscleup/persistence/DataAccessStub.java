@@ -279,6 +279,23 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
     }
 
     /**
+     * A method that returns a list of workout sessions scheduled in a date range
+     * @param startDate the first date of the date range
+     * @param endDate the last date of the date range
+     * @return a list of all workout sessions scheduled between startDate and endDate, inclusive
+     */
+    public List<InterfaceWorkoutSession> getSessionsInDateRange(LocalDate startDate,
+                                                                LocalDate endDate) {
+        List<InterfaceWorkoutSession> sessionsInDateRange = new ArrayList<>();
+        for (InterfaceWorkoutSession session: workoutSessionsByDate.values()) {
+            if (!session.getDate().isBefore(startDate) && !session.getDate().isAfter(endDate)) {
+                sessionsInDateRange.add(session);
+            }
+        }
+        return sessionsInDateRange;
+    }
+
+    /**
      * Retrieves a workout session scheduled on the given date from the database, if it exists. If
      * no workout session is found for that date, returns null.
      * @param dateOfSession the date to get the workout session for
