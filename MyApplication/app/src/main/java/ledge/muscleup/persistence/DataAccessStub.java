@@ -317,6 +317,10 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
     }
 
+    /**
+     * Removes a workout session from the database, if it exists
+     * @param workoutSession the workout session to remove from the database
+     */
     public void removeWorkoutSession(InterfaceWorkoutSession workoutSession) {
         workoutSessionsByDate.remove(workoutSession.getDate());
     }
