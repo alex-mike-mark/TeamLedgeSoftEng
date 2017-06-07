@@ -11,29 +11,32 @@ MuscleUp is an app intended to help people create and stick to their fitness goa
 				application
 					Services (Performs set up tasks. Currently linking db to app)
 				business
-					AccessExercises
-					AccessWorkouts
+					AccessExercises (performs actions on database regarding exercises)
+					AccessWorkouts  (performs actions on database regarding workouts)
 				model
 					exercise
-						DistanceUnit
-						Exercise
-						ExerciseDistance 
-						ExerciseDuration
-						ExerciseIntensity
-						ExerciseSets
-						ExerciseSetsAndWeight
-						WorkoutExercise
-						WorkoutSessionExercise
+						DistanceUnit (enum for units. Used in ExerciseDistance, Duration, Sets and SetsAndWeight classes)
+						Exercise (Stores and returns information about exercises)
+						ExerciseDistance (One of the quantities. WorkoutExercise contains one to plan workouts.)
+						ExerciseDuration 
+						ExerciseIntensity (enum for categorizing an exercise's stress on the human body.)
+						ExerciseSets (One of the quantities. WorkoutExercise contains one to plan workouts.)
+						ExerciseSetsAndWeight (One of the quantities. WorkoutExercise contains one to plan workouts.)
+						ExerciseType (enum for tracking how an exercise works the body.)
 						InterfaceExercise
 						InterfaceExerciseDistance 
 						InterfaceExerciseDuration
-						InterfaceExerciseIntensity
-						InterfaceExerciseSetsAndReps
-						InterfaceExerciseWeight
+						InterfaceExerciseQuantity
+						InterfaceExerciseSets
+						InterfaceExerciseSetsAndWeight
+						InterfaceWorkoutExercise
+						InterfaceWorkoutSessionExercise
 						WeightUnit
 						WorkoutExercise
 						WorkoutSessionExercise
 					workout
+						InterfaceWorkout
+						InterfaceWorkoutSession
 						Workout
 						WorkoutSession
 				persistence
@@ -42,6 +45,7 @@ MuscleUp is an app intended to help people create and stick to their fitness goa
 				presentation
 					Main Activity 
 					WorkoutActivity
+				MuscleUpApplication (sets up JODA for date, time tracking)
 	test
 		ledge.muscleup.model
 			AllTests
@@ -66,4 +70,6 @@ The log is found in [PLACE WHERE THE LOG IS FOUND].
 ###New Features and Where to Find Them###
 The major features implemented in this release are:
 The ability to view a list of Workouts, found by mashing the workouts button on the dashboard.
-The ability to view a list of Exercises,
+The ability to view a list of Exercises, found by mashing the exercises button on the dashboard.
+The ability to view details of workouts, found by mashing one of the workouts in the workouts list view.
+The ability to view your workout schedule, found by mashing the workout schedule button on the dashboard.

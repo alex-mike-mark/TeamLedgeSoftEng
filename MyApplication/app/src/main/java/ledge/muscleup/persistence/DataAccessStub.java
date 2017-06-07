@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import ledge.muscleup.model.exercise.DistanceUnit;
 import ledge.muscleup.model.exercise.Exercise;
@@ -114,7 +115,7 @@ public class DataAccessStub implements InterfaceDataAccess {
         new ExerciseSets(2, 15));
         addExerciseToWorkout(workout, workoutExercise);
 
-        workoutSessionsByDate = new HashMap<>();
+        workoutSessionsByDate = new TreeMap<>();
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Welcome to the Gun Show")),
                 new LocalDate(2017, 06, 12),

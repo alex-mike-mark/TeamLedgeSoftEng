@@ -125,7 +125,12 @@ public class WorkoutSessionExercise {
      */
     @Override
     public String toString() {
-        return exercise.toString() + "\n  Recommended: " + getRecommendedQuantity().toString() +
-                "\n  Completed";
+        String result = "";
+
+        result += exercise.toString();
+        if (isComplete)
+            result += "\n  Completed";
+
+        return result;
     }
 }
