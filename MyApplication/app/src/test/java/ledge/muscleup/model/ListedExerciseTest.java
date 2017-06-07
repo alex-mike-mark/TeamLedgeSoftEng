@@ -5,19 +5,21 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
-import ledge.muscleup.model.exercise.Exercise;
+import ledge.muscleup.model.exercise.ExerciseIntensity;
+import ledge.muscleup.model.exercise.ExerciseType;
+import ledge.muscleup.model.exercise.ListedExercise;
+import ledge.muscleup.model.workout.ModifiableWorkout;
 
 /**
  * Created by Alexander on 2017-05-27.
  */
 
-public class ExerciseTest extends TestCase {
+public class ListedExerciseTest extends TestCase {
 
-    Exercise testExercise;
-
+    ListedExercise testExercise;
     @Before
-    public void create(){
-        testExercise = new Exercise("Testercize",5,"Brain");
+    public void testInit(){
+        testExercise = new ListedExercise("Testersize", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, false);
     }
 
     @Test
@@ -31,8 +33,8 @@ public class ExerciseTest extends TestCase {
     @Test
     public void initalizeTest(){
         assertEquals("Something's up with exercise name.","Testercize",testExercise.getName());
-        assertEquals("Something's up with exercise intensity",5,testExercise.getIntensity());
-        assertEquals("Something's up with exercise muscles worked","Brain",testExercise.getMusclesWorked());
+        assertEquals("Something's up with exercise intensity",ExerciseIntensity.HIGH,testExercise.getIntensity());
+        assertEquals("Something's up with exercise muscles worked",ExerciseType.FULL_BODY,testExercise.getType());
         assertEquals(false,testExercise.isFavourite());
     }
 }

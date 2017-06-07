@@ -1,5 +1,7 @@
 package ledge.muscleup.persistence;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,37 +81,37 @@ public class DataAccessStub implements DataAccess{
         workout = new Workout("Welcome to the Gun Show", false);
         workoutsByName.put(workout.getName(), workout);
         workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Bicep Curls"),
-                new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
+        new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
         addExerciseToWorkout(workout, workoutExercise);
         workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Push-Ups"),
-                new ExerciseSets(2, 15));
+        new ExerciseSets(2, 15));
         addExerciseToWorkout(workout, workoutExercise);
 
         workout = new Workout("Never Skip Leg Day", false);
         workoutsByName.put(workout.getName(), workout);
         workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Squats"),
-                new ExerciseSets(4, 15));
+        new ExerciseSets(4, 15));
         addExerciseToWorkout(workout, workoutExercise);
         workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Lunges"),
-                new ExerciseSets(3, 10));
+        new ExerciseSets(3, 10));
         addExerciseToWorkout(workout, workoutExercise);
 
         workout = new Workout("Marathon Training Starts Here", false);
         workoutsByName.put(workout.getName(), workout);
         workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Running"),
-                new ExerciseDistance(2.5, DistanceUnit.MILES));
+        new ExerciseDistance(2.5, DistanceUnit.MILES));
         addExerciseToWorkout(workout, workoutExercise);
         workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Exercise Bike"),
-                new ExerciseDuration(45));
+        new ExerciseDuration(45));
         addExerciseToWorkout(workout, workoutExercise);
 
         workout = new Workout("Work that Core, Get that Score!", false);
         workoutsByName.put(workout.getName(), workout);
         workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Crunches"),
-                new ExerciseSets(2, 25));
+        new ExerciseSets(2, 25));
         addExerciseToWorkout(workout, workoutExercise);
         workoutExercise = new WorkoutExercise((Exercise)exercisesByName.get("Bicycle Kicks"),
-                new ExerciseSets(2, 15));
+        new ExerciseSets(2, 15));
         addExerciseToWorkout(workout, workoutExercise);
 
         System.out.println("Opened " + dbType + " database " + dbName);
@@ -151,7 +153,7 @@ public class DataAccessStub implements DataAccess{
      * @return a list of names of all workouts in the database
      */
     public List<String> getWorkoutNamesList() {
-        return new ArrayList<>(exercisesByName.keySet());
+        return new ArrayList<>(workoutsByName.keySet());
     }
 
     /**
@@ -210,6 +212,7 @@ public class DataAccessStub implements DataAccess{
                     added = true;
                 }
         }
+        Log.d("Workout", "Added: " + added);
         return added;
     }
 
