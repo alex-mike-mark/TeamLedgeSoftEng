@@ -4,18 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ledge.muscleup.MainActivity">
+    tools:context="ledge.muscleup.presentation.MainActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_schedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="openWorkouts"
-        android:text="Workouts"
+        android:text="@string/btn_schedule"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.611" />
+
+    <Button
+        android:id="@+id/btn_exercises"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_exercises"
+        android:onClick="openExercises"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.507" />
+
+    <Button
+        android:id="@+id/btn_workouts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="openWorkouts"
+        android:text="@string/btn_workouts"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.403"
         tools:layout_editor_absoluteX="147dp"
         tools:layout_editor_absoluteY="329dp" />
 
