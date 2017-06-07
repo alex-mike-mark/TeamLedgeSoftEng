@@ -37,9 +37,10 @@ public interface InterfaceWorkoutExercise {
     /**
      * Updates the exercise with the new recommended quantity
      * @param quantity the recommended quantity to update the exercise to
+     * @throws IllegalArgumentException if passed a {@code null} parameter
      * @return a boolean representing if the suggested quantity could be updated
      */
-    boolean updateRecommendedQuantity(InterfaceExerciseQuantity quantity);
+    boolean updateRecommendedQuantity(InterfaceExerciseQuantity quantity) throws IllegalArgumentException;
 
     /**
      * Compares the current InterfaceWorkoutExercise to another instance of InterfaceWorkoutExercise

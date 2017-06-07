@@ -14,10 +14,11 @@ public class ExerciseSets implements InterfaceExerciseSets {
 
     /**
      * The default constructor for the ExerciseSets class
-     * @param sets
-     * @param reps
+     * @param sets the number of sets for the exercise
+     * @param reps the number of reps for the exercise
+     * @throws IllegalArgumentException if {@code sets < 0 || reps < 0}
      */
-    public ExerciseSets(int sets, int reps) {
+    public ExerciseSets(int sets, int reps) throws IllegalArgumentException {
         if(sets < 0 || reps < 0) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
