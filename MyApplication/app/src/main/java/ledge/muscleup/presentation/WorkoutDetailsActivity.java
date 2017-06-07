@@ -38,7 +38,7 @@ public class WorkoutDetailsActivity extends Activity {
         Intent intent;
         Workout workout;
         DataAccessStub db = Services.getDataAccess();
-        List exerciseArray = new ArrayList();
+        List exerciseList = new ArrayList();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_display);
@@ -53,13 +53,13 @@ public class WorkoutDetailsActivity extends Activity {
         //fetch all exercises from workout
         workout.initExerciseIteration();
         while(workout.hasNextExercise()){
-            exerciseArray.add(workout.nextExercise());
+            exerciseList.add(workout.nextExercise());
         }
 
         TextView filter = (TextView) findViewById(R.id.filter_title);
         filter.setText("Filter: none");
 
-        populateList(exerciseArray);
+        populateList(exerciseList);
     }
 
     /**
