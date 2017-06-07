@@ -31,9 +31,11 @@ public interface InterfaceWorkout {
      *
      * @param exercise the exercise to set the quantity for
      * @param quantity the quantity to assign to the exercise
+     * @throws IllegalArgumentException if passed a {@code null} parameter
      * @return a boolean representing if the exercise was found and updated in the workout
      */
-    boolean setRecommendedQuantity(InterfaceWorkoutExercise exercise, InterfaceExerciseQuantity quantity);
+    boolean setRecommendedQuantity(InterfaceWorkoutExercise exercise,
+                                   InterfaceExerciseQuantity quantity)throws IllegalArgumentException;
 
     /**
      * Returns {@code true} if the workout is a favourite workout, and {@code false} otherwise
@@ -55,23 +57,27 @@ public interface InterfaceWorkout {
     /**
      * Adds a new exercise to the workout
      * @param exercise the exercise to add to the workout
+     * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    void addExercise(InterfaceWorkoutExercise exercise);
+    void addExercise(InterfaceWorkoutExercise exercise) throws IllegalArgumentException;
 
     /**
      * Move the position of an exercise in the list of exercises
      * @param exercise the exercise to change the position of
      * @param index the index of the exercise to move
+     * @throws IllegalArgumentException if passed a {@code null} parameter or if {@code index} is
+     * outside the bounds of the list of exercises
      * @return a boolean representing if the exercise was found and moved to the new index
      */
-    boolean moveExercise(InterfaceWorkoutExercise exercise, int index);
+    boolean moveExercise(InterfaceWorkoutExercise exercise, int index) throws IllegalArgumentException;
 
     /**
      * Removes an exercise from the list of exercises
      * @param exercise the exercise to remove from the list
+     * @throws IllegalArgumentException if passed a {@code null} parameter
      * @return a boolean representing if the exercise was removed
      */
-    boolean removeExercise(InterfaceWorkoutExercise exercise);
+    boolean removeExercise(InterfaceWorkoutExercise exercise) throws IllegalArgumentException;
 
     /**
      * Returns an enumeration for traversing over the exercises in the workout

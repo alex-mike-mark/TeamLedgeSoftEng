@@ -287,11 +287,15 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
     public List<InterfaceWorkoutSession> getSessionsInDateRange(LocalDate startDate,
                                                                 LocalDate endDate) {
         List<InterfaceWorkoutSession> sessionsInDateRange = new ArrayList<>();
-        for (InterfaceWorkoutSession session: workoutSessionsByDate.values()) {
-            if (!session.getDate().isBefore(startDate) && !session.getDate().isAfter(endDate)) {
-                sessionsInDateRange.add(session);
+
+        LocalDate currDate = startDate;
+        while (!currDate.isAfter(endDate)) {
+            if (workoutSessionsByDate.containsKey(currDate)) {
+                sessionsInDateRange.add(workoutSessionsByDate.get(currDate));
             }
+            currDate = currDate.plusDays(1);
         }
+
         return sessionsInDateRange;
     }
 
@@ -313,6 +317,10 @@ public class DataAccessStub implements InterfaceDataAccess, InterfaceExerciseDat
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
     }
 
+    /**
+     * Removes a workout session from the database, if it exists
+     * @param workoutSession the workout session to remove from the database
+     */
     public void removeWorkoutSession(InterfaceWorkoutSession workoutSession) {
         workoutSessionsByDate.remove(workoutSession.getDate());
     }

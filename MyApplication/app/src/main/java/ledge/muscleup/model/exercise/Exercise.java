@@ -20,9 +20,10 @@ public class Exercise implements InterfaceExercise {
      * @param intensity the intensity of the exercise
      * @param exerciseType the type of the exercise
      * @param isFavourite whether the exercise is favourite or not
+     * @throws IllegalArgumentException if passed a {@code null} parameter
      */
     public Exercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType,
-                       boolean isFavourite) {
+                       boolean isFavourite) throws IllegalArgumentException {
         if(name == null || intensity == null || exerciseType == null) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
@@ -39,8 +40,10 @@ public class Exercise implements InterfaceExercise {
      * @param name the name of the exercise
      * @param intensity the intensity of the exercise
      * @param exerciseType the type of the exercise
+     * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    public Exercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType) {
+    public Exercise(String name, ExerciseIntensity intensity,
+                    ExerciseType exerciseType) throws IllegalArgumentException {
         if(name == null || intensity == null || exerciseType == null) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
@@ -94,7 +97,10 @@ public class Exercise implements InterfaceExercise {
      * Toggle the favourite status of the exercise
      */
     @Override
-    public void toggleFavourite() { isFavourite = !isFavourite; }
+    public void toggleFavourite() {
+        isFavourite = !isFavourite;
+        //TODO - requires database update
+    }
 
     /**
      * Compares the current Exercise to another instance of Exercise

@@ -16,10 +16,12 @@ public class ExerciseSetsAndWeight extends ExerciseSets implements InterfaceExer
     /**
      * The default constructor for the ExerciseSets class
      *
-     * @param sets
-     * @param reps
+     * @param sets the number of sets for the exercise
+     * @param reps the number of reps for the exercise
+     * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    public ExerciseSetsAndWeight(int sets, int reps, double weight, WeightUnit unitOfMeasure) {
+    public ExerciseSetsAndWeight(int sets, int reps, double weight,
+                                 WeightUnit unitOfMeasure) throws IllegalArgumentException {
         super(sets, reps);
         if(unitOfMeasure == null) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));

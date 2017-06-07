@@ -21,9 +21,11 @@ public class WorkoutSessionExercise implements InterfaceWorkoutSessionExercise {
      * @param exerciseType the type of the exercise
      * @param recommendedQuantity the recommended quantity of exercise for this exercise
      * @param isComplete whether the exercise has been completed
+     * @throws IllegalArgumentException if passed a {@code null} parameter
      */
     public WorkoutSessionExercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType,
-                                  InterfaceExerciseQuantity recommendedQuantity, boolean isComplete) {
+                                  InterfaceExerciseQuantity recommendedQuantity,
+                                  boolean isComplete) throws IllegalArgumentException {
         if(name == null || intensity == null || exerciseType == null || recommendedQuantity == null){
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
@@ -38,8 +40,9 @@ public class WorkoutSessionExercise implements InterfaceWorkoutSessionExercise {
      *
      * @param exercise the exercise to create a WorkoutSessionExercise instance for
      * @param isComplete whether the exercise has been completed
+     * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    public WorkoutSessionExercise(WorkoutExercise exercise, boolean isComplete) {
+    public WorkoutSessionExercise(WorkoutExercise exercise, boolean isComplete) throws IllegalArgumentException {
         if(exercise == null) {
             throw (new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
@@ -105,6 +108,7 @@ public class WorkoutSessionExercise implements InterfaceWorkoutSessionExercise {
     @Override
     public void toggleCompleted() {
         isComplete = !isComplete;
+        //TODO - requires database update
     }
 
     /**

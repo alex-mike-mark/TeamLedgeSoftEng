@@ -24,18 +24,30 @@ public class Workout implements InterfaceWorkout {
     private Iterator<InterfaceWorkoutExercise> exerciseListIterator;
     private boolean isFavourite;
 
-    public Workout(String name, boolean isFavourite) {
+    /**
+     * The constructor for the Workout, which creates an empty workout
+     * @param name the name of the workout
+     * @throws IllegalArgumentException if passed a {@code null} parameter
+     */
+    public Workout(String name) throws IllegalArgumentException {
         if(name == null) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
         else {
             this.name = name;
-            this.isFavourite = isFavourite;
+            this.isFavourite = false;
             exerciseList = new ArrayList<>();
         }
     }
 
-    public Workout(String name, boolean isFavourite, InterfaceWorkoutExercise[] exercises) {
+    /**
+     * The constructor for the Workout, which creates a Workout based on a list of exercises
+     * @param name the name of the workout
+     * @param isFavourite if the workout is a favourite workout
+     * @param exercises the list of exercises that make up the workout
+     * @throws IllegalArgumentException if passed a {@code null} parameter
+     */
+    public Workout(String name, boolean isFavourite, InterfaceWorkoutExercise[] exercises) throws IllegalArgumentException {
         if (name == null || exercises == null) {
             throw (new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
@@ -74,10 +86,12 @@ public class Workout implements InterfaceWorkout {
      *
      * @param exercise the exercise to set the quantity for
      * @param quantity the quantity to assign to the exercise
+     * @throws IllegalArgumentException if passed a {@code null} parameter
      * @return a boolean representing if the exercise was found and updated in the workout
      */
     @Override
-    public boolean setRecommendedQuantity(InterfaceWorkoutExercise exercise, InterfaceExerciseQuantity quantity) {
+    public boolean setRecommendedQuantity(InterfaceWorkoutExercise exercise,
+                                          InterfaceExerciseQuantity quantity) throws IllegalArgumentException {
         boolean quantityUpdated = false;
         int exerciseIndex;
 
@@ -90,7 +104,6 @@ public class Workout implements InterfaceWorkout {
             if (exerciseIndex != -1)
                 quantityUpdated = exerciseList.get(exerciseIndex).updateRecommendedQuantity(quantity);
         }
-
         return quantityUpdated;
     }
 
@@ -106,7 +119,10 @@ public class Workout implements InterfaceWorkout {
      * Toggle the favourite status of this workout
      */
     @Override
-    public void toggleFavourite() { isFavourite = !isFavourite; }
+    public void toggleFavourite() {
+        isFavourite = !isFavourite;
+        //TODO - requires database update
+    }
 
     /**
      * Returns the number of exercises in the workout
@@ -122,13 +138,16 @@ public class Workout implements InterfaceWorkout {
      * Adds a new exercise to the workout
      *
      * @param exercise the exercise to add to the workout
+     * @throws IllegalArgumentException if passed a {@code null} parameter
      */
     @Override
-    public void addExercise(InterfaceWorkoutExercise exercise) {
+    public void addExercise(InterfaceWorkoutExercise exercise) throws IllegalArgumentException {
         if (exercise == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        else
+        else {
             exerciseList.add(exercise);
+            //TODO - requires database update
+        }
     }
 
     /**
@@ -136,10 +155,13 @@ public class Workout implements InterfaceWorkout {
      *
      * @param exercise the exercise to change the position of
      * @param index    the index of the exercise to move
+     * @throws IllegalArgumentException if passed a {@code null} parameter or if {@code index} is
+     * outside the bounds of the list of exercises
      * @return a boolean representing if the exercise was found and moved to the new index
      */
     @Override
-    public boolean moveExercise(InterfaceWorkoutExercise exercise, int index) {
+    public boolean moveExercise(InterfaceWorkoutExercise exercise,
+                                int index) throws IllegalArgumentException {
         boolean exerciseMoved = false;
         int exerciseIndex;
         InterfaceWorkoutExercise listExercise;
@@ -159,6 +181,7 @@ public class Workout implements InterfaceWorkout {
                         index--;
                     listExercise = exerciseList.remove(exerciseIndex);
                     exerciseList.add(index, listExercise);
+                    //TODO - requires database update
                 }
                 exerciseMoved = true;
             }
@@ -170,14 +193,17 @@ public class Workout implements InterfaceWorkout {
      * Removes an exercise from the list of exercises
      *
      * @param exercise the exercise to remove from the list
+     * @throws IllegalArgumentException if passed a {@code null} parameter
      * @return the exercise that was removed, or {@code null} if the exercise couldn't be found
      */
     @Override
-    public boolean removeExercise(InterfaceWorkoutExercise exercise) {
+    public boolean removeExercise(InterfaceWorkoutExercise exercise) throws IllegalArgumentException {
         if (exercise == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        else
+        else {
             return exerciseList.remove(exercise);
+            //TODO - requires database update
+        }
     }
 
     /**
