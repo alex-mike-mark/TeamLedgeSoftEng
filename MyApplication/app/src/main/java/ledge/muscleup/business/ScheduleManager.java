@@ -6,7 +6,8 @@ import org.joda.time.LocalDate;
 import java.util.List;
 
 import ledge.muscleup.model.workout.WorkoutSession;
-import ledge.muscleup.persistence.InterfaceDataAccess;
+import ledge.muscleup.persistence.InterfaceDataAccessStub;
+
 /**
  * Manages a week of scheduled workouts, which includes methods to increment or decrement the current
  * week and iterate through the scheduled workouts
@@ -19,9 +20,9 @@ import ledge.muscleup.persistence.InterfaceDataAccess;
 public class ScheduleManager implements InterfaceScheduleManager {
     private LocalDate firstDayOfWeek;
     private WorkoutSession[] workoutSessions;
-    private InterfaceDataAccess dataAccess;
+    private InterfaceDataAccessStub dataAccess;
 
-    public ScheduleManager(InterfaceDataAccess dataAccess) {
+    public ScheduleManager(InterfaceDataAccessStub dataAccess) {
         if (dataAccess == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else {

@@ -19,7 +19,7 @@ import ledge.muscleup.model.exercise.WeightUnit;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
-import ledge.muscleup.persistence.InterfaceDataAccess;
+import ledge.muscleup.persistence.InterfaceDataAccessStub;
 
 /**
  * A template database stub for use in testing business classes that take a database stub as a
@@ -30,7 +30,7 @@ import ledge.muscleup.persistence.InterfaceDataAccess;
  * @since 2017-06-07
  */
 
-class TemplateDataAccessStub implements InterfaceDataAccess {
+class TemplateDataAccessStub implements InterfaceDataAccessStub {
     private String dbName;
     private String dbType = "testing template";
 

@@ -2,12 +2,14 @@ package ledge.muscleup.model;
 
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import ledge.muscleup.business.ScheduleManager;
 import ledge.muscleup.persistence.InterfaceDataAccess;
+import ledge.muscleup.persistence.InterfaceDataAccessStub;
 
 /**
  * Tests for the ScheduleManager
@@ -19,6 +21,7 @@ import ledge.muscleup.persistence.InterfaceDataAccess;
 
 public class ScheduleManagerTest {
     private ScheduleManager scheduleManager;
+    InterfaceDataAccessStub dataAccess;
 
     /**
      * Constructor for the ScheduleManagerTest
@@ -28,11 +31,19 @@ public class ScheduleManagerTest {
     /**
      * Initializes the ScheduleManager to be used in the test
      */
-    @Test
     @Before
     public void testInit(){
-        InterfaceDataAccess dataAccess = new TemplateDataAccessStub("schedule manager test");
+        dataAccess = new TemplateDataAccessStub("schedule manager test");
+        dataAccess.open("schedule manager test");
         scheduleManager = new ScheduleManager(dataAccess);
+    }
+
+    /**
+     * Closes the database access
+     */
+    @After
+    public void testCleanup(){
+        dataAccess.close();
     }
 
     /**
