@@ -24,7 +24,7 @@ public class ModifiableWorkout extends Workout implements InterfaceModifiableWor
     protected ModifiableWorkout(String name, boolean isFavourite, InterfaceSuggestedExercise[] exercises) {
         super(name);
 
-        if(exercises == null || !(exercises instanceof InterfaceSuggestedExercise[])){
+        if(exercises == null){
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
         else{
@@ -42,7 +42,7 @@ public class ModifiableWorkout extends Workout implements InterfaceModifiableWor
     public ModifiableWorkout(String name, InterfaceSuggestedExercise[] exercises) {
         super(name);
 
-        if(exercises == null || !(exercises instanceof InterfaceSuggestedExercise[])){
+        if(exercises == null){
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
         else{

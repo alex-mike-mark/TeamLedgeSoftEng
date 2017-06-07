@@ -27,8 +27,7 @@ public class TrackableExercise extends Exercise implements InterfaceTrackableExe
                              InterfaceExerciseQuantity trackedQuantity) {
         super(name, intensity, exerciseType);
 
-        if((!(recommendedQuantity instanceof InterfaceExerciseQuantity) || !(trackedQuantity instanceof InterfaceExerciseQuantity))
-                && (recommendedQuantity == null || trackedQuantity == null)){
+        if(recommendedQuantity == null || trackedQuantity == null){
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
         else{

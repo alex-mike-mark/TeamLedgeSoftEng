@@ -22,12 +22,11 @@ public class SuggestedExercise extends Exercise implements InterfaceSuggestedExe
                                 InterfaceExerciseQuantity recommendedQuantity) {
         super(name, intensity, exerciseType);
 
-        if(!(recommendedQuantity instanceof InterfaceExerciseQuantity) && recommendedQuantity == null){
+        if(recommendedQuantity == null){
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
         else{
             this.recommendedQuantity = recommendedQuantity;
-
         }
     }
 
@@ -49,7 +48,7 @@ public class SuggestedExercise extends Exercise implements InterfaceSuggestedExe
     public boolean updateRecommendedQuantity(InterfaceExerciseQuantity quantity) {
         boolean quantityUpdated = false;
 
-        if((quantity instanceof InterfaceExerciseQuantity) && quantity != null){
+        if(quantity != null){
             recommendedQuantity = quantity;
             quantityUpdated = true;
         }
