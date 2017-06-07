@@ -1,7 +1,8 @@
 package ledge.muscleup.model.exercise;
 
 /**
- * The interface for an exercise for which the amount of exercise is tracked
+ * The interface for an exercise for which the amount of exercise is tracked and the exercise can
+ * be marked complete
  *
  * @author Cole Kehler
  * @version 1.0

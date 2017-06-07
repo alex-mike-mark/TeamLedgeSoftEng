@@ -1,8 +1,8 @@
 package ledge.muscleup.model.exercise;
 
 /**
- * An exercise which contains a suggested amount of exercise and for which the amount of exercise
- * can be tracked
+ * An exercise which contains a suggested amount of exercise and for which the exercise can be
+ * marked completed
  *
  * @author Cole Kehler
  * @version 1.0
