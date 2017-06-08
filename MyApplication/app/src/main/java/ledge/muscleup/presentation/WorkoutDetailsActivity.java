@@ -38,7 +38,6 @@ public class WorkoutDetailsActivity extends Activity {
         Workout workout;
         InterfaceDataAccess db = Services.getDataAccess();
         List exerciseList = new ArrayList();
-        Enumeration<InterfaceWorkoutExercise> workoutEnum;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_display);

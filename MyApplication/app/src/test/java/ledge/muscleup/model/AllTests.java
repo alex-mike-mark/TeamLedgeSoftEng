@@ -10,19 +10,21 @@ package ledge.muscleup.model;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import ledge.muscleup.model.workout.*;
+import ledge.muscleup.model.exercise.*;
+
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         ExerciseDistanceTest.class,
         ExerciseDurationTest.class,
         ExerciseQuantityTest.class,
-        ExerciseSetsTest.class,
         ExerciseSetsAndWeightTest.class,
-        ListedExerciseTest.class,
-        SuggestedExerciseTest.class,
-        TrackableExerciseTest.class,
-        ModifiableWorkoutTest.class,
-        TrackableWorkoutTest.class
-        TrackableWorkoutTest.class,
+        ExerciseSetsTest.class,
+        ExerciseTest.class,
+        WorkoutExerciseTest.class,
+        WorkoutSessionExerciseTest.class,
+        WorkoutSessionTest.class,
+        WorkoutTest.class,
         ScheduleManagerTest.class
 })
 
