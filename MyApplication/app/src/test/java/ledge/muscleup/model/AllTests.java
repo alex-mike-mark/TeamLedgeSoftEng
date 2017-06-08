@@ -1,11 +1,4 @@
 package ledge.muscleup.model;
-/**
- * AllTests.java used to run all the tests in all the suite classes.
- *
- * @author Matthew Smidt
- * @version 1.0
- * @since 2017-05-30
- */
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -28,6 +21,13 @@ import ledge.muscleup.model.exercise.*;
         ScheduleManagerTest.class
 })
 
+/**
+ * AllTests.java used to run all the tests in all the suite classes.
+ *
+ * @author Matthew Smidt
+ * @version 1.0
+ * @since 2017-05-30
+ */
 public class AllTests {
 
 }
