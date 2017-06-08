@@ -9,7 +9,7 @@ import java.text.DecimalFormat;
  * @version 1.0
  * @since 2017-05-29
 */
-public class ExerciseDistance implements InterfaceExerciseDistance {
+public class ExerciseDistance implements InterfaceExerciseQuantity {
     private double distance;
     private DistanceUnit unitOfMeasure;
 
@@ -33,7 +33,6 @@ public class ExerciseDistance implements InterfaceExerciseDistance {
      * Returns the distance for which an exercise is completed
      * @return the distance
      */
-    @Override
     public double getDistance() {
         return distance;
     }
@@ -42,7 +41,6 @@ public class ExerciseDistance implements InterfaceExerciseDistance {
      * Returns the unit of measurement for the distance
      * @return the unit of measurement
      */
-    @Override
     public DistanceUnit getUnitOfMeasure() {
         return unitOfMeasure;
     }

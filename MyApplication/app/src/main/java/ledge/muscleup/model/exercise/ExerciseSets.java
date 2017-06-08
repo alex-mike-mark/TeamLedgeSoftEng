@@ -8,7 +8,7 @@ package ledge.muscleup.model.exercise;
  * @since 2017-05-29
 */
 
-public class ExerciseSets implements InterfaceExerciseSets {
+public class ExerciseSets implements InterfaceExerciseQuantity {
     private int sets;
     private int reps;
 
@@ -32,7 +32,6 @@ public class ExerciseSets implements InterfaceExerciseSets {
      * Returns the number of sets for the exercise
      * @return the number of sets for the exercise
      */
-    @Override
     public int getSets() {
         return sets;
     }
@@ -41,7 +40,6 @@ public class ExerciseSets implements InterfaceExerciseSets {
      * Returns the number of reps for the exercise
      * @return the number of reps for the exercise
      */
-    @Override
     public int getReps() {
         return reps;
     }
