@@ -321,31 +321,31 @@ class TemplateDataAccessStub implements InterfaceDataAccess {
         workoutSessionsByDate = new HashMap<>();
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Welcome to the Gun Show")),
-                new LocalDate(2017, 06, 8),
+                new LocalDate(2017, 6, 8),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Never Skip Leg Day")),
-                new LocalDate(2017, 06, 9),
+                new LocalDate(2017, 6, 9),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Work that Core, Get that Score!")),
-                new LocalDate(2017, 06, 10),
+                new LocalDate(2017, 6, 10),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Never Skip Leg Day")),
-                new LocalDate(2017, 06, 13),
+                new LocalDate(2017, 6, 13),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Marathon Training Starts Here")),
-                new LocalDate(2017, 06, 15),
+                new LocalDate(2017, 6, 15),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
