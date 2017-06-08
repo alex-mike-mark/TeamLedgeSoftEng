@@ -1,4 +1,4 @@
-package ledge.muscleup.persistence;
+package ledge.muscleup.model;
 
 import org.joda.time.LocalDate;
 
@@ -6,32 +6,33 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import ledge.muscleup.model.exercise.DistanceUnit;
 import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.ExerciseDistance;
 import ledge.muscleup.model.exercise.ExerciseDuration;
+import ledge.muscleup.model.exercise.ExerciseIntensity;
 import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
 import ledge.muscleup.model.exercise.ExerciseType;
-import ledge.muscleup.model.exercise.ExerciseIntensity;
-import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WeightUnit;
+import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
+import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
- * A stub implementation of the database for Iteration 1
+ * A template database stub for use in testing business classes that take a database stub as a
+ * constructor parameter
  *
- * @author Ryan Koop
+ * @author Cole Kehler
  * @version 1.0
- * @since 2017-06-04
+ * @since 2017-06-07
  */
 
-public class DataAccessStub implements InterfaceDataAccess {
+class TemplateDataAccessStub implements InterfaceDataAccess {
     private String dbName;
-    private String dbType = "stub";
+    private String dbType = "testing template";
 
     private Map<String, Workout> workoutsByName;
     private Map<String, Exercise> exercisesByName;
@@ -41,7 +42,7 @@ public class DataAccessStub implements InterfaceDataAccess {
      * Constructor for DataAccessStub
      * @param dbName the name of the database
      */
-    public DataAccessStub (String dbName) {
+    public TemplateDataAccessStub (String dbName) {
         this.dbName = dbName;
     }
 
@@ -81,43 +82,55 @@ public class DataAccessStub implements InterfaceDataAccess {
         workoutsByName.put(workout.getName(), workout);
 
         workoutExercise = new WorkoutExercise(exercisesByName.get("Bicep Curls"),
-        new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
+                new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
         addExerciseToWorkout(workout, workoutExercise);
         workoutExercise = new WorkoutExercise(exercisesByName.get("Push-Ups"),
-        new ExerciseSets(2, 15));
+                new ExerciseSets(2, 15));
         addExerciseToWorkout(workout, workoutExercise);
 
         workout = new Workout("Never Skip Leg Day");
         workoutsByName.put(workout.getName(), workout);
         workoutExercise = new WorkoutExercise(exercisesByName.get("Squats"),
-        new ExerciseSets(4, 15));
+                new ExerciseSets(4, 15));
         addExerciseToWorkout(workout, workoutExercise);
         workoutExercise = new WorkoutExercise(exercisesByName.get("Lunges"),
-        new ExerciseSets(3, 10));
+                new ExerciseSets(3, 10));
         addExerciseToWorkout(workout, workoutExercise);
 
         workout = new Workout("Marathon Training Starts Here");
         workoutsByName.put(workout.getName(), workout);
         workoutExercise = new WorkoutExercise(exercisesByName.get("Running"),
-        new ExerciseDistance(2.5, DistanceUnit.MILES));
+                new ExerciseDistance(2.5, DistanceUnit.MILES));
         addExerciseToWorkout(workout, workoutExercise);
         workoutExercise = new WorkoutExercise(exercisesByName.get("Exercise Bike"),
-        new ExerciseDuration(45));
+                new ExerciseDuration(45));
         addExerciseToWorkout(workout, workoutExercise);
 
         workout = new Workout("Work that Core, Get that Score!");
         workoutsByName.put(workout.getName(), workout);
         workoutExercise = new WorkoutExercise(exercisesByName.get("Crunches"),
-        new ExerciseSets(2, 25));
+                new ExerciseSets(2, 25));
         addExerciseToWorkout(workout, workoutExercise);
         workoutExercise = new WorkoutExercise(exercisesByName.get("Bicycle Kicks"),
-        new ExerciseSets(2, 15));
+                new ExerciseSets(2, 15));
         addExerciseToWorkout(workout, workoutExercise);
 
-        workoutSessionsByDate = new TreeMap<>();
+        workoutSessionsByDate = new HashMap<>();
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Welcome to the Gun Show")),
-                new LocalDate(2017, 06, 12),
+                new LocalDate(2017, 06, 8),
+                false);
+        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
+
+        workoutSession = new WorkoutSession(
+                (workoutsByName.get("Never Skip Leg Day")),
+                new LocalDate(2017, 06, 9),
+                false);
+        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
+
+        workoutSession = new WorkoutSession(
+                (workoutsByName.get("Work that Core, Get that Score!")),
+                new LocalDate(2017, 06, 10),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
@@ -128,20 +141,8 @@ public class DataAccessStub implements InterfaceDataAccess {
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
-                (workoutsByName.get("Work that Core, Get that Score!")),
-                new LocalDate(2017, 06, 14),
-                false);
-        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
-
-        workoutSession = new WorkoutSession(
-                (workoutsByName.get("Never Skip Leg Day")),
-                new LocalDate(2017, 06, 16),
-                false);
-        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
-
-        workoutSession = new WorkoutSession(
                 (workoutsByName.get("Marathon Training Starts Here")),
-                new LocalDate(2017, 06, 17),
+                new LocalDate(2017, 06, 15),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
@@ -238,10 +239,10 @@ public class DataAccessStub implements InterfaceDataAccess {
 
         if (workoutsByName.containsKey(workout.getName())) {
             dbWorkout = workoutsByName.get(workout.getName());
-                if (exercisesByName.containsKey(exercise.getName())) {
-                    dbWorkout.addExercise(exercise);
-                    added = true;
-                }
+            if (exercisesByName.containsKey(exercise.getName())) {
+                dbWorkout.addExercise(exercise);
+                added = true;
+            }
         }
         return added;
     }
@@ -279,7 +280,7 @@ public class DataAccessStub implements InterfaceDataAccess {
      * @return a list of all workout sessions scheduled between startDate and endDate, inclusive
      */
     public List<WorkoutSession> getSessionsInDateRange(LocalDate startDate,
-                                                                LocalDate endDate) {
+                                                       LocalDate endDate) {
         List<WorkoutSession> sessionsInDateRange = new ArrayList<>();
 
         LocalDate currDate = startDate;
