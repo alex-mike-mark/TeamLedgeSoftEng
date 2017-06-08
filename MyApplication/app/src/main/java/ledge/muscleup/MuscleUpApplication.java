@@ -5,7 +5,7 @@ import android.app.Application;
 import net.danlew.android.joda.JodaTimeAndroid;
 
 /**
- * The application, for which the only change needed is to initialize libaries when the application
+ * The application, for which the only change needed is to initialize libraries when the application
  * is created
  *
  * @author Cole Kehler
@@ -13,7 +13,7 @@ import net.danlew.android.joda.JodaTimeAndroid;
  * @since 2017-06-05
  */
 
-public final class MuscleUpApplication extends Application {
+final class MuscleUpApplication extends Application {
     /**
      * Called when the application is starting, and calls the default application {@code onCreate()}
      * and then initializes any necessary libraries

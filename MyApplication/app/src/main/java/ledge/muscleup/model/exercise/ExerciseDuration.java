@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
  * @version 1.0
  * @since 2017-05-29
 */
-public class ExerciseDuration implements InterfaceExerciseDuration {
+public class ExerciseDuration implements InterfaceExerciseQuantity {
     private double minutes;
 
     /**
@@ -31,7 +31,6 @@ public class ExerciseDuration implements InterfaceExerciseDuration {
      * Get the number of minutes exercised
      * @return the number of minutes exercised
      */
-    @Override
     public double getMinutes() {
         return minutes;
     }

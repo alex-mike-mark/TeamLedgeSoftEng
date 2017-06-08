@@ -13,8 +13,8 @@ import org.junit.Test;
  * @since 2017-06-07
  */
 public class WorkoutSessionExerciseTest extends TestCase {
-    WorkoutSessionExercise workoutSessionExercise1, workoutSessionExercise2, workoutSessionExercise3;
-    WorkoutExercise workoutExercise1;
+    private WorkoutSessionExercise workoutSessionExercise1, workoutSessionExercise2, workoutSessionExercise3;
+    private WorkoutExercise workoutExercise1;
 
     /**
      * Initializes several instances of WorkoutSessionExercise to setup testing

@@ -1,6 +1,7 @@
 package ledge.muscleup.model.workout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -8,7 +9,6 @@ import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 
 import static java.util.Collections.enumeration;
-import static java.util.Collections.lastIndexOfSubList;
 
 /**
  * Stores information about workouts, which consists of a workout name, a set of exercises and
@@ -55,8 +55,7 @@ public class Workout {
             this.isFavourite = isFavourite;
 
             exerciseList = new ArrayList<>();
-            for (int i = 0; i < exercises.length; i++)
-                exerciseList.add(exercises[i]);
+            Collections.addAll(exerciseList, exercises);
         }
     }
 
@@ -110,7 +109,7 @@ public class Workout {
     /**
      * Returns {@code true} if the workout is a favourite workout, and {@code false} otherwise
      *
-     * @return a boolean represeting whether this workout is a favourite workout
+     * @return a boolean representing whether this workout is a favourite workout
      */
     public boolean isFavourite() { return isFavourite; }
 
@@ -199,7 +198,6 @@ public class Workout {
     public boolean removeExercise(WorkoutExercise exercise) throws IllegalArgumentException {
         boolean exerciseRemoved = false;
         int exerciseIndex = -1;
-        WorkoutExercise listExercise;
 
         if (exercise == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));

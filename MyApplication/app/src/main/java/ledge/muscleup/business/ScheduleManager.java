@@ -4,7 +4,6 @@ import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import ledge.muscleup.model.workout.WorkoutSession;
@@ -191,7 +190,6 @@ public class ScheduleManager implements InterfaceScheduleManager {
     private void populateWorkoutList() {
         List<WorkoutSession> sessionList;
         WorkoutSession currSession;
-        boolean datesInRange = true;
         LocalDate lastDayOfWeek = getWeekday(DateTimeConstants.SUNDAY);
 
         sessionList = dataAccess.getSessionsInDateRange(firstDayOfWeek, lastDayOfWeek);

@@ -3,8 +3,6 @@ package ledge.muscleup.presentation;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -12,12 +10,10 @@ import java.util.Enumeration;
 import java.util.List;
 
 import ledge.muscleup.R;
-import ledge.muscleup.application.Services;
 import ledge.muscleup.business.AccessWorkouts;
 import ledge.muscleup.business.InterfaceAccessWorkouts;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.workout.Workout;
-import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
  * WorkoutDetailsActivity displays a list of exercises for a workout
@@ -36,12 +32,12 @@ public class WorkoutDetailsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ListManager lm = new ListManager();
-        List exerciseList = new ArrayList();
+        List exerciseList;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_display);
 
-        exerciseList = getExcersiseList();
+        exerciseList = getExerciseList();
 
         lm.populateList(this, exerciseList);
 
@@ -53,11 +49,11 @@ public class WorkoutDetailsActivity extends Activity {
      * getExerciseList will get the workout that was clicked on in WorkoutActivity and return the exercises associated
      * @return list of exercises for a workout
      */
-    private List getExcersiseList(){
+    private List getExerciseList(){
         String workoutName;
         Intent intent;
         Workout workout;
-        InterfaceAccessWorkouts aw = (InterfaceAccessWorkouts) new AccessWorkouts();
+        InterfaceAccessWorkouts aw = new AccessWorkouts();
         List retList = new ArrayList();
 
         //get name of workout
@@ -65,7 +61,7 @@ public class WorkoutDetailsActivity extends Activity {
         workoutName = intent.getStringExtra("workoutName");
 
         //get Workout from db
-        workout = (Workout) aw.getWorkout(workoutName);
+        workout = aw.getWorkout(workoutName);
 
         //fetch all exercises from workout
         Enumeration<WorkoutExercise> exercises = workout.getExerciseEnumeration();

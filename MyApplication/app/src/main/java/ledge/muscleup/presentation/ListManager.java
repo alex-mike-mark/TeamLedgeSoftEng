@@ -16,7 +16,7 @@ import ledge.muscleup.R;
  * @since 2017-06-07
  */
 
-public class ListManager {
+class ListManager {
 
     /**
      *  Used to insert a List into a list pane defined in the xml as "list_panel"

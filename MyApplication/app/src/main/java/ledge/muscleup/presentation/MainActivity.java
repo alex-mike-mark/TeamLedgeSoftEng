@@ -9,7 +9,7 @@ import ledge.muscleup.R;
 import ledge.muscleup.application.Services;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String dbName="workout_till_you_dropout";
+    private static final String dbName = "workout_till_you_dropout";
 
     /**
      * Setup for MainActivity
@@ -25,23 +25,21 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * opens the WorkoutActivity
-     * @param view
      */
-    public void openWorkouts(View view) {
+    public void openWorkouts() {
         Intent intent = new Intent(this, WorkoutActivity.class);
         startActivity(intent);
     }
 
     /**
      * opens the  ExerciseActivity
-     * @param view
      */
-    public void openExercises(View view) {
+    public void openExercises() {
         Intent intent = new Intent(this, ExerciseActivity.class);
         startActivity(intent);
     }
 
-    public void openSchedule(View view) {
+    public void openSchedule() {
         Intent intent = new Intent(this, ScheduleActivity.class);
         startActivity(intent);
     }
@@ -49,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Create the stub stub database
      */
-    public static void startUp()
+    private static void startUp()
     {
         Services.createDataAccess(dbName);
     }

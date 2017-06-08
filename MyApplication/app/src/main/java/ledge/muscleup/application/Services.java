@@ -18,14 +18,12 @@ public class Services {
      * Creates and opens the database, if it hasn't already been created. Returns the stub
      * database
      * @param dbName the name of the database
-     * @return the database
      */
-    public static InterfaceDataAccess createDataAccess(String dbName) {
+    public static void createDataAccess(String dbName) {
         if (dataAccessService == null) {
             dataAccessService = new DataAccessStub(dbName);
             dataAccessService.open();
         }
-        return dataAccessService;
     }
 
     /**
