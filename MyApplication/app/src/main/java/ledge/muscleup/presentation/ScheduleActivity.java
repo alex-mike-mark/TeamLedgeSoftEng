@@ -10,6 +10,8 @@ import java.util.List;
 
 import ledge.muscleup.R;
 import ledge.muscleup.application.Services;
+import ledge.muscleup.business.AccessWorkoutSessions;
+import ledge.muscleup.business.ScheduleManager;
 import ledge.muscleup.persistence.DataAccessStub;
 import ledge.muscleup.persistence.InterfaceDataAccess;
 
@@ -17,13 +19,13 @@ public class ScheduleActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        InterfaceDataAccess db = Services.getDataAccess();
+        AccessWorkoutSessions aws = new AccessWorkoutSessions();
         List scheduleArray;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_display);
 
-        scheduleArray = db.getWorkoutSessionsList();
+        scheduleArray = aws.getWorkoutSessionsList();
 
         populateList(scheduleArray);
     }

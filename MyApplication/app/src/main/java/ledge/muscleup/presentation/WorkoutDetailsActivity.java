@@ -34,15 +34,30 @@ public class WorkoutDetailsActivity extends Activity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String workoutName;
-        Intent intent;
-        Workout workout;
-        AccessWorkouts aw = new AccessWorkouts();
         ListManager lm = new ListManager();
         List exerciseList = new ArrayList();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_display);
+
+        exerciseList = getExcersiseList();
+
+        lm.populateList(this, exerciseList);
+
+        TextView filter = (TextView) findViewById(R.id.filter_title);
+        filter.setText("Filter: none");
+    }
+
+    /**
+     * getExerciseList will get the workout that was clicked on in WorkoutActivity and return the exercises associated
+     * @return list of exercises for a workout
+     */
+    private List getExcersiseList(){
+        String workoutName;
+        Intent intent;
+        Workout workout;
+        AccessWorkouts aw = new AccessWorkouts();
+        List retList = new ArrayList();
 
         //get name of workout
         intent = getIntent();
@@ -54,13 +69,9 @@ public class WorkoutDetailsActivity extends Activity {
         //fetch all exercises from workout
         Enumeration<WorkoutExercise> exercises = workout.getExerciseEnumeration();
         while(exercises.hasMoreElements()){
-            exerciseList.add(exercises.nextElement());
+            retList.add(exercises.nextElement());
         }
 
-        lm.populateList(this, exerciseList);
-
-        TextView filter = (TextView) findViewById(R.id.filter_title);
-        filter.setText("Filter: none");
+        return retList;
     }
-
 }
