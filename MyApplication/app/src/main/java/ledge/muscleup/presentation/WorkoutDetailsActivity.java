@@ -37,7 +37,7 @@ public class WorkoutDetailsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_display);
 
-        exerciseList = getExcersiseList();
+        exerciseList = getExerciseList();
 
         lm.populateList(this, exerciseList);
 
@@ -49,7 +49,7 @@ public class WorkoutDetailsActivity extends Activity {
      * getExerciseList will get the workout that was clicked on in WorkoutActivity and return the exercises associated
      * @return list of exercises for a workout
      */
-    private List getExcersiseList(){
+    private List getExerciseList(){
         String workoutName;
         Intent intent;
         Workout workout;

@@ -84,7 +84,7 @@ public class WorkoutSession {
     }
 
     /**
-     * Returns {@code true} if the worokout has been completed, or {@code false} otherwise
+     * Returns {@code true} if the workout has been completed, or {@code false} otherwise
      *
      * @return a boolean representing if the workout has been completed
      */

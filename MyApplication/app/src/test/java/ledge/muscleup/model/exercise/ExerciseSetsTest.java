@@ -24,7 +24,7 @@ public class ExerciseSetsTest extends TestCase {
     }
 
     /**
-     * Tests the intialization of an instance of ExerciseSets
+     * Tests the initialization of an instance of ExerciseSets
      */
     @Test
     public void testInvalidInitialization() {
