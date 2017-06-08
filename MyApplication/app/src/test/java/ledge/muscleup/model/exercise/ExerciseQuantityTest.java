@@ -8,7 +8,7 @@ import org.junit.Test;
 /**
  * ExerciseQuantityTest.java used to test InterfaceExerciseQuantity.java
  *
- * @author Ryan Koope
+ * @author Matthew Smidt
  * @version 1.0
  * @since 2017-05-29
  */
