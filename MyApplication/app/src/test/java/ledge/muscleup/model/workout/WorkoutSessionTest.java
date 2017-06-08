@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 
 import org.joda.time.LocalDate;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,6 +12,7 @@ import ledge.muscleup.model.exercise.ExerciseIntensity;
 import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.ExerciseType;
 import ledge.muscleup.model.exercise.WorkoutExercise;
+import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 
 /**
  * WorkoutSessionTest.java used to test WorkoutSession.java
@@ -88,9 +90,17 @@ public class WorkoutSessionTest extends TestCase {
         assertEquals(3, workoutSession1.numExercises());
         assertEquals(2, workoutSession2.numExercises());
 
-        //Test completeExercise
-        //Test getExerciseEnumeration
+        assertTrue(workoutSession1.completeExercise(
+                new WorkoutSessionExercise("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY,
+                        new ExerciseSets(3, 20), false)));
+        assertTrue(workoutSession1.completeExercise(
+                new WorkoutSessionExercise("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY,
+                        new ExerciseSets(3, 20), false)));
+        assertTrue(workoutSession1.completeExercise(
+                new WorkoutSessionExercise("Sit-ups", ExerciseIntensity.HIGH,
+                        ExerciseType.FULL_BODY, new ExerciseSets(3, 20), false)));
 
+        //Test getExerciseEnumeration
 
         System.out.println("Finishing testWorkoutSession");
     }

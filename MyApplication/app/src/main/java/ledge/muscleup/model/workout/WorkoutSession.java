@@ -128,13 +128,17 @@ public class WorkoutSession implements InterfaceWorkoutSession {
     @Override
     public boolean completeExercise(InterfaceWorkoutSessionExercise exercise) throws IllegalArgumentException {
         boolean exerciseCompleted = false;
-        int exerciseIndex;
+        int exerciseIndex = -1;
         InterfaceWorkoutSessionExercise listExercise;
 
         if (exercise == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else {
-            exerciseIndex = exerciseList.indexOf(exercise);
+            for(int i = 0; i < exerciseList.size() && exerciseIndex < 0; i++){
+                if(exercise.equals(exerciseList.get(i))){
+                    exerciseIndex = i;
+                }
+            }
             //ensure the exercise exists in the list
             if (exerciseIndex != -1) {
                 listExercise = exerciseList.get(exerciseIndex);
