@@ -32,7 +32,7 @@ public class WorkoutDetailsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ListManager lm = new ListManager();
-        List exerciseList = new ArrayList();
+        List exerciseList;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_display);
