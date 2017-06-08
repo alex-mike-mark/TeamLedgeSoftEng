@@ -12,15 +12,20 @@ import org.junit.Test;
  * @version 1.0
  * @since 2017-06-06
  */
-
 public class ExerciseSetsTest extends TestCase {
     private ExerciseSets exerciseSets;
 
+    /**
+     * Initializes an instance of ExerciseSets to set up testing
+     */
     @Before
     public void setUp(){
         exerciseSets = new ExerciseSets(3, 10);
     }
 
+    /**
+     * Tests the intialization of an instance of ExerciseSets
+     */
     @Test
     public void testInvalidInitialization() {
         System.out.println("\nStarting testInvalidInitialization");
@@ -39,6 +44,10 @@ public class ExerciseSetsTest extends TestCase {
         System.out.println("Finishing testInvalidInitialization");
     }
 
+    /**
+     * Tests various functionality of the ExerciseSets class, including proper return values of
+     * getSets() and getReps(), and proper equals checking
+     */
     @Test
     public void testExerciseSets() {
         System.out.println("\nStarting testExerciseSets");

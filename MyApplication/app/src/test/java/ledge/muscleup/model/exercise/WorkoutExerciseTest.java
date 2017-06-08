@@ -12,12 +12,13 @@ import org.junit.Test;
  * @version 1.0
  * @since 2017-06-07
  */
-
 public class WorkoutExerciseTest extends TestCase {
-
     WorkoutExercise workoutExercise1, workoutExercise2, workoutExercise3;
     Exercise exercise1;
 
+    /**
+     * Initializes several instances of WorkoutExercise to set up testing
+     */
     @Before
     public void setUp(){
         workoutExercise1 = new WorkoutExercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(5, 4));
@@ -26,6 +27,10 @@ public class WorkoutExerciseTest extends TestCase {
         workoutExercise3 = new WorkoutExercise(exercise1, new ExerciseSets(5, 4));
     }
 
+    /**
+     * Tests various functionality of the WorkoutExercise class, including proper return value
+     * of getter methods, proper updating of recommended quantity, and proper equals checking
+     */
     @Test
     public void testWorkoutExerciseTest() {
         System.out.println("\nStarting testWorkoutExerciseTest");

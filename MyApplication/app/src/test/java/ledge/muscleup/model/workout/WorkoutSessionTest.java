@@ -22,12 +22,14 @@ import ledge.muscleup.model.exercise.WorkoutSessionExercise;
  * @version 1.0
  * @since 2017-06-07
  */
-
 public class WorkoutSessionTest extends TestCase {
     WorkoutSession workoutSession1, workoutSession2, workoutSession3;
     Workout workout1, workout2, workout3;
     WorkoutExercise[] exerciseList1, exerciseList2, exerciseList3;
 
+    /**
+     * Initializes several instances of WorkoutSession to setup testing
+     */
     @Before
     public void setUp() {
         exerciseList1 = new WorkoutExercise[]{
@@ -57,6 +59,10 @@ public class WorkoutSessionTest extends TestCase {
         workoutSession3 = new WorkoutSession(workout3, LocalDate.now(), false);
     }
 
+    /**
+     * Tests various functionality of the WorkoutSession class, including proper return values of
+     * getter methods, setter/toggle methods, toggleCompleted(), and equals checking
+     */
     @Test
     public void testWorkoutSession() {
         System.out.println("\nStarting testWorkoutSession");

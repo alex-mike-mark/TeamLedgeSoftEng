@@ -20,12 +20,13 @@ import ledge.muscleup.model.exercise.WorkoutExercise;
  * @version 1.0
  * @since 2017-06-07
  */
-
-
 public class WorkoutTest extends TestCase {
     Workout workout1, workout2, workout3;
     WorkoutExercise[] exerciseList1, exerciseList2;
 
+    /**
+     * Initializes several new instances of Workout to setup testing
+     */
     @Before
     public void setUp(){
         workout1 = new Workout("Leg Day");
@@ -44,6 +45,11 @@ public class WorkoutTest extends TestCase {
         workout3 = new Workout("Get Your 6 Pack Abs", true, exerciseList2);
     }
 
+    /**
+     * Tests various functionality of the Workout class, including proper return values of getter
+     * methods, proper functionality of setter methods, removing and moving exercises in a workout,
+     * and proper equals checking
+     */
     @Test
     public void testWorkout() {
         System.out.println("\nStarting testWorkout");

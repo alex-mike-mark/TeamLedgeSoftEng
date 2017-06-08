@@ -12,15 +12,20 @@ import org.junit.Test;
  * @version 1.0
  * @since 2017-06-06
  */
-
 public class ExerciseDurationTest extends TestCase {
     private ExerciseDuration exerciseDuration;
 
+    /**
+     * Initializes a new instance of ExerciseDuration as setup for testing
+     */
     @Before
     public void setUp(){
         exerciseDuration = new ExerciseDuration(30.0);
     }
 
+    /**
+     * Tests the initialization of an ExerciseDuration instance
+     */
     @Test
     public void testInvalidInitialization() {
         System.out.println("\nStarting testInvalidInitialization");
@@ -34,6 +39,10 @@ public class ExerciseDurationTest extends TestCase {
         System.out.println("Finishing testInvalidInitialization");
     }
 
+    /**
+     * Tests the various functionality of the ExerciseDuration class, including proper creation,
+     * correct return of getMinutes(), and correct equal checking
+     */
     @Test
     public void testExerciseDuration() {
         System.out.println("\nStarting testExerciseDuration");
