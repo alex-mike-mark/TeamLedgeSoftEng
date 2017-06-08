@@ -1,5 +1,6 @@
 This is the submission for iteration 1 of MuscleUp.
-MuscleUp is an app intended to help people create and stick to their fitness goals. The app is inteded to feature a variety of exercises, the ability to create custom workouts, schedule sessions and gamify their progress.
+MuscleUp is an app intended to help people create and stick to their fitness goals. 
+The app is intended to feature a variety of exercises and workouts, the ability to create custom workouts, schedule sessions and gamify their progress.
 Created by: Cole Kehler, Ryan Koop, Matt Smidt, Alex Mark and Jon Ingram
 
 ###Git Repository###
@@ -77,7 +78,7 @@ The log is in this google doc: <https://docs.google.com/document/d/18dOXb27PLIrS
 
 ###New Features and Where to Find Them###
 The major features implemented in this release are:
-The ability to view a list of Workouts, found by mashing the workouts button on the dashboard.
-The ability to view a list of Exercises, found by mashing the exercises button on the dashboard.
-The ability to view details of workouts, found by mashing one of the workouts in the workouts list view.
-The ability to view your workout schedule, found by mashing the workout schedule button on the dashboard.
+The ability to view a list of Workouts, found by pressing the "Workouts" button on the application's home screen
+The ability to view a list of Exercises, found by pressing the "Exercises" button on the application's home screen
+The ability to view details of workouts, found by pressing on one of the workouts in the workouts list view.
+The ability to view your workout schedule, found by pressing the "Workout Schedule" button on the dashboard.
