@@ -2,9 +2,10 @@ This is the submission for iteration 1 of MuscleUp.
 MuscleUp is an app intended to help people create and stick to their fitness goals. The app is inteded to feature a variety of exercises, the ability to create custom workouts, schedule sessions and gamify their progress.
 
 ###Contents of this .zip###
-[WHATEVER GOES HERE]
+This readme plus our source code. The log is found in a google doc linked far below.
+Also contained is our blood, sweat and tears, though they don't compress so well.
 
-###Nice Packages###
+###Packages###
 	main
 		java
 			ledge.muscleup
@@ -13,38 +14,45 @@ MuscleUp is an app intended to help people create and stick to their fitness goa
 				business
 					AccessExercises (performs actions on database regarding exercises)
 					AccessWorkouts  (performs actions on database regarding workouts)
+					AccessWorkoutSessions 
+					InterfaceAccessExercises
+					InterfaceAccessWorkouts
+					InterfaceAccessWorkoutSessions
+					InterfaceScheduleManager
+					ScheduleManager (Manages and tracks WorkoutSessions.)
 				model
 					exercise
-						DistanceUnit (enum for units. Used in ExerciseDistance, Duration, Sets and SetsAndWeight classes)
-						Exercise (Stores and returns information about exercises)
-						ExerciseDistance (One of the quantities. WorkoutExercise contains one to plan workouts.)
+						DistanceUnit
+						Exercise (Stores data relating to exercises)
+						ExerciseDistance
 						ExerciseDuration 
-						ExerciseIntensity (enum for categorizing an exercise's stress on the human body.)
-						ExerciseSets (One of the quantities. WorkoutExercise contains one to plan workouts.)
-						ExerciseSetsAndWeight (One of the quantities. WorkoutExercise contains one to plan workouts.)
-						ExerciseType (enum for tracking how an exercise works the body.)
-						InterfaceExercise
+						ExerciseIntensity 
+						ExerciseSets
+						ExerciseSetsAndWeight
+						ExerciseType
 						InterfaceExerciseDistance 
 						InterfaceExerciseDuration
 						InterfaceExerciseQuantity
 						InterfaceExerciseSets
 						InterfaceExerciseSetsAndWeight
-						InterfaceWorkoutExercise
-						InterfaceWorkoutSessionExercise
 						WeightUnit
-						WorkoutExercise
-						WorkoutSessionExercise
+						WorkoutExercise (An Execise wrapped for appropriate use by a Workout.)
+						WorkoutSessionExercise (A WorkoutExercise wrapped for appropriate use by a WorkoutSession.)
 					workout
-						InterfaceWorkout
-						InterfaceWorkoutSession
-						Workout
-						WorkoutSession
+						Workout (Contains a set of WorkoutExercises. Used to make WorkoutSessions)
+						WorkoutSession (Contains a set of WorkoutSessionExercises, used to track actual workouts.)
 				persistence
-					DataAccess
 					DataAccessStub
+					InterfaceDataAccess
+					InterfaceExerciseDataAccess
+					InterfaceWorkoutDataAccess
+					InterfaceWorkoutSessionDataAccess
 				presentation
-					Main Activity 
+					ExerciseActivity
+					Main Activity
+					ScheduleActivity
 					WorkoutActivity
+					WorkoutDetailsActivity
 				MuscleUpApplication (sets up JODA for date, time tracking)
 	test
 		ledge.muscleup.model
@@ -57,15 +65,8 @@ MuscleUp is an app intended to help people create and stick to their fitness goa
 			ExerciseTest
 			WorkoutTest
 
-The application is divided into five packages: application, business, presentation, persistence and model. The model package is divided further into two parts; workout and exercise.
-
-The application package contains the class Services and nothing else. Services is run on startup and connects the database to the app.
-
-The business package contains the code for accessing the database. The classes AccessExercises and AccessWorkouts have functions for adding, removing and getting name data from exercises and workouts in the database.
-
-The model package contains the class definitions.
 ###Log Location###
-The log is found in [PLACE WHERE THE LOG IS FOUND].
+The log is in this google doc: <https://docs.google.com/document/d/18dOXb27PLIrS7kjHcLGODmWes66gZQpesqNNg8ew2Go/edit>
 
 ###New Features and Where to Find Them###
 The major features implemented in this release are:
