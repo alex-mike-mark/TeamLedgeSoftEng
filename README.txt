@@ -19,7 +19,7 @@ Also contained is our blood, sweat and tears, though they don't compress so well
 					InterfaceAccessWorkouts
 					InterfaceAccessWorkoutSessions
 					InterfaceScheduleManager
-					ScheduleManager (Manages and tracks WorkoutSessions.)
+					ScheduleManager (Manages and tracks WorkoutSessions)
 				model
 					exercise
 						DistanceUnit
@@ -36,11 +36,11 @@ Also contained is our blood, sweat and tears, though they don't compress so well
 						InterfaceExerciseSets
 						InterfaceExerciseSetsAndWeight
 						WeightUnit
-						WorkoutExercise (An Execise wrapped for appropriate use by a Workout.)
-						WorkoutSessionExercise (A WorkoutExercise wrapped for appropriate use by a WorkoutSession.)
+						WorkoutExercise (An Execise wrapped for appropriate use by a Workout)
+						WorkoutSessionExercise (A WorkoutExercise wrapped for appropriate use by a WorkoutSession)
 					workout
 						Workout (Contains a set of WorkoutExercises. Used to make WorkoutSessions)
-						WorkoutSession (Contains a set of WorkoutSessionExercises, used to track actual workouts.)
+						WorkoutSession (Contains a set of WorkoutSessionExercises, used to track actual workouts)
 				persistence
 					DataAccessStub
 					InterfaceDataAccess
@@ -49,6 +49,7 @@ Also contained is our blood, sweat and tears, though they don't compress so well
 					InterfaceWorkoutSessionDataAccess
 				presentation
 					ExerciseActivity
+					ListManager
 					Main Activity
 					ScheduleActivity
 					WorkoutActivity
@@ -62,8 +63,10 @@ Also contained is our blood, sweat and tears, though they don't compress so well
 			ExerciseDurationTest
 			ExerciseQuantityTest
 			ExerciseSetsTest
-			ExerciseTest
-			WorkoutTest
+			ListedExerciseTest
+			ModifiableWorkoutTest
+			ScheduleManagerTest
+			TemplateDataAccessStub
 
 ###Log Location###
 The log is in this google doc: <https://docs.google.com/document/d/18dOXb27PLIrS7kjHcLGODmWes66gZQpesqNNg8ew2Go/edit>
