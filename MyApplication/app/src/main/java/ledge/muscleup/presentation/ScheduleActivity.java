@@ -15,11 +15,19 @@ import ledge.muscleup.business.ScheduleManager;
 import ledge.muscleup.persistence.DataAccessStub;
 import ledge.muscleup.persistence.InterfaceDataAccess;
 
+/**
+ * ScheduleActivity displays a list of workout sessions
+ *
+ * @author Cole Kehler
+ * @version 1.0
+ * @since 2017-06-07
+ */
 public class ScheduleActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AccessWorkoutSessions aws = new AccessWorkoutSessions();
+        ListManager lm = new ListManager();
         List scheduleArray;
 
         super.onCreate(savedInstanceState);
@@ -27,18 +35,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
         scheduleArray = aws.getWorkoutSessionsList();
 
-        populateList(scheduleArray);
+        lm.populateList(this, scheduleArray);
     }
 
-    /**
-     *  Used to insert a List into a list pane defined in the xml as "workout_list"
-     * @param arrayList
-     */
-    private void populateList(List arrayList) {
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                R.layout.activity_listview, arrayList);
-
-        ListView listView = (ListView) findViewById(R.id.list_panel);
-        listView.setAdapter(adapter);
-    }
 }
