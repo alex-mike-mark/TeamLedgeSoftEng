@@ -44,7 +44,7 @@ public interface InterfaceAccessWorkouts {
      * Removes a workout from the database, if it exists
      * @param workout the workout to be removed
      */
-    public void removeWorkout(Workout workout);
+    void removeWorkout(Workout workout);
 
     /**
      * Adds an exercise stored in the database to a workout stored in the database with the given
@@ -54,5 +54,5 @@ public interface InterfaceAccessWorkouts {
      *
      * @return true if exercise was added successfully, false otherwise
      */
-    public boolean addExerciseToWorkout (Workout workout, WorkoutExercise exercise);
+    boolean addExerciseToWorkout (Workout workout, WorkoutExercise exercise);
 }

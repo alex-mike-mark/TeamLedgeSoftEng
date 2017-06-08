@@ -9,9 +9,9 @@ package ledge.muscleup.model.exercise;
  * @since 2017-06-03
  */
 
-    double weight;
-    WeightUnit unitOfMeasure;
 public class ExerciseSetsAndWeight extends ExerciseSets {
+    private double weight;
+    private WeightUnit unitOfMeasure;
 
     /**
      * The default constructor for the ExerciseSets class
@@ -37,7 +37,6 @@ public class ExerciseSetsAndWeight extends ExerciseSets {
      *
      * @return the weight to use
      */
-    @Override
     public double getWeight() {
         return weight;
     }
@@ -47,7 +46,6 @@ public class ExerciseSetsAndWeight extends ExerciseSets {
      *
      * @return the unit of measurement
      */
-    @Override
     public WeightUnit getUnitOfMeasure() {
         return unitOfMeasure;
     }
