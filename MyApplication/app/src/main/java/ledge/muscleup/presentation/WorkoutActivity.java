@@ -14,6 +14,7 @@ import java.util.List;
 import ledge.muscleup.R;
 import ledge.muscleup.application.Services;
 import ledge.muscleup.business.AccessWorkouts;
+import ledge.muscleup.business.InterfaceAccessWorkouts;
 import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
@@ -32,7 +33,7 @@ public class WorkoutActivity extends Activity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AccessWorkouts aw = new AccessWorkouts();
+        InterfaceAccessWorkouts aw = (InterfaceAccessWorkouts) new AccessWorkouts();
         ListManager lm = new ListManager();
         final List workoutArray;
 

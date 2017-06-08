@@ -11,6 +11,7 @@ import java.util.List;
 import ledge.muscleup.R;
 import ledge.muscleup.application.Services;
 import ledge.muscleup.business.AccessWorkoutSessions;
+import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
 import ledge.muscleup.business.ScheduleManager;
 import ledge.muscleup.persistence.DataAccessStub;
 import ledge.muscleup.persistence.InterfaceDataAccess;
@@ -26,7 +27,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AccessWorkoutSessions aws = new AccessWorkoutSessions();
+        InterfaceAccessWorkoutSessions aws = (InterfaceAccessWorkoutSessions) new AccessWorkoutSessions();
         ListManager lm = new ListManager();
         List scheduleArray;
 
