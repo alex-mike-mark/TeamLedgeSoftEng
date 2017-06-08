@@ -25,23 +25,21 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * opens the WorkoutActivity
-     * @param view
      */
-    public void openWorkouts(View view) {
+    public void openWorkouts() {
         Intent intent = new Intent(this, WorkoutActivity.class);
         startActivity(intent);
     }
 
     /**
      * opens the  ExerciseActivity
-     * @param view
      */
-    public void openExercises(View view) {
+    public void openExercises() {
         Intent intent = new Intent(this, ExerciseActivity.class);
         startActivity(intent);
     }
 
-    public void openSchedule(View view) {
+    public void openSchedule() {
         Intent intent = new Intent(this, ScheduleActivity.class);
         startActivity(intent);
     }
