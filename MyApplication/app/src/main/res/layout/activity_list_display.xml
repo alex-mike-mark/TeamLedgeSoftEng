@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="ledge.muscleup.presentation.WorkoutActivity">
 
-    //top
+    <!--top-->
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
