@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 
+import java.util.Enumeration;
+
 import ledge.muscleup.model.exercise.ExerciseIntensity;
 import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.ExerciseType;
@@ -108,7 +110,14 @@ public class WorkoutTest extends TestCase {
         workout2.removeExercise(workoutExercise5);
         assertEquals(1, workout2.numExercises());
 
-        //Test getExerciseEnumeration
+        assertNotNull(workout1.getExerciseEnumeration());
+        assertTrue(workout1.getExerciseEnumeration() instanceof Enumeration);
+
+        assertNotNull(workout2.getExerciseEnumeration());
+        assertTrue(workout2.getExerciseEnumeration() instanceof Enumeration);
+
+        assertNotNull(workout3.getExerciseEnumeration());
+        assertTrue(workout3.getExerciseEnumeration() instanceof Enumeration);
 
         System.out.println("Finished testWorkout");
     }

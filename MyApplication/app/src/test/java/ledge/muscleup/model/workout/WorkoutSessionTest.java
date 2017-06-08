@@ -4,9 +4,10 @@ import junit.framework.TestCase;
 
 import org.joda.time.LocalDate;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Enumeration;
 
 import ledge.muscleup.model.exercise.ExerciseIntensity;
 import ledge.muscleup.model.exercise.ExerciseSets;
@@ -100,7 +101,14 @@ public class WorkoutSessionTest extends TestCase {
                 new WorkoutSessionExercise("Sit-ups", ExerciseIntensity.HIGH,
                         ExerciseType.FULL_BODY, new ExerciseSets(3, 20), false)));
 
-        //Test getExerciseEnumeration
+        assertNotNull(workoutSession1.getExerciseEnumeration());
+        assertTrue(workoutSession1.getExerciseEnumeration() instanceof Enumeration);
+
+        assertNotNull(workoutSession2.getExerciseEnumeration());
+        assertTrue(workoutSession2.getExerciseEnumeration() instanceof Enumeration);
+
+        assertNotNull(workoutSession3.getExerciseEnumeration());
+        assertTrue(workoutSession3.getExerciseEnumeration() instanceof Enumeration);
 
         System.out.println("Finishing testWorkoutSession");
     }
