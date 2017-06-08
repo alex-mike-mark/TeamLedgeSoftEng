@@ -13,6 +13,7 @@ import java.util.List;
 
 import ledge.muscleup.R;
 import ledge.muscleup.application.Services;
+import ledge.muscleup.business.AccessWorkouts;
 import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
@@ -31,19 +32,28 @@ public class WorkoutActivity extends Activity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        InterfaceDataAccess db = Services.getDataAccess();
+        AccessWorkouts aw = new AccessWorkouts();
+        ListManager lm = new ListManager();
         final List workoutArray;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_display);
 
-        workoutArray = db.getWorkoutNamesList();
+        workoutArray = aw.getWorkoutNamesList();
 
         TextView filter = (TextView) findViewById(R.id.filter_title);
         filter.setText("Filter: none");
 
-        populateList(workoutArray);
+        lm.populateList(this, workoutArray);
 
+        setupListeners(workoutArray);
+    }
+
+    /**
+     * Places listeners on each list item so clicking will open WorkoutDetailsActivity
+     * @param workoutArray
+     */
+    private void setupListeners(final List workoutArray) {
         ListView list = (ListView) findViewById(R.id.list_panel);
 
         //will respond to clicks by opening a WorkoutDetails and passing the name of the workout clicked
@@ -57,15 +67,5 @@ public class WorkoutActivity extends Activity {
         });
     }
 
-    /**
-     *  Used to insert a List into a list pane defined in the xml as "list_panel"
-     * @param arrayList
-     */
-    private void populateList(List arrayList) {
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                R.layout.activity_listview, arrayList);
 
-        ListView listView = (ListView) findViewById(R.id.list_panel);
-        listView.setAdapter(adapter);
-    }
 }

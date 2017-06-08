@@ -13,6 +13,7 @@ import java.util.List;
 
 import ledge.muscleup.R;
 import ledge.muscleup.application.Services;
+import ledge.muscleup.business.AccessWorkouts;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.persistence.InterfaceDataAccess;
@@ -36,7 +37,8 @@ public class WorkoutDetailsActivity extends Activity {
         String workoutName;
         Intent intent;
         Workout workout;
-        InterfaceDataAccess db = Services.getDataAccess();
+        AccessWorkouts aw = new AccessWorkouts();
+        ListManager lm = new ListManager();
         List exerciseList = new ArrayList();
 
         super.onCreate(savedInstanceState);
@@ -47,7 +49,7 @@ public class WorkoutDetailsActivity extends Activity {
         workoutName = intent.getStringExtra("workoutName");
 
         //get Workout from db
-        workout = (Workout) db.getWorkout(workoutName);
+        workout = (Workout) aw.getWorkout(workoutName);
 
         //fetch all exercises from workout
         Enumeration<WorkoutExercise> exercises = workout.getExerciseEnumeration();
@@ -55,21 +57,10 @@ public class WorkoutDetailsActivity extends Activity {
             exerciseList.add(exercises.nextElement());
         }
 
+        lm.populateList(this, exerciseList);
+
         TextView filter = (TextView) findViewById(R.id.filter_title);
         filter.setText("Filter: none");
-
-        populateList(exerciseList);
     }
 
-    /**
-     *  Used to insert a List into a list pane defined in the xml as "list_panel"
-     * @param arrayList
-     */
-    private void populateList(List arrayList) {
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                R.layout.activity_listview, arrayList);
-
-        ListView listView = (ListView) findViewById(R.id.list_panel);
-        listView.setAdapter(adapter);
-    }
 }

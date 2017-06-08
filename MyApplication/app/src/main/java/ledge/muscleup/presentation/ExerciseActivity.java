@@ -10,6 +10,7 @@ import java.util.List;
 
 import ledge.muscleup.R;
 import ledge.muscleup.application.Services;
+import ledge.muscleup.business.AccessExercises;
 import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
@@ -28,30 +29,19 @@ public class ExerciseActivity extends Activity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        InterfaceDataAccess db = Services.getDataAccess();
+        AccessExercises ae = new AccessExercises();
+        ListManager lm = new ListManager();
         List exerciseArray;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_display);
 
-        exerciseArray = db.getExercisesList();
+        exerciseArray = ae.getExercisesList();
 
         TextView filter = (TextView) findViewById(R.id.filter_title);
         filter.setText("Filter: none");
 
-        populateList(exerciseArray);
-
+        lm.populateList(this, exerciseArray);
     }
 
-    /**
-     *  Used to insert a List into a list pane defined in the xml as "workout_list"
-     * @param arrayList
-     */
-    private void populateList(List arrayList) {
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                R.layout.activity_listview, arrayList);
-
-        ListView listView = (ListView) findViewById(R.id.list_panel);
-        listView.setAdapter(adapter);
-    }
 }
