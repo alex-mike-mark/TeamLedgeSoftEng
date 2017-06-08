@@ -2,17 +2,13 @@ package ledge.muscleup.presentation;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import ledge.muscleup.R;
-import ledge.muscleup.application.Services;
 import ledge.muscleup.business.AccessExercises;
 import ledge.muscleup.business.InterfaceAccessExercises;
-import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
  * ExerciseActivity displays a list of exercises, showing their name, intensity, and exercise type

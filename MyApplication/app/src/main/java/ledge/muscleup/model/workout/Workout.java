@@ -8,7 +8,6 @@ import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 
 import static java.util.Collections.enumeration;
-import static java.util.Collections.lastIndexOfSubList;
 
 /**
  * Stores information about workouts, which consists of a workout name, a set of exercises and

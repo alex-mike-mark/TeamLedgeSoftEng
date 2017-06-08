@@ -5,17 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import ledge.muscleup.R;
-import ledge.muscleup.application.Services;
 import ledge.muscleup.business.AccessWorkouts;
 import ledge.muscleup.business.InterfaceAccessWorkouts;
-import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
  * WorkoutActivity displays a list of workouts that the user can click on to view list of exercises

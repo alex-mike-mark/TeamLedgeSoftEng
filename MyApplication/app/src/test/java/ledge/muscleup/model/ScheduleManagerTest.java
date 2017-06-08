@@ -2,7 +2,6 @@ package ledge.muscleup.model;
 
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
