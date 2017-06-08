@@ -9,6 +9,7 @@ import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
 
 import static java.util.Collections.enumeration;
+import static java.util.Collections.lastIndexOfSubList;
 
 /**
  * Stores information about workouts, which consists of a workout name, a set of exercises and
@@ -207,10 +208,26 @@ public class Workout implements InterfaceWorkout {
      */
     @Override
     public boolean removeExercise(InterfaceWorkoutExercise exercise) throws IllegalArgumentException {
+        boolean exerciseRemoved = false;
+        int exerciseIndex = -1;
+        InterfaceWorkoutExercise listExercise;
+
         if (exercise == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else {
-            return exerciseList.remove(exercise);
+            for(int i = 0; i < exerciseList.size() && exerciseIndex < 0; i++){
+                if(exercise.equals(exerciseList.get(i))){
+                    exerciseIndex = i;
+                }
+            }
+
+            //ensure the exercise exists in the list
+            if (exerciseIndex != -1) {
+                exerciseList.remove(exerciseIndex);
+                exerciseRemoved = true;
+            }
+
+            return exerciseRemoved;
             //TODO - requires database update
         }
     }

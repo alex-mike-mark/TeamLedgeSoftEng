@@ -101,9 +101,12 @@ public class WorkoutTest extends TestCase {
         workout1.removeExercise(workoutExercise1);
         assertEquals(0, workout1.numExercises());
 
-        //Doesn't remove workoutExercise4 from workout2?
-        //workout2.removeExercise(workoutExercise4);
-        //assertEquals(2, workout2.numExercises());
+        workout2.removeExercise(workoutExercise4);
+        assertEquals(2, workout2.numExercises());
+
+        WorkoutExercise workoutExercise5 = new WorkoutExercise("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 10));
+        workout2.removeExercise(workoutExercise5);
+        assertEquals(1, workout2.numExercises());
 
         //Test getExerciseEnumeration
 
