@@ -190,7 +190,6 @@ public class ScheduleManager implements InterfaceScheduleManager {
     private void populateWorkoutList() {
         List<WorkoutSession> sessionList;
         WorkoutSession currSession;
-        boolean datesInRange = true;
         LocalDate lastDayOfWeek = getWeekday(DateTimeConstants.SUNDAY);
 
         sessionList = dataAccess.getSessionsInDateRange(firstDayOfWeek, lastDayOfWeek);

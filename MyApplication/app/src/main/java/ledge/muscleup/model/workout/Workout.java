@@ -109,7 +109,7 @@ public class Workout {
     /**
      * Returns {@code true} if the workout is a favourite workout, and {@code false} otherwise
      *
-     * @return a boolean represeting whether this workout is a favourite workout
+     * @return a boolean representing whether this workout is a favourite workout
      */
     public boolean isFavourite() { return isFavourite; }
 
@@ -198,7 +198,6 @@ public class Workout {
     public boolean removeExercise(WorkoutExercise exercise) throws IllegalArgumentException {
         boolean exerciseRemoved = false;
         int exerciseIndex = -1;
-        WorkoutExercise listExercise;
 
         if (exercise == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
