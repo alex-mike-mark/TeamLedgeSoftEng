@@ -21,8 +21,8 @@ import ledge.muscleup.model.exercise.WorkoutExercise;
  * @since 2017-06-07
  */
 public class WorkoutTest extends TestCase {
-    Workout workout1, workout2, workout3;
-    WorkoutExercise[] exerciseList1, exerciseList2;
+    private Workout workout1, workout2, workout3;
+    private WorkoutExercise[] exerciseList1, exerciseList2;
 
     /**
      * Initializes several new instances of Workout to setup testing

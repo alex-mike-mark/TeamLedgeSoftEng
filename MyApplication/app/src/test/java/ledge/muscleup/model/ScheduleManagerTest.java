@@ -38,7 +38,7 @@ import ledge.muscleup.persistence.InterfaceDataAccess;
 
 public class ScheduleManagerTest {
     private ScheduleManager scheduleManager;
-    InterfaceAccessWorkoutSessions dataAccess;
+    private InterfaceAccessWorkoutSessions dataAccess;
 
     /**
      * Constructor for the ScheduleManagerTest

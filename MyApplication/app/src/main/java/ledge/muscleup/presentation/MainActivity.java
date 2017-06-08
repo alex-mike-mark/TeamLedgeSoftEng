@@ -9,7 +9,7 @@ import ledge.muscleup.R;
 import ledge.muscleup.application.Services;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String dbName="workout_till_you_dropout";
+    private static final String dbName = "workout_till_you_dropout";
 
     /**
      * Setup for MainActivity
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Create the stub stub database
      */
-    public static void startUp()
+    private static void startUp()
     {
         Services.createDataAccess(dbName);
     }
