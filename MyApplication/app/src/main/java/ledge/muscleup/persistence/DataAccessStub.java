@@ -117,31 +117,31 @@ public class DataAccessStub implements InterfaceDataAccess {
         workoutSessionsByDate = new TreeMap<>();
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Welcome to the Gun Show")),
-                new LocalDate(2017, 06, 12),
+                new LocalDate(2017, 06, 5),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Never Skip Leg Day")),
-                new LocalDate(2017, 06, 13),
+                new LocalDate(2017, 06, 6),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Work that Core, Get that Score!")),
-                new LocalDate(2017, 06, 14),
+                new LocalDate(2017, 06, 7),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Never Skip Leg Day")),
-                new LocalDate(2017, 06, 16),
+                new LocalDate(2017, 06, 9),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Marathon Training Starts Here")),
-                new LocalDate(2017, 06, 17),
+                new LocalDate(2017, 06, 10),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 

@@ -10,33 +10,34 @@ import java.util.List;
 
 import ledge.muscleup.R;
 import ledge.muscleup.application.Services;
+import ledge.muscleup.business.AccessWorkoutSessions;
+import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
+import ledge.muscleup.business.InterfaceScheduleManager;
+import ledge.muscleup.business.ScheduleManager;
 import ledge.muscleup.persistence.DataAccessStub;
 import ledge.muscleup.persistence.InterfaceDataAccess;
 
+/**
+ * ScheduleActivity displays a list of workout sessions
+ *
+ * @author Cole Kehler
+ * @version 1.0
+ * @since 2017-06-07
+ */
 public class ScheduleActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        InterfaceDataAccess db = Services.getDataAccess();
+        InterfaceScheduleManager scheduleManager = new ScheduleManager(new AccessWorkoutSessions());
+        ListManager lm = new ListManager();
         List scheduleArray;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_display);
 
-        scheduleArray = db.getWorkoutSessionsList();
+        scheduleArray = scheduleManager.getWorkoutSessionList();
 
-        populateList(scheduleArray);
+        lm.populateList(this, scheduleArray);
     }
 
-    /**
-     *  Used to insert a List into a list pane defined in the xml as "workout_list"
-     * @param arrayList
-     */
-    private void populateList(List arrayList) {
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                R.layout.activity_listview, arrayList);
-
-        ListView listView = (ListView) findViewById(R.id.list_panel);
-        listView.setAdapter(adapter);
-    }
 }

@@ -2,6 +2,8 @@ package ledge.muscleup.business;
 
 import org.joda.time.LocalDate;
 
+import java.util.List;
+
 import ledge.muscleup.model.workout.WorkoutSession;
 
 /**
@@ -31,6 +33,12 @@ public interface InterfaceScheduleManager {
      * @return the workout scheduled on that day of the week, or {@code null} if the day was empty
      */
     WorkoutSession getScheduledWorkout(int dayOfWeek) throws IllegalArgumentException;
+
+    /**
+     * Returns a list of all workout sessions in the schedule for the current week
+     * @return the list of all workout session in the schedule for the current week
+     */
+    List<WorkoutSession> getWorkoutSessionList();
 
     /**
      * Returns {@code true} if the given day of the week has no workouts scheduled, or {@code false}

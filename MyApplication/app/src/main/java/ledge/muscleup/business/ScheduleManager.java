@@ -3,6 +3,8 @@ package ledge.muscleup.business;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import ledge.muscleup.model.workout.WorkoutSession;
@@ -66,6 +68,22 @@ public class ScheduleManager implements InterfaceScheduleManager {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else
             return workoutSessions[dayOfWeek - 1];
+    }
+
+    /**
+     * Returns a list of all workout sessions in the schedule for the current week
+     *
+     * @return the list of all workout session in the schedule for the current week
+     */
+    @Override
+    public List<WorkoutSession> getWorkoutSessionList() {
+        ArrayList<WorkoutSession> workoutList = new ArrayList<>();
+
+        for (int i = 0; i < workoutSessions.length; i++)
+            if (workoutSessions[i] != null)
+                workoutList.add(workoutSessions[i]);
+
+        return workoutList;
     }
 
     /**

@@ -13,6 +13,8 @@ import java.util.List;
 
 import ledge.muscleup.R;
 import ledge.muscleup.application.Services;
+import ledge.muscleup.business.AccessWorkouts;
+import ledge.muscleup.business.InterfaceAccessWorkouts;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.persistence.InterfaceDataAccess;
@@ -33,43 +35,44 @@ public class WorkoutDetailsActivity extends Activity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String workoutName;
-        Intent intent;
-        Workout workout;
-        InterfaceDataAccess db = Services.getDataAccess();
+        ListManager lm = new ListManager();
         List exerciseList = new ArrayList();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_display);
+
+        exerciseList = getExcersiseList();
+
+        lm.populateList(this, exerciseList);
+
+        TextView filter = (TextView) findViewById(R.id.filter_title);
+        filter.setText("Filter: none");
+    }
+
+    /**
+     * getExerciseList will get the workout that was clicked on in WorkoutActivity and return the exercises associated
+     * @return list of exercises for a workout
+     */
+    private List getExcersiseList(){
+        String workoutName;
+        Intent intent;
+        Workout workout;
+        InterfaceAccessWorkouts aw = (InterfaceAccessWorkouts) new AccessWorkouts();
+        List retList = new ArrayList();
 
         //get name of workout
         intent = getIntent();
         workoutName = intent.getStringExtra("workoutName");
 
         //get Workout from db
-        workout = (Workout) db.getWorkout(workoutName);
+        workout = (Workout) aw.getWorkout(workoutName);
 
         //fetch all exercises from workout
         Enumeration<WorkoutExercise> exercises = workout.getExerciseEnumeration();
         while(exercises.hasMoreElements()){
-            exerciseList.add(exercises.nextElement());
+            retList.add(exercises.nextElement());
         }
 
-        TextView filter = (TextView) findViewById(R.id.filter_title);
-        filter.setText("Filter: none");
-
-        populateList(exerciseList);
-    }
-
-    /**
-     *  Used to insert a List into a list pane defined in the xml as "list_panel"
-     * @param arrayList
-     */
-    private void populateList(List arrayList) {
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                R.layout.activity_listview, arrayList);
-
-        ListView listView = (ListView) findViewById(R.id.list_panel);
-        listView.setAdapter(adapter);
+        return retList;
     }
 }
