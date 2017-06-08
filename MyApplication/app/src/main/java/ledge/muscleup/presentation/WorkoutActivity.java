@@ -33,7 +33,7 @@ public class WorkoutActivity extends Activity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        InterfaceAccessWorkouts aw = (InterfaceAccessWorkouts) new AccessWorkouts();
+        InterfaceAccessWorkouts aw = new AccessWorkouts();
         ListManager lm = new ListManager();
         final List workoutArray;
 

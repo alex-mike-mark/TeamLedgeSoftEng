@@ -15,7 +15,7 @@ import ledge.muscleup.persistence.DataAccessStub;
  * @version 1.0
  * @since 2017-06-05
  */
-class AccessWorkouts {
+public class AccessWorkouts implements InterfaceAccessWorkouts {
     private DataAccessStub dataAccess;
 
     /**
