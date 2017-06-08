@@ -3,6 +3,7 @@ package ledge.muscleup.business;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -76,7 +77,13 @@ public class ScheduleManager implements InterfaceScheduleManager {
      */
     @Override
     public List<WorkoutSession> getWorkoutSessionList() {
-        return Arrays.asList(workoutSessions);
+        ArrayList<WorkoutSession> workoutList = new ArrayList<>();
+
+        for (int i = 0; i < workoutSessions.length; i++)
+            if (workoutSessions[i] != null)
+                workoutList.add(workoutSessions[i]);
+
+        return workoutList;
     }
 
     /**
