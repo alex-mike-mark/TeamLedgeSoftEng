@@ -1,5 +1,9 @@
 This is the submission for iteration 1 of MuscleUp.
 MuscleUp is an app intended to help people create and stick to their fitness goals. The app is inteded to feature a variety of exercises, the ability to create custom workouts, schedule sessions and gamify their progress.
+Created by: Cole Kehler, Ryan Koop, Matt Smidt, Alex Mark and Jon Ingram
+
+###Git Repository###
+https://github.com/kerosenecity/TeamLedgeSoftEng
 
 ###Contents of this .zip###
 This readme plus our source code. The log is found in a google doc linked far below.
