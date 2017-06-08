@@ -38,7 +38,7 @@ import ledge.muscleup.persistence.InterfaceDataAccess;
 
 public class ScheduleManagerTest {
     private ScheduleManager scheduleManager;
-    InterfaceDataAccess dataAccess;
+    InterfaceAccessWorkoutSessions dataAccess;
 
     /**
      * Constructor for the ScheduleManagerTest
@@ -50,17 +50,8 @@ public class ScheduleManagerTest {
      */
     @Before
     public void testInit(){
-        dataAccess = (InterfaceDataAccess) new TemplateAccessWorkoutSessions();
-        dataAccess.open();
-        scheduleManager = new ScheduleManager((InterfaceAccessWorkoutSessions) dataAccess);
-    }
-
-    /**
-     * Closes the database access
-     */
-    @After
-    public void testCleanup(){
-        dataAccess.close();
+        dataAccess = new TemplateAccessWorkoutSessions();
+        scheduleManager = new ScheduleManager(dataAccess);
     }
 
     /**
@@ -176,6 +167,7 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      */
     TemplateAccessWorkoutSessions() {
         dataAccess = new TemplateDataAccessStub("testDB");
+        dataAccess.open();
     }
 
     /**
