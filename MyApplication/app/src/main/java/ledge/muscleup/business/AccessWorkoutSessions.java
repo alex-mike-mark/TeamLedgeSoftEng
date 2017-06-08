@@ -58,7 +58,7 @@ public class AccessWorkoutSessions {
      * Adds a new workout session to the database
      * @param workoutSession the workout session to be added to the database
      */
-    public void insertWorkout(WorkoutSession workoutSession) {
+    public void insertWorkoutSession(WorkoutSession workoutSession) {
         dataAccess.insertWorkoutSession(workoutSession);
     }
 

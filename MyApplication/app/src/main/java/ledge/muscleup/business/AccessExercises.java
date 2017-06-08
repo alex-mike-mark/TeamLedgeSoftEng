@@ -48,6 +48,7 @@ public class AccessExercises {
     public List<String> getExerciseNamesList() {
         return dataAccess.getExerciseNamesList();
     }
+
     /**
      * This method inserts a new exercise into the database
      * @param exercise the exercise to be inserted

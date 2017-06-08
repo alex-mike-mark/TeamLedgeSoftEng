@@ -11,12 +11,13 @@ import java.util.List;
 import ledge.muscleup.R;
 import ledge.muscleup.application.Services;
 import ledge.muscleup.persistence.DataAccessStub;
+import ledge.muscleup.persistence.InterfaceDataAccess;
 
 public class ScheduleActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        DataAccessStub db = Services.getDataAccess();
+        InterfaceDataAccess db = Services.getDataAccess();
         List scheduleArray;
 
         super.onCreate(savedInstanceState);
