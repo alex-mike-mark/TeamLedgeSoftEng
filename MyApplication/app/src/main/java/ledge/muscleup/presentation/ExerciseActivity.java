@@ -30,7 +30,7 @@ public class ExerciseActivity extends Activity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        InterfaceAccessExercises ae = (InterfaceAccessExercises) new AccessExercises();
+        InterfaceAccessExercises ae = new AccessExercises();
         ListManager lm = new ListManager();
         List exerciseArray;
 
