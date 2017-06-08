@@ -16,11 +16,17 @@ import org.junit.Test;
 public class ExerciseSetsAndWeightTest extends TestCase {
     private ExerciseSetsAndWeight exerciseSetsAndWeight;
 
+    /**
+     * Initializes an instance of ExerciseSetsAndWeight to setup testing
+     */
     @Before
     public void setUp(){
         exerciseSetsAndWeight = new ExerciseSetsAndWeight(3, 10, 30.0, WeightUnit.LBS);
     }
 
+    /**
+     * Tests the initialization of an ExerciseSetsAndWeight instance
+     */
     @Test
     public void testInvalidInitialization() {
         System.out.println("\nStarting testInvalidInitialization");
@@ -44,6 +50,10 @@ public class ExerciseSetsAndWeightTest extends TestCase {
         System.out.println("Finishing testInvalidInitialization");
     }
 
+    /**
+     * Tests various functionality of the ExerciseSetsAndWeight class, including proper return values
+     * of getWeight() and getUnitOfMeasure(), as well as proper equal checking
+     */
     @Test
     public void testExerciseSetsAndWeight() {
         System.out.println("\nStarting testExerciseSetsAndWeight");

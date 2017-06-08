@@ -12,11 +12,12 @@ import org.junit.Test;
  * @version 1.0
  * @since 2017-06-07
  */
-
 public class ExerciseTest extends TestCase {
-
     Exercise exercise1, exercise2, exercise3;
 
+    /**
+     * Initializes several instances of Exercise to setup testing
+     */
     @Before
     public void setUp(){
         exercise1 = new Exercise("Bicep Curls ;)", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, true);
@@ -24,6 +25,10 @@ public class ExerciseTest extends TestCase {
         exercise3 = new Exercise("Bicep Curls ;)", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, true);
     }
 
+    /**
+     * Tests various functionality of the Exercise class, including proper return values of
+     * getter methods, and equals checking
+     */
     @Test
     public void testExercise() {
         System.out.println("\nStarting testExercise");
