@@ -6,11 +6,8 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 
-import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
-import ledge.muscleup.model.exercise.InterfaceWorkoutSessionExercise;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 
@@ -24,12 +21,11 @@ import static java.util.Collections.enumeration;
  * @since 2017-06-03
  */
 
-public class WorkoutSession implements InterfaceWorkoutSession {
+public class WorkoutSession {
     private static final DateTimeFormatter format = DateTimeFormat.forPattern("yyyy/MM/dd");
 
     private String name;
-    private List<InterfaceWorkoutSessionExercise> exerciseList;
-    private Iterator<InterfaceWorkoutSessionExercise> exerciseListIterator;
+    private List<WorkoutSessionExercise> exerciseList;
     private LocalDate scheduledDate;
     private boolean isComplete;
 
@@ -49,9 +45,9 @@ public class WorkoutSession implements InterfaceWorkoutSession {
             this.scheduledDate = scheduledDate;
             this.isComplete = isComplete;
             this.exerciseList = new ArrayList<>();
-            Enumeration<InterfaceWorkoutExercise> enumeration = workout.getExerciseEnumeration();
+            Enumeration<WorkoutExercise> enumeration = workout.getExerciseEnumeration();
             while(enumeration.hasMoreElements())
-                exerciseList.add(new WorkoutSessionExercise((WorkoutExercise) enumeration.nextElement(), false));
+                exerciseList.add(new WorkoutSessionExercise(enumeration.nextElement(), false));
         }
 
     }
@@ -61,7 +57,6 @@ public class WorkoutSession implements InterfaceWorkoutSession {
      *
      * @return the name of the workout
      */
-    @Override
     public String getName() {
         return name;
     }
@@ -71,7 +66,6 @@ public class WorkoutSession implements InterfaceWorkoutSession {
      *
      * @return the scheduled date of the workout
      */
-    @Override
     public LocalDate getDate() { return scheduledDate; }
 
     /**
@@ -80,7 +74,6 @@ public class WorkoutSession implements InterfaceWorkoutSession {
      * @param newDate the new date of the workout
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    @Override
     public void setDate(LocalDate newDate) throws IllegalArgumentException {
         if (newDate == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
@@ -95,7 +88,6 @@ public class WorkoutSession implements InterfaceWorkoutSession {
      *
      * @return a boolean representing if the workout has been completed
      */
-    @Override
     public boolean isComplete() {
         return isComplete;
     }
@@ -103,7 +95,6 @@ public class WorkoutSession implements InterfaceWorkoutSession {
     /**
      * Toggles the completed state of this workout
      */
-    @Override
     public void toggleCompleted() {
         isComplete = !isComplete;
         //TODO - requires database update
@@ -114,7 +105,6 @@ public class WorkoutSession implements InterfaceWorkoutSession {
      *
      * @return the number of exercises in the workout
      */
-    @Override
     public int numExercises() {
         return exerciseList.size();
     }
@@ -125,11 +115,10 @@ public class WorkoutSession implements InterfaceWorkoutSession {
      * @throws IllegalArgumentException if passed a {@code null} parameter
      * @return a boolean representing whether the exercise was marked as completed or not
      */
-    @Override
-    public boolean completeExercise(InterfaceWorkoutSessionExercise exercise) throws IllegalArgumentException {
+    public boolean completeExercise(WorkoutSessionExercise exercise) throws IllegalArgumentException {
         boolean exerciseCompleted = false;
         int exerciseIndex = -1;
-        InterfaceWorkoutSessionExercise listExercise;
+        WorkoutSessionExercise listExercise;
 
         if (exercise == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
@@ -156,21 +145,19 @@ public class WorkoutSession implements InterfaceWorkoutSession {
      *
      * @return an enumeration of the exercises
      */
-    @Override
-    public Enumeration<InterfaceWorkoutSessionExercise> getExerciseEnumeration() {
+    public Enumeration<WorkoutSessionExercise> getExerciseEnumeration() {
         return enumeration(exerciseList);
     }
 
     /**
-     * Compares the current WorkoutSession to another instance of InterfaceWorkoutSession
+     * Compares the current WorkoutSession to another instance of WorkoutSession
      *
-     * @param other the instance of InterfaceWorkoutSession to compare to
+     * @param other the instance of WorkoutSession to compare to
      * @return a boolean representing whether the two instances were equal
      */
-    @Override
-    public boolean equals(InterfaceWorkoutSession other) {
-        Enumeration<InterfaceWorkoutSessionExercise> thisEnumeration;
-        Enumeration<InterfaceWorkoutSessionExercise> otherEnumeration;
+    public boolean equals(WorkoutSession other) {
+        Enumeration<WorkoutSessionExercise> thisEnumeration;
+        Enumeration<WorkoutSessionExercise> otherEnumeration;
         boolean isEqual = false;
         boolean exercisesEqual = true;
 

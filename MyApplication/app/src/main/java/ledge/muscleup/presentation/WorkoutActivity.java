@@ -13,7 +13,7 @@ import java.util.List;
 
 import ledge.muscleup.R;
 import ledge.muscleup.application.Services;
-import ledge.muscleup.persistence.DataAccessStub;
+import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
  * WorkoutActivity displays a list of workouts that the user can click on to view list of exercises
@@ -31,7 +31,7 @@ public class WorkoutActivity extends Activity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        DataAccessStub db = Services.getDataAccess();
+        InterfaceDataAccess db = Services.getDataAccess();
         final List workoutArray;
 
         super.onCreate(savedInstanceState);

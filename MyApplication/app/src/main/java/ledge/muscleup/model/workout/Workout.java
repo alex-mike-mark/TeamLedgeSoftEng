@@ -2,11 +2,10 @@ package ledge.muscleup.model.workout;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
-import ledge.muscleup.model.exercise.InterfaceWorkoutExercise;
+import ledge.muscleup.model.exercise.WorkoutExercise;
 
 import static java.util.Collections.enumeration;
 import static java.util.Collections.lastIndexOfSubList;
@@ -19,10 +18,9 @@ import static java.util.Collections.lastIndexOfSubList;
  * @version 1.0
  * @since 2017-05-27
  */
-public class Workout implements InterfaceWorkout {
+public class Workout {
     private String name;
-    private List<InterfaceWorkoutExercise> exerciseList;
-    private Iterator<InterfaceWorkoutExercise> exerciseListIterator;
+    private List<WorkoutExercise> exerciseList;
     private boolean isFavourite;
 
     /**
@@ -48,7 +46,7 @@ public class Workout implements InterfaceWorkout {
      * @param exercises the list of exercises that make up the workout
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    public Workout(String name, boolean isFavourite, InterfaceWorkoutExercise[] exercises) throws IllegalArgumentException {
+    public Workout(String name, boolean isFavourite, WorkoutExercise[] exercises) throws IllegalArgumentException {
         if (name == null || exercises == null) {
             throw (new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
@@ -67,7 +65,6 @@ public class Workout implements InterfaceWorkout {
      *
      * @return the name of the workout
      */
-    @Override
     public String getName() {
         return name;
     }
@@ -77,7 +74,6 @@ public class Workout implements InterfaceWorkout {
      *
      * @param newName the new name for the workout
      */
-    @Override
     public void setName(String newName) {
         name = newName;
     }
@@ -90,8 +86,7 @@ public class Workout implements InterfaceWorkout {
      * @throws IllegalArgumentException if passed a {@code null} parameter
      * @return a boolean representing if the exercise was found and updated in the workout
      */
-    @Override
-    public boolean setRecommendedQuantity(InterfaceWorkoutExercise exercise,
+    public boolean setRecommendedQuantity(WorkoutExercise exercise,
                                           InterfaceExerciseQuantity quantity) throws IllegalArgumentException {
         boolean quantityUpdated = false;
         int exerciseIndex = -1;
@@ -117,13 +112,11 @@ public class Workout implements InterfaceWorkout {
      *
      * @return a boolean represeting whether this workout is a favourite workout
      */
-    @Override
     public boolean isFavourite() { return isFavourite; }
 
     /**
      * Toggle the favourite status of this workout
      */
-    @Override
     public void toggleFavourite() {
         isFavourite = !isFavourite;
         //TODO - requires database update
@@ -134,7 +127,6 @@ public class Workout implements InterfaceWorkout {
      *
      * @return the number of exercises in the workout
      */
-    @Override
     public int numExercises() {
         return exerciseList.size();
     }
@@ -145,8 +137,7 @@ public class Workout implements InterfaceWorkout {
      * @param exercise the exercise to add to the workout
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    @Override
-    public void addExercise(InterfaceWorkoutExercise exercise) throws IllegalArgumentException {
+    public void addExercise(WorkoutExercise exercise) throws IllegalArgumentException {
         if (exercise == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else {
@@ -164,12 +155,11 @@ public class Workout implements InterfaceWorkout {
      * outside the bounds of the list of exercises
      * @return a boolean representing if the exercise was found and moved to the new index
      */
-    @Override
-    public boolean moveExercise(InterfaceWorkoutExercise exercise,
+    public boolean moveExercise(WorkoutExercise exercise,
                                 int index) throws IllegalArgumentException {
         boolean exerciseMoved = false;
         int exerciseIndex = -1;
-        InterfaceWorkoutExercise listExercise;
+        WorkoutExercise listExercise;
         int listSize = exerciseList.size();
 
         if (exercise == null || index <= 0 || index > listSize)
@@ -206,11 +196,10 @@ public class Workout implements InterfaceWorkout {
      * @throws IllegalArgumentException if passed a {@code null} parameter
      * @return the exercise that was removed, or {@code null} if the exercise couldn't be found
      */
-    @Override
-    public boolean removeExercise(InterfaceWorkoutExercise exercise) throws IllegalArgumentException {
+    public boolean removeExercise(WorkoutExercise exercise) throws IllegalArgumentException {
         boolean exerciseRemoved = false;
         int exerciseIndex = -1;
-        InterfaceWorkoutExercise listExercise;
+        WorkoutExercise listExercise;
 
         if (exercise == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
@@ -235,19 +224,17 @@ public class Workout implements InterfaceWorkout {
     /**
      * Returns an enumeration for traversing over the exercises in the workout
      */
-    @Override
-    public Enumeration<InterfaceWorkoutExercise> getExerciseEnumeration() {
+    public Enumeration<WorkoutExercise> getExerciseEnumeration() {
         return enumeration(exerciseList);
     }
 
     /**
-     * Compares the current Workout to another instance of InterfaceWorkout
+     * Compares the current Workout to another instance of Workout
      *
-     * @param other the instance of InterfaceWorkout to compare to
+     * @param other the instance of Workout to compare to
      * @return a boolean representing whether the two instances were equal
      */
-    @Override
-    public boolean equals(InterfaceWorkout other) {
+    public boolean equals(Workout other) {
         return other != null && this.name.equals(other.getName());
     }
 
