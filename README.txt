@@ -62,16 +62,23 @@ Also contained is our blood, sweat and tears, though they don't compress so well
 				MuscleUpApplication (sets up JODA for date, time tracking)
 	test
 		ledge.muscleup.model
+			exercise
+				ExerciseDistanceTest
+				ExerciseDurationTest
+				ExerciseQuantityTest
+				ExerciseSetsAndWeightTest
+				ExerciseSetsTest
+				ExerciseTest
+				WorkoutExerciseTest
+				WorkoutSessionExerciseTest
+			workout
+				WorkoutSessionTest
+				WorkoutTest
 			AllTests
-			ExampleUnitTest
-			ExerciseDistanceTest
-			ExerciseDurationTest
-			ExerciseQuantityTest
-			ExerciseSetsTest
-			ListedExerciseTest
-			ModifiableWorkoutTest
-			ScheduleManagerTest
-			TemplateDataAccessStub
+			ScheduleManagerTest.java
+				ScheduleManagerTest
+				TemplateAccessWorkoutSessions
+				TemplateDataAccessStub
 
 ###Log Location###
 The log is in this google doc: <https://docs.google.com/document/d/18dOXb27PLIrS7kjHcLGODmWes66gZQpesqNNg8ew2Go/edit>
