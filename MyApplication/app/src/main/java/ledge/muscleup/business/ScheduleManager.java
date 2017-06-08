@@ -19,9 +19,9 @@ import ledge.muscleup.model.workout.WorkoutSession;
 public class ScheduleManager implements InterfaceScheduleManager {
     private LocalDate firstDayOfWeek;
     private WorkoutSession[] workoutSessions;
-    private AccessWorkoutSessions dataAccess;
+    private InterfaceAccessWorkoutSessions dataAccess;
 
-    public ScheduleManager(AccessWorkoutSessions dataAccess) {
+    public ScheduleManager(InterfaceAccessWorkoutSessions dataAccess) {
         if (dataAccess == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else {
