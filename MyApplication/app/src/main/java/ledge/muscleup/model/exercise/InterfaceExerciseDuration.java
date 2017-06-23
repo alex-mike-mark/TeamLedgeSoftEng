@@ -11,9 +11,14 @@ package ledge.muscleup.model.exercise;
 
 public interface InterfaceExerciseDuration extends InterfaceExerciseQuantity {
     /**
-     * Get the number of minutes exercised
-     * @return the number of minutes exercised
+     * Get the number for time exercised
+     * @return the number for time exercised
      */
-    int getMinutes();
+    int getTime();
+
+    /**
+     * Returns the unit of measurement for the time
+     * @return the unit of measurement
+     */
     TimeUnit getUnitOfMeasure();
 }

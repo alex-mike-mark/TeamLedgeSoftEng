@@ -41,7 +41,7 @@ public class ExerciseDurationTest extends TestCase {
 
     /**
      * Tests the various functionality of the ExerciseDuration class, including proper creation,
-     * correct return of getMinutes(), and correct equal checking
+     * correct return of getTime(), and correct equal checking
      */
     @Test
     public void testExerciseDuration() {
@@ -49,7 +49,7 @@ public class ExerciseDurationTest extends TestCase {
 
         assertNotNull(exerciseDuration);
 
-        assertEquals(30, exerciseDuration.getMinutes());
+        assertEquals(30, exerciseDuration.getTime());
         assertEquals(true, exerciseDuration.equals(new ExerciseDuration(30, TimeUnit.MINUTES)));
         assertEquals(false, exerciseDuration.equals(new ExerciseDuration(45, TimeUnit.MINUTES)));
 
