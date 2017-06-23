@@ -11,19 +11,21 @@ import java.text.DecimalFormat;
  * @since 2017-05-29
 */
 public class ExerciseDuration implements InterfaceExerciseDuration {
-    private double minutes;
+    private int minutes;
+    private TimeUnit unitOfMeasure;
 
     /**
      * Default constructor for the ExerciseDuration class
      * @param minutes the number of minutes exercised
      * @throws IllegalArgumentException if {@code minutes < 0}
      */
-    public ExerciseDuration (double minutes) throws IllegalArgumentException {
+    public ExerciseDuration (int minutes, TimeUnit unitOfMeasure) throws IllegalArgumentException {
         if(minutes < 0) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
         else {
             this.minutes = minutes;
+            this.unitOfMeasure = unitOfMeasure;
         }
     }
 
@@ -32,8 +34,17 @@ public class ExerciseDuration implements InterfaceExerciseDuration {
      * @return the number of minutes exercised
      */
     @Override
-    public double getMinutes() {
+    public int getMinutes() {
         return minutes;
+    }
+
+    /**
+     * Returns the unit of measurement for the distance
+     * @return the unit of measurement
+     */
+    @Override
+    public TimeUnit getUnitOfMeasure() {
+        return unitOfMeasure;
     }
 
     /**
@@ -48,7 +59,8 @@ public class ExerciseDuration implements InterfaceExerciseDuration {
 
         if (other instanceof ExerciseDuration) {
             otherDuration = (ExerciseDuration) other;
-            if (this.minutes == otherDuration.getMinutes()) {
+            if (this.minutes == otherDuration.getMinutes()
+                    && this.unitOfMeasure == otherDuration.getUnitOfMeasure()) {
                 isEqual = true;
             }
         }

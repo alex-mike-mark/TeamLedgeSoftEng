@@ -20,7 +20,7 @@ public class ExerciseDurationTest extends TestCase {
      */
     @Before
     public void setUp(){
-        exerciseDuration = new ExerciseDuration(30.0);
+        exerciseDuration = new ExerciseDuration(30, TimeUnit.MINUTES);
     }
 
     /**
@@ -31,7 +31,7 @@ public class ExerciseDurationTest extends TestCase {
         System.out.println("\nStarting testInvalidInitialization");
 
         try {
-            exerciseDuration = new ExerciseDuration(-1);
+            exerciseDuration = new ExerciseDuration(-1, TimeUnit.MINUTES);
             fail("Expected the illegal argument.");
         } catch (IllegalArgumentException e) {
         }
@@ -49,9 +49,9 @@ public class ExerciseDurationTest extends TestCase {
 
         assertNotNull(exerciseDuration);
 
-        assertEquals(30.0, exerciseDuration.getMinutes());
-        assertEquals(true, exerciseDuration.equals(new ExerciseDuration(30.0)));
-        assertEquals(false, exerciseDuration.equals(new ExerciseDuration(45.0)));
+        assertEquals(30, exerciseDuration.getMinutes());
+        assertEquals(true, exerciseDuration.equals(new ExerciseDuration(30, TimeUnit.MINUTES)));
+        assertEquals(false, exerciseDuration.equals(new ExerciseDuration(45, TimeUnit.MINUTES)));
 
         System.out.println("Finished testExerciseDuration");
     }

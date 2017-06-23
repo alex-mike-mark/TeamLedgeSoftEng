@@ -16,6 +16,7 @@ import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
 import ledge.muscleup.model.exercise.ExerciseType;
 import ledge.muscleup.model.exercise.ExerciseIntensity;
+import ledge.muscleup.model.exercise.TimeUnit;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WeightUnit;
 import ledge.muscleup.model.workout.Workout;
@@ -102,7 +103,7 @@ public class DataAccessStub implements InterfaceDataAccess {
         new ExerciseDistance(2.5, DistanceUnit.MILES));
         addExerciseToWorkout(workout, workoutExercise);
         workoutExercise = new WorkoutExercise(exercisesByName.get("Exercise Bike"),
-        new ExerciseDuration(45));
+        new ExerciseDuration(45, TimeUnit.MINUTES));
         addExerciseToWorkout(workout, workoutExercise);
 
         workout = new Workout("Work that Core, Get that Score!");

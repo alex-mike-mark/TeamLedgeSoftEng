@@ -14,5 +14,6 @@ public interface InterfaceExerciseDuration extends InterfaceExerciseQuantity {
      * Get the number of minutes exercised
      * @return the number of minutes exercised
      */
-    double getMinutes();
+    int getMinutes();
+    TimeUnit getUnitOfMeasure();
 }
