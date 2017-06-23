@@ -5,7 +5,7 @@ package ledge.muscleup.model.exercise;
  *
  * @author Jon Ingram
  * @version 1.0
- * @since 2017-06-023
+ * @since 2017-06-23
  */
 
 public enum TimeUnit {
