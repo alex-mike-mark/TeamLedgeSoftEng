@@ -23,7 +23,7 @@ public class ExerciseQuantityTest  extends TestCase {
     public void setUp(){
         quantity1 = new ExerciseSets(3, 10);
         quantity2 = new ExerciseDistance(2.5, DistanceUnit.MILES);
-        quantity3 = new ExerciseDuration(45);
+        quantity3 = new ExerciseDuration(45, TimeUnit.MINUTES);
         quantity4 = new ExerciseSets(2, 15);
     }
 
@@ -57,10 +57,10 @@ public class ExerciseQuantityTest  extends TestCase {
         assertNotNull(quantity4);
         assertTrue(quantity2.equals(quantity4));
 
-        quantity4 = new ExerciseDuration(15);
+        quantity4 = new ExerciseDuration(15, TimeUnit.MINUTES);
         assertNotNull(quantity4);
         assertFalse(quantity3.equals(quantity4));
-        quantity4 = new ExerciseDuration(45);
+        quantity4 = new ExerciseDuration(45, TimeUnit.MINUTES);
         assertNotNull(quantity4);
         assertTrue(quantity3.equals(quantity4));
 
