@@ -96,6 +96,7 @@ public class WorkoutSessionActivity extends AppCompatActivity {
         //get workout session date
         intent = getIntent();
         workoutSessionDate = formatter.parseLocalDate(intent.getStringExtra("workoutSessionDate"));
+        workoutSession = (WorkoutSession) aws.getWorkoutSession(workoutSessionDate);
 
         //get WorkoutSession from db
         return aws.getExercisesInSession(workoutSessionDate);
