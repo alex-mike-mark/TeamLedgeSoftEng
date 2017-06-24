@@ -116,6 +116,11 @@ public class WorkoutSessionTest extends TestCase {
         assertNotNull(workoutSession3.getExerciseEnumeration());
         assertTrue(workoutSession3.getExerciseEnumeration() instanceof Enumeration);
 
+        assertNotNull(workoutSession1);
+
+        assertNotNull(workoutSession1.getWorkoutSessionExercises());
+        assertNotNull(workoutSession2.getWorkoutSessionExercises());
+        assertNotNull(workoutSession3.getWorkoutSessionExercises());
         System.out.println("Finishing testWorkoutSession");
     }
 }

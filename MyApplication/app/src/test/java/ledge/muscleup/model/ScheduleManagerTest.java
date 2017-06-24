@@ -224,11 +224,6 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
     public void removeWorkoutSession(WorkoutSession workoutSession) {
         dataAccess.removeWorkoutSession(workoutSession);
     }
-
-    @Override
-    public List<WorkoutSessionExercise> getExercisesInSession(LocalDate dateOfSession) {
-        return null;//TODO: actually test this garbage.
-    }
 }
 
 /**

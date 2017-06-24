@@ -50,11 +50,4 @@ public interface InterfaceAccessWorkoutSessions {
      * @param workoutSession the workout session to be removed
      */
     void removeWorkoutSession(WorkoutSession workoutSession);
-
-    /**
-     * Returns a list of the exercises in a given WorkoutSession.
-     * @param dateOfSession
-     * @return It's the list of exercises.
-     */
-    List<WorkoutSessionExercise> getExercisesInSession(LocalDate dateOfSession);
 }

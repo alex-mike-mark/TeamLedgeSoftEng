@@ -73,16 +73,4 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
     public void removeWorkoutSession(WorkoutSession workoutSession) {
         dataAccess.removeWorkoutSession(workoutSession);
     }
-
-    public List<WorkoutSessionExercise> getExercisesInSession(LocalDate dateOfSession){
-        List<WorkoutSessionExercise> retList = new ArrayList<>();
-        WorkoutSession session = getWorkoutSession(dateOfSession);
-
-        Enumeration<WorkoutSessionExercise> exercises = session.getExerciseEnumeration();
-        while(exercises.hasMoreElements()){
-            retList.add(exercises.nextElement());
-        }
-
-        return retList;
-    }
 }
