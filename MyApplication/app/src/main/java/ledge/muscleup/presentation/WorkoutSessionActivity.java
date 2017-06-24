@@ -63,7 +63,7 @@ public class WorkoutSessionActivity extends AppCompatActivity {
         TextView sessionDateTextView = (TextView) findViewById(R.id.workoutSessionDate);
         sessionDateTextView.setText(dateString);
 
-        TextView sessionNameTextView = (TextView) findViewById(R.id.workoutSessionTitle);
+        TextView sessionNameTextView = (TextView) findViewById(R.id.workoutSessionName);
         sessionNameTextView.setText(workoutSession.getName());
 
         numCompletedExercises = 0;
@@ -158,9 +158,9 @@ public class WorkoutSessionActivity extends AppCompatActivity {
             if (convertView == null) {
                 viewHolder = new ViewHolder();
                 convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_workout_session_exercise, parent, false);
-                viewHolder.exerciseName = (TextView) convertView.findViewById(R.id.textView);
-                viewHolder.exerciseQuantity = (TextView) convertView.findViewById(R.id.textView2);
-                viewHolder.completed = (CheckBox)convertView.findViewById(R.id.checkbox);
+                viewHolder.exerciseName = (TextView) convertView.findViewById(R.id.workoutSessionExerciseName);
+                viewHolder.exerciseQuantity = (TextView) convertView.findViewById(R.id.workoutSessionExerciseQuantity);
+                viewHolder.completed = (CheckBox)convertView.findViewById(R.id.exerciseCompletedCheckbox);
 
                 returnedView = convertView;
                 convertView.setTag(viewHolder);
@@ -185,7 +185,7 @@ public class WorkoutSessionActivity extends AppCompatActivity {
                         numCompletedExercises--;
                     }
 
-                    Button completeWorkoutButton = (Button) findViewById(R.id.completeWorkoutButton);
+                    Button completeWorkoutButton = (Button) findViewById(R.id.btn_completeWorkout);
                     if(numCompletedExercises == workoutSession.numExercises()) {
                         //all exercises in workout session are completed, enable button
                         completeWorkoutButton.setEnabled(true);
