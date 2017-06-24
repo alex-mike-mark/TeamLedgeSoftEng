@@ -29,6 +29,7 @@ import ledge.muscleup.persistence.InterfaceDataAccess;
 
 public class WorkoutDetailsActivity extends Activity {
 
+    private Workout workout;
     /**
      *  onCreate initializes WorkoutDetailsActivity
      * @param savedInstanceState contains context from last activity
@@ -45,8 +46,8 @@ public class WorkoutDetailsActivity extends Activity {
 
         lm.populateList(this, exerciseList);
 
-        TextView filter = (TextView) findViewById(R.id.filter_title);
-        filter.setText("Filter: none");
+        TextView title = (TextView) findViewById(R.id.activity_title);
+        title.setText(workout.getName());
     }
 
     /**
@@ -56,7 +57,6 @@ public class WorkoutDetailsActivity extends Activity {
     private List getExcersiseList(){
         String workoutName;
         Intent intent;
-        Workout workout;
         InterfaceAccessWorkouts aw = (InterfaceAccessWorkouts) new AccessWorkouts();
         List retList = new ArrayList();
 

@@ -45,6 +45,9 @@ public class WorkoutActivity extends Activity {
         TextView filter = (TextView) findViewById(R.id.filter_title);
         filter.setText("Filter: none");
 
+        TextView title = (TextView) findViewById(R.id.activity_title);
+        title.setText("Workout Collection");
+
         lm.populateList(this, workoutArray);
 
         setupListeners(workoutArray);

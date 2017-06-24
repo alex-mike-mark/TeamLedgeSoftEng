@@ -39,6 +39,9 @@ public class ExerciseActivity extends Activity {
 
         exerciseArray = ae.getExercisesList();
 
+        TextView title = (TextView) findViewById(R.id.activity_title);
+        title.setText("Exercise Collection");
+
         TextView filter = (TextView) findViewById(R.id.filter_title);
         filter.setText("Filter: none");
 
