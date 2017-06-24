@@ -13,30 +13,8 @@ import ledge.muscleup.model.exercise.enums.ExerciseType;
  */
 
 public class WorkoutSessionExercise {
-    private WorkoutExerciseDuration exercise;
+    private WorkoutExercise exercise;
     private boolean isComplete;
-
-    /**
-     * The constructor for the WorkoutSessionExercise class that creates a new WorkoutExerciseDuration
-     *
-     * @param name         the name of the exercise
-     * @param intensity    the intensity of the exercise
-     * @param exerciseType the type of the exercise
-     * @param recommendedQuantity the recommended quantity of exercise for this exercise
-     * @param isComplete whether the exercise has been completed
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    public WorkoutSessionExercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType,
-                                  InterfaceExerciseQuantity recommendedQuantity,
-                                  boolean isComplete) throws IllegalArgumentException {
-        if(name == null || intensity == null || exerciseType == null || recommendedQuantity == null){
-            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        }
-        else {
-            exercise = new WorkoutExerciseDuration(name, intensity, exerciseType, recommendedQuantity);
-            this.isComplete = isComplete;
-        }
-    }
 
     /**
      * The constructor for the WorkoutSessionExercise class that uses an existing WorkoutExerciseDuration
@@ -88,7 +66,7 @@ public class WorkoutSessionExercise {
      * @return the recommended quantity of exercise
      */
     public InterfaceExerciseQuantity getRecommendedQuantity() {
-        return exercise.getRecommendedDuration();
+        return exercise.getQuantity();
     }
 
     /**

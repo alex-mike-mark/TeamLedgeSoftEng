@@ -1,8 +1,5 @@
 package ledge.muscleup.model.exercise;
 
-import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
-import ledge.muscleup.model.exercise.enums.ExerciseType;
-
 /**
  * An exercise which contains a contains a suggested amount of exercise that uses sets, which can be modified
  *
@@ -11,29 +8,9 @@ import ledge.muscleup.model.exercise.enums.ExerciseType;
  * @since 2017-06-03
  */
 
-public class WorkoutExerciseSets {
+public class WorkoutExerciseSets extends WorkoutExercise{
     private Exercise exercise;
-    private WorkoutExerciseSets recommendedSets;
-
-    /**
-     * The constructor for the WorkoutExerciseSets class that creates a new Exercise
-     *
-     * @param name         the name of the exercise
-     * @param intensity    the intensity of the exercise
-     * @param exerciseType the type of the exercise
-     * @param recommendedSets the quantity of exercise recommended for the exercise
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    public WorkoutExerciseSets(String name, ExerciseIntensity intensity, ExerciseType exerciseType,
-                               WorkoutExerciseSets recommendedSets) throws IllegalArgumentException {
-        if(name == null || intensity == null || exerciseType == null || recommendedSets == null) {
-            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        }
-        else {
-            exercise = new Exercise(name, intensity, exerciseType);
-            this.recommendedSets = recommendedSets;
-        }
-    }
+    private InterfaceExerciseSets recommendedSets;
 
     /**
      * The constructor for the WorkoutExerciseSets class that uses an existing Exercise
@@ -43,8 +20,9 @@ public class WorkoutExerciseSets {
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
     public WorkoutExerciseSets(Exercise exercise,
-                               WorkoutExerciseSets recommendedSets) throws IllegalArgumentException {
-        if(exercise == null || recommendedSets == null) {
+                               InterfaceExerciseSets recommendedSets) throws IllegalArgumentException {
+        super(exercise);
+        if(recommendedSets == null) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
         else {
@@ -53,39 +31,7 @@ public class WorkoutExerciseSets {
         }
     }
 
-    /**
-     * Returns the name of the exercise
-     *
-     * @return the name of the exercise
-     */
-    public String getName() {
-        return exercise.getName();
-    }
-
-    /**
-     * Returns the intensity of the exercise
-     *
-     * @return the intensity of the exercise
-     */
-    public ExerciseIntensity getIntensity() {
-        return exercise.getIntensity();
-    }
-
-    /**
-     * Returns the type of the exercise
-     *
-     * @return the type of the exercise
-     */
-    public ExerciseType getType() {
-        return exercise.getType();
-    }
-
-    /**
-     * Returns the recommended sets of exercise for the exercise
-     *
-     * @return the recommended sets of exercise
-     */
-    public WorkoutExerciseSets getRecommendedSets() { return recommendedSets; }
+    public InterfaceExerciseQuantity getQuantity() { return recommendedSets; }
 
     /**
      * Updates the exercise with the new recommended sets
@@ -94,7 +40,7 @@ public class WorkoutExerciseSets {
      * @throws IllegalArgumentException if passed a {@code null} parameter
      * @return a boolean representing if the suggested quantity could be updated
      */
-    public boolean updateRecommendedSets(WorkoutExerciseSets quantity) throws IllegalArgumentException {
+    public boolean updateRecommendedSets(InterfaceExerciseSets quantity) throws IllegalArgumentException {
         boolean quantityUpdated = false;
 
         if (quantity == null)
@@ -117,7 +63,7 @@ public class WorkoutExerciseSets {
     public boolean equals(WorkoutExerciseSets other){
         return (other != null &&
                 getName().equals(other.getName()) &&
-                recommendedSets.equals(other.getRecommendedSets()));
+                recommendedSets.equals(other.getQuantity()));
     }
 
     /**

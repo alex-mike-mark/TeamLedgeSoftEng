@@ -11,29 +11,8 @@ import ledge.muscleup.model.exercise.enums.ExerciseType;
  * @since 2017-06-03
  */
 
-public class WorkoutExerciseDistance {
-    private Exercise exercise;
+public class WorkoutExerciseDistance extends WorkoutExercise{
     private InterfaceExerciseDistance recommendedDistance;
-
-    /**
-     * The constructor for the WorkoutExerciseDistance class that creates a new Exercise
-     *
-     * @param name         the name of the exercise
-     * @param intensity    the intensity of the exercise
-     * @param exerciseType the type of the exercise
-     * @param recommendedDistance the quantity of exercise recommended for the exercise
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    public WorkoutExerciseDistance(String name, ExerciseIntensity intensity, ExerciseType exerciseType,
-                                   InterfaceExerciseDistance recommendedDistance) throws IllegalArgumentException {
-        if(name == null || intensity == null || exerciseType == null || recommendedDistance == null) {
-            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        }
-        else {
-            exercise = new Exercise(name, intensity, exerciseType);
-            this.recommendedDistance = recommendedDistance;
-        }
-    }
 
     /**
      * The constructor for the WorkoutExerciseDistance class that uses an existing Exercise
@@ -44,40 +23,13 @@ public class WorkoutExerciseDistance {
      */
     public WorkoutExerciseDistance(Exercise exercise,
                                    InterfaceExerciseDistance recommendedDistance) throws IllegalArgumentException {
-        if(exercise == null || recommendedDistance == null) {
+        super(exercise);
+        if(recommendedDistance == null) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
         else {
-            this.exercise = exercise;
             this.recommendedDistance = recommendedDistance;
         }
-    }
-
-    /**
-     * Returns the name of the exercise
-     *
-     * @return the name of the exercise
-     */
-    public String getName() {
-        return exercise.getName();
-    }
-
-    /**
-     * Returns the intensity of the exercise
-     *
-     * @return the intensity of the exercise
-     */
-    public ExerciseIntensity getIntensity() {
-        return exercise.getIntensity();
-    }
-
-    /**
-     * Returns the type of the exercise
-     *
-     * @return the type of the exercise
-     */
-    public ExerciseType getType() {
-        return exercise.getType();
     }
 
     /**
@@ -85,7 +37,7 @@ public class WorkoutExerciseDistance {
      *
      * @return the recommended distance of exercise
      */
-    public InterfaceExerciseDistance getRecommendedDistance() { return recommendedDistance; }
+    public InterfaceExerciseQuantity getQuantity() { return recommendedDistance; }
 
     /**
      * Updates the exercise with the new recommended distance
@@ -117,7 +69,7 @@ public class WorkoutExerciseDistance {
     public boolean equals(WorkoutExerciseDistance other){
         return (other != null &&
                 getName().equals(other.getName()) &&
-                recommendedDistance.equals(other.getRecommendedDistance()));
+                recommendedDistance.equals(other.getQuantity()));
     }
 
     /**

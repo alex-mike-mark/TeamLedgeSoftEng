@@ -11,29 +11,9 @@ import ledge.muscleup.model.exercise.enums.ExerciseType;
  * @since 2017-06-03
  */
 
-public class WorkoutExerciseDuration {
+public class WorkoutExerciseDuration extends WorkoutExercise{
     private Exercise exercise;
     private InterfaceExerciseDuration recommendedDuration;
-
-    /**
-     * The constructor for the WorkoutExerciseDuration class that creates a new Exercise
-     *
-     * @param name         the name of the exercise
-     * @param intensity    the intensity of the exercise
-     * @param exerciseType the type of the exercise
-     * @param recommendedDuration the quantity of exercise recommended for the exercise
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    public WorkoutExerciseDuration(String name, ExerciseIntensity intensity, ExerciseType exerciseType,
-                                   InterfaceExerciseDuration recommendedDuration) throws IllegalArgumentException {
-        if(name == null || intensity == null || exerciseType == null || recommendedDuration == null) {
-            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        }
-        else {
-            exercise = new Exercise(name, intensity, exerciseType);
-            this.recommendedDuration = recommendedDuration;
-        }
-    }
 
     /**
      * The constructor for the WorkoutExerciseDuration class that uses an existing Exercise
@@ -44,7 +24,8 @@ public class WorkoutExerciseDuration {
      */
     public WorkoutExerciseDuration(Exercise exercise,
                                    InterfaceExerciseDuration recommendedDuration) throws IllegalArgumentException {
-        if(exercise == null || recommendedDuration == null) {
+        super(exercise);
+        if(recommendedDuration == null) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
         else {
@@ -54,38 +35,11 @@ public class WorkoutExerciseDuration {
     }
 
     /**
-     * Returns the name of the exercise
-     *
-     * @return the name of the exercise
-     */
-    public String getName() {
-        return exercise.getName();
-    }
-
-    /**
-     * Returns the intensity of the exercise
-     *
-     * @return the intensity of the exercise
-     */
-    public ExerciseIntensity getIntensity() {
-        return exercise.getIntensity();
-    }
-
-    /**
-     * Returns the type of the exercise
-     *
-     * @return the type of the exercise
-     */
-    public ExerciseType getType() {
-        return exercise.getType();
-    }
-
-    /**
      * Returns the recommended duration of exercise for the exercise
      *
      * @return the recommended duration of exercise
      */
-    public InterfaceExerciseDuration getRecommendedDuration() { return recommendedDuration; }
+    public InterfaceExerciseQuantity getQuantity() { return recommendedDuration; }
 
     /**
      * Updates the exercise with the new recommended duration
@@ -117,7 +71,7 @@ public class WorkoutExerciseDuration {
     public boolean equals(WorkoutExerciseDuration other){
         return (other != null &&
                 getName().equals(other.getName()) &&
-                recommendedDuration.equals(other.getRecommendedDuration()));
+                recommendedDuration.equals(other.getQuantity()));
     }
 
     /**
