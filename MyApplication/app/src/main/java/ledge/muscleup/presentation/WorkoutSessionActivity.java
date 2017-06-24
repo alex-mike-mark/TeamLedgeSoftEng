@@ -91,7 +91,6 @@ public class WorkoutSessionActivity extends AppCompatActivity {
         LocalDate workoutSessionDate;
         Intent intent;
         InterfaceAccessWorkoutSessions aws = (InterfaceAccessWorkoutSessions) new AccessWorkoutSessions();
-        //List<WorkoutSessionExercise> retList = new ArrayList();
 
         //get workout session date
         intent = getIntent();

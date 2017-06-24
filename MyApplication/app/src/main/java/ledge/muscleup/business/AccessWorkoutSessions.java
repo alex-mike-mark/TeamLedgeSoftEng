@@ -1,14 +1,9 @@
 package ledge.muscleup.business;
 
 import org.joda.time.LocalDate;
-
-import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import ledge.muscleup.application.Services;
-import ledge.muscleup.model.exercise.WorkoutExercise;
-import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 import ledge.muscleup.model.workout.WorkoutSession;
 import ledge.muscleup.persistence.DataAccessStub;
 
