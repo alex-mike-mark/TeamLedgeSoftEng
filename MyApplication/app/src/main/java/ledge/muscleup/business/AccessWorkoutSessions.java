@@ -2,9 +2,13 @@ package ledge.muscleup.business;
 
 import org.joda.time.LocalDate;
 
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import ledge.muscleup.application.Services;
+import ledge.muscleup.model.exercise.WorkoutExercise;
+import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 import ledge.muscleup.model.workout.WorkoutSession;
 import ledge.muscleup.persistence.DataAccessStub;
 
@@ -68,5 +72,17 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      */
     public void removeWorkoutSession(WorkoutSession workoutSession) {
         dataAccess.removeWorkoutSession(workoutSession);
+    }
+
+    public List<WorkoutSessionExercise> getExercisesInSession(LocalDate dateOfSession){
+        List<WorkoutSessionExercise> retList = new ArrayList<>();
+        WorkoutSession session = getWorkoutSession(dateOfSession);
+
+        Enumeration<WorkoutSessionExercise> exercises = session.getExerciseEnumeration();
+        while(exercises.hasMoreElements()){
+            retList.add(exercises.nextElement());
+        }
+
+        return retList;
     }
 }

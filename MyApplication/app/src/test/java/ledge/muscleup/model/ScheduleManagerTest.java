@@ -25,6 +25,7 @@ import ledge.muscleup.model.exercise.ExerciseType;
 import ledge.muscleup.model.exercise.TimeUnit;
 import ledge.muscleup.model.exercise.WeightUnit;
 import ledge.muscleup.model.exercise.WorkoutExercise;
+import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
 import ledge.muscleup.persistence.InterfaceDataAccess;
@@ -222,6 +223,11 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
     @Override
     public void removeWorkoutSession(WorkoutSession workoutSession) {
         dataAccess.removeWorkoutSession(workoutSession);
+    }
+
+    @Override
+    public List<WorkoutSessionExercise> getExercisesInSession(LocalDate dateOfSession) {
+        return null;//TODO: actually test this garbage.
     }
 }
 
