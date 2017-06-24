@@ -3,4 +3,5 @@
     <string name="btn_workouts">Workouts</string>
     <string name="btn_exercises">Exercises</string>
     <string name="btn_schedule">Workout Schedule</string>
+    <string name="btn_completeWorkout">COMPLETE WORKOUT</string>
 </resources>
