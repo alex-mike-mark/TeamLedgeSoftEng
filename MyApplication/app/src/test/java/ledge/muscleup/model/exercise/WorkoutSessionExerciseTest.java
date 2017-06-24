@@ -5,6 +5,9 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
+import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
+import ledge.muscleup.model.exercise.enums.ExerciseType;
+
 /**
  * WorkoutSessionExerciseTest.java used to test WorkoutSessionExercise.java
  *
@@ -14,7 +17,7 @@ import org.junit.Test;
  */
 public class WorkoutSessionExerciseTest extends TestCase {
     WorkoutSessionExercise workoutSessionExercise1, workoutSessionExercise2, workoutSessionExercise3;
-    WorkoutExercise workoutExercise1;
+    WorkoutExerciseDuration workoutExerciseDuration1;
 
     /**
      * Initializes several instances of WorkoutSessionExercise to setup testing
@@ -23,8 +26,8 @@ public class WorkoutSessionExerciseTest extends TestCase {
     public void setUp(){
         workoutSessionExercise1 = new WorkoutSessionExercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(5, 4), false);
         workoutSessionExercise2 = new WorkoutSessionExercise("Deadlifts", ExerciseIntensity.MEDIUM, ExerciseType.LEG, new ExerciseSets(5, 4), false);
-        workoutExercise1 = new WorkoutExercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(5, 4));
-        workoutSessionExercise3 = new WorkoutSessionExercise(workoutExercise1, true);
+        workoutExerciseDuration1 = new WorkoutExerciseDuration("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(5, 4));
+        workoutSessionExercise3 = new WorkoutSessionExercise(workoutExerciseDuration1, true);
     }
 
     /**

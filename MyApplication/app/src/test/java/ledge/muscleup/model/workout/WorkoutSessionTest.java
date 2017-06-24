@@ -9,10 +9,10 @@ import org.junit.Test;
 
 import java.util.Enumeration;
 
-import ledge.muscleup.model.exercise.ExerciseIntensity;
+import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
 import ledge.muscleup.model.exercise.ExerciseSets;
-import ledge.muscleup.model.exercise.ExerciseType;
-import ledge.muscleup.model.exercise.WorkoutExercise;
+import ledge.muscleup.model.exercise.enums.ExerciseType;
+import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 
 /**
@@ -25,34 +25,34 @@ import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 public class WorkoutSessionTest extends TestCase {
     WorkoutSession workoutSession1, workoutSession2, workoutSession3;
     Workout workout1, workout2, workout3;
-    WorkoutExercise[] exerciseList1, exerciseList2, exerciseList3;
+    WorkoutExerciseDuration[] exerciseList1, exerciseList2, exerciseList3;
 
     /**
      * Initializes several instances of WorkoutSession to setup testing
      */
     @Before
     public void setUp() {
-        exerciseList1 = new WorkoutExercise[]{
-                new WorkoutExercise("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20)),
-                new WorkoutExercise("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20)),
-                new WorkoutExercise("Sit-ups", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20))
+        exerciseList1 = new WorkoutExerciseDuration[]{
+                new WorkoutExerciseDuration("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20)),
+                new WorkoutExerciseDuration("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20)),
+                new WorkoutExerciseDuration("Sit-ups", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20))
         };
         workout1 = new Workout("Get Your 6 Pack Abs", true, exerciseList1);
 
         workoutSession1 = new WorkoutSession(workout1, LocalDate.now(), false);
 
-        exerciseList2 = new WorkoutExercise[]{
-                new WorkoutExercise("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20)),
-                new WorkoutExercise("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20))
+        exerciseList2 = new WorkoutExerciseDuration[]{
+                new WorkoutExerciseDuration("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20)),
+                new WorkoutExerciseDuration("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20))
         };
         workout2 = new Workout("Get Your 6 Pack Abs", true, exerciseList2);
 
         workoutSession2 = new WorkoutSession(workout2, LocalDate.now(), true);
 
-        exerciseList3 = new WorkoutExercise[]{
-                new WorkoutExercise("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20)),
-                new WorkoutExercise("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20)),
-                new WorkoutExercise("Sit-ups", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20))
+        exerciseList3 = new WorkoutExerciseDuration[]{
+                new WorkoutExerciseDuration("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20)),
+                new WorkoutExerciseDuration("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20)),
+                new WorkoutExerciseDuration("Sit-ups", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20))
         };
         workout3 = new Workout("Get Your 6 Pack Abs", true, exerciseList3);
 

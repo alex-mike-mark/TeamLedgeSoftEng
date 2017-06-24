@@ -5,6 +5,8 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
+import ledge.muscleup.model.exercise.enums.TimeUnit;
+
 /**
  * ExerciseDurationTest.java used to test ExerciseDuration.java
  *

@@ -1,5 +1,8 @@
 package ledge.muscleup.model.exercise;
 
+import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
+import ledge.muscleup.model.exercise.enums.ExerciseType;
+
 /**
  * An exercise as part of a workout, which consists of an exercise name, type, intensity, and whether
  * or not this exercise is a favourite exercise

@@ -2,7 +2,7 @@ package ledge.muscleup.persistence;
 
 import java.util.List;
 
-import ledge.muscleup.model.exercise.WorkoutExercise;
+import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
 import ledge.muscleup.model.workout.Workout;
 
 /**
@@ -54,5 +54,5 @@ public interface InterfaceWorkoutDataAccess {
      *
      * @return a boolean indicating whether the exercise was properly added to the workout
      */
-    boolean addExerciseToWorkout (Workout workout, WorkoutExercise exercise);
+    boolean addExerciseToWorkout (Workout workout, WorkoutExerciseDuration exercise);
 }

@@ -2,7 +2,6 @@ package ledge.muscleup.model;
 
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,17 +13,17 @@ import java.util.Map;
 
 import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
 import ledge.muscleup.business.ScheduleManager;
-import ledge.muscleup.model.exercise.DistanceUnit;
+import ledge.muscleup.model.exercise.enums.DistanceUnit;
 import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.ExerciseDistance;
 import ledge.muscleup.model.exercise.ExerciseDuration;
-import ledge.muscleup.model.exercise.ExerciseIntensity;
+import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
 import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
-import ledge.muscleup.model.exercise.ExerciseType;
-import ledge.muscleup.model.exercise.TimeUnit;
-import ledge.muscleup.model.exercise.WeightUnit;
-import ledge.muscleup.model.exercise.WorkoutExercise;
+import ledge.muscleup.model.exercise.enums.ExerciseType;
+import ledge.muscleup.model.exercise.enums.TimeUnit;
+import ledge.muscleup.model.exercise.enums.WeightUnit;
+import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
 import ledge.muscleup.persistence.InterfaceDataAccess;
@@ -257,7 +256,7 @@ class TemplateDataAccessStub implements InterfaceDataAccess {
     public void open() {
 
         Exercise exercise;
-        WorkoutExercise workoutExercise;
+        WorkoutExerciseDuration workoutExerciseDuration;
         Workout workout;
         WorkoutSession workoutSession;
 
@@ -286,39 +285,39 @@ class TemplateDataAccessStub implements InterfaceDataAccess {
         workout = new Workout("Welcome to the Gun Show");
         workoutsByName.put(workout.getName(), workout);
 
-        workoutExercise = new WorkoutExercise(exercisesByName.get("Bicep Curls"),
+        workoutExerciseDuration = new WorkoutExerciseDuration(exercisesByName.get("Bicep Curls"),
                 new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
-        addExerciseToWorkout(workout, workoutExercise);
-        workoutExercise = new WorkoutExercise(exercisesByName.get("Push-Ups"),
+        addExerciseToWorkout(workout, workoutExerciseDuration);
+        workoutExerciseDuration = new WorkoutExerciseDuration(exercisesByName.get("Push-Ups"),
                 new ExerciseSets(2, 15));
-        addExerciseToWorkout(workout, workoutExercise);
+        addExerciseToWorkout(workout, workoutExerciseDuration);
 
         workout = new Workout("Never Skip Leg Day");
         workoutsByName.put(workout.getName(), workout);
-        workoutExercise = new WorkoutExercise(exercisesByName.get("Squats"),
+        workoutExerciseDuration = new WorkoutExerciseDuration(exercisesByName.get("Squats"),
                 new ExerciseSets(4, 15));
-        addExerciseToWorkout(workout, workoutExercise);
-        workoutExercise = new WorkoutExercise(exercisesByName.get("Lunges"),
+        addExerciseToWorkout(workout, workoutExerciseDuration);
+        workoutExerciseDuration = new WorkoutExerciseDuration(exercisesByName.get("Lunges"),
                 new ExerciseSets(3, 10));
-        addExerciseToWorkout(workout, workoutExercise);
+        addExerciseToWorkout(workout, workoutExerciseDuration);
 
         workout = new Workout("Marathon Training Starts Here");
         workoutsByName.put(workout.getName(), workout);
-        workoutExercise = new WorkoutExercise(exercisesByName.get("Running"),
+        workoutExerciseDuration = new WorkoutExerciseDuration(exercisesByName.get("Running"),
                 new ExerciseDistance(2.5, DistanceUnit.MILES));
-        addExerciseToWorkout(workout, workoutExercise);
-        workoutExercise = new WorkoutExercise(exercisesByName.get("Exercise Bike"),
+        addExerciseToWorkout(workout, workoutExerciseDuration);
+        workoutExerciseDuration = new WorkoutExerciseDuration(exercisesByName.get("Exercise Bike"),
                 new ExerciseDuration(45, TimeUnit.MINUTES));
-        addExerciseToWorkout(workout, workoutExercise);
+        addExerciseToWorkout(workout, workoutExerciseDuration);
 
         workout = new Workout("Work that Core, Get that Score!");
         workoutsByName.put(workout.getName(), workout);
-        workoutExercise = new WorkoutExercise(exercisesByName.get("Crunches"),
+        workoutExerciseDuration = new WorkoutExerciseDuration(exercisesByName.get("Crunches"),
                 new ExerciseSets(2, 25));
-        addExerciseToWorkout(workout, workoutExercise);
-        workoutExercise = new WorkoutExercise(exercisesByName.get("Bicycle Kicks"),
+        addExerciseToWorkout(workout, workoutExerciseDuration);
+        workoutExerciseDuration = new WorkoutExerciseDuration(exercisesByName.get("Bicycle Kicks"),
                 new ExerciseSets(2, 15));
-        addExerciseToWorkout(workout, workoutExercise);
+        addExerciseToWorkout(workout, workoutExerciseDuration);
 
         workoutSessionsByDate = new HashMap<>();
         workoutSession = new WorkoutSession(
@@ -438,7 +437,7 @@ class TemplateDataAccessStub implements InterfaceDataAccess {
      *
      * @return a boolean indicating whether the exercise was properly added to the workout
      */
-    public boolean addExerciseToWorkout (Workout workout, WorkoutExercise exercise) {
+    public boolean addExerciseToWorkout (Workout workout, WorkoutExerciseDuration exercise) {
         boolean added = false;
         Workout dbWorkout;
 

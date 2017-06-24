@@ -21,7 +21,7 @@ import ledge.muscleup.model.exercise.*;
         ExerciseSetsAndWeightTest.class,
         ExerciseSetsTest.class,
         ExerciseTest.class,
-        WorkoutExerciseTest.class,
+        WorkoutExerciseDurationTest.class,
         WorkoutSessionExerciseTest.class,
         WorkoutSessionTest.class,
         WorkoutTest.class,

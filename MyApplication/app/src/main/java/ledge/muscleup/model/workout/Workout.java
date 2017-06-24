@@ -5,10 +5,9 @@ import java.util.Enumeration;
 import java.util.List;
 
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
-import ledge.muscleup.model.exercise.WorkoutExercise;
+import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
 
 import static java.util.Collections.enumeration;
-import static java.util.Collections.lastIndexOfSubList;
 
 /**
  * Stores information about workouts, which consists of a workout name, a set of exercises and
@@ -20,7 +19,7 @@ import static java.util.Collections.lastIndexOfSubList;
  */
 public class Workout {
     private String name;
-    private List<WorkoutExercise> exerciseList;
+    private List<WorkoutExerciseDuration> exerciseList;
     private boolean isFavourite;
 
     /**
@@ -46,7 +45,7 @@ public class Workout {
      * @param exercises the list of exercises that make up the workout
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    public Workout(String name, boolean isFavourite, WorkoutExercise[] exercises) throws IllegalArgumentException {
+    public Workout(String name, boolean isFavourite, WorkoutExerciseDuration[] exercises) throws IllegalArgumentException {
         if (name == null || exercises == null) {
             throw (new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
@@ -86,7 +85,7 @@ public class Workout {
      * @throws IllegalArgumentException if passed a {@code null} parameter
      * @return a boolean representing if the exercise was found and updated in the workout
      */
-    public boolean setRecommendedQuantity(WorkoutExercise exercise,
+    public boolean setRecommendedQuantity(WorkoutExerciseDuration exercise,
                                           InterfaceExerciseQuantity quantity) throws IllegalArgumentException {
         boolean quantityUpdated = false;
         int exerciseIndex = -1;
@@ -102,7 +101,7 @@ public class Workout {
 
             //ensure the exercise exists in the list
             if (exerciseIndex != -1)
-                quantityUpdated = exerciseList.get(exerciseIndex).updateRecommendedQuantity(quantity);
+                quantityUpdated = exerciseList.get(exerciseIndex).updateRecommendedDuration(quantity);
         }
         return quantityUpdated;
     }
@@ -137,7 +136,7 @@ public class Workout {
      * @param exercise the exercise to add to the workout
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    public void addExercise(WorkoutExercise exercise) throws IllegalArgumentException {
+    public void addExercise(WorkoutExerciseDuration exercise) throws IllegalArgumentException {
         if (exercise == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else {
@@ -155,11 +154,11 @@ public class Workout {
      * outside the bounds of the list of exercises
      * @return a boolean representing if the exercise was found and moved to the new index
      */
-    public boolean moveExercise(WorkoutExercise exercise,
+    public boolean moveExercise(WorkoutExerciseDuration exercise,
                                 int index) throws IllegalArgumentException {
         boolean exerciseMoved = false;
         int exerciseIndex = -1;
-        WorkoutExercise listExercise;
+        WorkoutExerciseDuration listExercise;
         int listSize = exerciseList.size();
 
         if (exercise == null || index <= 0 || index > listSize)
@@ -196,10 +195,10 @@ public class Workout {
      * @throws IllegalArgumentException if passed a {@code null} parameter
      * @return the exercise that was removed, or {@code null} if the exercise couldn't be found
      */
-    public boolean removeExercise(WorkoutExercise exercise) throws IllegalArgumentException {
+    public boolean removeExercise(WorkoutExerciseDuration exercise) throws IllegalArgumentException {
         boolean exerciseRemoved = false;
         int exerciseIndex = -1;
-        WorkoutExercise listExercise;
+        WorkoutExerciseDuration listExercise;
 
         if (exercise == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
@@ -224,7 +223,7 @@ public class Workout {
     /**
      * Returns an enumeration for traversing over the exercises in the workout
      */
-    public Enumeration<WorkoutExercise> getExerciseEnumeration() {
+    public Enumeration<WorkoutExerciseDuration> getExerciseEnumeration() {
         return enumeration(exerciseList);
     }
 

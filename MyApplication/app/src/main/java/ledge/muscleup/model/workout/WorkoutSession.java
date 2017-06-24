@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-import ledge.muscleup.model.exercise.WorkoutExercise;
+import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 
 import static java.util.Collections.enumeration;
@@ -45,7 +45,7 @@ public class WorkoutSession {
             this.scheduledDate = scheduledDate;
             this.isComplete = isComplete;
             this.exerciseList = new ArrayList<>();
-            Enumeration<WorkoutExercise> enumeration = workout.getExerciseEnumeration();
+            Enumeration<WorkoutExerciseDuration> enumeration = workout.getExerciseEnumeration();
             while(enumeration.hasMoreElements())
                 exerciseList.add(new WorkoutSessionExercise(enumeration.nextElement(), false));
         }

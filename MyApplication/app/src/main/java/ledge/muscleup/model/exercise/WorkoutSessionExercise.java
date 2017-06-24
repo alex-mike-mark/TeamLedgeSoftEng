@@ -1,5 +1,8 @@
 package ledge.muscleup.model.exercise;
 
+import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
+import ledge.muscleup.model.exercise.enums.ExerciseType;
+
 /**
  * An exercise which contains a suggested amount of exercise and for which the exercise can be
  * marked completed
@@ -10,11 +13,11 @@ package ledge.muscleup.model.exercise;
  */
 
 public class WorkoutSessionExercise {
-    private WorkoutExercise exercise;
+    private WorkoutExerciseDuration exercise;
     private boolean isComplete;
 
     /**
-     * The constructor for the WorkoutSessionExercise class that creates a new WorkoutExercise
+     * The constructor for the WorkoutSessionExercise class that creates a new WorkoutExerciseDuration
      *
      * @param name         the name of the exercise
      * @param intensity    the intensity of the exercise
@@ -30,19 +33,19 @@ public class WorkoutSessionExercise {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
         else {
-            exercise = new WorkoutExercise(name, intensity, exerciseType, recommendedQuantity);
+            exercise = new WorkoutExerciseDuration(name, intensity, exerciseType, recommendedQuantity);
             this.isComplete = isComplete;
         }
     }
 
     /**
-     * The constructor for the WorkoutSessionExercise class that uses an existing WorkoutExercise
+     * The constructor for the WorkoutSessionExercise class that uses an existing WorkoutExerciseDuration
      *
      * @param exercise the exercise to create a WorkoutSessionExercise instance for
      * @param isComplete whether the exercise has been completed
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    public WorkoutSessionExercise(WorkoutExercise exercise, boolean isComplete) throws IllegalArgumentException {
+    public WorkoutSessionExercise(WorkoutExerciseDuration exercise, boolean isComplete) throws IllegalArgumentException {
         if(exercise == null) {
             throw (new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
@@ -85,7 +88,7 @@ public class WorkoutSessionExercise {
      * @return the recommended quantity of exercise
      */
     public InterfaceExerciseQuantity getRecommendedQuantity() {
-        return exercise.getRecommendedQuantity();
+        return exercise.getRecommendedDuration();
     }
 
     /**

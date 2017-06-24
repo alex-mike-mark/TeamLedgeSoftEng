@@ -2,7 +2,7 @@ package ledge.muscleup.business;
 
 import java.util.List;
 
-import ledge.muscleup.model.exercise.WorkoutExercise;
+import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
 import ledge.muscleup.model.workout.Workout;
 
 /**
@@ -54,5 +54,5 @@ public interface InterfaceAccessWorkouts {
      *
      * @return true if exercise was added successfully, false otherwise
      */
-    public boolean addExerciseToWorkout (Workout workout, WorkoutExercise exercise);
+    public boolean addExerciseToWorkout (Workout workout, WorkoutExerciseDuration exercise);
 }
