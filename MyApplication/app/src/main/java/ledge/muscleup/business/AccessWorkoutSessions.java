@@ -1,7 +1,6 @@
 package ledge.muscleup.business;
 
 import org.joda.time.LocalDate;
-
 import java.util.List;
 
 import ledge.muscleup.application.Services;

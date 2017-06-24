@@ -91,22 +91,12 @@ public class WorkoutSessionActivity extends AppCompatActivity {
         LocalDate workoutSessionDate;
         Intent intent;
         InterfaceAccessWorkoutSessions aws = (InterfaceAccessWorkoutSessions) new AccessWorkoutSessions();
-        List<WorkoutSessionExercise> retList = new ArrayList();
 
         //get workout session date
         intent = getIntent();
         workoutSessionDate = formatter.parseLocalDate(intent.getStringExtra("workoutSessionDate"));
-
-        //get WorkoutSession from db
         workoutSession = (WorkoutSession) aws.getWorkoutSession(workoutSessionDate);
-
-        //fetch all exercises from workout session
-        Enumeration<WorkoutSessionExercise> exercises = workoutSession.getExerciseEnumeration();
-        while(exercises.hasMoreElements()){
-            retList.add(exercises.nextElement());
-        }
-
-        return retList;
+        return workoutSession.getWorkoutSessionExercises();
     }
 
     /**

@@ -40,6 +40,7 @@ public class WorkoutSessionExerciseTest extends TestCase {
         assertNotNull(workoutSessionExercise2);
         assertNotNull(workoutSessionExercise3);
 
+
         assertEquals("Power Cleans", workoutSessionExercise1.getName());
         assertEquals("Deadlifts", workoutSessionExercise2.getName());
         assertEquals("Power Cleans", workoutSessionExercise3.getName());
