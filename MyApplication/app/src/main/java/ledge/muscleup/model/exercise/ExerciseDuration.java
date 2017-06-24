@@ -3,7 +3,7 @@ package ledge.muscleup.model.exercise;
 import java.text.DecimalFormat;
 
 /**
- * Used to track the length in minutes for exercises to be done for a certain
+ * Used to track the length of time for exercises to be done for a certain
  * length of time, such as cycling for 30 minutes
  *
  * @author Ryan Koop
@@ -11,29 +11,40 @@ import java.text.DecimalFormat;
  * @since 2017-05-29
 */
 public class ExerciseDuration implements InterfaceExerciseDuration {
-    private double minutes;
+    private int time;
+    private TimeUnit unitOfMeasure;
 
     /**
      * Default constructor for the ExerciseDuration class
-     * @param minutes the number of minutes exercised
-     * @throws IllegalArgumentException if {@code minutes < 0}
+     * @param time the number for time exercised
+     * @throws IllegalArgumentException if {@code time < 0}
      */
-    public ExerciseDuration (double minutes) throws IllegalArgumentException {
-        if(minutes < 0) {
+    public ExerciseDuration (int time, TimeUnit unitOfMeasure) throws IllegalArgumentException {
+        if(time < 0) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
         else {
-            this.minutes = minutes;
+            this.time = time;
+            this.unitOfMeasure = unitOfMeasure;
         }
     }
 
     /**
-     * Get the number of minutes exercised
-     * @return the number of minutes exercised
+     * Get the number for time exercised
+     * @return the number for time exercised
      */
     @Override
-    public double getMinutes() {
-        return minutes;
+    public int getTime() {
+        return time;
+    }
+
+    /**
+     * Returns the unit of measurement for the distance
+     * @return the unit of measurement
+     */
+    @Override
+    public TimeUnit getUnitOfMeasure() {
+        return unitOfMeasure;
     }
 
     /**
@@ -48,7 +59,8 @@ public class ExerciseDuration implements InterfaceExerciseDuration {
 
         if (other instanceof ExerciseDuration) {
             otherDuration = (ExerciseDuration) other;
-            if (this.minutes == otherDuration.getMinutes()) {
+            if (this.time == otherDuration.getTime()
+                    && this.unitOfMeasure == otherDuration.getUnitOfMeasure()) {
                 isEqual = true;
             }
         }
@@ -62,6 +74,6 @@ public class ExerciseDuration implements InterfaceExerciseDuration {
      */
     @Override
     public String toString() {
-        return new DecimalFormat("#.00").format(minutes) + " minutes";
+        return super.toString() + " (" + time + " " + unitOfMeasure.toString() + ")";
     }
 }
