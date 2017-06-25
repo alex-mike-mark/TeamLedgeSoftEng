@@ -2,24 +2,17 @@ package ledge.muscleup.model.business;
 
 import junit.framework.TestCase;
 
-import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import ledge.muscleup.business.InterfaceAccessExercises;
 import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.ExerciseIntensity;
 import ledge.muscleup.model.exercise.ExerciseType;
-import ledge.muscleup.model.exercise.WorkoutExercise;
-import ledge.muscleup.model.workout.Workout;
-import ledge.muscleup.model.workout.WorkoutSession;
-import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
  * AccessExercisesTest.java used to test AccessExercises.java
@@ -32,71 +25,90 @@ import ledge.muscleup.persistence.InterfaceDataAccess;
 public class AccessExercisesTest extends TestCase {
     InterfaceAccessExercises dataAccess;
 
+    /**
+     * Constructor for the AccessExercisesTest
+     */
     public AccessExercisesTest(String arg0)
     {
         super(arg0);
     }
 
+    /**
+     * Initializes the AccessExercises to be used in the test
+     */
     @Before
     public void setUp()
     {
         dataAccess = new TemplateAccessExercises();
     }
 
+    /**
+     * Safely closes the AccessExercises
+     */
     @After
-    public void tearDown()
-    {
-
+    public void tearDown() {
+        //TODO:
     }
 
+    /**
+     * Tests that getting an exercise works properly
+     */
     @Test
-    public void testGetExercise(){
+    public void testGetExercise() {
         System.out.println("\nStarting testGetExercise");
 
         // Exercises should already be in db
         Exercise exercise = dataAccess.getExercise("Bicep Curls");
+        assertNotNull(exercise);
         assertEquals("Bicep Curls", exercise.getName());
         assertEquals(ExerciseIntensity.LOW, exercise.getIntensity());
         assertEquals(ExerciseType.ARM, exercise.getType());
         assertEquals(false, exercise.isFavourite());
 
         exercise = dataAccess.getExercise("Push-Ups");
+        assertNotNull(exercise);
         assertEquals("Push-Ups", exercise.getName());
         assertEquals(ExerciseIntensity.HIGH, exercise.getIntensity());
         assertEquals(ExerciseType.ARM, exercise.getType());
         assertEquals(false, exercise.isFavourite());
 
         exercise = dataAccess.getExercise("Running");
+        assertNotNull(exercise);
         assertEquals("Running", exercise.getName());
         assertEquals(ExerciseIntensity.HIGH, exercise.getIntensity());
         assertEquals(ExerciseType.CARDIO, exercise.getType());
         assertEquals(false, exercise.isFavourite());
 
         exercise = dataAccess.getExercise("Exercise Bike");
+        assertNotNull(exercise);
         assertEquals("Exercise Bike", exercise.getName());
         assertEquals(ExerciseIntensity.MEDIUM, exercise.getIntensity());
         assertEquals(ExerciseType.CARDIO, exercise.getType());
         assertEquals(false, exercise.isFavourite());
 
         exercise = dataAccess.getExercise("Crunches");
+        assertNotNull(exercise);
         assertEquals("Crunches", exercise.getName());
         assertEquals(ExerciseIntensity.LOW, exercise.getIntensity());
         assertEquals(ExerciseType.CORE, exercise.getType());
         assertEquals(false, exercise.isFavourite());
 
         exercise = dataAccess.getExercise("Bicycle Kicks");
+        assertNotNull(exercise);
         assertEquals("Bicycle Kicks", exercise.getName());
         assertEquals(ExerciseIntensity.HIGH, exercise.getIntensity());
         assertEquals(ExerciseType.CORE, exercise.getType());
         assertEquals(false, exercise.isFavourite());
 
         exercise = dataAccess.getExercise("Squats");
+        assertNotNull(exercise);
         assertEquals("Squats", exercise.getName());
         assertEquals(ExerciseIntensity.MEDIUM, exercise.getIntensity());
         assertEquals(ExerciseType.LEG, exercise.getType());
         assertEquals(false, exercise.isFavourite());
 
         exercise = dataAccess.getExercise("Lunges");
+        assertNotNull(exercise);
         assertEquals("Lunges", exercise.getName());
         assertEquals(ExerciseIntensity.MEDIUM, exercise.getIntensity());
         assertEquals(ExerciseType.LEG, exercise.getType());
@@ -105,30 +117,38 @@ public class AccessExercisesTest extends TestCase {
         System.out.println("Finishing testGetExercise\n");
     }
 
+    /**
+     * Tests that getting the list of exercises works properly
+     */
     @Test
-    public void testGetExercisesList(){
+    public void testGetExercisesList() {
         System.out.println("\nStarting testGetExercisesList");
 
         // Exercises by object already in list
-        List<Exercise> exerciseList = new ArrayList<>();
-        exerciseList.add(new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM, false));
-        exerciseList.add(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE, false));
-        exerciseList.add(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false));
-        exerciseList.add(new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM, false));
-        exerciseList.add(new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO, false));
-        exerciseList.add(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE,
+        List<Exercise> exerciseList1 = new ArrayList<>();
+        exerciseList1.add(new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM, false));
+        exerciseList1.add(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE, false));
+        exerciseList1.add(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false));
+        exerciseList1.add(new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM, false));
+        exerciseList1.add(new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO, false));
+        exerciseList1.add(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE,
                 false));
-        exerciseList.add(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false));
-        exerciseList.add(new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM,
+        exerciseList1.add(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false));
+        exerciseList1.add(new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM,
                 ExerciseType.CARDIO, false));
 
-        assertEquals(exerciseList.toString(), dataAccess.getExercisesList().toString());
+        List<Exercise> exerciseList2 = dataAccess.getExercisesList();
+        assertNotNull(exerciseList2);
+        assertEquals(exerciseList1.toString(), exerciseList2.toString());
 
         System.out.println("Finishing testGetExercisesList\n");
     }
 
+    /**
+     * Tests that getting the list of exercise names works properly
+     */
     @Test
-    public void testGetExerciseNamesList(){
+    public void testGetExerciseNamesList() {
         System.out.println("\nStarting testGetExerciseNamesList");
 
         // Exercises by name already in list
@@ -147,9 +167,11 @@ public class AccessExercisesTest extends TestCase {
         System.out.println("Finishing testGetExerciseNamesList\n");
     }
 
+    /**
+     * Tests that inserting an exercise works properly
+     */
     @Test
-    public void testInsertExercise()
-    {
+    public void testInsertExercise() {
         System.out.println("\nStarting testInsertExercise");
 
         List<Exercise> list = dataAccess.getExercisesList();
@@ -179,8 +201,11 @@ public class AccessExercisesTest extends TestCase {
         System.out.println("Finished testInsertExercise\n");
     }
 
+    /**
+     * Tests that removing an exercise works properly
+     */
     @Test
-    public void testRemoveExercise(){
+    public void testRemoveExercise() {
         System.out.println("\nStarting testRemoveExercise");
 
         // Remove first exercise in list
@@ -271,236 +296,5 @@ class TemplateAccessExercises implements InterfaceAccessExercises {
     @Override
     public void removeExercise(Exercise exercise) {
         dataAccess.removeExercise(exercise);
-    }
-}
-
-/**
- * A template database stub for use in testing the AccessExercises that needs an accessor, which in
- * turn needs a database stub
- * constructor parameter
- *
- * @author Matthew Smidt
- * @version 1.0
- * @since 2017-06-24
- */
-
-class TemplateDataAccessStub implements InterfaceDataAccess {
-    private String dbName;
-    private String dbType = "testing template";
-
-    private Map<String, Workout> workoutsByName;
-    private Map<String, Exercise> exercisesByName;
-    private Map<LocalDate, WorkoutSession> workoutSessionsByDate;
-
-    /**
-     * Constructor for DataAccessStub
-     * @param dbName the name of the database
-     */
-    public TemplateDataAccessStub (String dbName) {
-        this.dbName = dbName;
-    }
-
-    /**
-     * Opens the stub database and populates it with some default values
-     */
-    public void open() {
-
-        Exercise exercise;
-        WorkoutExercise workoutExercise;
-        Workout workout;
-        WorkoutSession workoutSession;
-
-        exercisesByName = new HashMap<>();
-        exercise = new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM, false);
-        exercisesByName.put(exercise.getName(), exercise);
-        exercise = new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM, false);
-        exercisesByName.put(exercise.getName(), exercise);
-        exercise = new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO, false);
-        exercisesByName.put(exercise.getName(), exercise);
-        exercise = new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM,
-                ExerciseType.CARDIO, false);
-        exercisesByName.put(exercise.getName(), exercise);
-        exercise = new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE, false);
-        exercisesByName.put(exercise.getName(), exercise);
-        exercise = new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE,
-                false);
-        exercisesByName.put(exercise.getName(), exercise);
-        exercise = new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false);
-        exercisesByName.put(exercise.getName(), exercise);
-        exercise = new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false);
-        exercisesByName.put(exercise.getName(), exercise);
-
-        System.out.println("Opened " + dbType + " database " + dbName);
-    }
-
-    /**
-     * Close the stub database
-     */
-    public void close() {
-        System.out.println("Closed " + dbType + " database " + dbName);
-    }
-
-    /**
-     * Gets a list of all exercises in the database
-     * @return a list of all exercises in the database
-     */
-    public List<Exercise> getExercisesList() {
-        return new ArrayList<>(exercisesByName.values());
-    }
-
-    /**
-     * Gets a list of names of all exercises in the database
-     * @return a list of names of all exercises in the database
-     */
-    public List<String> getExerciseNamesList() {
-        return new ArrayList<>(exercisesByName.keySet());
-    }
-
-    /**
-     * Gets a list of all workouts in the database
-     * @return a list of all workouts in the database
-     */
-    public List<Workout> getWorkoutsList() {
-        return new ArrayList<>(workoutsByName.values());
-    }
-
-    /**
-     * Gets a list of names of all exercises in the database
-     * @return a list of names of all workouts in the database
-     */
-    public List<String> getWorkoutNamesList() {
-        return new ArrayList<>(workoutsByName.keySet());
-    }
-
-    /**
-     * Retrieves an exercise from the database with the name given as parameter
-     * @param exerciseName- the name of the exercise to retrieve from the database
-     * @return The exercise with name exerciseName, or null if no exercise exists with that name
-     */
-    public Exercise getExercise(String exerciseName) {
-        return exercisesByName.get(exerciseName);
-    }
-
-    /**
-     * Retrieves a workout from the database with the name given as parameter
-     * @param workoutName the name of the workout to retrieve from the database
-     * @return The workout with name workoutName, or null if no workout exists with that name
-     */
-    public Workout getWorkout(String workoutName) {
-        return workoutsByName.get(workoutName);
-    }
-
-    /**
-     * Adds an exercise to the database
-     * @param exercise the exercise to be added to the database
-     */
-
-    public void insertExercise(Exercise exercise) {
-        exercisesByName.put(exercise.getName(), exercise);
-    }
-
-    /**
-     * Adds a workout to the database
-     * @param workout the workout to be added to the database
-     */
-
-    public void insertWorkout(Workout workout) {
-        workoutsByName.put(workout.getName(), workout);
-    }
-
-    /**
-
-     * Adds an exercise to a workout in the database, if both the workout and the exercise exist in
-     * the database
-     * @param workout the workout to add the exercise to
-     * @param exercise the exercise to add to the workout
-     *
-     * @return a boolean indicating whether the exercise was properly added to the workout
-     */
-    public boolean addExerciseToWorkout (Workout workout, WorkoutExercise exercise) {
-        boolean added = false;
-        Workout dbWorkout;
-
-        if (workoutsByName.containsKey(workout.getName())) {
-            dbWorkout = workoutsByName.get(workout.getName());
-            if (exercisesByName.containsKey(exercise.getName())) {
-                dbWorkout.addExercise(exercise);
-                added = true;
-            }
-        }
-        return added;
-    }
-
-    /**
-     * Removes an exercise from the database, if it exists
-     * @param exercise the exercise to remove from the database
-     */
-
-    public void removeExercise(Exercise exercise) {
-        exercisesByName.remove(exercise.getName());
-    }
-
-    /**
-     * Removes a workout from the database, if it exists
-     * @param workout the workout to remove from the database
-     */
-
-    public void removeWorkout(Workout workout) {
-        workoutsByName.remove(workout.getName());
-    }
-
-    /**
-     * A method that returns a list of all workout sessions in the database
-     * @return a list of all workout sessions in the database
-     */
-    public List<WorkoutSession> getWorkoutSessionsList() {
-        return new ArrayList<>(workoutSessionsByDate.values());
-    }
-
-    /**
-     * A method that returns a list of workout sessions scheduled in a date range
-     * @param startDate the first date of the date range
-     * @param endDate the last date of the date range
-     * @return a list of all workout sessions scheduled between startDate and endDate, inclusive
-     */
-    public List<WorkoutSession> getSessionsInDateRange(LocalDate startDate,
-                                                       LocalDate endDate) {
-        List<WorkoutSession> sessionsInDateRange = new ArrayList<>();
-
-        LocalDate currDate = startDate;
-        while (!currDate.isAfter(endDate)) {
-            if (workoutSessionsByDate.containsKey(currDate)) {
-                sessionsInDateRange.add(workoutSessionsByDate.get(currDate));
-            }
-            currDate = currDate.plusDays(1);
-        }
-
-        return sessionsInDateRange;
-    }
-
-    /**
-     * Retrieves a workout session scheduled on the given date from the database, if it exists. If
-     * no workout session is found for that date, returns null.
-     * @param dateOfSession the date to get the workout session for
-     * @return the workout session scheduled on the given date
-     */
-    public WorkoutSession getWorkoutSession(LocalDate dateOfSession) {
-        return workoutSessionsByDate.get(dateOfSession);
-    }
-
-    /**
-     * Inserts a new workout session into the database
-     * @param workoutSession the new workout session to insert into the database
-     */
-    public void insertWorkoutSession(WorkoutSession workoutSession) {
-        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
-    }
-
-    /**
-     * Removes a workout session from the database, if it exists
-     * @param workoutSession the workout session to remove from the database
-     */
-    public void removeWorkoutSession(WorkoutSession workoutSession) {
-        workoutSessionsByDate.remove(workoutSession.getDate());
     }
 }
