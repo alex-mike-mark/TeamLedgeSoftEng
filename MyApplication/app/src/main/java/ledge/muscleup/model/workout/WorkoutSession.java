@@ -134,6 +134,7 @@ public class WorkoutSession {
                 if (!listExercise.isComplete()) {
                     listExercise.toggleCompleted();
                     exerciseCompleted = true;
+                    //TODO - requires database update
                 }
             }
         }

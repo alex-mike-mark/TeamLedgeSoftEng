@@ -103,6 +103,7 @@ public class Workout {
             //ensure the exercise exists in the list
             if (exerciseIndex != -1)
                 quantityUpdated = exerciseList.get(exerciseIndex).updateRecommendedQuantity(quantity);
+                //TODO - requires database update
         }
         return quantityUpdated;
     }
@@ -214,10 +215,10 @@ public class Workout {
             if (exerciseIndex != -1) {
                 exerciseList.remove(exerciseIndex);
                 exerciseRemoved = true;
+                //TODO - requires database update
             }
 
             return exerciseRemoved;
-            //TODO - requires database update
         }
     }
 
