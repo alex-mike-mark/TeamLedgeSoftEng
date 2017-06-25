@@ -29,21 +29,20 @@
             android:layout_marginTop="20dp"/>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/button_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/list_panel"
             android:layout_below="@+id/list_panel"
             android:layout_marginTop="13dp"
-            android:onClick="showNextWeek"
             android:text="@string/btn_next" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/button_previous"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btn_previous"
-            android:layout_alignTop="@+id/button"
+            android:layout_alignTop="@+id/button_next"
             android:layout_toEndOf="@+id/filter_title" />
     </RelativeLayout>
     

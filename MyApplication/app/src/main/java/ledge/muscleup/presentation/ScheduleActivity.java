@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -46,6 +47,20 @@ public class ScheduleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_list_display);
 
+        final Button nextBtn = (Button) findViewById(R.id.button_next);
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showNextWeek();
+            }
+        });
+
+        final Button prevBtn = (Button) findViewById(R.id.button_previous);
+        prevBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showLastWeek();
+            }
+        });
+
         scheduleArray = scheduleManager.getWorkoutSessionList();
 
         lm.populateList(this, scheduleArray);
@@ -70,10 +85,22 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     public void showNextWeek(){
-//        scheduleManager.nextWeek();
-//        scheduleArray = scheduleManager.getWorkoutSessionList();
-//
-//        lm.populateList(this, scheduleArray);
-//        setupListeners(scheduleArray);
+        lm.clearList();
+
+        scheduleManager.nextWeek();
+        scheduleArray = scheduleManager.getWorkoutSessionList();
+
+        lm.populateList(this, scheduleArray);
+        setupListeners(scheduleArray);
+    }
+
+    public void showLastWeek(){
+        lm.clearList();
+
+        scheduleManager.lastWeek();
+        scheduleArray = scheduleManager.getWorkoutSessionList();
+
+        lm.populateList(this, scheduleArray);
+        setupListeners(scheduleArray);
     }
 }

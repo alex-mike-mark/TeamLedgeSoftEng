@@ -17,17 +17,23 @@ import ledge.muscleup.R;
  */
 
 public class ListManager {
-
+    private ArrayAdapter adapter;
+    private ListView listView;
     /**
      *  Used to insert a List into a list pane defined in the xml as "list_panel"
      * @param arrayList
      */
     public void populateList(Activity act, List arrayList) {
-        ArrayAdapter adapter = new ArrayAdapter<>(act,
+        adapter = new ArrayAdapter<>(act,
                 R.layout.activity_listview, arrayList);
 
-        ListView listView = (ListView) act.findViewById(R.id.list_panel);
+        listView = (ListView) act.findViewById(R.id.list_panel);
         listView.setAdapter(adapter);
+
     }
 
+    public void clearList(){
+        adapter.clear();
+        adapter.notifyDataSetChanged();
+    }
 }
