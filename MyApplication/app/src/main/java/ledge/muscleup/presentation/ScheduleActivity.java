@@ -50,7 +50,6 @@ public class ScheduleActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         InterfaceScheduleManager scheduleManager = new ScheduleManager(new AccessWorkoutSessions());
-        ListManager lm = new ListManager();
         List<WorkoutSession> sessionList;
 
         super.onCreate(savedInstanceState);

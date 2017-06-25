@@ -43,7 +43,6 @@ public class WorkoutDetailsActivity extends Activity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ListManager lm = new ListManager();
         List<WorkoutExercise> exerciseList;
 
         super.onCreate(savedInstanceState);

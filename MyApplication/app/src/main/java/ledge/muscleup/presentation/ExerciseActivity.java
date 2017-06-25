@@ -39,7 +39,7 @@ public class ExerciseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         InterfaceAccessExercises ae = new AccessExercises();
-        ListManager lm = new ListManager();
+
         List exerciseList;
 
         super.onCreate(savedInstanceState);
@@ -57,7 +57,6 @@ public class ExerciseActivity extends Activity {
         adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_exercise, exerciseList);
         listView.setAdapter(adapter);
         listView.setItemsCanFocus(true);
-        //lm.populateList(this, exerciseArray);
     }
 
     /**
