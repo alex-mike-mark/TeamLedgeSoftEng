@@ -191,4 +191,12 @@ public class WorkoutSession {
 
         return result;
     }
+
+    /**
+     * Returns the list of workout session exercises
+     * @return the list of workout session exercices
+     */
+    public List<WorkoutSessionExercise> getWorkoutSessionExercises(){
+        return exerciseList;
+    }
 }
