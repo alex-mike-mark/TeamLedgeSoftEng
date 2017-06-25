@@ -118,7 +118,7 @@ public class DataAccessStub implements InterfaceDataAccess {
         workoutSessionsByDate = new TreeMap<>();
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Welcome to the Gun Show")),
-                new LocalDate(2017, 06, 5),
+                new LocalDate(2017, 06, 1),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
@@ -142,7 +142,7 @@ public class DataAccessStub implements InterfaceDataAccess {
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Marathon Training Starts Here")),
-                new LocalDate(2017, 06, 10),
+                new LocalDate(2017, 06, 13),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 

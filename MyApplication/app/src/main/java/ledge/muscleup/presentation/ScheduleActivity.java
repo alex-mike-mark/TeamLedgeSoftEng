@@ -34,15 +34,17 @@ import ledge.muscleup.persistence.InterfaceDataAccess;
  * @since 2017-06-07
  */
 public class ScheduleActivity extends AppCompatActivity {
+    private List<WorkoutSession> scheduleArray;
+    private ListManager lm;
+    private InterfaceScheduleManager scheduleManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        InterfaceScheduleManager scheduleManager = new ScheduleManager(new AccessWorkoutSessions());
-        ListManager lm = new ListManager();
-        List<WorkoutSession> scheduleArray;
+        scheduleManager = new ScheduleManager(new AccessWorkoutSessions());
+        lm = new ListManager();
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_display);
+        setContentView(R.layout.activity_schedule_list_display);
 
         scheduleArray = scheduleManager.getWorkoutSessionList();
 
@@ -65,5 +67,13 @@ public class ScheduleActivity extends AppCompatActivity {
                 startActivity(appInfo);
             }
         });
+    }
+
+    public void showNextWeek(){
+//        scheduleManager.nextWeek();
+//        scheduleArray = scheduleManager.getWorkoutSessionList();
+//
+//        lm.populateList(this, scheduleArray);
+//        setupListeners(scheduleArray);
     }
 }
