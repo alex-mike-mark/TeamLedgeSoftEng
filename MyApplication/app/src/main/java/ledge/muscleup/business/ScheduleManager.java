@@ -27,7 +27,7 @@ public class ScheduleManager implements InterfaceScheduleManager {
         if (dataAccess == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else {
-            firstDayOfWeek = new LocalDate().withDayOfWeek(DateTimeConstants.MONDAY);
+            firstDayOfWeek = new LocalDate(2017, 06, 05);
             workoutSessions = new WorkoutSession[DateTimeConstants.DAYS_PER_WEEK];
             this.dataAccess = dataAccess;
             populateWorkoutList();

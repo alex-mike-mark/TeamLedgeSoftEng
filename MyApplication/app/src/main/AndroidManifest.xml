@@ -19,7 +19,8 @@
         <activity android:name=".presentation.WorkoutActivity" />
         <activity android:name=".presentation.ExerciseActivity" />
         <activity android:name=".presentation.WorkoutDetailsActivity" />
-        <activity android:name=".presentation.ScheduleActivity"></activity>
+        <activity android:name=".presentation.ScheduleActivity" />
+        <activity android:name=".presentation.WorkoutSessionActivity"></activity>
     </application>
 
 </manifest>
