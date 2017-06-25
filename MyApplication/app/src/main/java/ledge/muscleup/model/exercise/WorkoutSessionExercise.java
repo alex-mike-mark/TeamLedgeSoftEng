@@ -23,7 +23,7 @@ public class WorkoutSessionExercise {
      * @param isComplete whether the exercise has been completed
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    public WorkoutSessionExercise(WorkoutExerciseDuration exercise, boolean isComplete) throws IllegalArgumentException {
+    public WorkoutSessionExercise(WorkoutExercise exercise, boolean isComplete) throws IllegalArgumentException {
         if(exercise == null) {
             throw (new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
