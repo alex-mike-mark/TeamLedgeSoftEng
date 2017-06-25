@@ -60,19 +60,19 @@ public class ExerciseActivity extends Activity {
     }
 
     /**
-     * A custom extension of the ArrayAdapter class, used for displaying exercise name and quantity
-     * along with a checkbox beside it in a ListView
+     * A custom extension of the ArrayAdapter class, used for displaying exercise name as well
+     * as exercise type and intensity
      */
     private class ListItemAdapter extends ArrayAdapter {
         private List<Exercise> exerciseList;
         Context context;
 
         /**
-         * A constructor for a CheckboxAdapter, which is a custom ArrayAdapter used for displaying
-         * exercise name and quantity along with a checkbox of whether it's been completed
+         * A constructor for a ListItemAdapter, which is a custom ArrayAdapter used for displaying
+         * exercise name as well as type and intensity
          * @param context The activity's context
          * @param resourceId the layout resource used for the adapter
-         * @param exerciseList a list of exercises in the workout session
+         * @param exerciseList a list of exercises
          */
         public ListItemAdapter(Context context, int resourceId, List<Exercise> exerciseList) {
             super(context, resourceId, exerciseList);
@@ -81,7 +81,8 @@ public class ExerciseActivity extends Activity {
         }
 
         /**
-         * A wrapper class holding the different elements of a single list item in the checklist view
+         * A wrapper class holding the different elements of a single list item in the list view,
+         * 1 TextView for the exerciseName and 1 for the rest of the info
          */
         private class ViewHolder {
             TextView exerciseName;
@@ -90,13 +91,11 @@ public class ExerciseActivity extends Activity {
 
 
         /**
-         * Returns a view containing the workout session exercise name and quantity along with a checkbox
-         * for each exercise in the workout session
+         * Returns a view containing the exercise name, intensity, and type
          * @param index the index of the exercise in the exercise list
          * @param convertView the view used for conversion
          * @param parent the parent ViewGroup
-         * @return a view containing the workout session exercise name and quantity along with a
-         * checkbox for each exercise in the workout session
+         * @return a view containing the exercise name, intensity, and type
          */
         @Override
         public View getView(final int index, View convertView, @NonNull ViewGroup parent) {

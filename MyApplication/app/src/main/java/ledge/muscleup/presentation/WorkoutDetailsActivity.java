@@ -74,17 +74,9 @@ public class WorkoutDetailsActivity extends Activity {
         intent = getIntent();
         workoutName = intent.getStringExtra("workoutName");
 
-        Log.d("Hi", workoutName);
         //get Workout from db
         workout = (Workout) aw.getWorkout(workoutName);
 
-        //fetch all exercises from workout
-       /* Enumeration<WorkoutExercise> exercises = workout.getExerciseEnumeration();
-        while(exercises.hasMoreElements()){
-            retList.add(exercises.nextElement());
-        } */
-        retList = workout.getExerciseList();
-        Log.d("Hi", String.valueOf(retList.size()));
         return workout.getExerciseList();
     }
 
@@ -93,11 +85,11 @@ public class WorkoutDetailsActivity extends Activity {
         Context context;
 
         /**
-         * A constructor for a CheckboxAdapter, which is a custom ArrayAdapter used for displaying
-         * exercise name and quantity along with a checkbox of whether it's been completed
+         * A constructor for a ListItemAdapter, which is a custom ArrayAdapter used for displaying
+         * exercise name and quantity
          * @param context The activity's context
          * @param resourceId the layout resource used for the adapter
-         * @param exerciseList a list of exercises in the workout session
+         * @param exerciseList a list of exercises in the workout
          */
         public ListItemAdapter(Context context, int resourceId, List<WorkoutExercise> exerciseList) {
             super(context, resourceId, exerciseList);
@@ -106,7 +98,8 @@ public class WorkoutDetailsActivity extends Activity {
         }
 
         /**
-         * A wrapper class holding the different elements of a single list item in the checklist view
+         * A wrapper class holding the different elements of a single list item in the list view.
+         * Contains 1 TextView for exercise name, and 1 TextView that contians the quantity
          */
         private class ViewHolder {
             TextView exerciseName;
@@ -115,12 +108,11 @@ public class WorkoutDetailsActivity extends Activity {
 
 
         /**
-         * Returns a view containing the workout session exercise name and quantity along with a checkbox
-         * for each exercise in the workout session
+         * Returns a view containing the workout exercise name and quantity
          * @param index the index of the exercise in the exercise list
          * @param convertView the view used for conversion
          * @param parent the parent ViewGroup
-         * @return a view containing the workout session exercise name and quantity along with a
+         * @return a view containing the workout exercise name and quantity along with a
          * checkbox for each exercise in the workout session
          */
         @Override
