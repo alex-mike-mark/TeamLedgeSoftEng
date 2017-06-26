@@ -77,10 +77,8 @@ public class WorkoutSession {
     public void setDate(LocalDate newDate) throws IllegalArgumentException {
         if (newDate == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        else {
+        else
             scheduledDate = newDate;
-            //TODO - requires database update
-        }
     }
 
     /**
@@ -97,7 +95,6 @@ public class WorkoutSession {
      */
     public void toggleCompleted() {
         isComplete = !isComplete;
-        //TODO - requires database update
     }
 
     /**
@@ -140,6 +137,7 @@ public class WorkoutSession {
 
         return exerciseCompleted;
     }
+
     /**
      * Returns an enumeration for traversing over the exercises in the workout
      *

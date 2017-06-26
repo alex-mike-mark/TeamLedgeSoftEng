@@ -3,6 +3,7 @@ package ledge.muscleup.business;
 import java.util.List;
 
 import ledge.muscleup.application.Services;
+import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.persistence.DataAccessStub;
@@ -67,6 +68,30 @@ public class AccessWorkouts implements InterfaceAccessWorkouts {
     }
 
     /**
+     * Sets the recommended quantity of exercise for a given exercise in a given workout
+     *
+     * @param workout  the workout that contains the exercise to update
+     * @param exercise the exercise to set the quantity for
+     * @param quantity the quantity to assign to the exercise
+     * @return a boolean representing if the exercise was found and updated in the workout
+     * @throws IllegalArgumentException if passed a {@code null} parameter
+     */
+    public boolean setRecommendedQuantity(Workout workout, WorkoutExercise exercise, InterfaceExerciseQuantity quantity) throws IllegalArgumentException {
+        return workout.setRecommendedQuantity(exercise, quantity) &&
+                dataAccess.updateExerciseQuantity(workout, exercise, quantity);
+    }
+
+    /**
+     * Toggle the favourite status of a workout
+     *
+     * @param workout the workout to update the status of
+     */
+    public void toggleFavourite(Workout workout) {
+        workout.toggleFavourite();
+        dataAccess.toggleExerciseFavourite(workout);
+    }
+
+    /**
      * Adds an exercise stored in the database to a workout stored in the database with the given
      * quantity of the exercise to be done
      * @param workout the workout to add an exercise to
@@ -74,8 +99,41 @@ public class AccessWorkouts implements InterfaceAccessWorkouts {
      *
      * @return true if exercise was added successfully, false otherwise
      */
-    public boolean addExerciseToWorkout (Workout workout, WorkoutExercise exercise) {
-        return dataAccess.addExerciseToWorkout(workout, exercise);
+    public boolean addExercise(Workout workout, WorkoutExercise exercise) {
+        boolean exerciseAdded = false; //if the exercise was added
+
+        exerciseAdded = dataAccess.addExerciseToWorkout(workout, exercise);
+        if (exerciseAdded)
+            workout.addExercise(exercise);
+
+        return exerciseAdded;
     }
 
+    /**
+     * Move the position of an exercise in the list of exercises
+     *
+     * @param workout  the workout to change the order of exercises for
+     * @param exercise the exercise to change the position of
+     * @param index    the index of the exercise to move
+     * @return a boolean representing if the exercise was found and moved to the new index
+     * @throws IllegalArgumentException if passed a {@code null} parameter or if {@code index} is
+     *                                  outside the bounds of the list of exercises
+     */
+    public boolean moveExercise(Workout workout, WorkoutExercise exercise, int index) throws IllegalArgumentException {
+        return workout.moveExercise(exercise, index) &&
+                dataAccess.moveWorkoutExercise(workout, exercise, index);
+    }
+
+    /**
+     * Removes an exercise from the list of exercises
+     *
+     * @param workout  the workout to remove an exercise from
+     * @param exercise the exercise to remove from the list
+     * @return the exercise that was removed, or {@code null} if the exercise couldn't be found
+     * @throws IllegalArgumentException if passed a {@code null} parameter
+     */
+    public boolean removeExercise(Workout workout, WorkoutExercise exercise) throws IllegalArgumentException {
+        return workout.removeExercise(exercise) &&
+                dataAccess.removeWorkoutExercise(workout, exercise);
+    }
 }
