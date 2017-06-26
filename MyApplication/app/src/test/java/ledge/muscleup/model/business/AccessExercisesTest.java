@@ -43,14 +43,6 @@ public class AccessExercisesTest extends TestCase {
     }
 
     /**
-     * Safely closes the AccessExercises
-     */
-    @After
-    public void tearDown() {
-        //TODO:
-    }
-
-    /**
      * Tests that getting an exercise works properly
      */
     @Test

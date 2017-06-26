@@ -49,15 +49,7 @@ public class AccessWorkoutsTest extends TestCase {
     {
         dataAccess = new TemplateAccessWorkouts();
     }
-
-    /**
-     * Safely closes the AccessWorkouts
-     */
-    @After
-    public void tearDown() {
-        //TODO:
-    }
-
+    
     /**
      * Tests that getting a workout works properly
      */
