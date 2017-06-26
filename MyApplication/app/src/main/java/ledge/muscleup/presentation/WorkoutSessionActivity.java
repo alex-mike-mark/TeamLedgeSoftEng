@@ -53,6 +53,8 @@ public class WorkoutSessionActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final InterfaceAccessWorkoutSessions aws = new AccessWorkoutSessions();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_session_checklist);
 
@@ -77,7 +79,7 @@ public class WorkoutSessionActivity extends AppCompatActivity {
         completeWorkoutButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                workoutSession.toggleCompleted();
+                aws.toggleCompleted(workoutSession);
                 finish();
             }
         });

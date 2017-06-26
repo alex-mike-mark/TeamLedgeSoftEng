@@ -3,6 +3,8 @@ package ledge.muscleup.business;
 import org.joda.time.LocalDate;
 
 import java.util.List;
+
+import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 import ledge.muscleup.model.workout.WorkoutSession;
 
 /**
@@ -48,4 +50,30 @@ public interface InterfaceAccessWorkoutSessions {
      * @param workoutSession the workout session to be removed
      */
     void removeWorkoutSession(WorkoutSession workoutSession);
+
+    /**
+     * Sets the scheduled date of a workout
+     *
+     * @param workoutSession the workout to change the date for
+     * @param newDate the new date of the workout
+     * @throws IllegalArgumentException if passed a {@code null} parameter
+     */
+    void setDate(WorkoutSession workoutSession, LocalDate newDate) throws IllegalArgumentException;
+
+    /**
+     * Toggles the completed state of a workout
+     *
+     * @param workoutSession the workout to change the state of
+     */
+    void toggleCompleted(WorkoutSession workoutSession);
+
+    /**
+     * Log an exercise in a workout as complete
+     *
+     * @param workoutSession the workout which contains the exercise
+     * @param exercise the exercise to complete
+     * @throws IllegalArgumentException if passed a {@code null} parameter
+     * @return a boolean representing whether the exercise was marked as completed or not
+     */
+    boolean completeExercise(WorkoutSession workoutSession, WorkoutSessionExercise exercise) throws IllegalArgumentException;
 }

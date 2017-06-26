@@ -103,7 +103,6 @@ public class Workout {
             //ensure the exercise exists in the list
             if (exerciseIndex != -1)
                 quantityUpdated = exerciseList.get(exerciseIndex).updateRecommendedQuantity(quantity);
-                //TODO - requires database update
         }
         return quantityUpdated;
     }
@@ -120,7 +119,6 @@ public class Workout {
      */
     public void toggleFavourite() {
         isFavourite = !isFavourite;
-        //TODO - requires database update
     }
 
     /**
@@ -141,10 +139,8 @@ public class Workout {
     public void addExercise(WorkoutExercise exercise) throws IllegalArgumentException {
         if (exercise == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        else {
+        else
             exerciseList.add(exercise);
-            //TODO - requires database update
-        }
     }
 
     /**
@@ -182,7 +178,6 @@ public class Workout {
                         index--;
                     listExercise = exerciseList.remove(exerciseIndex);
                     exerciseList.add(index, listExercise);
-                    //TODO - requires database update
                 }
                 exerciseMoved = true;
             }
@@ -215,7 +210,6 @@ public class Workout {
             if (exerciseIndex != -1) {
                 exerciseList.remove(exerciseIndex);
                 exerciseRemoved = true;
-                //TODO - requires database update
             }
 
             return exerciseRemoved;
