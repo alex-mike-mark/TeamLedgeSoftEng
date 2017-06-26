@@ -79,7 +79,7 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      */
     public void setDate(WorkoutSession workoutSession, LocalDate newDate) throws IllegalArgumentException {
         workoutSession.setDate(newDate);
-        //dataAccess.
+        dataAccess.updateWorkoutDate(workoutSession, newDate);
     }
 
     /**
@@ -89,7 +89,7 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      */
     public void toggleCompleted(WorkoutSession workoutSession) {
         workoutSession.toggleCompleted();
-        //dataAccess.
+        dataAccess.toggleWorkoutComplete(workoutSession);
     }
 
     /**
@@ -101,12 +101,6 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
     public boolean completeExercise(WorkoutSession workoutSession, WorkoutSessionExercise exercise) throws IllegalArgumentException {
-        boolean exerciseMarked = false;
-
-        exerciseMarked = workoutSession.completeExercise(exercise);
-        //if (exerciseMarked)
-            //dataAccess.
-
-        return exerciseMarked;
+        return workoutSession.completeExercise(exercise) && dataAccess.toggleExerciseComplete(workoutSession, exercise);
     }
 }

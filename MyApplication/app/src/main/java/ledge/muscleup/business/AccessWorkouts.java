@@ -77,13 +77,8 @@ public class AccessWorkouts implements InterfaceAccessWorkouts {
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
     public boolean setRecommendedQuantity(Workout workout, WorkoutExercise exercise, InterfaceExerciseQuantity quantity) throws IllegalArgumentException {
-        boolean quantitySet = false; //if the quantity was successfully set
-
-        quantitySet = workout.setRecommendedQuantity(exercise, quantity);
-//        if (quantitySet)
-//            dataAccess.
-
-        return quantitySet;
+        return workout.setRecommendedQuantity(exercise, quantity) &&
+                dataAccess.updateExerciseQuantity(workout, exercise, quantity);
     }
 
     /**
@@ -93,7 +88,7 @@ public class AccessWorkouts implements InterfaceAccessWorkouts {
      */
     public void toggleFavourite(Workout workout) {
         workout.toggleFavourite();
-        //dataAccess.
+        dataAccess.toggleExerciseFavourite(workout);
     }
 
     /**
@@ -125,13 +120,8 @@ public class AccessWorkouts implements InterfaceAccessWorkouts {
      *                                  outside the bounds of the list of exercises
      */
     public boolean moveExercise(Workout workout, WorkoutExercise exercise, int index) throws IllegalArgumentException {
-        boolean exerciseMoved = false; //if the exercise was moved
-
-        exerciseMoved = workout.moveExercise(exercise, index);
-        //if (exerciseMoved)
-            //dataAccess.
-
-        return exerciseMoved;
+        return workout.moveExercise(exercise, index) &&
+                dataAccess.moveWorkoutExercise(workout, exercise, index);
     }
 
     /**
@@ -143,12 +133,7 @@ public class AccessWorkouts implements InterfaceAccessWorkouts {
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
     public boolean removeExercise(Workout workout, WorkoutExercise exercise) throws IllegalArgumentException {
-        boolean exerciseRemoved = false; //if the exercise was removed
-
-        exerciseRemoved = workout.removeExercise(exercise);
-        //if (exerciseRemoved)
-            //dataAccess.
-
-        return exerciseRemoved;
+        return workout.removeExercise(exercise) &&
+                dataAccess.removeWorkoutExercise(workout, exercise);
     }
 }
