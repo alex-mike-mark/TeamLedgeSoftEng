@@ -234,6 +234,7 @@ public class Workout {
      * @param other the instance of Workout to compare to
      * @return a boolean representing whether the two instances were equal
      */
+
     public boolean equals(Workout other) {
         return other != null && this.name.equals(other.getName());
     }
@@ -252,5 +253,9 @@ public class Workout {
             result += " " + (i + 1) + ". " + exerciseList.get(i).toString() + "\n";
 
         return result;
+    }
+
+    public List<WorkoutExercise> getExerciseList() {
+        return exerciseList;
     }
 }
