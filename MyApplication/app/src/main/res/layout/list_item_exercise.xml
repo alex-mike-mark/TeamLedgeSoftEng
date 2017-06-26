@@ -21,7 +21,8 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:textColor="@color/colorAccent"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:paddingLeft="15sp"/>
 
         <TextView
             android:id="@+id/exerciseInfo"
@@ -32,6 +33,7 @@
             android:layout_centerVertical="true"
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
+            android:paddingLeft="15sp"
              />
     </LinearLayout>
 

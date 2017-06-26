@@ -16,7 +16,8 @@
         android:layout_weight ="0.75"
         android:gravity = "left"
         android:textColor = "@color/colorAccent"
-        android:textSize="30sp"/>
+        android:textSize="30sp"
+        android:paddingLeft="10sp"/>
 
 
     <TextView
