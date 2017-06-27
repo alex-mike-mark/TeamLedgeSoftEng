@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,19 +20,12 @@ import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import ledge.muscleup.R;
-import ledge.muscleup.application.Services;
 import ledge.muscleup.business.AccessWorkoutSessions;
-import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
-import ledge.muscleup.business.InterfaceScheduleManager;
-import ledge.muscleup.business.ScheduleManager;
-import ledge.muscleup.model.exercise.WorkoutSessionExercise;
+import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.WorkoutSession;
-import ledge.muscleup.persistence.DataAccessStub;
-import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
  * ScheduleActivity displays a list of workout sessions
@@ -45,13 +37,15 @@ import ledge.muscleup.persistence.InterfaceDataAccess;
 public class ScheduleActivity extends Activity {
 
     private ListItemAdapter adapter;
-    private  InterfaceScheduleManager scheduleManager;
+	private AccessWorkoutSessions aws;
+    private ScheduleWeek scheduleWeek;
     private List<WorkoutSession> sessionList;
 
     private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        scheduleManager = new ScheduleManager(new AccessWorkoutSessions());
+        aws = new AccessWorkoutSessions();
+        scheduleWeek = new ScheduleWeek(aws.getCurrentWeekSessions());
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_list_display);
@@ -62,7 +56,7 @@ public class ScheduleActivity extends Activity {
 
     private void populateList(){
         ListView listView = (ListView) findViewById(R.id.list_panel);
-        sessionList = scheduleManager.getWorkoutSessionList();
+        sessionList = scheduleWeek.getWorkoutSessionList();
 
         adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_workout_session, sessionList);
         listView.setAdapter(adapter);
@@ -119,8 +113,8 @@ public class ScheduleActivity extends Activity {
     public void showNextWeek(){
         adapter.clear();
 
-        scheduleManager.nextWeek();
-        sessionList = scheduleManager.getWorkoutSessionList();
+        aws.nextWeek(scheduleWeek);
+        sessionList = scheduleWeek.getWorkoutSessionList();
 
         populateList();
     }
@@ -131,8 +125,8 @@ public class ScheduleActivity extends Activity {
     public void showLastWeek(){
         adapter.clear();
 
-        scheduleManager.lastWeek();
-        sessionList = scheduleManager.getWorkoutSessionList();
+        aws.lastWeek(scheduleWeek);
+        sessionList = scheduleWeek.getWorkoutSessionList();
 
         populateList();
     }
