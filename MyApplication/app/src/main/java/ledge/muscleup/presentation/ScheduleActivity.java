@@ -3,7 +3,6 @@ package ledge.muscleup.presentation;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
@@ -15,8 +14,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,7 +28,6 @@ import ledge.muscleup.business.AccessWorkoutSessions;
 
 import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.business.AccessWorkouts;
-import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
 import ledge.muscleup.business.InterfaceAccessWorkouts;
 import ledge.muscleup.model.workout.WorkoutSession;
 
@@ -138,7 +134,7 @@ public class ScheduleActivity extends Activity {
     public void showNextWeek(){
         adapter.clear();
 
-        aws.nextWeek(scheduleWeek);
+        aws.setToNextWeek(scheduleWeek);
         sessionList = scheduleWeek.getWorkoutSessionList();
 
         populateList();
@@ -151,7 +147,7 @@ public class ScheduleActivity extends Activity {
     public void showLastWeek(){
         adapter.clear();
 
-        aws.lastWeek(scheduleWeek);
+        aws.setToLastWeek(scheduleWeek);
         sessionList = scheduleWeek.getWorkoutSessionList();
 
         populateList();
@@ -160,7 +156,7 @@ public class ScheduleActivity extends Activity {
 
     public void showCurrentWeek() {
         adapter.clear();
-        aws.currentWeek(scheduleWeek);
+        aws.setToCurrentWeek(scheduleWeek);
         sessionList = scheduleWeek.getWorkoutSessionList();
 
         populateList();

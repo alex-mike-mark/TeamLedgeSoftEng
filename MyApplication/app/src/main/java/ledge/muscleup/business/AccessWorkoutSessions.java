@@ -160,7 +160,7 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      * @param scheduleWeek the week to change
      */
     @Override
-    public void lastWeek(ScheduleWeek scheduleWeek) {
+    public void setToLastWeek(ScheduleWeek scheduleWeek) {
         LocalDate firstDayOfWeek;
         List<WorkoutSession> weekWorkouts;
 
@@ -175,7 +175,7 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      * @param scheduleWeek the week to change
      */
     @Override
-    public void nextWeek(ScheduleWeek scheduleWeek) {
+    public void setToNextWeek(ScheduleWeek scheduleWeek) {
         LocalDate firstDayOfWeek;
         List<WorkoutSession> weekWorkouts;
 
@@ -189,7 +189,7 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      * @param scheduleWeek the week to change
      */
     @Override
-    public void currentWeek(ScheduleWeek scheduleWeek) {
+    public void setToCurrentWeek(ScheduleWeek scheduleWeek) {
         LocalDate firstDayOfWeek;
         List<WorkoutSession> weekWorkouts;
 

@@ -93,7 +93,7 @@ public class ScheduleWeekTest {
         LocalDate currWeekStart = scheduleWeek.getWeekday(DateTimeConstants.MONDAY);
         List<WorkoutSession> workoutList;
 
-        dataAccess.nextWeek(scheduleWeek);
+        dataAccess.setToNextWeek(scheduleWeek);
 
         Assert.assertEquals("Improperly incremented week",
                 scheduleWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart.plusWeeks(1));
@@ -104,7 +104,7 @@ public class ScheduleWeekTest {
                 scheduleWeek.getScheduledWorkout(DateTimeConstants.THURSDAY).getName(),
                 "Marathon Training Starts Here");
 
-        dataAccess.lastWeek(scheduleWeek);
+        dataAccess.setToLastWeek(scheduleWeek);
 
         Assert.assertEquals("Improperly decremented week",
                 scheduleWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart);
@@ -118,7 +118,7 @@ public class ScheduleWeekTest {
                 scheduleWeek.getScheduledWorkout(DateTimeConstants.SATURDAY).getName(),
                 "Work that Core, Get that Score!");
 
-        dataAccess.lastWeek(scheduleWeek);
+        dataAccess.setToLastWeek(scheduleWeek);
 
         Assert.assertEquals("Improperly decremented week",
                 scheduleWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart.minusWeeks(1));
@@ -127,7 +127,7 @@ public class ScheduleWeekTest {
         Assert.assertEquals("Returned unexpected workout",
                 scheduleWeek.getScheduledWorkout(DateTimeConstants.SUNDAY), null);
 
-        dataAccess.nextWeek(scheduleWeek);
+        dataAccess.setToNextWeek(scheduleWeek);
 
         Assert.assertEquals("Improperly incremented week",
                 scheduleWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart);
@@ -308,7 +308,7 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      * @param scheduleWeek the week to change
      */
     @Override
-    public void lastWeek(ScheduleWeek scheduleWeek) {
+    public void setToLastWeek(ScheduleWeek scheduleWeek) {
         //TODO remove after refactoring persistence layer or implement and test
     }
 
@@ -318,7 +318,7 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      * @param scheduleWeek the week to change
      */
     @Override
-    public void nextWeek(ScheduleWeek scheduleWeek) {
+    public void setToNextWeek(ScheduleWeek scheduleWeek) {
         //TODO remove after refactoring persistence layer or implement and test
     }
 
@@ -328,7 +328,7 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      * @param scheduleWeek the week to change
      */
     @Override
-    public void currentWeek(ScheduleWeek scheduleWeek) {
+    public void setToCurrentWeek(ScheduleWeek scheduleWeek) {
         //TODO remove after refactoring persistence layer or implement and test
     }
 
