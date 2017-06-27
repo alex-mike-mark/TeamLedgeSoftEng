@@ -25,56 +25,42 @@ import ledge.muscleup.model.exercise.WorkoutSessionExercise;
  * @since 2017-06-07
  */
 public class WorkoutSessionTest extends TestCase {
-    WorkoutSession workoutSession1, workoutSession2, workoutSession3, workoutSession4, workoutSession5;
-    Workout workout1, workout2, workout3, workout4, workout5;
-    WorkoutExercise[] exerciseList1, exerciseList2, exerciseList3, exerciseList4, exerciseList5;
-
+    WorkoutSession workoutSession1, workoutSession2, workoutSession3;
+    Workout workout1, workout2, workout3;
+    WorkoutExercise[] exerciseList1, exerciseList2, exerciseList3;
+    final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
+    final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
+    final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
     /**
      * Initializes several instances of WorkoutSession to setup testing
      */
     @Before
     public void setUp() {
         exerciseList1 = new WorkoutExercise[]{
-                new WorkoutExercise("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20)),
-                new WorkoutExercise("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20)),
-                new WorkoutExercise("Sit-ups", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20))
+                new WorkoutExercise("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20), xpHighIntensity),
+                new WorkoutExercise("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20), xpHighIntensity),
+                new WorkoutExercise("Sit-ups", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20), xpHighIntensity)
         };
         workout1 = new Workout("Get Your 6 Pack Abs", true, exerciseList1);
 
         workoutSession1 = new WorkoutSession(workout1, LocalDate.now(), false);
 
         exerciseList2 = new WorkoutExercise[]{
-                new WorkoutExercise("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20)),
-                new WorkoutExercise("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20))
+                new WorkoutExercise("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20), xpHighIntensity),
+                new WorkoutExercise("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20), xpHighIntensity)
         };
         workout2 = new Workout("Get Your 6 Pack Abs", true, exerciseList2);
 
         workoutSession2 = new WorkoutSession(workout2, LocalDate.now(), true);
 
         exerciseList3 = new WorkoutExercise[]{
-                new WorkoutExercise("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20)),
-                new WorkoutExercise("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20)),
-                new WorkoutExercise("Sit-ups", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20))
+                new WorkoutExercise("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20), xpHighIntensity),
+                new WorkoutExercise("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20), xpHighIntensity),
+                new WorkoutExercise("Sit-ups", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20), xpHighIntensity)
         };
         workout3 = new Workout("Get Your 6 Pack Abs", true, exerciseList3);
 
         workoutSession3 = new WorkoutSession(workout3, LocalDate.now(), false);
-
-        exerciseList4 = new WorkoutExercise[] {
-                new WorkoutExercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM, new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS)),
-                new WorkoutExercise("Tricp Extensions", ExerciseIntensity.LOW, ExerciseType.ARM, new ExerciseSetsAndWeight(2, 15, 10, WeightUnit.LBS))
-        };
-        workout4 = new Workout("Work those Arms", true, exerciseList4);
-
-        workoutSession4 = new WorkoutSession(workout4, LocalDate.now(), false);
-
-        exerciseList5 = new WorkoutExercise[] {
-                new WorkoutExercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG, new ExerciseSets(3, 15)),
-                new WorkoutExercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG, new ExerciseSets(3, 15))
-        };
-        workout5 = new Workout("Work them Legs", true, exerciseList5);
-
-        workoutSession5 = new WorkoutSession(workout5, LocalDate.now(), false);
     }
 
     /**
@@ -116,14 +102,14 @@ public class WorkoutSessionTest extends TestCase {
         assertEquals(2, workoutSession2.numExercises());
 
         assertTrue(workoutSession1.completeExercise(
-                new WorkoutSessionExercise("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY,
-                        new ExerciseSets(3, 20), false)));
+                new WorkoutSessionExercise(new WorkoutExercise("Crunches", ExerciseIntensity.HIGH,
+                        ExerciseType.FULL_BODY, new ExerciseSets(3, 20), xpHighIntensity), false)));
         assertTrue(workoutSession1.completeExercise(
-                new WorkoutSessionExercise("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY,
-                        new ExerciseSets(3, 20), false)));
+                new WorkoutSessionExercise(new WorkoutExercise("Russian Twists", ExerciseIntensity.HIGH,
+                        ExerciseType.FULL_BODY, new ExerciseSets(3, 20), xpHighIntensity), false)));
         assertTrue(workoutSession1.completeExercise(
-                new WorkoutSessionExercise("Sit-ups", ExerciseIntensity.HIGH,
-                        ExerciseType.FULL_BODY, new ExerciseSets(3, 20), false)));
+                new WorkoutSessionExercise(new WorkoutExercise("Sit-ups", ExerciseIntensity.HIGH,
+                        ExerciseType.FULL_BODY, new ExerciseSets(3, 20), xpHighIntensity), false)));
 
         assertNotNull(workoutSession1.getExerciseEnumeration());
         assertTrue(workoutSession1.getExerciseEnumeration() instanceof Enumeration);
@@ -139,16 +125,6 @@ public class WorkoutSessionTest extends TestCase {
         assertNotNull(workoutSession1.getWorkoutSessionExercises());
         assertNotNull(workoutSession2.getWorkoutSessionExercises());
         assertNotNull(workoutSession3.getWorkoutSessionExercises());
-
-        final int xpLowIntensityExercise = 15;
-        final int xpMediumIntensityExercise = 30;
-        final int xpHighIntensityExercise = 45;
-
-        assertEquals(workoutSession1.getExperienceValue(), (3 * xpHighIntensityExercise));
-        assertEquals(workoutSession2.getExperienceValue(), (2 * xpHighIntensityExercise));
-        assertEquals(workoutSession3.getExperienceValue(), (3 * xpHighIntensityExercise));
-        assertEquals(workoutSession4.getExperienceValue(), (2 * xpLowIntensityExercise));
-        assertEquals(workoutSession5.getExperienceValue(), (2 * xpMediumIntensityExercise));
 
         System.out.println("Finishing testWorkoutSession");
     }
