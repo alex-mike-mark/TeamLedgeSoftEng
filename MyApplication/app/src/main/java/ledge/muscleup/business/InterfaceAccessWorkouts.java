@@ -97,10 +97,5 @@ public interface InterfaceAccessWorkouts {
      * @throws IllegalArgumentException if passed a {@code null} parameter
      * @return the exercise that was removed, or {@code null} if the exercise couldn't be found
      */
-<<<<<<< HEAD
-    boolean removeExercise(Workout workout, WorkoutExercise exercise) throws IllegalArgumentException;
-
-=======
     boolean removeExerciseFromWorkout(Workout workout, WorkoutExercise exercise) throws IllegalArgumentException;
->>>>>>> develop
 }
