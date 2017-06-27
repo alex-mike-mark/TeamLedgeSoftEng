@@ -110,12 +110,14 @@ public class ScheduleActivity extends Activity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
-                Intent appInfo = new Intent(ScheduleActivity.this, WorkoutSessionActivity.class);
-                LocalDate date = workoutSessionList.get(position).getDate();
-                DateTimeFormatter  formatter= DateTimeFormat.forPattern("MM/dd/yyyy");
+                if (workoutSessionList.get(position).getName() != null) {   //workout scheduled on day
+                    Intent appInfo = new Intent(ScheduleActivity.this, WorkoutSessionActivity.class);
+                    LocalDate date = workoutSessionList.get(position).getDate();
+                    DateTimeFormatter  formatter= DateTimeFormat.forPattern("MM/dd/yyyy");
 
-                appInfo.putExtra("workoutSessionDate", formatter.print(date));
-                startActivity(appInfo);
+                    appInfo.putExtra("workoutSessionDate", formatter.print(date));
+                    startActivity(appInfo);
+                }
             }
         });
     }
