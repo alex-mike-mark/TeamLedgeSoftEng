@@ -52,6 +52,8 @@ public class ScheduleActivity extends Activity {
     private InterfaceAccessWorkouts aw;
 
     private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd");
+    private static final DateTimeFormatter monthDayYearFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         aws = new AccessWorkoutSessions();
@@ -64,7 +66,7 @@ public class ScheduleActivity extends Activity {
         setContentView(R.layout.activity_schedule_list_display);
 
         populateList();
-
+        setWeekRangeTitle();
     }
 
     private void populateList(){
@@ -132,6 +134,7 @@ public class ScheduleActivity extends Activity {
         sessionList = scheduleWeek.getWorkoutSessionList();
 
         populateList();
+        setWeekRangeTitle();
     }
 
     /**
@@ -144,6 +147,18 @@ public class ScheduleActivity extends Activity {
         sessionList = scheduleWeek.getWorkoutSessionList();
 
         populateList();
+        setWeekRangeTitle();
+    }
+
+    /**
+     * Sets the Activity title shown on screen to display the range of dates for current week
+     */
+    public void setWeekRangeTitle() {
+        TextView titleView = (TextView) findViewById(R.id.activity_title);
+        LocalDate startOfWeek = sessionList.get(0).getDate();
+        LocalDate endOfWeek = sessionList.get(sessionList.size() - 1).getDate();
+        String title = monthDayYearFormatter.print(startOfWeek) + " - " + monthDayYearFormatter.print(endOfWeek);
+        titleView.setText(title);
     }
 
     /**
