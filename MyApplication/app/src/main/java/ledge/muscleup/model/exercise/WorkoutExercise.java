@@ -9,26 +9,18 @@ import ledge.muscleup.model.exercise.enums.ExerciseType;
 
 public abstract class WorkoutExercise {
     Exercise exercise;
+    int experienceValue;
 
-    WorkoutExercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType) throws IllegalArgumentException {
-        if(name == null || intensity == null || exerciseType == null) {
+    public WorkoutExercise(Exercise exercise, int xpValue) throws IllegalArgumentException {
+        if(exercise==null) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
         else{
-            exercise = new Exercise(name, intensity, exerciseType);
+            this.exercise = exercise;
+            this.experienceValue = xpValue;
         }
     }
 
-    WorkoutExercise(Exercise exercise) throws IllegalArgumentException{
-        if(exercise == null) {
-            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        }
-        this.exercise = exercise;
-    }
-
-    WorkoutExercise(){
-        exercise = null;
-    }
 
     /**
      * Returns the name of the exercise
@@ -73,6 +65,14 @@ public abstract class WorkoutExercise {
      * @return
      */
     public abstract boolean updateQuantity(InterfaceExerciseQuantity quantity);
+
+    /**
+     * Returns the experience value of the WorkoutExercise
+     * @return the experience value of the WorkoutExercise
+     */
+    public int getExperienceValue() {
+        return experienceValue;
+    }
 
     /**
      * Compares the current WorkoutExercise to another instance of WorkoutExercise

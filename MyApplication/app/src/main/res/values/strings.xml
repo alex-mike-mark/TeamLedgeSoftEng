@@ -4,4 +4,7 @@
     <string name="btn_exercises">Exercises</string>
     <string name="btn_schedule">Workout Schedule</string>
     <string name="btn_completeWorkout">COMPLETE WORKOUT</string>
+    <string name="btn_next">Next</string>
+    <string name="btn_previous">Previous</string>
+    <string name="btn_currentWeek">Current Week</string>
 </resources>

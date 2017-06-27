@@ -19,9 +19,9 @@ public class WorkoutExerciseSetsAndWeight extends WorkoutExercise{
      * @param recommendedSetsAndWeight the quantity of exercise recommended for the exercise
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    public WorkoutExerciseSetsAndWeight(Exercise exercise,
+    public WorkoutExerciseSetsAndWeight(Exercise exercise, int xpValue,
                                         InterfaceExerciseSetsAndWeight recommendedSetsAndWeight) throws IllegalArgumentException {
-        super(exercise);
+        super(exercise, xpValue);
         if(recommendedSetsAndWeight == null) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }

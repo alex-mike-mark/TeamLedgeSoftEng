@@ -56,7 +56,7 @@ public interface InterfaceAccessWorkouts {
      * @throws IllegalArgumentException if passed a {@code null} parameter
      * @return a boolean representing if the exercise was found and updated in the workout
      */
-    boolean setRecommendedQuantity(Workout workout, WorkoutExercise exercise,
+    boolean setRecommendedExerciseQuantity(Workout workout, WorkoutExercise exercise,
                                           InterfaceExerciseQuantity quantity) throws IllegalArgumentException;
 
     /**
@@ -64,7 +64,7 @@ public interface InterfaceAccessWorkouts {
      *
      * @param workout the workout to update the status of
      */
-    void toggleFavourite(Workout workout);
+    void toggleWorkoutFavourite(Workout workout);
 
     /**
      * Adds an exercise stored in the database to a workout stored in the database with the given
@@ -74,7 +74,7 @@ public interface InterfaceAccessWorkouts {
      * @param exercise the exercise to add to the workout
      * @return true if exercise was added successfully, false otherwise
      */
-    boolean addExercise(Workout workout, WorkoutExercise exercise);
+    boolean addExerciseToWorkout(Workout workout, WorkoutExercise exercise);
 
     /**
      * Move the position of an exercise in the list of exercises
@@ -86,7 +86,7 @@ public interface InterfaceAccessWorkouts {
      * outside the bounds of the list of exercises
      * @return a boolean representing if the exercise was found and moved to the new index
      */
-    boolean moveExercise(Workout workout, WorkoutExercise exercise,
+    boolean moveWorkoutExercise(Workout workout, WorkoutExercise exercise,
                                 int index) throws IllegalArgumentException;
 
     /**
@@ -97,6 +97,10 @@ public interface InterfaceAccessWorkouts {
      * @throws IllegalArgumentException if passed a {@code null} parameter
      * @return the exercise that was removed, or {@code null} if the exercise couldn't be found
      */
+<<<<<<< HEAD
     boolean removeExercise(Workout workout, WorkoutExercise exercise) throws IllegalArgumentException;
 
+=======
+    boolean removeExerciseFromWorkout(Workout workout, WorkoutExercise exercise) throws IllegalArgumentException;
+>>>>>>> develop
 }

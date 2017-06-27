@@ -21,9 +21,9 @@ public class WorkoutExerciseDuration extends WorkoutExercise{
      * @param recommendedDuration the quantity of exercise recommended for the exercise
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    public WorkoutExerciseDuration(Exercise exercise,
+    public WorkoutExerciseDuration(Exercise exercise, int xpValue,
                                    InterfaceExerciseDuration recommendedDuration) throws IllegalArgumentException {
-        super(exercise);
+        super(exercise, xpValue);
         if(recommendedDuration == null) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
