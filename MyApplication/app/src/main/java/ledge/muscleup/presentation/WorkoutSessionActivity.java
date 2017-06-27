@@ -80,7 +80,7 @@ public class WorkoutSessionActivity extends Activity {
         completeWorkoutButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                aws.toggleCompleted(workoutSession);
+                aws.toggleWorkoutCompleted(workoutSession);
                 finish();
             }
         });

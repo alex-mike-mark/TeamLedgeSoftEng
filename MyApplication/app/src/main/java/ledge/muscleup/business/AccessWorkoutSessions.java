@@ -1,10 +1,12 @@
 package ledge.muscleup.business;
 
+import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 import java.util.List;
 
 import ledge.muscleup.application.Services;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
+import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.WorkoutSession;
 import ledge.muscleup.persistence.DataAccessStub;
 
@@ -55,6 +57,15 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
     }
 
     /**
+     * A method that returns a list of workout sessions scheduled in the current week
+     * @return a list of all workout sessions scheduled in the current week
+     */
+    public List<WorkoutSession> getCurrentWeekSessions() {
+        LocalDate firstOfThisWeek = new LocalDate().withDayOfWeek(DateTimeConstants.MONDAY);
+        return dataAccess.getSessionsInDateRange(firstOfThisWeek, firstOfThisWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
+    }
+
+    /**
      * Adds a new workout session to the database
      * @param workoutSession the workout session to be added to the database
      */
@@ -77,7 +88,7 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      * @param newDate        the new date of the workout
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    public void setDate(WorkoutSession workoutSession, LocalDate newDate) throws IllegalArgumentException {
+    public void setWorkoutDate(WorkoutSession workoutSession, LocalDate newDate) throws IllegalArgumentException {
         workoutSession.setDate(newDate);
         dataAccess.updateWorkoutDate(workoutSession, newDate);
     }
@@ -87,7 +98,7 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      *
      * @param workoutSession the workout to change the state of
      */
-    public void toggleCompleted(WorkoutSession workoutSession) {
+    public void toggleWorkoutCompleted(WorkoutSession workoutSession) {
         workoutSession.toggleCompleted();
         dataAccess.toggleWorkoutComplete(workoutSession);
     }
@@ -100,7 +111,76 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      * @return a boolean representing whether the exercise was marked as completed or not
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    public boolean completeExercise(WorkoutSession workoutSession, WorkoutSessionExercise exercise) throws IllegalArgumentException {
+    public boolean completeWorkoutExercise(WorkoutSession workoutSession, WorkoutSessionExercise exercise) throws IllegalArgumentException {
         return workoutSession.completeExercise(exercise) && dataAccess.toggleExerciseComplete(workoutSession, exercise);
+    }
+
+    /**
+     * Adds a workout session to a given day of a scheduled week
+     *
+     * @param scheduleWeek  the week to add the workout to
+     * @param workoutSession the workout session to add
+     * @param dayOfWeek      the day of the week to add the workout session to
+     * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
+     *                                  > DateTimeConstants.SUNDAY}
+     */
+    public void addWorkoutSession(ScheduleWeek scheduleWeek, WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException {
+        scheduleWeek.addWorkoutSession(workoutSession, dayOfWeek);
+        dataAccess.addWorkoutSession(scheduleWeek, workoutSession, dayOfWeek);
+    }
+
+    /**
+     * Removes a workout from a given day of a scheduled week
+     *
+     * @param scheduleWeek the week to remove the workout from
+     * @param dayOfWeek     the day to remove the workout from
+     * @return a boolean representing if a workout was removed
+     * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
+     *                                  > DateTimeConstants.SUNDAY}
+     */
+    public boolean removeWorkoutSession(ScheduleWeek scheduleWeek, int dayOfWeek) throws IllegalArgumentException {
+        return scheduleWeek.removeWorkoutSession(dayOfWeek) && dataAccess.removeWorkoutSession(scheduleWeek, dayOfWeek);
+    }
+
+    /**
+     * Creates a new ScheduleWeek based on the given date
+     *
+     * @param dayInWeek a day in the week to created a ScheduleWeek for
+     * @return a ScheduleWeek, which contains all WorkoutSessions for the given week
+     */
+    @Override
+    public ScheduleWeek newScheduledWeek(LocalDate dayInWeek) {
+        LocalDate firstDayOfWeek = dayInWeek.withDayOfWeek(DateTimeConstants.MONDAY);
+        return new ScheduleWeek(getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1)));
+    }
+
+    /**
+     * Sets the manager to contain the scheduled workouts for the previous week
+     *
+     * @param scheduleWeek the week to change
+     */
+    @Override
+    public void lastWeek(ScheduleWeek scheduleWeek) {
+        LocalDate firstDayOfWeek;
+        List<WorkoutSession> weekWorkouts;
+
+        firstDayOfWeek = scheduleWeek.getWeekday(DateTimeConstants.MONDAY).minusWeeks(1);
+        weekWorkouts = getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
+        scheduleWeek.lastWeek(weekWorkouts);
+    }
+
+    /**
+     * Sets the manager to contain the scheduled workouts for the following week
+     *
+     * @param scheduleWeek the week to change
+     */
+    @Override
+    public void nextWeek(ScheduleWeek scheduleWeek) {
+        LocalDate firstDayOfWeek;
+        List<WorkoutSession> weekWorkouts;
+
+        firstDayOfWeek = scheduleWeek.getWeekday(DateTimeConstants.MONDAY).plusWeeks(1);
+        weekWorkouts = getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
+        scheduleWeek.lastWeek(weekWorkouts);
     }
 }
