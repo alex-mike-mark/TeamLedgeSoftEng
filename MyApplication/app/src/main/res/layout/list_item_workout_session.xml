@@ -4,16 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum = "1"
-    android:paddingTop="50sp"
-    android:paddingBottom="50sp"
+    android:paddingTop="30sp"
+    android:paddingBottom="30sp"
     >
 
     <TextView
 
         android:id="@+id/scheduleDate"
-        android:layout_width="fill_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight ="0.75"
+        android:layout_weight ="0.2"
         android:gravity = "left"
         android:textColor = "@color/colorAccent"
         android:textSize="30sp"
@@ -22,12 +22,23 @@
 
     <TextView
         android:id="@+id/scheduleWorkoutName"
-        android:layout_width="fill_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.25"
+        android:layout_weight="0.75"
         android:gravity="left"
         android:textColor="@color/colorAccent"
         android:textSize="30sp"
         />
 
+    <Button
+        android:id="@+id/removeWorkoutSessionButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.05"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="right"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="24sp"
+        android:focusable="false"/>
 </LinearLayout>
