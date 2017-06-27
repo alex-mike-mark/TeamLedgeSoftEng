@@ -29,7 +29,8 @@ public class ScheduleActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ScheduledWeek scheduledWeek = new ScheduledWeek(new AccessWorkoutSessions());
+        AccessWorkoutSessions aws = new AccessWorkoutSessions();
+        ScheduledWeek scheduledWeek = new ScheduledWeek(aws.getCurrentWeekSessions());
         ListManager lm = new ListManager();
         List<WorkoutSession> scheduleArray;
 

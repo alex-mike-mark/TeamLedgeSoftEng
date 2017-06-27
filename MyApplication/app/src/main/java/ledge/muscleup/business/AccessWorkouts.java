@@ -76,7 +76,7 @@ public class AccessWorkouts implements InterfaceAccessWorkouts {
      * @return a boolean representing if the exercise was found and updated in the workout
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    public boolean setRecommendedQuantity(Workout workout, WorkoutExercise exercise, InterfaceExerciseQuantity quantity) throws IllegalArgumentException {
+    public boolean setRecommendedExerciseQuantity(Workout workout, WorkoutExercise exercise, InterfaceExerciseQuantity quantity) throws IllegalArgumentException {
         return workout.setRecommendedQuantity(exercise, quantity) &&
                 dataAccess.updateExerciseQuantity(workout, exercise, quantity);
     }
@@ -86,7 +86,7 @@ public class AccessWorkouts implements InterfaceAccessWorkouts {
      *
      * @param workout the workout to update the status of
      */
-    public void toggleFavourite(Workout workout) {
+    public void toggleWorkoutFavourite(Workout workout) {
         workout.toggleFavourite();
         dataAccess.toggleExerciseFavourite(workout);
     }
@@ -99,7 +99,7 @@ public class AccessWorkouts implements InterfaceAccessWorkouts {
      *
      * @return true if exercise was added successfully, false otherwise
      */
-    public boolean addExercise(Workout workout, WorkoutExercise exercise) {
+    public boolean addExerciseToWorkout(Workout workout, WorkoutExercise exercise) {
         boolean exerciseAdded = false; //if the exercise was added
 
         exerciseAdded = dataAccess.addExerciseToWorkout(workout, exercise);
@@ -119,7 +119,7 @@ public class AccessWorkouts implements InterfaceAccessWorkouts {
      * @throws IllegalArgumentException if passed a {@code null} parameter or if {@code index} is
      *                                  outside the bounds of the list of exercises
      */
-    public boolean moveExercise(Workout workout, WorkoutExercise exercise, int index) throws IllegalArgumentException {
+    public boolean moveWorkoutExercise(Workout workout, WorkoutExercise exercise, int index) throws IllegalArgumentException {
         return workout.moveExercise(exercise, index) &&
                 dataAccess.moveWorkoutExercise(workout, exercise, index);
     }
@@ -132,7 +132,7 @@ public class AccessWorkouts implements InterfaceAccessWorkouts {
      * @return the exercise that was removed, or {@code null} if the exercise couldn't be found
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    public boolean removeExercise(Workout workout, WorkoutExercise exercise) throws IllegalArgumentException {
+    public boolean removeExerciseFromWorkout(Workout workout, WorkoutExercise exercise) throws IllegalArgumentException {
         return workout.removeExercise(exercise) &&
                 dataAccess.removeWorkoutExercise(workout, exercise);
     }

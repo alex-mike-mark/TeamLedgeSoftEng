@@ -23,11 +23,10 @@ public class ScheduledWeek {
     private WorkoutSession[] workoutSessions;
 
     public ScheduledWeek(List<WorkoutSession> workoutList) {
-        if (workoutSessions == null)
+        if (workoutList == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else {
-            firstDayOfWeek = new LocalDate(2017, 06, 05);
-            workoutSessions = null;
+            firstDayOfWeek = new LocalDate().withDayOfWeek(DateTimeConstants.MONDAY);
             populateWorkoutList(workoutList);
         }
     }
@@ -179,7 +178,8 @@ public class ScheduledWeek {
         WorkoutSession currSession;
         LocalDate lastDayOfWeek = getWeekday(DateTimeConstants.SUNDAY);
 
-        initWeek();
+        workoutSessions = new WorkoutSession[DateTimeConstants.DAYS_PER_WEEK];
+
         for (int i = 0; i < sessionList.size(); i++) {
             currSession = sessionList.get(i);
             if (currSession.getDate().isBefore(firstDayOfWeek) ||
@@ -187,16 +187,10 @@ public class ScheduledWeek {
                 throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
             else
                 workoutSessions[currSession.getDate().getDayOfWeek() - 1] = currSession;
-
         }
-    }
 
-    /**
-     * Initializes the array of workout sessions for the week
-     */
-    private void initWeek() {
-        workoutSessions = new WorkoutSession[DateTimeConstants.DAYS_PER_WEEK];
-        for (int i = 0; i < DateTimeConstants.DAYS_PER_WEEK; i++)
-            workoutSessions[i] = new WorkoutSession(firstDayOfWeek.plusDays(i));
+        for (int i = 0; i < workoutSessions.length; i++)
+            if (workoutSessions[i] == null)
+                workoutSessions[i] = new WorkoutSession(firstDayOfWeek.plusDays(i));
     }
 }
