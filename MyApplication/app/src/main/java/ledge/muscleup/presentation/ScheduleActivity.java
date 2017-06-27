@@ -62,7 +62,6 @@ public class ScheduleActivity extends Activity {
 
         adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_workout_session, sessionList);
         listView.setAdapter(adapter);
-        listView.setItemsCanFocus(true);
 
         setupListeners(sessionList);
 
