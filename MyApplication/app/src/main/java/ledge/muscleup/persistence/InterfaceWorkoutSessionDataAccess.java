@@ -5,7 +5,7 @@ import org.joda.time.LocalDate;
 import java.util.List;
 
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
-import ledge.muscleup.model.schedule.ScheduledWeek;
+import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.WorkoutSession;
 
 /**
@@ -84,22 +84,22 @@ public interface InterfaceWorkoutSessionDataAccess {
     /**
      * Adds a workout session to a given day in the database
      *
-     * @param scheduledWeek the week to add the workout to
+     * @param scheduleWeek the week to add the workout to
      * @param workoutSession the workout session to add
      * @param dayOfWeek the day of the week to add the workout session to
      * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
      * > DateTimeConstants.SUNDAY}
      */
-    void addWorkoutSession(ScheduledWeek scheduledWeek, WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException;
+    void addWorkoutSession(ScheduleWeek scheduleWeek, WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException;
 
     /**
      * Removes a workout from a given day in the database
      *
-     * @param scheduledWeek the week to remove the workout from
+     * @param scheduleWeek the week to remove the workout from
      * @param dayOfWeek the day to remove the workout from
      * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
      * > DateTimeConstants.SUNDAY}
      * @return a boolean representing if a workout was removed
      */
-    boolean removeWorkoutSession(ScheduledWeek scheduledWeek, int dayOfWeek) throws IllegalArgumentException;
+    boolean removeWorkoutSession(ScheduleWeek scheduleWeek, int dayOfWeek) throws IllegalArgumentException;
 }

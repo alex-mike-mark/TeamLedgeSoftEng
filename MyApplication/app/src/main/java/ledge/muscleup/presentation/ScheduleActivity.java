@@ -21,7 +21,7 @@ import java.util.List;
 
 import ledge.muscleup.R;
 import ledge.muscleup.business.AccessWorkoutSessions;
-import ledge.muscleup.model.schedule.ScheduledWeek;
+import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.WorkoutSession;
 
 /**
@@ -39,14 +39,14 @@ public class ScheduleActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AccessWorkoutSessions aws = new AccessWorkoutSessions();
-        ScheduledWeek scheduledWeek = new ScheduledWeek(aws.getCurrentWeekSessions());
+        ScheduleWeek scheduleWeek = new ScheduleWeek(aws.getCurrentWeekSessions());
         List<WorkoutSession> sessionList;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_display);
 
         ListView listView = (ListView) findViewById(R.id.list_panel);
-        sessionList = scheduledWeek.getWorkoutSessionList();
+        sessionList = scheduleWeek.getWorkoutSessionList();
 
         adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_workout_session, sessionList);
         listView.setAdapter(adapter);

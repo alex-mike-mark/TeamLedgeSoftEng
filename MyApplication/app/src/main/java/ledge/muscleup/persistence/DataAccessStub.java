@@ -22,7 +22,7 @@ import ledge.muscleup.model.exercise.TimeUnit;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WeightUnit;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
-import ledge.muscleup.model.schedule.ScheduledWeek;
+import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
 
@@ -424,26 +424,26 @@ public class DataAccessStub implements InterfaceDataAccess {
     /**
      * Adds a workout session to a given day in the database
      *
-     * @param scheduledWeek  the week to add the workout to
+     * @param scheduleWeek  the week to add the workout to
      * @param workoutSession the workout session to add
      * @param dayOfWeek      the day of the week to add the workout session to
      * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
      *                                  > DateTimeConstants.SUNDAY}
      */
-    public void addWorkoutSession(ScheduledWeek scheduledWeek, WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException {
+    public void addWorkoutSession(ScheduleWeek scheduleWeek, WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException {
         //TODO implement when implementing SQL database
     }
 
     /**
      * Removes a workout from a given day in the database
      *
-     * @param scheduledWeek the week to remove the workout from
+     * @param scheduleWeek the week to remove the workout from
      * @param dayOfWeek     the day to remove the workout from
      * @return a boolean representing if a workout was removed
      * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
      *                                  > DateTimeConstants.SUNDAY}
      */
-    public boolean removeWorkoutSession(ScheduledWeek scheduledWeek, int dayOfWeek) throws IllegalArgumentException {
+    public boolean removeWorkoutSession(ScheduleWeek scheduleWeek, int dayOfWeek) throws IllegalArgumentException {
         //TODO implement when implementing SQL database
         return false;
     }

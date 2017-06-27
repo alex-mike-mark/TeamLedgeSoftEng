@@ -25,35 +25,35 @@ import ledge.muscleup.model.exercise.TimeUnit;
 import ledge.muscleup.model.exercise.WeightUnit;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
-import ledge.muscleup.model.schedule.ScheduledWeek;
+import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
 import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
- * Tests for the ScheduledWeek
+ * Tests for the ScheduleWeek
  *
  * @author Cole Kehler
  * @version 1.0
  * @since 2017-06-06
  */
 
-public class ScheduledWeekTest {
-    private ScheduledWeek scheduledWeek;
+public class ScheduleWeekTest {
+    private ScheduleWeek scheduleWeek;
     InterfaceAccessWorkoutSessions dataAccess;
 
     /**
-     * Constructor for the ScheduledWeekTest
+     * Constructor for the ScheduleWeekTest
      */
-    public ScheduledWeekTest() { super(); }
+    public ScheduleWeekTest() { super(); }
 
     /**
-     * Initializes the ScheduledWeek to be used in the test
+     * Initializes the ScheduleWeek to be used in the test
      */
     @Before
     public void testInit(){
         dataAccess = new TemplateAccessWorkoutSessions();
-        scheduledWeek = new ScheduledWeek(dataAccess.getCurrentWeekSessions());
+        scheduleWeek = new ScheduleWeek(dataAccess.getCurrentWeekSessions());
     }
 
     /**
@@ -62,9 +62,9 @@ public class ScheduledWeekTest {
     @Test
     public void getWeekdayTest(){
         Assert.assertTrue("Returned unexpected weekday value",
-                scheduledWeek.getWeekday(DateTimeConstants.MONDAY).isEqual(new LocalDate(2017, 6, 5)));
+                scheduleWeek.getWeekday(DateTimeConstants.MONDAY).isEqual(new LocalDate(2017, 6, 5)));
         Assert.assertTrue("Returned unexpected weekday value",
-                scheduledWeek.getWeekday(DateTimeConstants.SUNDAY).isEqual(new LocalDate(2017, 6, 11)));
+                scheduleWeek.getWeekday(DateTimeConstants.SUNDAY).isEqual(new LocalDate(2017, 6, 11)));
     }
 
     /**
@@ -74,14 +74,14 @@ public class ScheduledWeekTest {
     @Test
     public void scheduledWorkoutsTest(){
         Assert.assertFalse("Returned that day is empty when it isn't",
-                scheduledWeek.isDayEmpty(DateTimeConstants.MONDAY));
+                scheduleWeek.isDayEmpty(DateTimeConstants.MONDAY));
         Assert.assertTrue("Returned that day isn't empty when it is",
-                scheduledWeek.isDayEmpty(DateTimeConstants.SATURDAY));
+                scheduleWeek.isDayEmpty(DateTimeConstants.SATURDAY));
 
         Assert.assertEquals("Returned a workout for a day where there shouldn't be one",
-                scheduledWeek.getScheduledWorkout(DateTimeConstants.MONDAY), null);
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.MONDAY), null);
         Assert.assertEquals("Didn't return the workout scheduled for a day",
-                scheduledWeek.getScheduledWorkout(DateTimeConstants.SATURDAY).getName(),
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.SATURDAY).getName(),
                 "Work that Core, Get that Score!");
     }
 
@@ -90,55 +90,55 @@ public class ScheduledWeekTest {
      */
     @Test
     public void changeWeekTest(){
-        LocalDate currWeekStart = scheduledWeek.getWeekday(DateTimeConstants.MONDAY);
+        LocalDate currWeekStart = scheduleWeek.getWeekday(DateTimeConstants.MONDAY);
         List<WorkoutSession> workoutList;
 
-        dataAccess.nextWeek(scheduledWeek);
+        dataAccess.nextWeek(scheduleWeek);
 
         Assert.assertEquals("Improperly incremented week",
-                scheduledWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart.plusWeeks(1));
+                scheduleWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart.plusWeeks(1));
         Assert.assertEquals("Returned unexpected workout",
-                scheduledWeek.getScheduledWorkout(DateTimeConstants.TUESDAY).getName(),
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.TUESDAY).getName(),
                 "Never Skip Leg Day");
         Assert.assertEquals("Returned unexpected workout",
-                scheduledWeek.getScheduledWorkout(DateTimeConstants.THURSDAY).getName(),
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.THURSDAY).getName(),
                 "Marathon Training Starts Here");
 
-        dataAccess.lastWeek(scheduledWeek);
+        dataAccess.lastWeek(scheduleWeek);
 
         Assert.assertEquals("Improperly decremented week",
-                scheduledWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart);
+                scheduleWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart);
         Assert.assertEquals("Returned unexpected workout",
-                scheduledWeek.getScheduledWorkout(DateTimeConstants.THURSDAY).getName(),
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.THURSDAY).getName(),
                 "Welcome to the Gun Show");
         Assert.assertEquals("Returned unexpected workout",
-                scheduledWeek.getScheduledWorkout(DateTimeConstants.FRIDAY).getName(),
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.FRIDAY).getName(),
                 "Never Skip Leg Day");
         Assert.assertEquals("Returned unexpected workout",
-                scheduledWeek.getScheduledWorkout(DateTimeConstants.SATURDAY).getName(),
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.SATURDAY).getName(),
                 "Work that Core, Get that Score!");
 
-        dataAccess.lastWeek(scheduledWeek);
+        dataAccess.lastWeek(scheduleWeek);
 
         Assert.assertEquals("Improperly decremented week",
-                scheduledWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart.minusWeeks(1));
+                scheduleWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart.minusWeeks(1));
         Assert.assertEquals("Returned unexpected workout",
-                scheduledWeek.getScheduledWorkout(DateTimeConstants.MONDAY), null);
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.MONDAY), null);
         Assert.assertEquals("Returned unexpected workout",
-                scheduledWeek.getScheduledWorkout(DateTimeConstants.SUNDAY), null);
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.SUNDAY), null);
 
-        dataAccess.nextWeek(scheduledWeek);
+        dataAccess.nextWeek(scheduleWeek);
 
         Assert.assertEquals("Improperly incremented week",
-                scheduledWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart);
+                scheduleWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart);
         Assert.assertEquals("Returned unexpected workout",
-                scheduledWeek.getScheduledWorkout(DateTimeConstants.THURSDAY).getName(),
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.THURSDAY).getName(),
                 "Welcome to the Gun Show");
         Assert.assertEquals("Returned unexpected workout",
-                scheduledWeek.getScheduledWorkout(DateTimeConstants.FRIDAY).getName(),
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.FRIDAY).getName(),
                 "Never Skip Leg Day");
         Assert.assertEquals("returned unexpected workout",
-                scheduledWeek.getScheduledWorkout(DateTimeConstants.SATURDAY).getName(),
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.SATURDAY).getName(),
                 "Work that Core, Get that Score!");
     }
 
@@ -148,14 +148,14 @@ public class ScheduledWeekTest {
     @Test
     public void addRemoveWorkoutTest(){
         Assert.assertFalse("Removed a workout when there isn't one",
-                scheduledWeek.removeWorkoutSession(DateTimeConstants.WEDNESDAY));
+                scheduleWeek.removeWorkoutSession(DateTimeConstants.WEDNESDAY));
         Assert.assertTrue("Didn't remove workout",
-                scheduledWeek.removeWorkoutSession(DateTimeConstants.THURSDAY));
+                scheduleWeek.removeWorkoutSession(DateTimeConstants.THURSDAY));
 
         Assert.assertEquals("Improperly deleted a workout",
-                scheduledWeek.getScheduledWorkout(DateTimeConstants.WEDNESDAY), null);
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.WEDNESDAY), null);
         Assert.assertEquals("Improperly deleted a workout",
-                scheduledWeek.getScheduledWorkout(DateTimeConstants.THURSDAY), null);
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.THURSDAY), null);
     }
 }
 
@@ -276,28 +276,28 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
     /**
      * Adds a workout session to a given day of a scheduled week
      *
-     * @param scheduledWeek  the week to add the workout to
+     * @param scheduleWeek  the week to add the workout to
      * @param workoutSession the workout session to add
      * @param dayOfWeek      the day of the week to add the workout session to
      * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
      *                                  > DateTimeConstants.SUNDAY}
      */
     @Override
-    public void addWorkoutSession(ScheduledWeek scheduledWeek, WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException {
+    public void addWorkoutSession(ScheduleWeek scheduleWeek, WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException {
         //TODO remove after refactoring persistence layer or implement and test
     }
 
     /**
      * Removes a workout from a given day of a scheduled week
      *
-     * @param scheduledWeek the week to remove the workout from
+     * @param scheduleWeek the week to remove the workout from
      * @param dayOfWeek     the day to remove the workout from
      * @return a boolean representing if a workout was removed
      * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
      *                                  > DateTimeConstants.SUNDAY}
      */
     @Override
-    public boolean removeWorkoutSession(ScheduledWeek scheduledWeek, int dayOfWeek) throws IllegalArgumentException {
+    public boolean removeWorkoutSession(ScheduleWeek scheduleWeek, int dayOfWeek) throws IllegalArgumentException {
         //TODO remove after refactoring persistence layer or implement and test
         return false;
     }
@@ -305,38 +305,38 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
     /**
      * Sets the manager to contain the scheduled workouts for the previous week
      *
-     * @param scheduledWeek the week to change
+     * @param scheduleWeek the week to change
      */
     @Override
-    public void lastWeek(ScheduledWeek scheduledWeek) {
+    public void lastWeek(ScheduleWeek scheduleWeek) {
         //TODO remove after refactoring persistence layer or implement and test
     }
 
     /**
      * Sets the manager to contain the scheduled workouts for the following week
      *
-     * @param scheduledWeek the week to change
+     * @param scheduleWeek the week to change
      */
     @Override
-    public void nextWeek(ScheduledWeek scheduledWeek) {
+    public void nextWeek(ScheduleWeek scheduleWeek) {
         //TODO remove after refactoring persistence layer or implement and test
     }
 
     /**
-     * Creates a new ScheduledWeek based on the given date
+     * Creates a new ScheduleWeek based on the given date
      *
-     * @param dayInWeek a day in the week to created a ScheduledWeek for
-     * @return a ScheduledWeek, which contains all WorkoutSessions for the given week
+     * @param dayInWeek a day in the week to created a ScheduleWeek for
+     * @return a ScheduleWeek, which contains all WorkoutSessions for the given week
      */
     @Override
-    public ScheduledWeek newScheduledWeek(LocalDate dayInWeek) {
+    public ScheduleWeek newScheduledWeek(LocalDate dayInWeek) {
         //TODO remove after refactoring persistence layer or implement and test
         return null;
     }
 }
 
 /**
- * A template database stub for use in testing the ScheduledWeek that needs an accessor, which in
+ * A template database stub for use in testing the ScheduleWeek that needs an accessor, which in
  * turn needs a database stub
  * constructor parameter
  *
@@ -743,28 +743,28 @@ class TemplateDataAccessStub implements InterfaceDataAccess {
     /**
      * Adds a workout session to a given day in the database
      *
-     * @param scheduledWeek  the week to add the workout to
+     * @param scheduleWeek  the week to add the workout to
      * @param workoutSession the workout session to add
      * @param dayOfWeek      the day of the week to add the workout session to
      * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
      *                                  > DateTimeConstants.SUNDAY}
      */
     @Override
-    public void addWorkoutSession(ScheduledWeek scheduledWeek, WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException {
+    public void addWorkoutSession(ScheduleWeek scheduleWeek, WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException {
         //TODO remove after refactoring persistence layer or implement and test
     }
 
     /**
      * Removes a workout from a given day in the database
      *
-     * @param scheduledWeek the week to remove the workout from
+     * @param scheduleWeek the week to remove the workout from
      * @param dayOfWeek     the day to remove the workout from
      * @return a boolean representing if a workout was removed
      * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
      *                                  > DateTimeConstants.SUNDAY}
      */
     @Override
-    public boolean removeWorkoutSession(ScheduledWeek scheduledWeek, int dayOfWeek) throws IllegalArgumentException {
+    public boolean removeWorkoutSession(ScheduleWeek scheduleWeek, int dayOfWeek) throws IllegalArgumentException {
         //TODO remove after refactoring persistence layer or implement and test
         return false;
     }

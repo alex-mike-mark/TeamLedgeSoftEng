@@ -5,7 +5,7 @@ import org.joda.time.LocalDate;
 import java.util.List;
 
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
-import ledge.muscleup.model.schedule.ScheduledWeek;
+import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.WorkoutSession;
 
 /**
@@ -87,44 +87,44 @@ public interface InterfaceAccessWorkoutSessions {
     /**
      * Adds a workout session to a given day of a scheduled week
      *
-     * @param scheduledWeek the week to add the workout to
+     * @param scheduleWeek the week to add the workout to
      * @param workoutSession the workout session to add
      * @param dayOfWeek the day of the week to add the workout session to
      * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
      * > DateTimeConstants.SUNDAY}
      */
-    void addWorkoutSession(ScheduledWeek scheduledWeek, WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException;
+    void addWorkoutSession(ScheduleWeek scheduleWeek, WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException;
 
     /**
      * Removes a workout from a given day of a scheduled week
      *
-     * @param scheduledWeek the week to remove the workout from
+     * @param scheduleWeek the week to remove the workout from
      * @param dayOfWeek the day to remove the workout from
      * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
      * > DateTimeConstants.SUNDAY}
      * @return a boolean representing if a workout was removed
      */
-    boolean removeWorkoutSession(ScheduledWeek scheduledWeek, int dayOfWeek) throws IllegalArgumentException;
+    boolean removeWorkoutSession(ScheduleWeek scheduleWeek, int dayOfWeek) throws IllegalArgumentException;
 
     /**
      * Sets the manager to contain the scheduled workouts for the previous week
      *
-     * @param scheduledWeek the week to change
+     * @param scheduleWeek the week to change
      */
-    void lastWeek(ScheduledWeek scheduledWeek);
+    void lastWeek(ScheduleWeek scheduleWeek);
 
     /**
      * Sets the manager to contain the scheduled workouts for the following week
      *
-     * @param scheduledWeek the week to change
+     * @param scheduleWeek the week to change
      */
-    void nextWeek(ScheduledWeek scheduledWeek);
+    void nextWeek(ScheduleWeek scheduleWeek);
 
     /**
-     * Creates a new ScheduledWeek based on the given date
+     * Creates a new ScheduleWeek based on the given date
      *
-     * @param dayInWeek a day in the week to created a ScheduledWeek for
-     * @return a ScheduledWeek, which contains all WorkoutSessions for the given week
+     * @param dayInWeek a day in the week to created a ScheduleWeek for
+     * @return a ScheduleWeek, which contains all WorkoutSessions for the given week
      */
-    ScheduledWeek newScheduledWeek(LocalDate dayInWeek);
+    ScheduleWeek newScheduledWeek(LocalDate dayInWeek);
 }

@@ -18,16 +18,16 @@ import ledge.muscleup.model.workout.WorkoutSession;
  * @since 2017-06-05
  */
 
-public class ScheduledWeek {
+public class ScheduleWeek {
     private LocalDate firstDayOfWeek;
     private WorkoutSession[] workoutSessions;
 
-    public ScheduledWeek(List<WorkoutSession> workoutList) {
-        if (workoutList == null)
+    public ScheduleWeek(List<WorkoutSession> workoutSessionList) {
+        if (workoutSessionList == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else {
             firstDayOfWeek = new LocalDate().withDayOfWeek(DateTimeConstants.MONDAY);
-            populateWorkoutList(workoutList);
+            populateWorkoutList(workoutSessionList);
         }
     }
 
