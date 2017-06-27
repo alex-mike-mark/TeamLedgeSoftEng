@@ -200,7 +200,8 @@ public class ScheduleActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     aws.removeWorkoutSession(sessionList.get(index));
-                    sessionList.remove(index);
+                    WorkoutSession emptySession = new WorkoutSession(sessionList.get(index).getDate());
+                    sessionList.set(index, emptySession);
                     notifyDataSetChanged();
                 }
             });
