@@ -34,6 +34,5 @@ public class ListManager {
 
     public void clearList(){
         adapter.clear();
-        adapter.notifyDataSetChanged();
     }
 }
