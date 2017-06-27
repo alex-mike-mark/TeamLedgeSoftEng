@@ -46,7 +46,7 @@ public class WorkoutExerciseSets extends WorkoutExercise{
             recommendedSets = (InterfaceExerciseSets)quantity;
             updated = true;
         }
-        return false;
+        return updated;
     }
 
     /**

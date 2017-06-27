@@ -46,7 +46,7 @@ public class WorkoutExerciseDistance extends WorkoutExercise{
             recommendedDistance = (InterfaceExerciseDistance)quantity;
             updated = true;
         }
-        return false;
+        return updated;
     }
 
     /**

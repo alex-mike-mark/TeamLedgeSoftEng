@@ -27,7 +27,7 @@ public class WorkoutExerciseDurationTest extends TestCase {
     public void setUp(){
         workoutExerciseDuration1 = new WorkoutExerciseDuration(new Exercise("Run From Your Past", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), new ExerciseDuration(692040, TimeUnit.HOURS));
         workoutExerciseDuration2 = new WorkoutExerciseDuration(new Exercise("Swim With The Fishes", ExerciseIntensity.MEDIUM, ExerciseType.LEG), new ExerciseDuration(5, TimeUnit.HOURS));
-        exercise1 = new Exercise("Cycle Over The Same Path", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, true);
+        exercise1 = new Exercise("Run From Your Past", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, true);
         workoutExerciseDuration3 = new WorkoutExerciseDuration(exercise1, new ExerciseDuration(2, TimeUnit.HOURS));
     }
 
@@ -43,9 +43,9 @@ public class WorkoutExerciseDurationTest extends TestCase {
         assertNotNull(workoutExerciseDuration2);
         assertNotNull(workoutExerciseDuration3);
 
-        assertEquals("Rin From Your Past", workoutExerciseDuration1.getName());
+        assertEquals("Run From Your Past", workoutExerciseDuration1.getName());
         assertEquals("Swim With The Fishes", workoutExerciseDuration2.getName());
-        assertEquals("Cycle Over The Same Path", workoutExerciseDuration3.getName());
+        assertEquals("Run From Your Past", workoutExerciseDuration3.getName());
 
         assertEquals(ExerciseIntensity.HIGH, workoutExerciseDuration1.getIntensity());
         assertEquals(ExerciseIntensity.MEDIUM, workoutExerciseDuration2.getIntensity());
@@ -78,7 +78,7 @@ public class WorkoutExerciseDurationTest extends TestCase {
         assertFalse(workoutExerciseDuration1.equals(workoutExerciseDuration2));
         assertFalse(workoutExerciseDuration2.equals(workoutExerciseDuration1));
 
-        assertTrue(workoutExerciseDuration1.equals(workoutExerciseDuration3));
+        assertTrue(workoutExerciseDuration1.equals(workoutExerciseDuration3));//TODO: Make this not fail.
         assertTrue(workoutExerciseDuration3.equals(workoutExerciseDuration1));
 
         System.out.println("Finished testWorkoutExerciseTest");

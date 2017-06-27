@@ -53,7 +53,7 @@ public class WorkoutExerciseDuration extends WorkoutExercise{
             recommendedDuration = (InterfaceExerciseDuration) quantity;
             updated = true;
         }
-        return false;
+        return updated;
     }
 
     /**

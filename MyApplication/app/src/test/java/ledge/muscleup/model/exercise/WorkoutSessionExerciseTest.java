@@ -26,7 +26,7 @@ public class WorkoutSessionExerciseTest extends TestCase {
     public void setUp(){
         powerClean1 = new WorkoutExerciseSets(new Exercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), new ExerciseSets(5,4));
         powerClean2 = new WorkoutExerciseSets(new Exercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), new ExerciseSets(5,4));
-        deadlift = new WorkoutExerciseSets(new Exercise("Deadlifts", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), new ExerciseSets(5,4));
+        deadlift = new WorkoutExerciseSets(new Exercise("Deadlifts", ExerciseIntensity.MEDIUM, ExerciseType.LEG), new ExerciseSets(5,4));
 
         workoutSessionExercise1 = new WorkoutSessionExercise(powerClean1, false);
         workoutSessionExercise2 = new WorkoutSessionExercise(deadlift, false);
@@ -56,7 +56,7 @@ public class WorkoutSessionExerciseTest extends TestCase {
         assertEquals(ExerciseIntensity.HIGH, workoutSessionExercise3.getIntensity());
 
         assertEquals(ExerciseType.FULL_BODY, workoutSessionExercise1.getType());
-        assertEquals(ExerciseType.LEG, workoutSessionExercise2.getType());
+        assertEquals(ExerciseType.LEG, workoutSessionExercise2.getType());//TODO: Make  this not fail.
         assertEquals(ExerciseType.FULL_BODY, workoutSessionExercise3.getType());
 
         assertTrue(workoutSessionExercise1.getRecommendedQuantity().equals(new ExerciseSets(5, 4)));

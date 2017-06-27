@@ -51,7 +51,7 @@ public class WorkoutExerciseSetsAndWeight extends WorkoutExercise{
             recommendedSetsAndWeight = (InterfaceExerciseSetsAndWeight) quantity;
             updated = true;
         }
-        return false;
+        return updated;
     }
 
     /**
