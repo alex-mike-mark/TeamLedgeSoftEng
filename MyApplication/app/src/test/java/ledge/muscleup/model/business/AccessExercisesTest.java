@@ -16,7 +16,9 @@ import ledge.muscleup.business.InterfaceAccessExercises;
 import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.ExerciseIntensity;
 import ledge.muscleup.model.exercise.ExerciseType;
+import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.WorkoutExercise;
+import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
 import ledge.muscleup.persistence.InterfaceDataAccess;
@@ -450,6 +452,75 @@ class TemplateDataAccessStub implements InterfaceDataAccess {
     }
 
     /**
+     * Updates the recommended quantity of exercise for a given exercise in a given workout in the database
+     *
+     * @param workout  the workout that contains the exercise to update
+     * @param exercise the exercise to set the quantity for
+     * @param quantity the quantity to assign to the exercise
+     * @return a boolean representing if the exercise was found and updated in the workout
+     * @throws IllegalArgumentException if passed a {@code null} parameter
+     */
+    @Override
+    public boolean updateExerciseQuantity(Workout workout, WorkoutExercise exercise, InterfaceExerciseQuantity quantity) throws IllegalArgumentException {
+        //TODO remove after refactoring persistence layer or implement and test
+        return false;
+    }
+
+    /**
+     * Toggles the favourite state of an exercise in the database
+     *
+     * @param workout the workout to update the status of
+     */
+    @Override
+    public void toggleExerciseFavourite(Workout workout) {
+        //TODO remove after refactoring persistence layer or implement and test
+    }
+
+    /**
+     * Adds an exercise stored in the database to a workout stored in the database with the given
+     * quantity of the exercise to be done
+     *
+     * @param workout  the workout to add an exercise to
+     * @param exercise the exercise to add to the workout
+     * @return true if exercise was added successfully, false otherwise
+     */
+    @Override
+    public boolean addWorkoutExercise(Workout workout, WorkoutExercise exercise) {
+        //TODO remove after refactoring persistence layer or implement and test
+        return false;
+    }
+
+    /**
+     * Move the position of an exercise in the list of exercises in the database
+     *
+     * @param workout  the workout to change the order of exercises for
+     * @param exercise the exercise to change the position of
+     * @param index    the index of the exercise to move
+     * @return a boolean representing if the exercise was found and moved to the new index
+     * @throws IllegalArgumentException if passed a {@code null} parameter or if {@code index} is
+     *                                  outside the bounds of the list of exercises
+     */
+    @Override
+    public boolean moveWorkoutExercise(Workout workout, WorkoutExercise exercise, int index) throws IllegalArgumentException {
+        //TODO remove after refactoring persistence layer or implement and test
+        return false;
+    }
+
+    /**
+     * Removes an exercise from a workout in the database
+     *
+     * @param workout  the workout to remove an exercise from
+     * @param exercise the exercise to remove from the list
+     * @return the exercise that was removed, or {@code null} if the exercise couldn't be found
+     * @throws IllegalArgumentException if passed a {@code null} parameter
+     */
+    @Override
+    public boolean removeWorkoutExercise(Workout workout, WorkoutExercise exercise) throws IllegalArgumentException {
+        //TODO remove after refactoring persistence layer or implement and test
+        return false;
+    }
+
+    /**
      * A method that returns a list of all workout sessions in the database
      * @return a list of all workout sessions in the database
      */
@@ -502,5 +573,41 @@ class TemplateDataAccessStub implements InterfaceDataAccess {
      */
     public void removeWorkoutSession(WorkoutSession workoutSession) {
         workoutSessionsByDate.remove(workoutSession.getDate());
+    }
+
+    /**
+     * Updates the scheduled date of a workout in the database
+     *
+     * @param workoutSession the workout to change the date for
+     * @param newDate        the new date of the workout
+     * @throws IllegalArgumentException if passed a {@code null} parameter
+     */
+    @Override
+    public void updateWorkoutDate(WorkoutSession workoutSession, LocalDate newDate) throws IllegalArgumentException {
+        //TODO remove after refactoring persistence layer or implement and test
+    }
+
+    /**
+     * Toggles the completed state of a workout in the database
+     *
+     * @param workoutSession the workout to change the state of
+     */
+    @Override
+    public void toggleWorkoutComplete(WorkoutSession workoutSession) {
+        //TODO remove after refactoring persistence layer or implement and test
+    }
+
+    /**
+     * Toggles the completed state of an exercise in a workout in the database
+     *
+     * @param workoutSession the workout which contains the exercise
+     * @param exercise       the exercise to complete
+     * @return a boolean representing whether the exercise was marked as completed or not
+     * @throws IllegalArgumentException if passed a {@code null} parameter
+     */
+    @Override
+    public boolean toggleExerciseComplete(WorkoutSession workoutSession, WorkoutSessionExercise exercise) throws IllegalArgumentException {
+        //TODO remove after refactoring persistence layer or implement and test
+        return false;
     }
 }

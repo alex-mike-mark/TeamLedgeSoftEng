@@ -2,6 +2,7 @@ package ledge.muscleup.business;
 
 import java.util.List;
 
+import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.workout.Workout;
 
@@ -44,15 +45,57 @@ public interface InterfaceAccessWorkouts {
      * Removes a workout from the database, if it exists
      * @param workout the workout to be removed
      */
-    public void removeWorkout(Workout workout);
+    void removeWorkout(Workout workout);
+
+    /**
+     * Sets the recommended quantity of exercise for a given exercise in a given workout
+     *
+     * @param workout the workout that contains the exercise to update
+     * @param exercise the exercise to set the quantity for
+     * @param quantity the quantity to assign to the exercise
+     * @throws IllegalArgumentException if passed a {@code null} parameter
+     * @return a boolean representing if the exercise was found and updated in the workout
+     */
+    boolean setRecommendedQuantity(Workout workout, WorkoutExercise exercise,
+                                          InterfaceExerciseQuantity quantity) throws IllegalArgumentException;
+
+    /**
+     * Toggle the favourite status of a workout
+     *
+     * @param workout the workout to update the status of
+     */
+    void toggleFavourite(Workout workout);
 
     /**
      * Adds an exercise stored in the database to a workout stored in the database with the given
      * quantity of the exercise to be done
+     *
      * @param workout the workout to add an exercise to
      * @param exercise the exercise to add to the workout
-     *
      * @return true if exercise was added successfully, false otherwise
      */
-    public boolean addExerciseToWorkout (Workout workout, WorkoutExercise exercise);
+    boolean addExercise(Workout workout, WorkoutExercise exercise);
+
+    /**
+     * Move the position of an exercise in the list of exercises
+     *
+     * @param workout the workout to change the order of exercises for
+     * @param exercise the exercise to change the position of
+     * @param index    the index of the exercise to move
+     * @throws IllegalArgumentException if passed a {@code null} parameter or if {@code index} is
+     * outside the bounds of the list of exercises
+     * @return a boolean representing if the exercise was found and moved to the new index
+     */
+    boolean moveExercise(Workout workout, WorkoutExercise exercise,
+                                int index) throws IllegalArgumentException;
+
+    /**
+     * Removes an exercise from the list of exercises
+     *
+     * @param workout the workout to remove an exercise from
+     * @param exercise the exercise to remove from the list
+     * @throws IllegalArgumentException if passed a {@code null} parameter
+     * @return the exercise that was removed, or {@code null} if the exercise couldn't be found
+     */
+    boolean removeExercise(Workout workout, WorkoutExercise exercise) throws IllegalArgumentException;
 }
