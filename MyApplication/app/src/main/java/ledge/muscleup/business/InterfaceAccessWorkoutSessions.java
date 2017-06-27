@@ -121,6 +121,12 @@ public interface InterfaceAccessWorkoutSessions {
     void nextWeek(ScheduleWeek scheduleWeek);
 
     /**
+     * Sets the manager to contain the scheduled workouts for the current week
+     * @param scheduleWeek the week to change
+     */
+    void currentWeek(ScheduleWeek scheduleWeek);
+
+    /**
      * Creates a new ScheduleWeek based on the given date
      *
      * @param dayInWeek a day in the week to created a ScheduleWeek for

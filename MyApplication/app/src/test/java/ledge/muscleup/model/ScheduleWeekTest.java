@@ -323,6 +323,16 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
     }
 
     /**
+     * Sets the manager to contain the scheduled workouts for the current week
+     *
+     * @param scheduleWeek the week to change
+     */
+    @Override
+    public void currentWeek(ScheduleWeek scheduleWeek) {
+        //TODO remove after refactoring persistence layer or implement and test
+    }
+
+    /**
      * Creates a new ScheduleWeek based on the given date
      *
      * @param dayInWeek a day in the week to created a ScheduleWeek for
