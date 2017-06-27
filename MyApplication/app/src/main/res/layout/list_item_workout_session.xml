@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum = "1"
-    android:paddingTop="50sp"
-    android:paddingBottom="50sp"
+    android:paddingTop="30sp"
+    android:paddingBottom="30sp"
     >
 
     <TextView
@@ -39,5 +39,6 @@
         android:gravity="right"
         android:textAlignment="center"
         android:textColor="@android:color/holo_red_dark"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:focusable="false"/>
 </LinearLayout>
