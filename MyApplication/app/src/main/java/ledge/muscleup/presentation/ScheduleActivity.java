@@ -92,6 +92,14 @@ public class ScheduleActivity extends Activity {
             }
         });
 
+        final Button currentWeekBtn = (Button) findViewById(R.id.button_currentWeek);
+        currentWeekBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showCurrentWeek();
+            }
+        });
+
+
         final Button prevBtn = (Button) findViewById(R.id.button_previous);
         prevBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -144,6 +152,15 @@ public class ScheduleActivity extends Activity {
         adapter.clear();
 
         aws.lastWeek(scheduleWeek);
+        sessionList = scheduleWeek.getWorkoutSessionList();
+
+        populateList();
+        setWeekRangeTitle();
+    }
+
+    public void showCurrentWeek() {
+        adapter.clear();
+        aws.currentWeek(scheduleWeek);
         sessionList = scheduleWeek.getWorkoutSessionList();
 
         populateList();
