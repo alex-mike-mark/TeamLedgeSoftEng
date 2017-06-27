@@ -54,7 +54,7 @@ public class ScheduleActivity extends Activity {
         scheduleManager = new ScheduleManager(new AccessWorkoutSessions());
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_display);
+        setContentView(R.layout.activity_schedule_list_display);
 
         populateList();
 
