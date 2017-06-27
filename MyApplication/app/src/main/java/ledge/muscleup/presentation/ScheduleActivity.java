@@ -5,26 +5,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import ledge.muscleup.R;
-import ledge.muscleup.application.Services;
 import ledge.muscleup.business.AccessWorkoutSessions;
-import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
-import ledge.muscleup.business.InterfaceScheduleManager;
-import ledge.muscleup.business.ScheduleManager;
+import ledge.muscleup.model.schedule.ScheduledWeek;
 import ledge.muscleup.model.workout.WorkoutSession;
-import ledge.muscleup.persistence.DataAccessStub;
-import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
  * ScheduleActivity displays a list of workout sessions
@@ -37,14 +29,14 @@ public class ScheduleActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        InterfaceScheduleManager scheduleManager = new ScheduleManager(new AccessWorkoutSessions());
+        ScheduledWeek scheduledWeek = new ScheduledWeek(new AccessWorkoutSessions());
         ListManager lm = new ListManager();
         List<WorkoutSession> scheduleArray;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_display);
 
-        scheduleArray = scheduleManager.getWorkoutSessionList();
+        scheduleArray = scheduledWeek.getWorkoutSessionList();
 
         lm.populateList(this, scheduleArray);
         setupListeners(scheduleArray);

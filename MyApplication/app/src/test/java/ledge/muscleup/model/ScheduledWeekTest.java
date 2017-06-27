@@ -2,7 +2,6 @@ package ledge.muscleup.model;
 
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
-import ledge.muscleup.business.ScheduleManager;
 import ledge.muscleup.model.exercise.DistanceUnit;
 import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.ExerciseDistance;
@@ -27,34 +25,35 @@ import ledge.muscleup.model.exercise.TimeUnit;
 import ledge.muscleup.model.exercise.WeightUnit;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
+import ledge.muscleup.model.schedule.ScheduledWeek;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
 import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
- * Tests for the ScheduleManager
+ * Tests for the ScheduledWeek
  *
  * @author Cole Kehler
  * @version 1.0
  * @since 2017-06-06
  */
 
-public class ScheduleManagerTest {
-    private ScheduleManager scheduleManager;
+public class ScheduledWeekTest {
+    private ScheduledWeek scheduledWeek;
     InterfaceAccessWorkoutSessions dataAccess;
 
     /**
-     * Constructor for the ScheduleManagerTest
+     * Constructor for the ScheduledWeekTest
      */
-    public ScheduleManagerTest() { super(); }
+    public ScheduledWeekTest() { super(); }
 
     /**
-     * Initializes the ScheduleManager to be used in the test
+     * Initializes the ScheduledWeek to be used in the test
      */
     @Before
     public void testInit(){
         dataAccess = new TemplateAccessWorkoutSessions();
-        scheduleManager = new ScheduleManager(dataAccess);
+        scheduledWeek = new ScheduledWeek(dataAccess);
     }
 
     /**
@@ -63,9 +62,9 @@ public class ScheduleManagerTest {
     @Test
     public void getWeekdayTest(){
         Assert.assertTrue("Returned unexpected weekday value",
-                scheduleManager.getWeekday(DateTimeConstants.MONDAY).isEqual(new LocalDate(2017, 6, 5)));
+                scheduledWeek.getWeekday(DateTimeConstants.MONDAY).isEqual(new LocalDate(2017, 6, 5)));
         Assert.assertTrue("Returned unexpected weekday value",
-                scheduleManager.getWeekday(DateTimeConstants.SUNDAY).isEqual(new LocalDate(2017, 6, 11)));
+                scheduledWeek.getWeekday(DateTimeConstants.SUNDAY).isEqual(new LocalDate(2017, 6, 11)));
     }
 
     /**
@@ -75,14 +74,14 @@ public class ScheduleManagerTest {
     @Test
     public void scheduledWorkoutsTest(){
         Assert.assertFalse("Returned that day is empty when it isn't",
-                scheduleManager.isDayEmpty(DateTimeConstants.MONDAY));
+                scheduledWeek.isDayEmpty(DateTimeConstants.MONDAY));
         Assert.assertTrue("Returned that day isn't empty when it is",
-                scheduleManager.isDayEmpty(DateTimeConstants.SATURDAY));
+                scheduledWeek.isDayEmpty(DateTimeConstants.SATURDAY));
 
         Assert.assertEquals("Returned a workout for a day where there shouldn't be one",
-                scheduleManager.getScheduledWorkout(DateTimeConstants.MONDAY), null);
+                scheduledWeek.getScheduledWorkout(DateTimeConstants.MONDAY), null);
         Assert.assertEquals("Didn't return the workout scheduled for a day",
-                scheduleManager.getScheduledWorkout(DateTimeConstants.SATURDAY).getName(),
+                scheduledWeek.getScheduledWorkout(DateTimeConstants.SATURDAY).getName(),
                 "Work that Core, Get that Score!");
     }
 
@@ -91,54 +90,54 @@ public class ScheduleManagerTest {
      */
     @Test
     public void changeWeekTest(){
-        LocalDate currWeekStart = scheduleManager.getWeekday(DateTimeConstants.MONDAY);
+        LocalDate currWeekStart = scheduledWeek.getWeekday(DateTimeConstants.MONDAY);
 
-        scheduleManager.nextWeek();
+        scheduledWeek.nextWeek();
 
         Assert.assertEquals("Improperly incremented week",
-                scheduleManager.getWeekday(DateTimeConstants.MONDAY), currWeekStart.plusWeeks(1));
+                scheduledWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart.plusWeeks(1));
         Assert.assertEquals("Returned unexpected workout",
-                scheduleManager.getScheduledWorkout(DateTimeConstants.TUESDAY).getName(),
+                scheduledWeek.getScheduledWorkout(DateTimeConstants.TUESDAY).getName(),
                 "Never Skip Leg Day");
         Assert.assertEquals("Returned unexpected workout",
-                scheduleManager.getScheduledWorkout(DateTimeConstants.THURSDAY).getName(),
+                scheduledWeek.getScheduledWorkout(DateTimeConstants.THURSDAY).getName(),
                 "Marathon Training Starts Here");
 
-        scheduleManager.lastWeek();
+        scheduledWeek.lastWeek();
 
         Assert.assertEquals("Improperly decremented week",
-                scheduleManager.getWeekday(DateTimeConstants.MONDAY), currWeekStart);
+                scheduledWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart);
         Assert.assertEquals("Returned unexpected workout",
-                scheduleManager.getScheduledWorkout(DateTimeConstants.THURSDAY).getName(),
+                scheduledWeek.getScheduledWorkout(DateTimeConstants.THURSDAY).getName(),
                 "Welcome to the Gun Show");
         Assert.assertEquals("Returned unexpected workout",
-                scheduleManager.getScheduledWorkout(DateTimeConstants.FRIDAY).getName(),
+                scheduledWeek.getScheduledWorkout(DateTimeConstants.FRIDAY).getName(),
                 "Never Skip Leg Day");
         Assert.assertEquals("Returned unexpected workout",
-                scheduleManager.getScheduledWorkout(DateTimeConstants.SATURDAY).getName(),
+                scheduledWeek.getScheduledWorkout(DateTimeConstants.SATURDAY).getName(),
                 "Work that Core, Get that Score!");
 
-        scheduleManager.lastWeek();
+        scheduledWeek.lastWeek();
 
         Assert.assertEquals("Improperly decremented week",
-                scheduleManager.getWeekday(DateTimeConstants.MONDAY), currWeekStart.minusWeeks(1));
+                scheduledWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart.minusWeeks(1));
         Assert.assertEquals("Returned unexpected workout",
-                scheduleManager.getScheduledWorkout(DateTimeConstants.MONDAY), null);
+                scheduledWeek.getScheduledWorkout(DateTimeConstants.MONDAY), null);
         Assert.assertEquals("Returned unexpected workout",
-                scheduleManager.getScheduledWorkout(DateTimeConstants.SUNDAY), null);
+                scheduledWeek.getScheduledWorkout(DateTimeConstants.SUNDAY), null);
 
-        scheduleManager.nextWeek();
+        scheduledWeek.nextWeek();
 
         Assert.assertEquals("Improperly incremented week",
-                scheduleManager.getWeekday(DateTimeConstants.MONDAY), currWeekStart);
+                scheduledWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart);
         Assert.assertEquals("Returned unexpected workout",
-                scheduleManager.getScheduledWorkout(DateTimeConstants.THURSDAY).getName(),
+                scheduledWeek.getScheduledWorkout(DateTimeConstants.THURSDAY).getName(),
                 "Welcome to the Gun Show");
         Assert.assertEquals("Returned unexpected workout",
-                scheduleManager.getScheduledWorkout(DateTimeConstants.FRIDAY).getName(),
+                scheduledWeek.getScheduledWorkout(DateTimeConstants.FRIDAY).getName(),
                 "Never Skip Leg Day");
         Assert.assertEquals("returned unexpected workout",
-                scheduleManager.getScheduledWorkout(DateTimeConstants.SATURDAY).getName(),
+                scheduledWeek.getScheduledWorkout(DateTimeConstants.SATURDAY).getName(),
                 "Work that Core, Get that Score!");
     }
 
@@ -148,14 +147,14 @@ public class ScheduleManagerTest {
     @Test
     public void addRemoveWorkoutTest(){
         Assert.assertFalse("Removed a workout when there isn't one",
-                scheduleManager.removeWorkoutSession(DateTimeConstants.WEDNESDAY));
+                scheduledWeek.removeWorkoutSession(DateTimeConstants.WEDNESDAY));
         Assert.assertTrue("Didn't remove workout",
-                scheduleManager.removeWorkoutSession(DateTimeConstants.THURSDAY));
+                scheduledWeek.removeWorkoutSession(DateTimeConstants.THURSDAY));
 
         Assert.assertEquals("Improperly deleted a workout",
-                scheduleManager.getScheduledWorkout(DateTimeConstants.WEDNESDAY), null);
+                scheduledWeek.getScheduledWorkout(DateTimeConstants.WEDNESDAY), null);
         Assert.assertEquals("Improperly deleted a workout",
-                scheduleManager.getScheduledWorkout(DateTimeConstants.THURSDAY), null);
+                scheduledWeek.getScheduledWorkout(DateTimeConstants.THURSDAY), null);
     }
 }
 
@@ -264,7 +263,7 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
 }
 
 /**
- * A template database stub for use in testing the ScheduleManager that needs an accessor, which in
+ * A template database stub for use in testing the ScheduledWeek that needs an accessor, which in
  * turn needs a database stub
  * constructor parameter
  *
