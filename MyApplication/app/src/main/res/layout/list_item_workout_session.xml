@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum = "1"
+    android:paddingTop="50sp"
+    android:paddingBottom="50sp"
+    >
+
+    <TextView
+
+        android:id="@+id/scheduleDate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight ="0.75"
+        android:gravity = "left"
+        android:textColor = "@color/colorAccent"
+        android:textSize="30sp"
+        android:paddingLeft="10sp"/>
+
+
+    <TextView
+        android:id="@+id/scheduleWorkoutName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.25"
+        android:gravity="left"
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp"
+        />
+
+</LinearLayout>
