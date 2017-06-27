@@ -25,14 +25,6 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/filter_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:textAlignment="viewStart"
-        android:textColor="@color/colorAccent"
-        android:textSize="18sp" />
 
     <ListView
         android:id="@+id/list_panel"
@@ -44,21 +36,27 @@
         android:paddingBottom="50dp"
         android:paddingTop="50dp" />
 
-    <Button
-        android:id="@+id/button_next"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/list_panel"
-        android:layout_below="@+id/list_panel"
-        android:layout_marginTop="13dp"
-        android:text="@string/btn_next" />
+        android:background="@color/colorPrimaryDark"
+        android:paddingLeft="20sp"
+        android:paddingRight="20sp">
 
-    <Button
-        android:id="@+id/button_previous"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/button_next"
-        android:layout_toEndOf="@+id/filter_title"
-        android:text="@string/btn_previous" />
+        <Button
+            android:id="@+id/button_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/btn_previous" />
+
+        <Button
+            android:id="@+id/button_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/btn_next" />
+
+    </RelativeLayout>
 
 </LinearLayout>
