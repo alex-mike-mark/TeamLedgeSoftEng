@@ -17,11 +17,7 @@ public class WorkoutSessionExercise {
     private boolean isComplete;
 
     /**
-<<<<<<< HEAD
-     * The constructor for the WorkoutSessionExercise class that uses an existing WorkoutExerciseDuration
-=======
      * The constructor for the WorkoutSessionExercise class that uses an existing WorkoutExercise
->>>>>>> develop
      *
      * @param exercise the exercise to create a WorkoutSessionExercise instance for
      * @param isComplete whether the exercise has been completed
