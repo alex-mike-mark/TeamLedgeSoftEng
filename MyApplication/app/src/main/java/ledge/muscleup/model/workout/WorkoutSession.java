@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
+import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 
@@ -45,7 +46,7 @@ public class WorkoutSession {
             this.scheduledDate = scheduledDate;
             this.isComplete = isComplete;
             this.exerciseList = new ArrayList<>();
-            Enumeration<WorkoutExerciseDuration> enumeration = workout.getExerciseEnumeration();
+            Enumeration<WorkoutExercise> enumeration = workout.getExerciseEnumeration();
             while(enumeration.hasMoreElements())
                 exerciseList.add(new WorkoutSessionExercise(enumeration.nextElement(), false));
         }
@@ -77,10 +78,8 @@ public class WorkoutSession {
     public void setDate(LocalDate newDate) throws IllegalArgumentException {
         if (newDate == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        else {
+        else
             scheduledDate = newDate;
-            //TODO - requires database update
-        }
     }
 
     /**
@@ -97,7 +96,6 @@ public class WorkoutSession {
      */
     public void toggleCompleted() {
         isComplete = !isComplete;
-        //TODO - requires database update
     }
 
     /**
@@ -140,6 +138,7 @@ public class WorkoutSession {
 
         return exerciseCompleted;
     }
+
     /**
      * Returns an enumeration for traversing over the exercises in the workout
      *
@@ -190,5 +189,13 @@ public class WorkoutSession {
             result += " " + (i + 1) + ". " + exerciseList.get(i).toString() + "\n";
 
         return result;
+    }
+
+    /**
+     * Returns the list of workout session exercises
+     * @return the list of workout session exercices
+     */
+    public List<WorkoutSessionExercise> getWorkoutSessionExercises(){
+        return exerciseList;
     }
 }

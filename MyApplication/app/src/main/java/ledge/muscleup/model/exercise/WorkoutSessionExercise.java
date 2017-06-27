@@ -83,7 +83,6 @@ public class WorkoutSessionExercise {
      */
     public void toggleCompleted() {
         isComplete = !isComplete;
-        //TODO - requires database update
     }
 
     /**

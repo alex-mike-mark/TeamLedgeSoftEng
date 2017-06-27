@@ -24,8 +24,8 @@ public class WorkoutExerciseDurationTest extends TestCase {
      */
     @Before
     public void setUp(){
-        workoutExerciseDuration1 = new WorkoutExerciseDuration("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(5, 4));
-        workoutExerciseDuration2 = new WorkoutExerciseDuration("Deadlifts", ExerciseIntensity.MEDIUM, ExerciseType.LEG, new ExerciseSets(5, 4));
+        workoutExerciseDuration1 = new WorkoutExerciseDuration(new Exercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), new ExerciseSets(5, 4));
+        workoutExerciseDuration2 = new WorkoutExerciseDuration(new Exercise("Deadlifts", ExerciseIntensity.MEDIUM, ExerciseType.LEG), new ExerciseSets(5, 4));
         exercise1 = new Exercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, true);
         workoutExerciseDuration3 = new WorkoutExerciseDuration(exercise1, new ExerciseSets(5, 4));
     }

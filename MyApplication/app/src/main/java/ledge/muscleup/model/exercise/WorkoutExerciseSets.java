@@ -37,21 +37,16 @@ public class WorkoutExerciseSets extends WorkoutExercise{
      * Updates the exercise with the new recommended sets
      *
      * @param quantity the recommended quantity to update the exercise to
-     * @throws IllegalArgumentException if passed a {@code null} parameter
      * @return a boolean representing if the suggested quantity could be updated
      */
-    public boolean updateRecommendedSets(InterfaceExerciseSets quantity) throws IllegalArgumentException {
-        boolean quantityUpdated = false;
-
-        if (quantity == null)
-            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        else if (recommendedSets.getClass().isInstance(quantity)) {
-            recommendedSets = quantity;
-            //TODO - requires database update
-            quantityUpdated = true;
+    @Override
+    public boolean updateQuantity(InterfaceExerciseQuantity quantity) {
+        boolean updated = false;
+        if(quantity instanceof InterfaceExerciseSets){
+            recommendedSets = (InterfaceExerciseSets)quantity;
+            updated = true;
         }
-
-        return quantityUpdated;
+        return false;
     }
 
     /**

@@ -57,5 +57,41 @@ public abstract class WorkoutExercise {
         return exercise.getType();
     }
 
+    /**
+     * Returns the quantity of the exercise in question. It returns an interface, so if there is
+     * specific functionality required by a certain implementation, you need to find another way.
+     * @return the quantity of the exercise as the interface it implements.
+     */
     public abstract InterfaceExerciseQuantity getQuantity();
+
+    /**
+     * Updates the quantity for a given WorkoutExercise.
+     * Note, this method takes in a generic InterfaceExerciseQuantity where specific subclasses require
+     * specific implementations of that interface. Type checking MUST happen in the implementation.
+     * I am quite aware this isn't great but whatever.
+     * @param quantity
+     * @return
+     */
+    public abstract boolean updateQuantity(InterfaceExerciseQuantity quantity);
+
+    /**
+     * Compares the current WorkoutExercise to another instance of WorkoutExercise
+     *
+     * @param other the instance of WorkoutExercise to compare to
+     * @return a boolean representing whether the two instances were equal
+     */
+    public boolean equals(WorkoutExercise other){
+        return (other != null &&
+                getName().equals(other.getName()));
+    }
+
+    /**
+     * Returns the WorkoutExercise as a String
+     *
+     * @return the WorkoutExercise as a String
+     */
+    @Override
+    public String toString() {
+        return exercise.toString();
+    }
 }

@@ -12,7 +12,6 @@ import ledge.muscleup.model.exercise.enums.ExerciseType;
  */
 
 public class WorkoutExerciseDuration extends WorkoutExercise{
-    private Exercise exercise;
     private InterfaceExerciseDuration recommendedDuration;
 
     /**
@@ -45,21 +44,16 @@ public class WorkoutExerciseDuration extends WorkoutExercise{
      * Updates the exercise with the new recommended duration
      *
      * @param quantity the recommended quantity to update the exercise to
-     * @throws IllegalArgumentException if passed a {@code null} parameter
      * @return a boolean representing if the suggested quantity could be updated
      */
-    public boolean updateRecommendedDuration(InterfaceExerciseDuration quantity) throws IllegalArgumentException {
-        boolean quantityUpdated = false;
-
-        if (quantity == null)
-            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        else if (recommendedDuration.getClass().isInstance(quantity)) {
-            recommendedDuration = quantity;
-            //TODO - requires database update
-            quantityUpdated = true;
+    @Override
+    public boolean updateQuantity(InterfaceExerciseQuantity quantity) {
+        boolean updated = false;
+        if(quantity instanceof InterfaceExerciseDuration){
+            recommendedDuration = (InterfaceExerciseDuration) quantity;
+            updated = true;
         }
-
-        return quantityUpdated;
+        return false;
     }
 
     /**

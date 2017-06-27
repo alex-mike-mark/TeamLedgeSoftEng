@@ -39,25 +39,14 @@ public class WorkoutExerciseDistance extends WorkoutExercise{
      */
     public InterfaceExerciseQuantity getQuantity() { return recommendedDistance; }
 
-    /**
-     * Updates the exercise with the new recommended distance
-     *
-     * @param quantity the recommended quantity to update the exercise to
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     * @return a boolean representing if the suggested quantity could be updated
-     */
-    public boolean updateRecommendedDistance(InterfaceExerciseDistance quantity) throws IllegalArgumentException {
-        boolean quantityUpdated = false;
-
-        if (quantity == null)
-            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        else if (recommendedDistance.getClass().isInstance(quantity)) {
-            recommendedDistance = quantity;
-            //TODO - requires database update
-            quantityUpdated = true;
+    @Override
+    public boolean updateQuantity(InterfaceExerciseQuantity quantity) {
+        boolean updated = false;
+        if(quantity instanceof InterfaceExerciseDistance){
+            recommendedDistance = (InterfaceExerciseDistance)quantity;
+            updated = true;
         }
-
-        return quantityUpdated;
+        return false;
     }
 
     /**

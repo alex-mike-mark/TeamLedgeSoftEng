@@ -1,40 +1,293 @@
-package ledge.muscleup.persistence;
+package ledge.muscleup.model.business;
+
+import junit.framework.TestCase;
 
 import org.joda.time.LocalDate;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
-import ledge.muscleup.model.exercise.WorkoutExerciseDistance;
-import ledge.muscleup.model.exercise.WorkoutExerciseSets;
-import ledge.muscleup.model.exercise.WorkoutExerciseSetsAndWeight;
-import ledge.muscleup.model.exercise.enums.*;
+import ledge.muscleup.business.InterfaceAccessExercises;
 import ledge.muscleup.model.exercise.Exercise;
-import ledge.muscleup.model.exercise.ExerciseDistance;
-import ledge.muscleup.model.exercise.ExerciseDuration;
-import ledge.muscleup.model.exercise.ExerciseSets;
-import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
-import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
+import ledge.muscleup.model.exercise.enums.*;
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
+import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
- * A stub implementation of the database for Iteration 1
+ * AccessExercisesTest.java used to test AccessExercises.java
  *
- * @author Ryan Koop
+ * @author Matthew Smidt
  * @version 1.0
- * @since 2017-06-04
+ * @since 2017-06-24
  */
 
-public class DataAccessStub implements InterfaceDataAccess {
+public class AccessExercisesTest extends TestCase {
+    InterfaceAccessExercises dataAccess;
+
+    public AccessExercisesTest(String arg0)
+    {
+        super(arg0);
+    }
+
+    @Before
+    public void setUp()
+    {
+        dataAccess = new TemplateAccessExercises();
+    }
+
+    @After
+    public void tearDown()
+    {
+
+    }
+
+    @Test
+    public void testGetExercise(){
+        System.out.println("\nStarting testGetExercise");
+
+        // Exercises should already be in db
+        Exercise exercise = dataAccess.getExercise("Bicep Curls");
+        assertEquals("Bicep Curls", exercise.getName());
+        assertEquals(ExerciseIntensity.LOW, exercise.getIntensity());
+        assertEquals(ExerciseType.ARM, exercise.getType());
+        assertEquals(false, exercise.isFavourite());
+
+        exercise = dataAccess.getExercise("Push-Ups");
+        assertEquals("Push-Ups", exercise.getName());
+        assertEquals(ExerciseIntensity.HIGH, exercise.getIntensity());
+        assertEquals(ExerciseType.ARM, exercise.getType());
+        assertEquals(false, exercise.isFavourite());
+
+        exercise = dataAccess.getExercise("Running");
+        assertEquals("Running", exercise.getName());
+        assertEquals(ExerciseIntensity.HIGH, exercise.getIntensity());
+        assertEquals(ExerciseType.CARDIO, exercise.getType());
+        assertEquals(false, exercise.isFavourite());
+
+        exercise = dataAccess.getExercise("Exercise Bike");
+        assertEquals("Exercise Bike", exercise.getName());
+        assertEquals(ExerciseIntensity.MEDIUM, exercise.getIntensity());
+        assertEquals(ExerciseType.CARDIO, exercise.getType());
+        assertEquals(false, exercise.isFavourite());
+
+        exercise = dataAccess.getExercise("Crunches");
+        assertEquals("Crunches", exercise.getName());
+        assertEquals(ExerciseIntensity.LOW, exercise.getIntensity());
+        assertEquals(ExerciseType.CORE, exercise.getType());
+        assertEquals(false, exercise.isFavourite());
+
+        exercise = dataAccess.getExercise("Bicycle Kicks");
+        assertEquals("Bicycle Kicks", exercise.getName());
+        assertEquals(ExerciseIntensity.HIGH, exercise.getIntensity());
+        assertEquals(ExerciseType.CORE, exercise.getType());
+        assertEquals(false, exercise.isFavourite());
+
+        exercise = dataAccess.getExercise("Squats");
+        assertEquals("Squats", exercise.getName());
+        assertEquals(ExerciseIntensity.MEDIUM, exercise.getIntensity());
+        assertEquals(ExerciseType.LEG, exercise.getType());
+        assertEquals(false, exercise.isFavourite());
+
+        exercise = dataAccess.getExercise("Lunges");
+        assertEquals("Lunges", exercise.getName());
+        assertEquals(ExerciseIntensity.MEDIUM, exercise.getIntensity());
+        assertEquals(ExerciseType.LEG, exercise.getType());
+        assertEquals(false, exercise.isFavourite());
+
+        System.out.println("Finishing testGetExercise\n");
+    }
+
+    @Test
+    public void testGetExercisesList(){
+        System.out.println("\nStarting testGetExercisesList");
+
+        // Exercises by object already in list
+        List<Exercise> exerciseList = new ArrayList<>();
+        exerciseList.add(new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM, false));
+        exerciseList.add(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE, false));
+        exerciseList.add(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false));
+        exerciseList.add(new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM, false));
+        exerciseList.add(new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO, false));
+        exerciseList.add(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE,
+                false));
+        exerciseList.add(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false));
+        exerciseList.add(new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM,
+                ExerciseType.CARDIO, false));
+
+        assertEquals(exerciseList.toString(), dataAccess.getExercisesList().toString());
+
+        System.out.println("Finishing testGetExercisesList\n");
+    }
+
+    @Test
+    public void testGetExerciseNamesList(){
+        System.out.println("\nStarting testGetExerciseNamesList");
+
+        // Exercises by name already in list
+        List<String> namesList = new ArrayList<>();
+        namesList.add("Bicep Curls");
+        namesList.add("Crunches");
+        namesList.add("Lunges");
+        namesList.add("Push-Ups");
+        namesList.add("Running");
+        namesList.add("Bicycle Kicks");
+        namesList.add("Squats");
+        namesList.add("Exercise Bike");
+
+        assertEquals(namesList, dataAccess.getExerciseNamesList());
+
+        System.out.println("Finishing testGetExerciseNamesList\n");
+    }
+
+    @Test
+    public void testInsertExercise()
+    {
+        System.out.println("\nStarting testInsertExercise");
+
+        List<Exercise> list = dataAccess.getExercisesList();
+        assertEquals(8, list.size());
+        Exercise exercise1 = new Exercise("Dead Lifts", ExerciseIntensity.HIGH, ExerciseType.LEG, false);
+        dataAccess.insertExercise(exercise1);
+        Exercise exercise2 = dataAccess.getExercise("Dead Lifts");
+        assertEquals(exercise1, exercise2);
+        assertEquals("Dead Lifts", exercise2.getName());
+        assertEquals(ExerciseIntensity.HIGH, exercise2.getIntensity());
+        assertEquals(ExerciseType.LEG, exercise2.getType());
+        assertEquals(false, exercise2.isFavourite());
+        list = dataAccess.getExercisesList();
+        assertEquals(9, list.size());
+
+        exercise1 = new Exercise("Military Press", ExerciseIntensity.LOW, ExerciseType.ARM, true);
+        dataAccess.insertExercise(exercise1);
+        exercise2 = dataAccess.getExercise("Military Press");
+        assertEquals(exercise1, exercise2);
+        assertEquals("Military Press", exercise2.getName());
+        assertEquals(ExerciseIntensity.LOW, exercise2.getIntensity());
+        assertEquals(ExerciseType.ARM, exercise2.getType());
+        assertEquals(true, exercise2.isFavourite());
+        list = dataAccess.getExercisesList();
+        assertEquals(10, list.size());
+
+        System.out.println("Finished testInsertExercise\n");
+    }
+
+    @Test
+    public void testRemoveExercise(){
+        System.out.println("\nStarting testRemoveExercise");
+
+        // Remove first exercise in list
+        List<Exercise> list = dataAccess.getExercisesList();
+        assertEquals(8, list.size());
+        Exercise exercise = new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM, false);
+        dataAccess.removeExercise(exercise);
+        exercise = dataAccess.getExercise("Bicep Curls");
+        assertNull(exercise);
+        list = dataAccess.getExercisesList();
+        assertEquals(7, list.size());
+
+        // Remove last exercise in list
+        exercise = new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false);
+        dataAccess.removeExercise(exercise);
+        exercise = dataAccess.getExercise("Bicep Curls");
+        assertNull(exercise);
+        list = dataAccess.getExercisesList();
+        assertEquals(6, list.size());
+
+        // Remove middle exercise in list
+        exercise = new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE, false);
+        dataAccess.removeExercise(exercise);
+        exercise = dataAccess.getExercise("Bicep Curls");
+        assertNull(exercise);
+        list = dataAccess.getExercisesList();
+        assertEquals(5, list.size());
+
+        System.out.println("Finished testRemoveExercise\n");
+    }
+}
+
+/**
+ * A template Exercises accessor that creates a template database stub for use in testing
+ */
+class TemplateAccessExercises implements InterfaceAccessExercises {
+    private TemplateDataAccessStub dataAccess;
+
+    /**
+     * The default constructor for the TemplateAccessExercises
+     */
+    TemplateAccessExercises() {
+        dataAccess = new TemplateDataAccessStub("testDB");
+        dataAccess.open();
+    }
+
+    /**
+     * This method gets an exercise from the database with the given name
+     * @param exerciseName the name of the exercise
+     * @return an exercise from the database with the given name, or null if it does not exist
+     */
+    @Override
+    public Exercise getExercise(String exerciseName) {
+        return dataAccess.getExercise(exerciseName);
+    }
+
+    /**
+     * This method gets exercises stored in the database in the form of a list
+     * @return a list of exercises in the database
+     */
+    @Override
+    public List<Exercise> getExercisesList() {
+        return dataAccess.getExercisesList();
+    }
+
+    /**
+     * This method gets the names of all exercises in the database in the form of a list
+     * @return a list of exercise names in the database
+     */
+    @Override
+    public List<String> getExerciseNamesList() {
+        return dataAccess.getExerciseNamesList();
+    }
+
+    /**
+     * This method inserts a new exercise into the database
+     * @param exercise the exercise to be inserted
+     */
+    @Override
+    public void insertExercise(Exercise exercise) {
+        dataAccess.insertExercise(exercise);
+    }
+
+    /**
+     * This method removes an exercise from the database
+     * @param exercise the exercise to be removed
+     */
+    @Override
+    public void removeExercise(Exercise exercise) {
+        dataAccess.removeExercise(exercise);
+    }
+}
+
+/**
+ * A template database stub for use in testing the AccessExercises that needs an accessor, which in
+ * turn needs a database stub
+ * constructor parameter
+ *
+ * @author Matthew Smidt
+ * @version 1.0
+ * @since 2017-06-24
+ */
+
+class TemplateDataAccessStub implements InterfaceDataAccess {
     private String dbName;
-    private String dbType = "stub";
+    private String dbType = "testing template";
 
     private Map<String, Workout> workoutsByName;
     private Map<String, Exercise> exercisesByName;
@@ -44,7 +297,7 @@ public class DataAccessStub implements InterfaceDataAccess {
      * Constructor for DataAccessStub
      * @param dbName the name of the database
      */
-    public DataAccessStub (String dbName) {
+    public TemplateDataAccessStub (String dbName) {
         this.dbName = dbName;
     }
 
@@ -77,76 +330,6 @@ public class DataAccessStub implements InterfaceDataAccess {
         exercisesByName.put(exercise.getName(), exercise);
         exercise = new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false);
         exercisesByName.put(exercise.getName(), exercise);
-
-        workoutsByName = new HashMap<>();
-
-        workout = new Workout("Welcome to the Gun Show");
-        workoutsByName.put(workout.getName(), workout);
-
-        workoutExercise = new WorkoutExerciseSetsAndWeight(exercisesByName.get("Bicep Curls"),
-        new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
-        addExerciseToWorkout(workout, workoutExercise);
-        workoutExercise = new WorkoutExerciseSets(exercisesByName.get("Push-Ups"),
-        new ExerciseSets(2, 15));
-        addExerciseToWorkout(workout, workoutExercise);
-
-        workout = new Workout("Never Skip Leg Day");
-        workoutsByName.put(workout.getName(), workout);
-        workoutExercise = new WorkoutExerciseSets(exercisesByName.get("Squats"),
-        new ExerciseSets(4, 15));
-        addExerciseToWorkout(workout, workoutExercise);
-        workoutExercise = new WorkoutExerciseSets(exercisesByName.get("Lunges"),
-        new ExerciseSets(3, 10));
-        addExerciseToWorkout(workout, workoutExercise);
-
-        workout = new Workout("Marathon Training Starts Here");
-        workoutsByName.put(workout.getName(), workout);
-        workoutExercise = new WorkoutExerciseDistance(exercisesByName.get("Running"),
-        new ExerciseDistance(2.5, DistanceUnit.MILES));
-        addExerciseToWorkout(workout, workoutExercise);
-        workoutExercise = new WorkoutExerciseDuration(exercisesByName.get("Exercise Bike"),
-        new ExerciseDuration(45, TimeUnit.MINUTES));
-        addExerciseToWorkout(workout, workoutExercise);
-
-        workout = new Workout("Work that Core, Get that Score!");
-        workoutsByName.put(workout.getName(), workout);
-        workoutExercise = new WorkoutExerciseSets(exercisesByName.get("Crunches"),
-        new ExerciseSets(2, 25));
-        addExerciseToWorkout(workout, workoutExercise);
-        workoutExercise = new WorkoutExerciseSets(exercisesByName.get("Bicycle Kicks"),
-        new ExerciseSets(2, 15));
-        addExerciseToWorkout(workout, workoutExercise);
-
-        workoutSessionsByDate = new TreeMap<>();
-        workoutSession = new WorkoutSession(
-                (workoutsByName.get("Welcome to the Gun Show")),
-                new LocalDate(2017, 06, 5),
-                false);
-        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
-
-        workoutSession = new WorkoutSession(
-                (workoutsByName.get("Never Skip Leg Day")),
-                new LocalDate(2017, 06, 6),
-                false);
-        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
-
-        workoutSession = new WorkoutSession(
-                (workoutsByName.get("Work that Core, Get that Score!")),
-                new LocalDate(2017, 06, 7),
-                false);
-        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
-
-        workoutSession = new WorkoutSession(
-                (workoutsByName.get("Never Skip Leg Day")),
-                new LocalDate(2017, 06, 9),
-                false);
-        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
-
-        workoutSession = new WorkoutSession(
-                (workoutsByName.get("Marathon Training Starts Here")),
-                new LocalDate(2017, 06, 10),
-                false);
-        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         System.out.println("Opened " + dbType + " database " + dbName);
     }
@@ -241,10 +424,10 @@ public class DataAccessStub implements InterfaceDataAccess {
 
         if (workoutsByName.containsKey(workout.getName())) {
             dbWorkout = workoutsByName.get(workout.getName());
-                if (exercisesByName.containsKey(exercise.getName())) {
-                    dbWorkout.addExercise(exercise);
-                    added = true;
-                }
+            if (exercisesByName.containsKey(exercise.getName())) {
+                dbWorkout.addExercise(exercise);
+                added = true;
+            }
         }
         return added;
     }
@@ -276,8 +459,9 @@ public class DataAccessStub implements InterfaceDataAccess {
      * @return a boolean representing if the exercise was found and updated in the workout
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
+    @Override
     public boolean updateExerciseQuantity(Workout workout, WorkoutExercise exercise, InterfaceExerciseQuantity quantity) throws IllegalArgumentException {
-        //TODO implement when implementing SQL database
+        //TODO remove after refactoring persistence layer or implement and test
         return false;
     }
 
@@ -286,8 +470,9 @@ public class DataAccessStub implements InterfaceDataAccess {
      *
      * @param workout the workout to update the status of
      */
+    @Override
     public void toggleExerciseFavourite(Workout workout) {
-        //TODO implement when implementing SQL database
+        //TODO remove after refactoring persistence layer or implement and test
     }
 
     /**
@@ -298,8 +483,9 @@ public class DataAccessStub implements InterfaceDataAccess {
      * @param exercise the exercise to add to the workout
      * @return true if exercise was added successfully, false otherwise
      */
+    @Override
     public boolean addWorkoutExercise(Workout workout, WorkoutExercise exercise) {
-        //TODO implement when implementing SQL database
+        //TODO remove after refactoring persistence layer or implement and test
         return false;
     }
 
@@ -313,8 +499,9 @@ public class DataAccessStub implements InterfaceDataAccess {
      * @throws IllegalArgumentException if passed a {@code null} parameter or if {@code index} is
      *                                  outside the bounds of the list of exercises
      */
+    @Override
     public boolean moveWorkoutExercise(Workout workout, WorkoutExercise exercise, int index) throws IllegalArgumentException {
-        //TODO implement when implementing SQL database
+        //TODO remove after refactoring persistence layer or implement and test
         return false;
     }
 
@@ -326,8 +513,9 @@ public class DataAccessStub implements InterfaceDataAccess {
      * @return the exercise that was removed, or {@code null} if the exercise couldn't be found
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
+    @Override
     public boolean removeWorkoutExercise(Workout workout, WorkoutExercise exercise) throws IllegalArgumentException {
-        //TODO implement when implementing SQL database
+        //TODO remove after refactoring persistence layer or implement and test
         return false;
     }
 
@@ -346,7 +534,7 @@ public class DataAccessStub implements InterfaceDataAccess {
      * @return a list of all workout sessions scheduled between startDate and endDate, inclusive
      */
     public List<WorkoutSession> getSessionsInDateRange(LocalDate startDate,
-                                                                LocalDate endDate) {
+                                                       LocalDate endDate) {
         List<WorkoutSession> sessionsInDateRange = new ArrayList<>();
 
         LocalDate currDate = startDate;
@@ -393,8 +581,9 @@ public class DataAccessStub implements InterfaceDataAccess {
      * @param newDate        the new date of the workout
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
+    @Override
     public void updateWorkoutDate(WorkoutSession workoutSession, LocalDate newDate) throws IllegalArgumentException {
-        //TODO implement when implementing SQL database
+        //TODO remove after refactoring persistence layer or implement and test
     }
 
     /**
@@ -402,8 +591,9 @@ public class DataAccessStub implements InterfaceDataAccess {
      *
      * @param workoutSession the workout to change the state of
      */
+    @Override
     public void toggleWorkoutComplete(WorkoutSession workoutSession) {
-        //TODO implement when implementing SQL database
+        //TODO remove after refactoring persistence layer or implement and test
     }
 
     /**
@@ -414,8 +604,9 @@ public class DataAccessStub implements InterfaceDataAccess {
      * @return a boolean representing whether the exercise was marked as completed or not
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
+    @Override
     public boolean toggleExerciseComplete(WorkoutSession workoutSession, WorkoutSessionExercise exercise) throws IllegalArgumentException {
-        //TODO implement when implementing SQL database
+        //TODO remove after refactoring persistence layer or implement and test
         return false;
     }
 }

@@ -8,6 +8,9 @@ import org.junit.Test;
 
 import java.util.Enumeration;
 
+import ledge.muscleup.model.exercise.Exercise;
+import ledge.muscleup.model.exercise.WorkoutExercise;
+import ledge.muscleup.model.exercise.WorkoutExerciseSets;
 import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
 import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.enums.ExerciseType;
@@ -22,7 +25,8 @@ import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
  */
 public class WorkoutTest extends TestCase {
     Workout workout1, workout2, workout3;
-    WorkoutExerciseDuration[] exerciseList1, exerciseList2;
+    WorkoutExercise[] exerciseList1, exerciseList2;
+    Exercise crunches, russianTwists, sitUps;
 
     /**
      * Initializes several new instances of Workout to setup testing
@@ -30,17 +34,21 @@ public class WorkoutTest extends TestCase {
     @Before
     public void setUp(){
         workout1 = new Workout("Leg Day");
-        exerciseList1 = new WorkoutExerciseDuration[]{
-                new WorkoutExerciseDuration("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20)),
-                new WorkoutExerciseDuration("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20)),
-                new WorkoutExerciseDuration("Sit-ups", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20))
+        crunches = new Exercise("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY);
+        russianTwists = new Exercise("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY);
+        sitUps = new Exercise("Sit-ups", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY);
+
+        exerciseList1 = new WorkoutExerciseSets[]{
+                new WorkoutExerciseSets(crunches, new ExerciseSets(3, 20)),
+                new WorkoutExerciseSets(russianTwists, new ExerciseSets(3, 20)),
+                new WorkoutExerciseSets(sitUps, new ExerciseSets(3, 20))
         };
         workout2 = new Workout("Get Your 6 Pack Abs", true, exerciseList1);
 
-        exerciseList2 = new WorkoutExerciseDuration[]{
-                new WorkoutExerciseDuration("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20)),
-                new WorkoutExerciseDuration("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20)),
-                new WorkoutExerciseDuration("Sit-ups", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20))
+        exerciseList2 = new WorkoutExerciseSets[]{
+                new WorkoutExerciseSets(crunches, new ExerciseSets(3, 20)),
+                new WorkoutExerciseSets(russianTwists, new ExerciseSets(3, 20)),
+                new WorkoutExerciseSets(sitUps, new ExerciseSets(3, 20))
         };
         workout3 = new Workout("Get Your 6 Pack Abs", true, exerciseList2);
     }
@@ -75,13 +83,13 @@ public class WorkoutTest extends TestCase {
         assertEquals("Shred The Abs", workout2.getName());
         assertEquals("Shred The Abs", workout3.getName());
 
-        WorkoutExerciseDuration workoutExerciseDuration1 = new WorkoutExerciseDuration("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20));
+        WorkoutExerciseSets workoutExerciseDuration1 = new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), new ExerciseSets(3, 20));
         assertTrue(workout2.setRecommendedQuantity(workoutExerciseDuration1, new ExerciseSets(3, 10)));
 
-        WorkoutExerciseDuration workoutExerciseDuration2 = new WorkoutExerciseDuration("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20));
+        WorkoutExerciseSets workoutExerciseDuration2 = new WorkoutExerciseSets(new Exercise("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), new ExerciseSets(3, 20));
         assertTrue(workout2.setRecommendedQuantity(workoutExerciseDuration2, new ExerciseSets(3, 10)));
 
-        WorkoutExerciseDuration workoutExerciseDuration3 = new WorkoutExerciseDuration("Sit-ups", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 20));
+        WorkoutExerciseSets workoutExerciseDuration3 = new WorkoutExerciseSets(new Exercise("Sit-ups", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), new ExerciseSets(3, 20));
         assertTrue(workout2.setRecommendedQuantity(workoutExerciseDuration3, new ExerciseSets(3, 10)));
 
         assertEquals(false, workout1.isFavourite());
@@ -103,7 +111,7 @@ public class WorkoutTest extends TestCase {
         workout1.addExercise(workoutExerciseDuration1);
         assertEquals(1, workout1.numExercises());
 
-        WorkoutExerciseDuration workoutExerciseDuration4 = new WorkoutExerciseDuration("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 10));
+        WorkoutExerciseSets workoutExerciseDuration4 = new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), new ExerciseSets(3, 10));
         assertTrue(workout2.moveExercise(workoutExerciseDuration4, 2));
 
         workout1.removeExercise(workoutExerciseDuration1);
@@ -112,7 +120,7 @@ public class WorkoutTest extends TestCase {
         workout2.removeExercise(workoutExerciseDuration4);
         assertEquals(2, workout2.numExercises());
 
-        WorkoutExerciseDuration workoutExerciseDuration5 = new WorkoutExerciseDuration("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 10));
+        WorkoutExerciseSets workoutExerciseDuration5 = new WorkoutExerciseSets(new Exercise("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), new ExerciseSets(3, 10));
         workout2.removeExercise(workoutExerciseDuration5);
         assertEquals(1, workout2.numExercises());
 
