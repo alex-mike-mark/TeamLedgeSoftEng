@@ -37,6 +37,7 @@ import ledge.muscleup.model.workout.WorkoutSession;
 public class ScheduleActivity extends Activity {
 
     private ListItemAdapter adapter;
+
 	private AccessWorkoutSessions aws;
     private ScheduleWeek scheduleWeek;
     private List<WorkoutSession> sessionList;
@@ -46,6 +47,7 @@ public class ScheduleActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         aws = new AccessWorkoutSessions();
         scheduleWeek = new ScheduleWeek(aws.getCurrentWeekSessions());
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_list_display);
@@ -60,9 +62,9 @@ public class ScheduleActivity extends Activity {
 
         adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_workout_session, sessionList);
         listView.setAdapter(adapter);
-        listView.setItemsCanFocus(true);
 
         setupListeners(sessionList);
+
         setupNavButtons();
     }
 
@@ -153,11 +155,12 @@ public class ScheduleActivity extends Activity {
 
         /**
          * A wrapper class holding the different elements of a single list item in the list view.
-         * Contains 1 TextView for date and 1 TextView for name
+         * Contains 1 TextView for date and 1 TextView for name, as well as a remove button
          */
         private class ViewHolder {
             TextView sessionDate;
             TextView sessionWorkoutName;
+            Button removeButton;
         }
 
         /**
@@ -178,6 +181,7 @@ public class ScheduleActivity extends Activity {
                 convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_workout_session, parent, false);
                 viewHolder.sessionDate = (TextView) convertView.findViewById(R.id.scheduleDate);
                 viewHolder.sessionWorkoutName = (TextView) convertView.findViewById(R.id.scheduleWorkoutName);
+                viewHolder.removeButton = (Button) convertView.findViewById(R.id.removeWorkoutSessionButton);
 
                 returnedView = convertView;
                 convertView.setTag(viewHolder);
@@ -190,6 +194,18 @@ public class ScheduleActivity extends Activity {
 
             viewHolder.sessionDate.setText(formatter.print(session.getDate()));
             viewHolder.sessionWorkoutName.setText(session.getName());
+            viewHolder.removeButton.setText("X");
+
+            viewHolder.removeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    aws.removeWorkoutSession(sessionList.get(index));
+                    WorkoutSession emptySession = new WorkoutSession(sessionList.get(index).getDate());
+                    sessionList.set(index, emptySession);
+                    notifyDataSetChanged();
+                }
+            });
+
             return returnedView;
         }
     }
