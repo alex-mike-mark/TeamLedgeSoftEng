@@ -4,16 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,19 +17,12 @@ import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import ledge.muscleup.R;
-import ledge.muscleup.application.Services;
 import ledge.muscleup.business.AccessWorkoutSessions;
-import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
-import ledge.muscleup.business.InterfaceScheduleManager;
-import ledge.muscleup.business.ScheduleManager;
-import ledge.muscleup.model.exercise.WorkoutSessionExercise;
+import ledge.muscleup.model.schedule.ScheduledWeek;
 import ledge.muscleup.model.workout.WorkoutSession;
-import ledge.muscleup.persistence.DataAccessStub;
-import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
  * ScheduleActivity displays a list of workout sessions
@@ -57,7 +46,7 @@ public class ScheduleActivity extends Activity {
         setContentView(R.layout.activity_list_display);
 
         ListView listView = (ListView) findViewById(R.id.list_panel);
-        sessionList = scheduleWeek.getWorkoutSessionList();
+        sessionList = scheduledWeek.getWorkoutSessionList();
 
         adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_workout_session, sessionList);
         listView.setAdapter(adapter);
