@@ -32,6 +32,9 @@ public class ListManager {
 
     }
 
+    /**
+     * clears the list contained in adapter
+     */
     public void clearList(){
         adapter.clear();
     }

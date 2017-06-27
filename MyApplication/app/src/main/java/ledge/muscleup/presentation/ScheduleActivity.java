@@ -47,6 +47,17 @@ public class ScheduleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_list_display);
 
+        scheduleArray = scheduleManager.getWorkoutSessionList();
+        lm.populateList(this, scheduleArray);
+        setupListeners(scheduleArray);
+
+        setupNavButtons();
+    }
+
+    /**
+     * Creates listeners for navigation buttons
+     */
+    private void setupNavButtons(){
         final Button nextBtn = (Button) findViewById(R.id.button_next);
         nextBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -60,13 +71,13 @@ public class ScheduleActivity extends AppCompatActivity {
                 showLastWeek();
             }
         });
-
-        scheduleArray = scheduleManager.getWorkoutSessionList();
-
-        lm.populateList(this, scheduleArray);
-        setupListeners(scheduleArray);
     }
 
+
+    /**
+     * Creates listeners for each workout in the schedule
+     * @param workoutSessionList list of workouts to display for currently selected week
+     */
     private void setupListeners(final List<WorkoutSession> workoutSessionList) {
         ListView list = (ListView) findViewById(R.id.list_panel);
 
@@ -84,6 +95,9 @@ public class ScheduleActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * clears current list and repopulates with next week's scheduled workouts
+     */
     public void showNextWeek(){
         lm.clearList();
 
@@ -94,6 +108,9 @@ public class ScheduleActivity extends AppCompatActivity {
         setupListeners(scheduleArray);
     }
 
+    /**
+     * clears current list and repopulates with last week's scheduled workouts
+     */
     public void showLastWeek(){
         lm.clearList();
 
