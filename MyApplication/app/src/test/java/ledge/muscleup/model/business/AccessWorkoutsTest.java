@@ -32,7 +32,9 @@ import ledge.muscleup.model.workout.Workout;
 
 public class AccessWorkoutsTest extends TestCase {
     InterfaceAccessWorkouts dataAccess;
-
+    final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
+    final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
+    final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
     /**
      * Constructor for the AccessWorkoutsTest
      */
@@ -96,27 +98,27 @@ public class AccessWorkoutsTest extends TestCase {
         List<Workout> workoutList1 = new ArrayList<>();
         workoutList1.add(new Workout("Never Skip Leg Day", false, new WorkoutExercise[]{
                 new WorkoutExercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG,
-                        new ExerciseSets(4, 15)),
+                        new ExerciseSets(4, 15), xpMediumIntensity),
                 new WorkoutExercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG,
-                        new ExerciseSets(3, 10))
+                        new ExerciseSets(3, 10), xpMediumIntensity)
         }));
         workoutList1.add(new Workout("Marathon Training Starts Here", false, new WorkoutExercise[]{
                 new WorkoutExercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO,
-                        new ExerciseDistance(2.5, DistanceUnit.MILES)),
+                        new ExerciseDistance(2.5, DistanceUnit.MILES), xpHighIntensity),
                 new WorkoutExercise("Exercise Bike", ExerciseIntensity.MEDIUM, ExerciseType.CARDIO,
-                        new ExerciseDuration(45, TimeUnit.MINUTES))
+                        new ExerciseDuration(45, TimeUnit.MINUTES), xpMediumIntensity)
         }));
         workoutList1.add(new Workout("Welcome to the Gun Show", false, new WorkoutExercise[]{
                 new WorkoutExercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM,
-                        new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS)),
+                        new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS), xpLowIntensity),
                 new WorkoutExercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM,
-                        new ExerciseSets(2, 15))
+                        new ExerciseSets(2, 15), xpHighIntensity)
         }));
         workoutList1.add(new Workout("Work that Core, Get that Score!", false, new WorkoutExercise[]{
                 new WorkoutExercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE,
-                        new ExerciseSets(2, 25)),
+                        new ExerciseSets(2, 25), xpLowIntensity),
                 new WorkoutExercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE,
-                        new ExerciseSets(2, 15))
+                        new ExerciseSets(2, 15), xpHighIntensity)
         }));
 
         List<Workout> workoutList2 = dataAccess.getWorkoutsList();
@@ -221,16 +223,16 @@ public class AccessWorkoutsTest extends TestCase {
         Workout workout = dataAccess.getWorkout("Never Skip Leg Day");
 
         assertFalse(dataAccess.getWorkout("Never Skip Leg Day").isFavourite());
-        dataAccess.toggleFavourite(workout);
+        dataAccess.toggleWorkoutFavourite(workout);
         assertTrue(dataAccess.getWorkout("Never Skip Leg Day").isFavourite());
-        dataAccess.toggleFavourite(workout);
+        dataAccess.toggleWorkoutFavourite(workout);
         assertFalse(dataAccess.getWorkout("Never Skip Leg Day").isFavourite());
 
         workout = dataAccess.getWorkout("Work that Core, Get that Score!");
         assertFalse(dataAccess.getWorkout("Work that Core, Get that Score!").isFavourite());
-        dataAccess.toggleFavourite(workout);
+        dataAccess.toggleWorkoutFavourite(workout);
         assertTrue(dataAccess.getWorkout("Work that Core, Get that Score!").isFavourite());
-        dataAccess.toggleFavourite(workout);
+        dataAccess.toggleWorkoutFavourite(workout);
         assertFalse(dataAccess.getWorkout("Work that Core, Get that Score!").isFavourite());
 
         System.out.println("Finishing testToggleFavourite\n");
@@ -245,9 +247,9 @@ public class AccessWorkoutsTest extends TestCase {
 
         assertEquals(2, dataAccess.getWorkout("Never Skip Leg Day").numExercises());
 
-        dataAccess.addExercise(new Workout("Never Skip Leg Day"),
+        dataAccess.addExerciseToWorkout(new Workout("Never Skip Leg Day"),
                 new WorkoutExercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG,
-                        new ExerciseSets(3, 10)));
+                        new ExerciseSets(3, 10), xpMediumIntensity));
 
         assertEquals(3, dataAccess.getWorkout("Never Skip Leg Day").numExercises());
 
@@ -275,33 +277,33 @@ public class AccessWorkoutsTest extends TestCase {
 
         Workout workout = dataAccess.getWorkout("Never Skip Leg Day");
         WorkoutExercise workoutExercise = new WorkoutExercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG,
-                new ExerciseSets(4, 15));
+                new ExerciseSets(4, 15), xpMediumIntensity);
 
         assertEquals(2, dataAccess.getWorkout("Never Skip Leg Day").numExercises());
-        dataAccess.removeExercise(workout, workoutExercise);
+        dataAccess.removeExerciseFromWorkout(workout, workoutExercise);
         assertEquals(1, dataAccess.getWorkout("Never Skip Leg Day").numExercises());
 
         workoutExercise = new WorkoutExercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG,
-                new ExerciseSets(3, 10));
+                new ExerciseSets(3, 10), xpMediumIntensity);
 
         assertEquals(1, dataAccess.getWorkout("Never Skip Leg Day").numExercises());
-        dataAccess.removeExercise(workout, workoutExercise);
+        dataAccess.removeExerciseFromWorkout(workout, workoutExercise);
         assertEquals(0, dataAccess.getWorkout("Never Skip Leg Day").numExercises());
 
         workout = dataAccess.getWorkout("Marathon Training Starts Here");
         workoutExercise = new WorkoutExercise("Exercise Bike", ExerciseIntensity.MEDIUM, ExerciseType.CARDIO,
-                new ExerciseDuration(45, TimeUnit.MINUTES));
+                new ExerciseDuration(45, TimeUnit.MINUTES), xpMediumIntensity);
 
 
         assertEquals(2, dataAccess.getWorkout("Marathon Training Starts Here").numExercises());
-        dataAccess.removeExercise(workout, workoutExercise);
+        dataAccess.removeExerciseFromWorkout(workout, workoutExercise);
         assertEquals(1, dataAccess.getWorkout("Marathon Training Starts Here").numExercises());
 
         workoutExercise = new WorkoutExercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO,
-                new ExerciseDistance(2.5, DistanceUnit.MILES));
+                new ExerciseDistance(2.5, DistanceUnit.MILES), xpHighIntensity);
 
         assertEquals(1, dataAccess.getWorkout("Marathon Training Starts Here").numExercises());
-        dataAccess.removeExercise(workout, workoutExercise);
+        dataAccess.removeExerciseFromWorkout(workout, workoutExercise);
         assertEquals(0, dataAccess.getWorkout("Marathon Training Starts Here").numExercises());
 
         System.out.println("Finishing testRemoveExercise\n");
@@ -378,7 +380,7 @@ class TemplateAccessWorkouts implements InterfaceAccessWorkouts {
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
     @Override
-    public boolean setRecommendedQuantity(Workout workout, WorkoutExercise exercise, InterfaceExerciseQuantity quantity) throws IllegalArgumentException {
+    public boolean setRecommendedExerciseQuantity(Workout workout, WorkoutExercise exercise, InterfaceExerciseQuantity quantity) throws IllegalArgumentException {
         return workout.setRecommendedQuantity(exercise, quantity) &&
                 dataAccess.updateExerciseQuantity(workout, exercise, quantity);
     }
@@ -389,7 +391,7 @@ class TemplateAccessWorkouts implements InterfaceAccessWorkouts {
      * @param workout the workout to update the status of
      */
     @Override
-    public void toggleFavourite(Workout workout) {
+    public void toggleWorkoutFavourite(Workout workout) {
         workout.toggleFavourite();
         dataAccess.toggleExerciseFavourite(workout);
     }
@@ -403,7 +405,7 @@ class TemplateAccessWorkouts implements InterfaceAccessWorkouts {
      * @return true if exercise was added successfully, false otherwise
      */
     @Override
-    public boolean addExercise(Workout workout, WorkoutExercise exercise) {
+    public boolean addExerciseToWorkout(Workout workout, WorkoutExercise exercise) {
         boolean exerciseAdded = false; //if the exercise was added
 
         exerciseAdded = dataAccess.addExerciseToWorkout(workout, exercise);
@@ -424,7 +426,7 @@ class TemplateAccessWorkouts implements InterfaceAccessWorkouts {
      *                                  outside the bounds of the list of exercises
      */
     @Override
-    public boolean moveExercise(Workout workout, WorkoutExercise exercise, int index) throws IllegalArgumentException {
+    public boolean moveWorkoutExercise(Workout workout, WorkoutExercise exercise, int index) throws IllegalArgumentException {
         return workout.moveExercise(exercise, index) &&
                 dataAccess.moveWorkoutExercise(workout, exercise, index);
     }
@@ -438,7 +440,7 @@ class TemplateAccessWorkouts implements InterfaceAccessWorkouts {
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
     @Override
-    public boolean removeExercise(Workout workout, WorkoutExercise exercise) throws IllegalArgumentException {
+    public boolean removeExerciseFromWorkout(Workout workout, WorkoutExercise exercise) throws IllegalArgumentException {
         return workout.removeExercise(exercise) &&
                 dataAccess.removeWorkoutExercise(workout, exercise);
     }

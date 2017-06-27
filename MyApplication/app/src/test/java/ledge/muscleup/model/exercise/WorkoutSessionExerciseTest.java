@@ -14,16 +14,21 @@ import org.junit.Test;
  */
 public class WorkoutSessionExerciseTest extends TestCase {
     WorkoutSessionExercise workoutSessionExercise1, workoutSessionExercise2, workoutSessionExercise3;
-    WorkoutExercise workoutExercise1;
+    WorkoutExercise workoutExercise1, workoutExercise2;
+
+    final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
+    final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
+    final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
 
     /**
      * Initializes several instances of WorkoutSessionExercise to setup testing
      */
     @Before
     public void setUp(){
-        workoutSessionExercise1 = new WorkoutSessionExercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(5, 4), false);
-        workoutSessionExercise2 = new WorkoutSessionExercise("Deadlifts", ExerciseIntensity.MEDIUM, ExerciseType.LEG, new ExerciseSets(5, 4), false);
-        workoutExercise1 = new WorkoutExercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(5, 4));
+        workoutExercise1 = new WorkoutExercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(5, 4), xpHighIntensity);
+        workoutSessionExercise1 = new WorkoutSessionExercise(workoutExercise1, false);
+        workoutExercise2 = new WorkoutExercise("Deadlifts", ExerciseIntensity.MEDIUM, ExerciseType.LEG, new ExerciseSets(5, 4), xpMediumIntensity);
+        workoutSessionExercise2 = new WorkoutSessionExercise(workoutExercise2, false);
         workoutSessionExercise3 = new WorkoutSessionExercise(workoutExercise1, true);
     }
 

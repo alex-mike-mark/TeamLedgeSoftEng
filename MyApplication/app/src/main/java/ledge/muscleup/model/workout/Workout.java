@@ -253,4 +253,16 @@ public class Workout {
     public List<WorkoutExercise> getExerciseList() {
         return exerciseList;
     }
+
+    /**
+     * Returns the experience value of a workout, which is the sum of the xp values of its exercises
+     * @return
+     */
+    public int getExperienceValue() {
+        int total = 0;
+        for (WorkoutExercise exercise: exerciseList) {
+            total+= exercise.getExperienceValue();
+        }
+        return total;
+    }
 }
