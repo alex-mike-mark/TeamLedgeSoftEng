@@ -214,4 +214,13 @@ public class WorkoutSession {
     public List<WorkoutSessionExercise> getWorkoutSessionExercises(){
         return exerciseList;
     }
+
+    public int getExperienceValue() {
+        int total = 0;
+        for (WorkoutSessionExercise sessionExercise: exerciseList) {
+            total += sessionExercise.getExperienceValue();
+        }
+
+        return total;
+    }
 }
