@@ -66,7 +66,7 @@ public class ExerciseSetsAndWeight extends ExerciseSets implements InterfaceExer
         if (other instanceof ExerciseSetsAndWeight) {
             weight = (ExerciseSetsAndWeight) other;
             if (this.getSets() == weight.getSets() && this.getReps() == weight.getReps() &&
-                    this.weight == weight.getWeight()) {
+                    this.weight == weight.getWeight() && this.getUnitOfMeasure() == weight.getUnitOfMeasure()) {
                 isEqual = true;
             }
         }
