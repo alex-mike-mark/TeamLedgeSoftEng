@@ -181,6 +181,6 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
 
         firstDayOfWeek = scheduleWeek.getWeekday(DateTimeConstants.MONDAY).plusWeeks(1);
         weekWorkouts = getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
-        scheduleWeek.lastWeek(weekWorkouts);
+        scheduleWeek.nextWeek(weekWorkouts);
     }
 }

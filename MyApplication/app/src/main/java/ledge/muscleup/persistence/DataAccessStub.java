@@ -122,7 +122,7 @@ public class DataAccessStub implements InterfaceDataAccess {
         workoutSessionsByDate = new TreeMap<>();
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Welcome to the Gun Show")),
-                new LocalDate().withDayOfWeek(DateTimeConstants.MONDAY),
+                new LocalDate().minusWeeks(1).withDayOfWeek(DateTimeConstants.THURSDAY),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
@@ -146,7 +146,7 @@ public class DataAccessStub implements InterfaceDataAccess {
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Marathon Training Starts Here")),
-                new LocalDate().plusWeeks(1).withDayOfWeek(DateTimeConstants.MONDAY),
+                new LocalDate().plusWeeks(1).withDayOfWeek(DateTimeConstants.TUESDAY),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 

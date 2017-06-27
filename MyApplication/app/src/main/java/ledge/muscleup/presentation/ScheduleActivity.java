@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,17 +37,24 @@ import ledge.muscleup.model.workout.WorkoutSession;
 public class ScheduleActivity extends Activity {
 
     private ListItemAdapter adapter;
+	private AccessWorkoutSessions aws;
+    private ScheduleWeek scheduleWeek;
+    private List<WorkoutSession> sessionList;
 
     private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AccessWorkoutSessions aws = new AccessWorkoutSessions();
-        ScheduleWeek scheduleWeek = new ScheduleWeek(aws.getCurrentWeekSessions());
-        List<WorkoutSession> sessionList;
+        aws = new AccessWorkoutSessions();
+        scheduleWeek = new ScheduleWeek(aws.getCurrentWeekSessions());
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_display);
+        setContentView(R.layout.activity_schedule_list_display);
 
+        populateList();
+
+    }
+
+    private void populateList(){
         ListView listView = (ListView) findViewById(R.id.list_panel);
         sessionList = scheduleWeek.getWorkoutSessionList();
 
@@ -53,8 +63,33 @@ public class ScheduleActivity extends Activity {
         listView.setItemsCanFocus(true);
 
         setupListeners(sessionList);
+        setupNavButtons();
     }
 
+    /**
+     * Creates listeners for navigation buttons
+     */
+    private void setupNavButtons(){
+        final Button nextBtn = (Button) findViewById(R.id.button_next);
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showNextWeek();
+            }
+        });
+
+        final Button prevBtn = (Button) findViewById(R.id.button_previous);
+        prevBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showLastWeek();
+            }
+        });
+    }
+
+
+    /**
+     * Creates listeners for each workout in the schedule
+     * @param workoutSessionList list of workouts to display for currently selected week
+     */
     private void setupListeners(final List<WorkoutSession> workoutSessionList) {
         ListView list = (ListView) findViewById(R.id.list_panel);
 
@@ -70,6 +105,30 @@ public class ScheduleActivity extends Activity {
                 startActivity(appInfo);
             }
         });
+    }
+
+    /**
+     * clears current list and repopulates with next week's scheduled workouts
+     */
+    public void showNextWeek(){
+        adapter.clear();
+
+        aws.nextWeek(scheduleWeek);
+        sessionList = scheduleWeek.getWorkoutSessionList();
+
+        populateList();
+    }
+
+    /**
+     * clears current list and repopulates with last week's scheduled workouts
+     */
+    public void showLastWeek(){
+        adapter.clear();
+
+        aws.lastWeek(scheduleWeek);
+        sessionList = scheduleWeek.getWorkoutSessionList();
+
+        populateList();
     }
 
     /**
