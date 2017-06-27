@@ -17,36 +17,26 @@ import ledge.muscleup.model.exercise.enums.ExerciseType;
  */
 public class WorkoutSessionExerciseTest extends TestCase {
     WorkoutSessionExercise workoutSessionExercise1, workoutSessionExercise2, workoutSessionExercise3;
-<<<<<<< HEAD
+
     WorkoutExerciseSets powerClean1, powerClean2, deadlift;
-=======
-    WorkoutExercise workoutExercise1, workoutExercise2;
 
     final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
     final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
     final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
->>>>>>> develop
+
 
     /**
      * Initializes several instances of WorkoutSessionExercise to setup testing
      */
     @Before
     public void setUp(){
-<<<<<<< HEAD
-        powerClean1 = new WorkoutExerciseSets(new Exercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), new ExerciseSets(5,4));
-        powerClean2 = new WorkoutExerciseSets(new Exercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), new ExerciseSets(5,4));
-        deadlift = new WorkoutExerciseSets(new Exercise("Deadlifts", ExerciseIntensity.MEDIUM, ExerciseType.LEG), new ExerciseSets(5,4));
+        powerClean1 = new WorkoutExerciseSets(new Exercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), xpHighIntensity,new ExerciseSets(5,4));
+        powerClean2 = new WorkoutExerciseSets(new Exercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), xpHighIntensity, new ExerciseSets(5,4));
+        deadlift = new WorkoutExerciseSets(new Exercise("Deadlifts", ExerciseIntensity.MEDIUM, ExerciseType.LEG), xpMediumIntensity,new ExerciseSets(5,4));
 
         workoutSessionExercise1 = new WorkoutSessionExercise(powerClean1, false);
         workoutSessionExercise2 = new WorkoutSessionExercise(deadlift, false);
         workoutSessionExercise3 = new WorkoutSessionExercise(powerClean2, true);
-=======
-        workoutExercise1 = new WorkoutExercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(5, 4), xpHighIntensity);
-        workoutSessionExercise1 = new WorkoutSessionExercise(workoutExercise1, false);
-        workoutExercise2 = new WorkoutExercise("Deadlifts", ExerciseIntensity.MEDIUM, ExerciseType.LEG, new ExerciseSets(5, 4), xpMediumIntensity);
-        workoutSessionExercise2 = new WorkoutSessionExercise(workoutExercise2, false);
-        workoutSessionExercise3 = new WorkoutSessionExercise(workoutExercise1, true);
->>>>>>> develop
     }
 
     /**
