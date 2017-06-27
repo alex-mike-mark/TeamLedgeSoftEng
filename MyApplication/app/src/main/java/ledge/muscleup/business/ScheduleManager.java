@@ -194,6 +194,8 @@ public class ScheduleManager implements InterfaceScheduleManager {
         boolean datesInRange = true;
         LocalDate lastDayOfWeek = getWeekday(DateTimeConstants.SUNDAY);
 
+        workoutSessions = new WorkoutSession[DateTimeConstants.DAYS_PER_WEEK]; //create empty workout session
+
         sessionList = dataAccess.getSessionsInDateRange(firstDayOfWeek, lastDayOfWeek);
         for (int i = 0; i < sessionList.size(); i++) {
             currSession = sessionList.get(i);
