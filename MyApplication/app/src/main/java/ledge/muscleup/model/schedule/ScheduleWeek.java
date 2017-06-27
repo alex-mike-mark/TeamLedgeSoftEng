@@ -1,5 +1,6 @@
 package ledge.muscleup.model.schedule;
 
+import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 
@@ -109,6 +110,14 @@ public class ScheduleWeek {
      */
     public void nextWeek(List<WorkoutSession> workoutList) {
         firstDayOfWeek = firstDayOfWeek.plusWeeks(1);
+        populateWorkoutList(workoutList);
+    }
+
+    /**
+     * Gets the manager to contain the scheduled workouts for the week containing today's date
+     */
+    public void currentWeek(List<WorkoutSession> workoutList) {
+        firstDayOfWeek = LocalDate.now().withDayOfWeek(DateTimeConstants.MONDAY);
         populateWorkoutList(workoutList);
     }
 
