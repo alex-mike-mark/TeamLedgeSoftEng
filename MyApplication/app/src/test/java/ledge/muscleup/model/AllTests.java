@@ -33,8 +33,7 @@ import ledge.muscleup.model.exercise.*;
         // business
         AccessExercisesTest.class,
         AccessWorkoutsTest.class,
-        AccessWorkoutSessionsTest.class,
-        ScheduleManagerTest.class
+        AccessWorkoutSessionsTest.class
 })
 
 public class AllTests {

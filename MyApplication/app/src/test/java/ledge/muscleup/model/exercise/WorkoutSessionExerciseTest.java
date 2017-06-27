@@ -17,17 +17,20 @@ import ledge.muscleup.model.exercise.enums.ExerciseType;
  */
 public class WorkoutSessionExerciseTest extends TestCase {
     WorkoutSessionExercise workoutSessionExercise1, workoutSessionExercise2, workoutSessionExercise3;
-    WorkoutExerciseDuration workoutExerciseDuration1;
+    WorkoutExerciseSets powerClean1, powerClean2, deadlift;
 
     /**
      * Initializes several instances of WorkoutSessionExercise to setup testing
      */
     @Before
     public void setUp(){
-        workoutSessionExercise1 = new WorkoutSessionExercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(5, 4), false);
-        workoutSessionExercise2 = new WorkoutSessionExercise("Deadlifts", ExerciseIntensity.MEDIUM, ExerciseType.LEG, new ExerciseSets(5, 4), false);
-        workoutExerciseDuration1 = new WorkoutExerciseDuration("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(5, 4));
-        workoutSessionExercise3 = new WorkoutSessionExercise(workoutExerciseDuration1, true);
+        powerClean1 = new WorkoutExerciseSets(new Exercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), new ExerciseSets(5,4));
+        powerClean2 = new WorkoutExerciseSets(new Exercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), new ExerciseSets(5,4));
+        deadlift = new WorkoutExerciseSets(new Exercise("Deadlifts", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), new ExerciseSets(5,4));
+
+        workoutSessionExercise1 = new WorkoutSessionExercise(powerClean1, false);
+        workoutSessionExercise2 = new WorkoutSessionExercise(deadlift, false);
+        workoutSessionExercise3 = new WorkoutSessionExercise(powerClean2, true);
     }
 
     /**
