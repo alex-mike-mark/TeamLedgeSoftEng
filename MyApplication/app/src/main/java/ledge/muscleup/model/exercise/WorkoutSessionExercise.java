@@ -12,6 +12,8 @@ package ledge.muscleup.model.exercise;
 public class WorkoutSessionExercise {
     private WorkoutExercise exercise;
     private boolean isComplete;
+    private int experienceValue;
+    private final static int xpPerIntensityLevel = 15;
 
     /**
      * The constructor for the WorkoutSessionExercise class that creates a new WorkoutExercise
@@ -31,6 +33,7 @@ public class WorkoutSessionExercise {
         }
         else {
             exercise = new WorkoutExercise(name, intensity, exerciseType, recommendedQuantity);
+            this.experienceValue = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
             this.isComplete = isComplete;
         }
     }
@@ -48,6 +51,7 @@ public class WorkoutSessionExercise {
         }
         else {
             this.exercise = exercise;
+            this.experienceValue = (exercise.getIntensity().ordinal() + 1) * 15;
             this.isComplete = isComplete;
         }
     }
@@ -102,6 +106,14 @@ public class WorkoutSessionExercise {
      */
     public void toggleCompleted() {
         isComplete = !isComplete;
+    }
+
+    /**
+     * Returns the number of experience completing this exercise is worth
+     * @return the experience value of the exercise
+     */
+    public int getExperienceValue() {
+        return experienceValue;
     }
 
     /**
