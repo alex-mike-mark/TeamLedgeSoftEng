@@ -1,5 +1,6 @@
 package ledge.muscleup.persistence;
 
+import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import ledge.muscleup.model.exercise.TimeUnit;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WeightUnit;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
+import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
 
@@ -120,31 +122,31 @@ public class DataAccessStub implements InterfaceDataAccess {
         workoutSessionsByDate = new TreeMap<>();
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Welcome to the Gun Show")),
-                new LocalDate(2017, 06, 5),
+                new LocalDate().minusWeeks(1).withDayOfWeek(DateTimeConstants.THURSDAY),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Never Skip Leg Day")),
-                new LocalDate(2017, 06, 6),
+                new LocalDate().withDayOfWeek(DateTimeConstants.TUESDAY),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Work that Core, Get that Score!")),
-                new LocalDate(2017, 06, 7),
+                new LocalDate().withDayOfWeek(DateTimeConstants.WEDNESDAY),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Never Skip Leg Day")),
-                new LocalDate(2017, 06, 9),
+                new LocalDate().withDayOfWeek(DateTimeConstants.FRIDAY),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Marathon Training Starts Here")),
-                new LocalDate(2017, 06, 10),
+                new LocalDate().plusWeeks(1).withDayOfWeek(DateTimeConstants.TUESDAY),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
@@ -415,6 +417,33 @@ public class DataAccessStub implements InterfaceDataAccess {
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
     public boolean toggleExerciseComplete(WorkoutSession workoutSession, WorkoutSessionExercise exercise) throws IllegalArgumentException {
+        //TODO implement when implementing SQL database
+        return false;
+    }
+
+    /**
+     * Adds a workout session to a given day in the database
+     *
+     * @param scheduleWeek  the week to add the workout to
+     * @param workoutSession the workout session to add
+     * @param dayOfWeek      the day of the week to add the workout session to
+     * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
+     *                                  > DateTimeConstants.SUNDAY}
+     */
+    public void addWorkoutSession(ScheduleWeek scheduleWeek, WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException {
+        //TODO implement when implementing SQL database
+    }
+
+    /**
+     * Removes a workout from a given day in the database
+     *
+     * @param scheduleWeek the week to remove the workout from
+     * @param dayOfWeek     the day to remove the workout from
+     * @return a boolean representing if a workout was removed
+     * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
+     *                                  > DateTimeConstants.SUNDAY}
+     */
+    public boolean removeWorkoutSession(ScheduleWeek scheduleWeek, int dayOfWeek) throws IllegalArgumentException {
         //TODO implement when implementing SQL database
         return false;
     }

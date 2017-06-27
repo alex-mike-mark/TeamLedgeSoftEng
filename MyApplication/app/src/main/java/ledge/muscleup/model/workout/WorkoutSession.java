@@ -30,7 +30,7 @@ public class WorkoutSession {
     private boolean isComplete;
 
     /**
-     * The default constructor for the WorkoutSession class
+     * The constructor for the WorkoutSession class, which is created for a given workout
      * @param workout the workout to create a WorkoutSession for
      * @param scheduledDate the date to create the WorkoutSession for
      * @param isComplete whether the session has been completed or not
@@ -49,7 +49,24 @@ public class WorkoutSession {
             while(enumeration.hasMoreElements())
                 exerciseList.add(new WorkoutSessionExercise(enumeration.nextElement(), false));
         }
+    }
 
+    /**
+     * The constructor for the WorkoutSession class, which is created with no workout
+     * @param scheduledDate the date to create the WorkoutSession for
+     * @throws IllegalArgumentException if passed a {@code null} parameter
+     */
+    public WorkoutSession(LocalDate scheduledDate) throws IllegalArgumentException {
+        if (scheduledDate == null) {
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        }
+        else {
+            this.scheduledDate = scheduledDate;
+
+            this.name = null;
+            this.isComplete = false;
+            this.exerciseList = new ArrayList<>();
+        }
     }
 
     /**
