@@ -85,80 +85,54 @@ public class DataAccessStub implements InterfaceDataAccess {
 
         workout = new Workout("Welcome to the Gun Show");
         workoutsByName.put(workout.getName(), workout);
-<<<<<<< HEAD
-
-        workoutExercise = new WorkoutExerciseSetsAndWeight(exercisesByName.get("Bicep Curls"),
-        new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
-        addExerciseToWorkout(workout, workoutExercise);
-        workoutExercise = new WorkoutExerciseSets(exercisesByName.get("Push-Ups"),
-        new ExerciseSets(2, 15));
-=======
-        exercise = exercisesByName.get("Bicep Curls");
         int exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExercise(exercise, new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS),
-               exerciseExperience);
+        workoutExercise = new WorkoutExerciseSetsAndWeight(exercisesByName.get("Bicep Curls"), exerciseExperience, new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
+        addExerciseToWorkout(workout, workoutExercise);
+
+
+        workoutExercise = new WorkoutExerciseSets(exercisesByName.get("Push-Ups"), exerciseExperience, new ExerciseSets(2, 15));
+        workoutExercise = new WorkoutExerciseSetsAndWeight(exercise, exerciseExperience,new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
         addExerciseToWorkout(workout, workoutExercise);
         exercise = exercisesByName.get("Push-Ups");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExercise(exercise, new ExerciseSets(2, 15), exerciseExperience);
->>>>>>> develop
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience,new ExerciseSets(2, 15));
         addExerciseToWorkout(workout, workoutExercise);
 
         workout = new Workout("Never Skip Leg Day");
         workoutsByName.put(workout.getName(), workout);
-<<<<<<< HEAD
-        workoutExercise = new WorkoutExerciseSets(exercisesByName.get("Squats"),
-        new ExerciseSets(4, 15));
-        addExerciseToWorkout(workout, workoutExercise);
-        workoutExercise = new WorkoutExerciseSets(exercisesByName.get("Lunges"),
-        new ExerciseSets(3, 10));
-=======
+
         exercise = exercisesByName.get("Squats");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExercise(exercise, new ExerciseSets(4, 15), exerciseExperience);
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience,new ExerciseSets(4, 15));
         addExerciseToWorkout(workout, workoutExercise);
         exercise = exercisesByName.get("Lunges");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExercise(exercise, new ExerciseSets(3, 10), exerciseExperience);
->>>>>>> develop
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience,new ExerciseSets(3, 10));
         addExerciseToWorkout(workout, workoutExercise);
 
         workout = new Workout("Marathon Training Starts Here");
         workoutsByName.put(workout.getName(), workout);
-<<<<<<< HEAD
-        workoutExercise = new WorkoutExerciseDistance(exercisesByName.get("Running"),
-        new ExerciseDistance(2.5, DistanceUnit.MILES));
-        addExerciseToWorkout(workout, workoutExercise);
-        workoutExercise = new WorkoutExerciseDuration(exercisesByName.get("Exercise Bike"),
-        new ExerciseDuration(45, TimeUnit.MINUTES));
-=======
+
         exercise = exercisesByName.get("Running");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExercise(exercise, new ExerciseDistance(2.5, DistanceUnit.MILES), exerciseExperience);
+        workoutExercise = new WorkoutExerciseDistance(exercise, exerciseExperience,new ExerciseDistance(2.5, DistanceUnit.MILES));
         addExerciseToWorkout(workout, workoutExercise);
         exercise = exercisesByName.get("Exercise Bike");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExercise(exercise, new ExerciseDuration(45, TimeUnit.MINUTES), exerciseExperience);
->>>>>>> develop
+        workoutExercise = new WorkoutExerciseDuration(exercise, exerciseExperience,new ExerciseDuration(45, TimeUnit.MINUTES));
+
         addExerciseToWorkout(workout, workoutExercise);
 
         workout = new Workout("Work that Core, Get that Score!");
         workoutsByName.put(workout.getName(), workout);
-<<<<<<< HEAD
-        workoutExercise = new WorkoutExerciseSets(exercisesByName.get("Crunches"),
-        new ExerciseSets(2, 25));
-        addExerciseToWorkout(workout, workoutExercise);
-        workoutExercise = new WorkoutExerciseSets(exercisesByName.get("Bicycle Kicks"),
-        new ExerciseSets(2, 15));
-=======
+
         exercise = exercisesByName.get("Crunches");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExercise(exercise, new ExerciseSets(2, 25), exerciseExperience);
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience,new ExerciseSets(2, 25));
         addExerciseToWorkout(workout, workoutExercise);
         exercise = exercisesByName.get("Bicycle Kicks");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExercise(exercise, new ExerciseSets(2, 15), exerciseExperience);
->>>>>>> develop
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience,new ExerciseSets(2, 15));
         addExerciseToWorkout(workout, workoutExercise);
 
         workoutSessionsByDate = new TreeMap<>();
