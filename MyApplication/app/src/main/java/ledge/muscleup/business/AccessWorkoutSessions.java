@@ -160,7 +160,7 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      * @param scheduleWeek the week to change
      */
     @Override
-    public void lastWeek(ScheduleWeek scheduleWeek) {
+    public void setToLastWeek(ScheduleWeek scheduleWeek) {
         LocalDate firstDayOfWeek;
         List<WorkoutSession> weekWorkouts;
 
@@ -175,7 +175,7 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      * @param scheduleWeek the week to change
      */
     @Override
-    public void nextWeek(ScheduleWeek scheduleWeek) {
+    public void setToNextWeek(ScheduleWeek scheduleWeek) {
         LocalDate firstDayOfWeek;
         List<WorkoutSession> weekWorkouts;
 
@@ -183,4 +183,19 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
         weekWorkouts = getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
         scheduleWeek.nextWeek(weekWorkouts);
     }
+
+    /**
+     * Sets the manager to contain the scheduled workouts for the current week
+     * @param scheduleWeek the week to change
+     */
+    @Override
+    public void setToCurrentWeek(ScheduleWeek scheduleWeek) {
+        LocalDate firstDayOfWeek;
+        List<WorkoutSession> weekWorkouts;
+
+        firstDayOfWeek = LocalDate.now().withDayOfWeek(DateTimeConstants.MONDAY);
+        weekWorkouts = getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
+        scheduleWeek.currentWeek(weekWorkouts);
+    }
+
 }
