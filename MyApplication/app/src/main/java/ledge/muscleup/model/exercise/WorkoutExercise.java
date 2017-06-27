@@ -11,6 +11,7 @@ package ledge.muscleup.model.exercise;
 public class WorkoutExercise {
     private Exercise exercise;
     private InterfaceExerciseQuantity recommendedQuantity;
+    private int experienceValue;
 
     /**
      * The constructor for the WorkoutExercise class that creates a new Exercise
@@ -22,13 +23,14 @@ public class WorkoutExercise {
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
     public WorkoutExercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType,
-                           InterfaceExerciseQuantity recommendedQuantity) throws IllegalArgumentException {
+                           InterfaceExerciseQuantity recommendedQuantity, int xpValue) throws IllegalArgumentException {
         if(name == null || intensity == null || exerciseType == null || recommendedQuantity == null) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
         else {
             exercise = new Exercise(name, intensity, exerciseType);
             this.recommendedQuantity = recommendedQuantity;
+            this.experienceValue = xpValue;
         }
     }
 
@@ -40,13 +42,14 @@ public class WorkoutExercise {
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
     public WorkoutExercise(Exercise exercise,
-                           InterfaceExerciseQuantity recommendedQuantity) throws IllegalArgumentException {
+                           InterfaceExerciseQuantity recommendedQuantity, int xpValue) throws IllegalArgumentException {
         if(exercise == null || recommendedQuantity == null) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
         else {
             this.exercise = exercise;
             this.recommendedQuantity = recommendedQuantity;
+            this.experienceValue = xpValue;
         }
     }
 
@@ -102,6 +105,14 @@ public class WorkoutExercise {
         }
 
         return quantityUpdated;
+    }
+
+    /**
+     * Returns the experience value of the WorkoutExercise
+     * @return the experience value of the WorkoutExercise
+     */
+    public int getExperienceValue() {
+        return experienceValue;
     }
 
     /**

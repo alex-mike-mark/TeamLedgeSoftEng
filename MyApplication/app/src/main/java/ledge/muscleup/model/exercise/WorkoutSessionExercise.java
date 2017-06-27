@@ -12,31 +12,6 @@ package ledge.muscleup.model.exercise;
 public class WorkoutSessionExercise {
     private WorkoutExercise exercise;
     private boolean isComplete;
-    private int experienceValue;
-    private final static int xpPerIntensityLevel = 15;
-
-    /**
-     * The constructor for the WorkoutSessionExercise class that creates a new WorkoutExercise
-     *
-     * @param name         the name of the exercise
-     * @param intensity    the intensity of the exercise
-     * @param exerciseType the type of the exercise
-     * @param recommendedQuantity the recommended quantity of exercise for this exercise
-     * @param isComplete whether the exercise has been completed
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    public WorkoutSessionExercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType,
-                                  InterfaceExerciseQuantity recommendedQuantity,
-                                  boolean isComplete) throws IllegalArgumentException {
-        if(name == null || intensity == null || exerciseType == null || recommendedQuantity == null){
-            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        }
-        else {
-            exercise = new WorkoutExercise(name, intensity, exerciseType, recommendedQuantity);
-            this.experienceValue = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-            this.isComplete = isComplete;
-        }
-    }
 
     /**
      * The constructor for the WorkoutSessionExercise class that uses an existing WorkoutExercise
@@ -51,7 +26,6 @@ public class WorkoutSessionExercise {
         }
         else {
             this.exercise = exercise;
-            this.experienceValue = (exercise.getIntensity().ordinal() + 1) * 15;
             this.isComplete = isComplete;
         }
     }
@@ -108,13 +82,6 @@ public class WorkoutSessionExercise {
         isComplete = !isComplete;
     }
 
-    /**
-     * Returns the number of experience completing this exercise is worth
-     * @return the experience value of the exercise
-     */
-    public int getExperienceValue() {
-        return experienceValue;
-    }
 
     /**
      * Compares the current WorkoutSessionExercise to another instance of WorkoutSessionExercise
