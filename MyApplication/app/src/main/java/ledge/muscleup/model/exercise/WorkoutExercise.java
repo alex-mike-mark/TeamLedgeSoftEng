@@ -98,7 +98,6 @@ public class WorkoutExercise {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else if (recommendedQuantity.getClass().isInstance(quantity)) {
             recommendedQuantity = quantity;
-            //TODO - requires database update
             quantityUpdated = true;
         }
 

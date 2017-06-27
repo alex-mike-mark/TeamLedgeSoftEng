@@ -74,6 +74,6 @@ public class ExerciseDuration implements InterfaceExerciseDuration {
      */
     @Override
     public String toString() {
-        return "(" + time + " " + unitOfMeasure.toString() + ")";
+        return time + " " + unitOfMeasure.toString();
     }
 }

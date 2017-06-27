@@ -4,6 +4,7 @@ import org.joda.time.LocalDate;
 import java.util.List;
 
 import ledge.muscleup.application.Services;
+import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 import ledge.muscleup.model.workout.WorkoutSession;
 import ledge.muscleup.persistence.DataAccessStub;
 
@@ -67,5 +68,39 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      */
     public void removeWorkoutSession(WorkoutSession workoutSession) {
         dataAccess.removeWorkoutSession(workoutSession);
+    }
+
+    /**
+     * Sets the scheduled date of a workout
+     *
+     * @param workoutSession the workout to change the date for
+     * @param newDate        the new date of the workout
+     * @throws IllegalArgumentException if passed a {@code null} parameter
+     */
+    public void setDate(WorkoutSession workoutSession, LocalDate newDate) throws IllegalArgumentException {
+        workoutSession.setDate(newDate);
+        dataAccess.updateWorkoutDate(workoutSession, newDate);
+    }
+
+    /**
+     * Toggles the completed state of a workout
+     *
+     * @param workoutSession the workout to change the state of
+     */
+    public void toggleCompleted(WorkoutSession workoutSession) {
+        workoutSession.toggleCompleted();
+        dataAccess.toggleWorkoutComplete(workoutSession);
+    }
+
+    /**
+     * Log an exercise in a workout as complete
+     *
+     * @param workoutSession the workout which contains the exercise
+     * @param exercise       the exercise to complete
+     * @return a boolean representing whether the exercise was marked as completed or not
+     * @throws IllegalArgumentException if passed a {@code null} parameter
+     */
+    public boolean completeExercise(WorkoutSession workoutSession, WorkoutSessionExercise exercise) throws IllegalArgumentException {
+        return workoutSession.completeExercise(exercise) && dataAccess.toggleExerciseComplete(workoutSession, exercise);
     }
 }

@@ -1,5 +1,6 @@
 package ledge.muscleup.presentation;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -40,7 +41,7 @@ import ledge.muscleup.model.workout.WorkoutSession;
  * @version 1.0
  * @since 2017-06-23
  */
-public class WorkoutSessionActivity extends AppCompatActivity {
+public class WorkoutSessionActivity extends Activity {
 
     private WorkoutSession workoutSession;  //the workout session in view
     private CheckboxAdapter adapter;
@@ -53,6 +54,8 @@ public class WorkoutSessionActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final InterfaceAccessWorkoutSessions aws = new AccessWorkoutSessions();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_session_checklist);
 
@@ -77,7 +80,7 @@ public class WorkoutSessionActivity extends AppCompatActivity {
         completeWorkoutButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                workoutSession.toggleCompleted();
+                aws.toggleCompleted(workoutSession);
                 finish();
             }
         });

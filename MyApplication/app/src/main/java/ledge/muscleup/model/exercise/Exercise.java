@@ -94,7 +94,6 @@ public class Exercise {
      */
     public void toggleFavourite() {
         isFavourite = !isFavourite;
-        //TODO - requires database update
     }
 
     /**
