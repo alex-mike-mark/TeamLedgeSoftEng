@@ -8,8 +8,8 @@ import ledge.muscleup.model.exercise.enums.ExerciseType;
  */
 
 public abstract class WorkoutExercise {
-    Exercise exercise;
-    int experienceValue;
+    private Exercise exercise;
+    private int experienceValue;
 
     public WorkoutExercise(Exercise exercise, int xpValue) throws IllegalArgumentException {
         if(exercise==null) {

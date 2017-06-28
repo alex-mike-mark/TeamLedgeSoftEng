@@ -85,6 +85,7 @@ public class DataAccessStub implements InterfaceDataAccess {
 
         workout = new Workout("Welcome to the Gun Show");
         workoutsByName.put(workout.getName(), workout);
+        exercise = exercisesByName.get("Bicep Curls");
         int exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
         workoutExercise = new WorkoutExerciseSetsAndWeight(exercisesByName.get("Bicep Curls"), exerciseExperience, new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
         addExerciseToWorkout(workout, workoutExercise);

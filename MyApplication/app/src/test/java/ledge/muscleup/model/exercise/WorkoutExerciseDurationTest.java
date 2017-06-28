@@ -82,7 +82,7 @@ public class WorkoutExerciseDurationTest extends TestCase {
         assertFalse(workoutExerciseDuration1.equals(workoutExerciseDuration2));
         assertFalse(workoutExerciseDuration2.equals(workoutExerciseDuration1));
 
-        assertTrue(workoutExerciseDuration1.equals(workoutExerciseDuration3));//TODO: Make this not fail.
+        assertTrue(workoutExerciseDuration1.equals(workoutExerciseDuration3));
         assertTrue(workoutExerciseDuration3.equals(workoutExerciseDuration1));
 
         System.out.println("Finished testWorkoutExerciseTest");

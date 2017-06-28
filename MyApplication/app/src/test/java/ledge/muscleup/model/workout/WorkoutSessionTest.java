@@ -114,21 +114,16 @@ public class WorkoutSessionTest extends TestCase {
         assertNotNull(workoutSession3.getExerciseEnumeration());
         assertTrue(workoutSession3.getExerciseEnumeration() instanceof Enumeration);
 
-        /**
-         * This test is weird. We've tested the enumeration stuff so we should use it to test toggling exercises
-         * between complete and not-complete.
-         * Also, with the changes made to the various *Exercise constructors, the building of exercises
-         * in the constructor call is not longer a valid way of doing hings.
         assertTrue(workoutSession1.completeExercise(
-                new WorkoutSessionExercise(new WorkoutExercise("Crunches", ExerciseIntensity.HIGH,
-                        ExerciseType.FULL_BODY, new ExerciseSets(3, 20), xpHighIntensity), false)));
+                new WorkoutSessionExercise(new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.HIGH,
+                        ExerciseType.FULL_BODY), xpHighIntensity, new ExerciseSets(3, 20)), false)));
         assertTrue(workoutSession1.completeExercise(
-                new WorkoutSessionExercise(new WorkoutExercise("Russian Twists", ExerciseIntensity.HIGH,
-                        ExerciseType.FULL_BODY, new ExerciseSets(3, 20), xpHighIntensity), false)));
+                new WorkoutSessionExercise(new WorkoutExerciseSets(new Exercise("Russian Twists", ExerciseIntensity.HIGH,
+                        ExerciseType.FULL_BODY), xpHighIntensity, new ExerciseSets(3, 20)), false)));
         assertTrue(workoutSession1.completeExercise(
-                new WorkoutSessionExercise("Sit-ups", ExerciseIntensity.HIGH,
-                        ExerciseType.FULL_BODY, new ExerciseSets(3, 20), false)));
-         */
+                new WorkoutSessionExercise(new WorkoutExerciseSets(new Exercise("Sit-ups", ExerciseIntensity.HIGH,
+                        ExerciseType.FULL_BODY), xpHighIntensity, new ExerciseSets(3, 20)), false)));
+
 
         assertNotNull(workoutSession1);
 
