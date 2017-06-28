@@ -48,7 +48,7 @@ public class WorkoutExerciseSets extends WorkoutExercise{
     @Override
     public boolean updateQuantity(InterfaceExerciseQuantity quantity) {
         boolean updated = false;
-        if(quantity instanceof InterfaceExerciseSets){
+        if(quantity instanceof InterfaceExerciseSets && !(quantity instanceof InterfaceExerciseSetsAndWeight)){
             recommendedSets = (InterfaceExerciseSets)quantity;
             updated = true;
         }

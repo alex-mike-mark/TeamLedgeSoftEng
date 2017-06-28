@@ -28,7 +28,6 @@ public class WorkoutExerciseDuration extends WorkoutExercise{
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
         else {
-            this.exercise = exercise;
             this.recommendedDuration = recommendedDuration;
         }
     }
@@ -77,6 +76,6 @@ public class WorkoutExerciseDuration extends WorkoutExercise{
      */
     @Override
     public String toString() {
-        return exercise.toString() + "\n  Recommended duration: " + recommendedDuration.toString();
+        return super.toString() + "\n  Recommended duration: " + recommendedDuration.toString();
     }
 }

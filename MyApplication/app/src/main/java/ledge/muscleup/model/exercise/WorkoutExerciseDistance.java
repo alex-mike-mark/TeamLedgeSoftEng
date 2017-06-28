@@ -76,6 +76,6 @@ public class WorkoutExerciseDistance extends WorkoutExercise{
      */
     @Override
     public String toString() {
-        return exercise.toString() + "\n  Recommended distance: " + recommendedDistance.toString();
+        return super.toString() + "\n  Recommended distance: " + recommendedDistance.toString();
     }
 }
