@@ -29,6 +29,15 @@ import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 import ledge.muscleup.model.workout.WorkoutSession;
 
+/**
+ * CompletedWorkoutActivity displays the details of the experience gained from a completed workout,
+ * including a list of exercises completed and their xp values, as well as the total xp gained,
+ * the current level, and the amount of xp needed for the next level
+ *
+ * @author Ryan Koop
+ * @version 1.0
+ * @since 2017-06-27
+ */
 public class CompletedWorkoutActivity extends Activity {
 
     private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
@@ -67,11 +76,23 @@ public class CompletedWorkoutActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(CompletedWorkoutActivity.this, ScheduleActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
     }
 
+    /**
+     * Override the onBackPressed() method to jump to the ScheduleActivity whenever pressed from here
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(CompletedWorkoutActivity.this, ScheduleActivity.class));
+    }
+
+    /**
+     * Gets the completed WorkoutSession to view in this activity and show experience gained from it
+     * @return the completed WorkoutSession to be used in the view
+     */
     private WorkoutSession getWorkoutSessionInView() {
         LocalDate workoutSessionDate;
         Intent intent;
@@ -84,13 +105,17 @@ public class CompletedWorkoutActivity extends Activity {
         return workoutSession;
     }
 
+    /**
+     * A custom extension of the ArrayAdapter class, used for displaying completed exercises in the
+     * workout session, with name and quantity completed, as well as xp gained for completing it
+     */
     private class ListItemAdapter extends ArrayAdapter {
         private List<WorkoutSessionExercise> exerciseList;
         Context context;
 
         /**
-         * A constructor for a CheckboxAdapter, which is a custom ArrayAdapter used for displaying
-         * exercise name and quantity along with a checkbox of whether it's been completed
+         * A constructor for a ListItemAdapter, which is a custom ArrayAdapter used for displaying
+         * exercise name and quantity along with the amount of xp gained from it
          * @param context The activity's context
          * @param resourceId the layout resource used for the adapter
          * @param exerciseList a list of exercises in the workout session
@@ -112,13 +137,13 @@ public class CompletedWorkoutActivity extends Activity {
 
 
         /**
-         * Returns a view containing the workout session exercise name and quantity along with a checkbox
-         * for each exercise in the workout session
+         * Returns a view containing the workout session exercise name and quantity along with the amount
+         * of xp gained from completing it
          * @param index the index of the exercise in the exercise list
          * @param convertView the view used for conversion
          * @param parent the parent ViewGroup
-         * @return a view containing the workout session exercise name and quantity along with a
-         * checkbox for each exercise in the workout session
+         * @return a view containing the workout session exercise name and quantity along with the amount
+         * of xp gained from completing it
          */
         @Override
         public View getView(final int index, View convertView, @NonNull ViewGroup parent) {

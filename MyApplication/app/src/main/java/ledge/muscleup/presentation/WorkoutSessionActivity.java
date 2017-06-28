@@ -91,6 +91,16 @@ public class WorkoutSessionActivity extends Activity {
     }
 
     /**
+     * Overrides the onBackPressed method to jump to the ScheduleActivity whenever back button is pressed here
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(WorkoutSessionActivity.this, ScheduleActivity.class));
+    }
+
+
+    /**
      * Gets a list of all WorkoutSessionExercises in the workout session being viewed
      * @return a list of WorkoutSessionExercises in the current workout session
      */
