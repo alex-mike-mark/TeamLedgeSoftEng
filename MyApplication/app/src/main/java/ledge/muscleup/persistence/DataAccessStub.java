@@ -34,7 +34,8 @@ import ledge.muscleup.model.workout.WorkoutSession;
  * @since 2017-06-04
  */
 
-public class DataAccessStub implements InterfaceDataAccess {
+public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWorkoutDataAccess,
+        InterfaceWorkoutSessionDataAccess{
     private String dbName;
     private String dbType = "stub";
 

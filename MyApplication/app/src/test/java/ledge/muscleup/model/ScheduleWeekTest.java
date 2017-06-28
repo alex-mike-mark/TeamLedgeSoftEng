@@ -11,7 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ledge.muscleup.business.InterfaceAccessExercises;
 import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
+import ledge.muscleup.business.InterfaceAccessWorkouts;
 import ledge.muscleup.model.exercise.WorkoutExerciseDistance;
 import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
 import ledge.muscleup.model.exercise.WorkoutExerciseSets;
@@ -30,6 +32,9 @@ import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
 import ledge.muscleup.persistence.InterfaceDataAccess;
+import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
+import ledge.muscleup.persistence.InterfaceWorkoutDataAccess;
+import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
 
 /**
  * Tests for the ScheduleWeek
@@ -334,7 +339,7 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
  * @since 2017-06-07
  */
 
-class TemplateDataAccessStub implements InterfaceDataAccess {
+class TemplateDataAccessStub implements InterfaceExerciseDataAccess, InterfaceWorkoutDataAccess, InterfaceWorkoutSessionDataAccess {
     private String dbName;
     private String dbType = "testing template";
 
