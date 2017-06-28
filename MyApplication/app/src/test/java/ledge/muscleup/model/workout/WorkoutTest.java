@@ -26,7 +26,7 @@ import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
  * @since 2017-06-07
  */
 public class WorkoutTest extends TestCase {
-    Workout workout1, workout2, workout3;
+    Workout workout1, workout2, workout3, workout4;
     WorkoutExercise[] exerciseList1, exerciseList2;
     Exercise crunches, russianTwists, sitUps;
     final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
@@ -55,6 +55,7 @@ public class WorkoutTest extends TestCase {
                 new WorkoutExerciseSets(sitUps, xpHighIntensity,new ExerciseSets(3, 20))
         };
         workout3 = new Workout("Get Your 6 Pack Abs", true, exerciseList2);
+        workout4 = new Workout("Nothing does in this.");
     }
 
     /**
@@ -118,10 +119,10 @@ public class WorkoutTest extends TestCase {
         WorkoutExerciseSets workoutExerciseDuration4 = new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), xpHighIntensity,new ExerciseSets(3, 10));
         assertTrue(workout2.moveExercise(workoutExerciseDuration4, 2));
 
-        assertEquals(0, workout1.getExperienceValue());
+        assertEquals(45, workout1.getExperienceValue());
         assertEquals(3 * xpHighIntensity, workout2.getExperienceValue());
         assertEquals(3 * xpHighIntensity, workout3.getExperienceValue());
-
+        assertEquals(0, workout4.getExperienceValue());
         /*
         WorkoutExercise workoutExercise4 = new WorkoutExercise("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(3, 10), xpHighIntensity);
         assertTrue(workout2.moveExercise(workoutExercise4, 2));*/

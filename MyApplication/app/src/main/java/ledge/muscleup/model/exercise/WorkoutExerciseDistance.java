@@ -34,7 +34,6 @@ public class WorkoutExerciseDistance extends WorkoutExercise{
 
     /**
      * Returns the recommended distance of exercise for the exercise
-     *
      * @return the recommended distance of exercise
      */
     public InterfaceExerciseQuantity getQuantity() { return recommendedDistance; }

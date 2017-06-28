@@ -7,7 +7,7 @@ package ledge.muscleup.model.exercise;
  * @version 1.0
  * @since 2017-05-29
  */
-public interface InterfaceExerciseQuantity {
+    public interface InterfaceExerciseQuantity {
     /**
      * Compares the current InterfaceExerciseQuantity to another instance of InterfaceExerciseQuantity
      * @param other the instance of InterfaceExerciseQuantity to compare to
