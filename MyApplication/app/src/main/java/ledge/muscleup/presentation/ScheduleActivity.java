@@ -104,6 +104,14 @@ public class ScheduleActivity extends Activity {
         });
     }
 
+    /**
+     * Overrides the onBackPressed method to jump to the MainActivity whenever the back button is pressed here
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(ScheduleActivity.this, MainActivity.class));
+    }
 
     /**
      * Creates listeners for each workout in the schedule

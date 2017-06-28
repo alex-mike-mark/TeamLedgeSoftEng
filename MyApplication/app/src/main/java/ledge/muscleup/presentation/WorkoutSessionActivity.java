@@ -81,10 +81,24 @@ public class WorkoutSessionActivity extends Activity {
             @Override
             public void onClick(View v) {
                 aws.toggleWorkoutCompleted(workoutSession);
-                finish();
+                Intent appInfo = new Intent(WorkoutSessionActivity.this, CompletedWorkoutActivity.class);
+                LocalDate date = workoutSession.getDate();
+                appInfo.putExtra("workoutSessionDate", formatter.print(date));
+                //TODO- Method call to update user's xp with completed workout xp value. User's xp not yet implemented.
+                startActivity(appInfo);
             }
         });
     }
+
+    /**
+     * Overrides the onBackPressed method to jump to the ScheduleActivity whenever back button is pressed here
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(WorkoutSessionActivity.this, ScheduleActivity.class));
+    }
+
 
     /**
      * Gets a list of all WorkoutSessionExercises in the workout session being viewed
