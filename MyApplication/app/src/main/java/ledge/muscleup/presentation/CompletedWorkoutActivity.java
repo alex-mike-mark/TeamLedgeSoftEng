@@ -67,6 +67,7 @@ public class CompletedWorkoutActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(CompletedWorkoutActivity.this, ScheduleActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
