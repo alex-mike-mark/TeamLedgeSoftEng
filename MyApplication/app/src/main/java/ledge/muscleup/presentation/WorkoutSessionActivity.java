@@ -81,7 +81,10 @@ public class WorkoutSessionActivity extends Activity {
             @Override
             public void onClick(View v) {
                 aws.toggleWorkoutCompleted(workoutSession);
-                finish();
+                Intent appInfo = new Intent(WorkoutSessionActivity.this, CompletedWorkoutActivity.class);
+                LocalDate date = workoutSession.getDate();
+                appInfo.putExtra("workoutSessionDate", formatter.print(date));
+                startActivity(appInfo);
             }
         });
     }
