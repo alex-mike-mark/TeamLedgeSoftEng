@@ -239,6 +239,19 @@ public class DataAccess implements InterfaceDataAccess {
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
     @Override
+    public boolean addExerciseToWorkout(Workout workout, WorkoutExercise exercise) {
+        return false;
+    }
+
+    /**
+     * Removes an exercise from a workout in the database
+     *
+     * @param workout  the workout to remove an exercise from
+     * @param exercise the exercise to remove from the list
+     * @return the exercise that was removed, or {@code null} if the exercise couldn't be found
+     * @throws IllegalArgumentException if passed a {@code null} parameter
+     */
+    @Override
     public boolean removeWorkoutExercise(Workout workout, WorkoutExercise exercise) throws IllegalArgumentException {
         return false;
     }
