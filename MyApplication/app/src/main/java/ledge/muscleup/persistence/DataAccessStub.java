@@ -5,6 +5,7 @@ import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -41,6 +42,7 @@ public class DataAccessStub implements InterfaceDataAccess {
     private Map<String, Workout> workoutsByName;
     private Map<String, Exercise> exercisesByName;
     private Map<LocalDate, WorkoutSession> workoutSessionsByDate;
+    private Map<LocalDate, Integer> experienceTotalByDate;
 
     /**
      * Constructor for DataAccessStub
@@ -159,6 +161,12 @@ public class DataAccessStub implements InterfaceDataAccess {
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
+        experienceTotalByDate = new TreeMap<>();
+
+        experienceTotalByDate.put(LocalDate.now().minusWeeks(1), 0);
+        experienceTotalByDate.put(LocalDate.now().minusDays(5), 250);
+        experienceTotalByDate.put(LocalDate.now().minusDays(3), 475);
+        experienceTotalByDate.put(LocalDate.now().minusDays(1), 600);
         System.out.println("Opened " + dbType + " database " + dbName);
     }
 
@@ -455,5 +463,34 @@ public class DataAccessStub implements InterfaceDataAccess {
     public boolean removeWorkoutSession(ScheduleWeek scheduleWeek, int dayOfWeek) throws IllegalArgumentException {
         //TODO implement when implementing SQL database
         return false;
+    }
+
+    public int getExperienceTotalOnDate(LocalDate date) {
+        int total;
+        Iterator<LocalDate> iterator = experienceTotalByDate.keySet().iterator();
+        LocalDate prev = null;
+        while (iterator.hasNext()) {
+            LocalDate curr = iterator.next();
+            if (curr.isEqual(LocalDate.now())) {
+                prev = curr;
+                break;
+            }
+            if (curr.isAfter(date)) {
+                break;
+            }
+            prev = curr;
+        }
+
+        if (prev == null) {
+            total = 0;
+        } else {
+            total = experienceTotalByDate.get(prev);
+        }
+
+        return total;
+    }
+
+    public void addExperienceTotal(LocalDate date, int experienceGained) {
+        experienceTotalByDate.put(date, experienceGained);
     }
 }

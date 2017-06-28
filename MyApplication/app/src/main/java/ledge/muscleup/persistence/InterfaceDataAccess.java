@@ -8,7 +8,8 @@ package ledge.muscleup.persistence;
  * @since 2017-06-04
  */
 public interface InterfaceDataAccess extends InterfaceExerciseDataAccess,
-        InterfaceWorkoutDataAccess, InterfaceWorkoutSessionDataAccess{
+        InterfaceWorkoutDataAccess, InterfaceWorkoutSessionDataAccess,
+        InterfaceExperienceDataAccess{
 
     /**
      * Opens the stub database and populates it with some default values
