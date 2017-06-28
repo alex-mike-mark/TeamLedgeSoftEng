@@ -96,6 +96,10 @@ public class WorkoutSessionExerciseTest extends TestCase {
         assertTrue(workoutSessionExercise1.equals(workoutSessionExercise3));
         assertTrue(workoutSessionExercise3.equals(workoutSessionExercise1));
 
+        assertEquals(xpHighIntensity, workoutSessionExercise1.getExperienceValue());
+        assertEquals(xpMediumIntensity, workoutSessionExercise2.getExperienceValue());
+        assertEquals(xpHighIntensity, workoutSessionExercise3.getExperienceValue());
+
         System.out.println("Finished testWorkoutSessionExerciseTest");
     }
 }

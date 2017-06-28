@@ -61,6 +61,14 @@ public class WorkoutSessionExercise {
     }
 
     /**
+     * Returns the experience value of the exercise
+     * @return the experience value of the exercise
+     */
+    public int getExperienceValue() {
+        return exercise.getExperienceValue();
+    }
+
+    /**
      * Returns the recommended quantity of exercise for the exercise
      *
      * @return the recommended quantity of exercise
