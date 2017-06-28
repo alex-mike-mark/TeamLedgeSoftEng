@@ -5,6 +5,8 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
+import ledge.muscleup.model.exercise.enums.WeightUnit;
+
 /**
  * ExerciseSetsAndWeightTest.java used to test ExerciseSetsAndWeight.java
  *

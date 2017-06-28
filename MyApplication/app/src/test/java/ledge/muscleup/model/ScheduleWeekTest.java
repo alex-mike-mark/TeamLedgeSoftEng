@@ -11,24 +11,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ledge.muscleup.business.InterfaceAccessExercises;
 import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
-import ledge.muscleup.model.exercise.DistanceUnit;
+import ledge.muscleup.business.InterfaceAccessWorkouts;
+import ledge.muscleup.model.exercise.WorkoutExerciseDistance;
+import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
+import ledge.muscleup.model.exercise.WorkoutExerciseSets;
+import ledge.muscleup.model.exercise.WorkoutExerciseSetsAndWeight;
+import ledge.muscleup.model.exercise.enums.*;
 import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.ExerciseDistance;
 import ledge.muscleup.model.exercise.ExerciseDuration;
-import ledge.muscleup.model.exercise.ExerciseIntensity;
 import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
-import ledge.muscleup.model.exercise.ExerciseType;
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
-import ledge.muscleup.model.exercise.TimeUnit;
-import ledge.muscleup.model.exercise.WeightUnit;
+
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
 import ledge.muscleup.persistence.InterfaceDataAccess;
+import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
+import ledge.muscleup.persistence.InterfaceWorkoutDataAccess;
+import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
 
 /**
  * Tests for the ScheduleWeek
@@ -93,7 +99,7 @@ public class ScheduleWeekTest {
         LocalDate currWeekStart = scheduleWeek.getWeekday(DateTimeConstants.MONDAY);
         List<WorkoutSession> workoutList;
 
-        dataAccess.nextWeek(scheduleWeek);
+        dataAccess.setToNextWeek(scheduleWeek);
 
         Assert.assertEquals("Improperly incremented week",
                 scheduleWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart.plusWeeks(1));
@@ -104,7 +110,7 @@ public class ScheduleWeekTest {
                 scheduleWeek.getScheduledWorkout(DateTimeConstants.THURSDAY).getName(),
                 "Marathon Training Starts Here");
 
-        dataAccess.lastWeek(scheduleWeek);
+        dataAccess.setToLastWeek(scheduleWeek);
 
         Assert.assertEquals("Improperly decremented week",
                 scheduleWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart);
@@ -118,7 +124,7 @@ public class ScheduleWeekTest {
                 scheduleWeek.getScheduledWorkout(DateTimeConstants.SATURDAY).getName(),
                 "Work that Core, Get that Score!");
 
-        dataAccess.lastWeek(scheduleWeek);
+        dataAccess.setToLastWeek(scheduleWeek);
 
         Assert.assertEquals("Improperly decremented week",
                 scheduleWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart.minusWeeks(1));
@@ -127,7 +133,7 @@ public class ScheduleWeekTest {
         Assert.assertEquals("Returned unexpected workout",
                 scheduleWeek.getScheduledWorkout(DateTimeConstants.SUNDAY), null);
 
-        dataAccess.nextWeek(scheduleWeek);
+        dataAccess.setToNextWeek(scheduleWeek);
 
         Assert.assertEquals("Improperly incremented week",
                 scheduleWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart);
@@ -308,7 +314,7 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      * @param scheduleWeek the week to change
      */
     @Override
-    public void lastWeek(ScheduleWeek scheduleWeek) {
+    public void setToLastWeek(ScheduleWeek scheduleWeek) {
         //TODO remove after refactoring persistence layer or implement and test
     }
 
@@ -318,7 +324,17 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      * @param scheduleWeek the week to change
      */
     @Override
-    public void nextWeek(ScheduleWeek scheduleWeek) {
+    public void setToNextWeek(ScheduleWeek scheduleWeek) {
+        //TODO remove after refactoring persistence layer or implement and test
+    }
+
+    /**
+     * Sets the manager to contain the scheduled workouts for the current week
+     *
+     * @param scheduleWeek the week to change
+     */
+    @Override
+    public void setToCurrentWeek(ScheduleWeek scheduleWeek) {
         //TODO remove after refactoring persistence layer or implement and test
     }
 
@@ -345,7 +361,7 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
  * @since 2017-06-07
  */
 
-class TemplateDataAccessStub implements InterfaceDataAccess {
+class TemplateDataAccessStub implements InterfaceExerciseDataAccess, InterfaceWorkoutDataAccess, InterfaceWorkoutSessionDataAccess {
     private String dbName;
     private String dbType = "testing template";
 
@@ -392,42 +408,50 @@ class TemplateDataAccessStub implements InterfaceDataAccess {
         exercisesByName.put(exercise.getName(), exercise);
 
         workoutsByName = new HashMap<>();
+        final int xpPerIntensityLevel = 15;
 
         workout = new Workout("Welcome to the Gun Show");
         workoutsByName.put(workout.getName(), workout);
-
-        workoutExercise = new WorkoutExercise(exercisesByName.get("Bicep Curls"),
-                new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
+        exercise = exercisesByName.get("Bicep Curls");
+        int exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
+        workoutExercise = new WorkoutExerciseSetsAndWeight(exercise, exerciseExperience, new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
         addExerciseToWorkout(workout, workoutExercise);
-        workoutExercise = new WorkoutExercise(exercisesByName.get("Push-Ups"),
-                new ExerciseSets(2, 15));
+        exercise = exercisesByName.get("Push-Ups");
+        exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience, new ExerciseSets(2, 15));
         addExerciseToWorkout(workout, workoutExercise);
 
         workout = new Workout("Never Skip Leg Day");
         workoutsByName.put(workout.getName(), workout);
-        workoutExercise = new WorkoutExercise(exercisesByName.get("Squats"),
-                new ExerciseSets(4, 15));
+        exercise = exercisesByName.get("Squats");
+        exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience, new ExerciseSets(4, 15));
         addExerciseToWorkout(workout, workoutExercise);
-        workoutExercise = new WorkoutExercise(exercisesByName.get("Lunges"),
-                new ExerciseSets(3, 10));
+        exercise = exercisesByName.get("Lunges");
+        exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience, new ExerciseSets(3, 10));
         addExerciseToWorkout(workout, workoutExercise);
 
         workout = new Workout("Marathon Training Starts Here");
         workoutsByName.put(workout.getName(), workout);
-        workoutExercise = new WorkoutExercise(exercisesByName.get("Running"),
-                new ExerciseDistance(2.5, DistanceUnit.MILES));
+        exercise = exercisesByName.get("Running");
+        exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
+        workoutExercise = new WorkoutExerciseDistance(exercise, exerciseExperience, new ExerciseDistance(2.5, DistanceUnit.MILES));
         addExerciseToWorkout(workout, workoutExercise);
-        workoutExercise = new WorkoutExercise(exercisesByName.get("Exercise Bike"),
-                new ExerciseDuration(45, TimeUnit.MINUTES));
+        exercise = exercisesByName.get("Exercise Bike");
+        exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
+        workoutExercise = new WorkoutExerciseDuration(exercise, exerciseExperience, new ExerciseDuration(45, TimeUnit.MINUTES));
         addExerciseToWorkout(workout, workoutExercise);
 
         workout = new Workout("Work that Core, Get that Score!");
         workoutsByName.put(workout.getName(), workout);
-        workoutExercise = new WorkoutExercise(exercisesByName.get("Crunches"),
-                new ExerciseSets(2, 25));
+        exercise = exercisesByName.get("Crunches");
+        exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience, new ExerciseSets(2, 25));
         addExerciseToWorkout(workout, workoutExercise);
-        workoutExercise = new WorkoutExercise(exercisesByName.get("Bicycle Kicks"),
-                new ExerciseSets(2, 15));
+        exercise = exercisesByName.get("Bicycle Kicks");
+        exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience, new ExerciseSets(2, 15));
         addExerciseToWorkout(workout, workoutExercise);
 
         workoutSessionsByDate = new HashMap<>();

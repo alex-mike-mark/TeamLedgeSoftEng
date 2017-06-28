@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?android:attr/colorPrimaryDark"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ledge.muscleup.presentation.CompletedWorkoutActivity">
+
+
+        <TextView
+            android:id="@+id/workoutCompleted"
+            android:text="@string/text_workoutCompleted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_dark"
+            android:fontFamily="serif"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/completedSessionName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_dark"
+            android:fontFamily="serif"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:fontFamily="serif"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:text="@string/text_exercisesCompleted"
+            android:paddingBottom="20sp"
+            android:paddingTop="20sp"/>
+        <ListView
+            android:id="@+id/completedExerciseList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/colorPrimaryDark"
+            android:divider="@color/colorAccent"
+            android:dividerHeight="1dp" />
+
+        <TextView
+            android:id="@+id/completedWorkoutTotalXP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:fontFamily="serif"
+            android:textColor="@color/colorAccent"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:paddingBottom="20sp"
+            android:paddingTop="20sp" />
+
+        <TextView
+            android:id="@+id/levelUpText"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:fontFamily="serif"
+            android:textColor="@color/colorAccent"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:paddingBottom="20sp"
+            android:paddingTop="20sp"
+            android:text="@string/text_levelUp"/>
+
+        <TextView
+            android:id="@+id/completedWorkoutCurrentLevel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:fontFamily="serif"
+            android:textColor="@color/colorAccent"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:paddingBottom="20sp"
+            android:paddingTop="20sp" />
+
+
+        <TextView
+            android:id="@+id/completedWorkoutXPNeeded"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:fontFamily="serif"
+            android:textColor="@color/colorAccent"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:paddingBottom="20sp"
+            android:paddingTop="20sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20sp">
+
+            <Button
+                android:id="@+id/backToScheduleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="@string/btn_backToSchedule"/>
+        </RelativeLayout>
+
+    </LinearLayout>

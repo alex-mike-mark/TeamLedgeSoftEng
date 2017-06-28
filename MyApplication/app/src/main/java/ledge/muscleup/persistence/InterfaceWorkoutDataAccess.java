@@ -2,8 +2,11 @@ package ledge.muscleup.persistence;
 
 import java.util.List;
 
+
+import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.WorkoutExercise;
+
 import ledge.muscleup.model.workout.Workout;
 
 /**
@@ -14,7 +17,7 @@ import ledge.muscleup.model.workout.Workout;
  * @version 1.0
  * @since 2017-06-07
  */
-public interface InterfaceWorkoutDataAccess {
+public interface InterfaceWorkoutDataAccess extends InterfaceDataAccess{
 
     /**
      * Gets a list of all workouts in the database
@@ -96,5 +99,7 @@ public interface InterfaceWorkoutDataAccess {
      * @return the exercise that was removed, or {@code null} if the exercise couldn't be found
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
+    boolean addExerciseToWorkout (Workout workout, WorkoutExercise exercise);
+
     boolean removeWorkoutExercise(Workout workout, WorkoutExercise exercise) throws IllegalArgumentException;
 }

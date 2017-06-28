@@ -25,7 +25,7 @@ import ledge.muscleup.model.exercise.*;
         ExerciseSetsAndWeightTest.class,
         ExerciseSetsTest.class,
         ExerciseTest.class,
-        WorkoutExerciseTest.class,
+        WorkoutExerciseDurationTest.class,
         WorkoutSessionExerciseTest.class,
         // model/workout
         WorkoutSessionTest.class,
@@ -33,8 +33,9 @@ import ledge.muscleup.model.exercise.*;
         // business
         AccessExercisesTest.class,
         AccessWorkoutsTest.class,
-        AccessWorkoutSessionsTest.class,
-        ScheduleWeekTest.class
+       // AccessWorkoutSessionsTest.class,
+        ScheduleWeekTest.class,
+        WorkoutExerciseSubsTest.class
 })
 
 public class AllTests {

@@ -1,4 +1,4 @@
-package ledge.muscleup.model.exercise;
+package ledge.muscleup.model.exercise.enums;
 
 /**
  * The type of an exercise. Ex. Bicep Curls is of type ARM, while Running would be of type CARDIO

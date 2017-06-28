@@ -1,5 +1,7 @@
 package ledge.muscleup.model.exercise;
 
+import ledge.muscleup.model.exercise.enums.DistanceUnit;
+
 /**
  * The interface for tracking distance metrics for exercises such as running
  *

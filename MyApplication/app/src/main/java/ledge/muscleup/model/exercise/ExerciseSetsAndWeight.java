@@ -1,5 +1,7 @@
 package ledge.muscleup.model.exercise;
 
+import ledge.muscleup.model.exercise.enums.WeightUnit;
+
 /**
  * Used to track the number of sets, the number of reps in each set and the weight used for
  * strength-building exercises
@@ -66,7 +68,7 @@ public class ExerciseSetsAndWeight extends ExerciseSets implements InterfaceExer
         if (other instanceof ExerciseSetsAndWeight) {
             weight = (ExerciseSetsAndWeight) other;
             if (this.getSets() == weight.getSets() && this.getReps() == weight.getReps() &&
-                    this.weight == weight.getWeight()) {
+                    this.weight == weight.getWeight() && this.getUnitOfMeasure() == weight.getUnitOfMeasure()) {
                 isEqual = true;
             }
         }

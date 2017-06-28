@@ -1,15 +1,14 @@
-package ledge.muscleup.persistence;
+package ledge.muscleup.model.business;
 
-import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import ledge.muscleup.model.exercise.WorkoutExerciseDistance;
+import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
 import ledge.muscleup.model.exercise.WorkoutExerciseSets;
 import ledge.muscleup.model.exercise.WorkoutExerciseSetsAndWeight;
 import ledge.muscleup.model.exercise.enums.*;
@@ -18,26 +17,27 @@ import ledge.muscleup.model.exercise.ExerciseDistance;
 import ledge.muscleup.model.exercise.ExerciseDuration;
 import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
-import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
+import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
- * A stub implementation of the database for Iteration 1
+ * A template database stub for use in testing the ScheduleManager that needs an accessor, which in
+ * turn needs a database stub
+ * constructor parameter
  *
- * @author Ryan Koop
+ * @author Matthew Smidt
  * @version 1.0
- * @since 2017-06-04
+ * @since 2017-06-25
  */
 
-public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWorkoutDataAccess,
-        InterfaceWorkoutSessionDataAccess{
+class TemplateDataAccessStub implements InterfaceDataAccess {
     private String dbName;
-    private String dbType = "stub";
+    private String dbType = "testing template";
 
     private Map<String, Workout> workoutsByName;
     private Map<String, Exercise> exercisesByName;
@@ -47,7 +47,7 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
      * Constructor for DataAccessStub
      * @param dbName the name of the database
      */
-    public DataAccessStub (String dbName) {
+    public TemplateDataAccessStub (String dbName) {
         this.dbName = dbName;
     }
 
@@ -88,46 +88,37 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
         workoutsByName.put(workout.getName(), workout);
         exercise = exercisesByName.get("Bicep Curls");
         int exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExerciseSetsAndWeight(exercisesByName.get("Bicep Curls"), exerciseExperience, new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
-        addExerciseToWorkout(workout, workoutExercise);
-
-
-        workoutExercise = new WorkoutExerciseSets(exercisesByName.get("Push-Ups"), exerciseExperience, new ExerciseSets(2, 15));
         workoutExercise = new WorkoutExerciseSetsAndWeight(exercise, exerciseExperience,new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
         addExerciseToWorkout(workout, workoutExercise);
         exercise = exercisesByName.get("Push-Ups");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience,new ExerciseSets(2, 15));
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience, new ExerciseSets(2, 15));
         addExerciseToWorkout(workout, workoutExercise);
 
         workout = new Workout("Never Skip Leg Day");
         workoutsByName.put(workout.getName(), workout);
-
         exercise = exercisesByName.get("Squats");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience,new ExerciseSets(4, 15));
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience, new ExerciseSets(4, 15));
         addExerciseToWorkout(workout, workoutExercise);
         exercise = exercisesByName.get("Lunges");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience,new ExerciseSets(3, 10));
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience, new ExerciseSets(3, 10));
         addExerciseToWorkout(workout, workoutExercise);
 
         workout = new Workout("Marathon Training Starts Here");
         workoutsByName.put(workout.getName(), workout);
-
         exercise = exercisesByName.get("Running");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
         workoutExercise = new WorkoutExerciseDistance(exercise, exerciseExperience,new ExerciseDistance(2.5, DistanceUnit.MILES));
         addExerciseToWorkout(workout, workoutExercise);
         exercise = exercisesByName.get("Exercise Bike");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExerciseDuration(exercise, exerciseExperience,new ExerciseDuration(45, TimeUnit.MINUTES));
-
+        workoutExercise = new WorkoutExerciseDuration(exercise, exerciseExperience, new ExerciseDuration(45, TimeUnit.MINUTES));
         addExerciseToWorkout(workout, workoutExercise);
 
         workout = new Workout("Work that Core, Get that Score!");
         workoutsByName.put(workout.getName(), workout);
-
         exercise = exercisesByName.get("Crunches");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
         workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience,new ExerciseSets(2, 25));
@@ -137,34 +128,34 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
         workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience,new ExerciseSets(2, 15));
         addExerciseToWorkout(workout, workoutExercise);
 
-        workoutSessionsByDate = new TreeMap<>();
+        workoutSessionsByDate = new HashMap<>();
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Welcome to the Gun Show")),
-                new LocalDate().minusWeeks(1).withDayOfWeek(DateTimeConstants.THURSDAY),
+                new LocalDate(2017, 06, 8),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Never Skip Leg Day")),
-                new LocalDate().withDayOfWeek(DateTimeConstants.TUESDAY),
+                new LocalDate(2017, 06, 9),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Work that Core, Get that Score!")),
-                new LocalDate().withDayOfWeek(DateTimeConstants.WEDNESDAY),
+                new LocalDate(2017, 06, 10),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Never Skip Leg Day")),
-                new LocalDate().withDayOfWeek(DateTimeConstants.FRIDAY),
+                new LocalDate(2017, 06, 13),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Marathon Training Starts Here")),
-                new LocalDate().plusWeeks(1).withDayOfWeek(DateTimeConstants.TUESDAY),
+                new LocalDate(2017, 06, 15),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
@@ -261,10 +252,10 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
 
         if (workoutsByName.containsKey(workout.getName())) {
             dbWorkout = workoutsByName.get(workout.getName());
-                if (exercisesByName.containsKey(exercise.getName())) {
-                    dbWorkout.addExercise(exercise);
-                    added = true;
-                }
+            if (exercisesByName.containsKey(exercise.getName())) {
+                dbWorkout.addExercise(exercise);
+                added = true;
+            }
         }
         return added;
     }
@@ -286,7 +277,6 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
     public void removeWorkout(Workout workout) {
         workoutsByName.remove(workout.getName());
     }
-
     /**
      * Updates the recommended quantity of exercise for a given exercise in a given workout in the database
      *
@@ -297,7 +287,7 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
     public boolean updateExerciseQuantity(Workout workout, WorkoutExercise exercise, InterfaceExerciseQuantity quantity) throws IllegalArgumentException {
-        //TODO implement when implementing SQL database
+        //TODO remove after refactoring persistence layer or implement and test
         return false;
     }
 
@@ -307,7 +297,7 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
      * @param workout the workout to update the status of
      */
     public void toggleExerciseFavourite(Workout workout) {
-        //TODO implement when implementing SQL database
+        //TODO remove after refactoring persistence layer or implement and test
     }
 
     /**
@@ -319,7 +309,7 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
      * @return true if exercise was added successfully, false otherwise
      */
     public boolean addWorkoutExercise(Workout workout, WorkoutExercise exercise) {
-        //TODO implement when implementing SQL database
+        //TODO remove after refactoring persistence layer or implement and test
         return false;
     }
 
@@ -334,7 +324,7 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
      *                                  outside the bounds of the list of exercises
      */
     public boolean moveWorkoutExercise(Workout workout, WorkoutExercise exercise, int index) throws IllegalArgumentException {
-        //TODO implement when implementing SQL database
+        //TODO remove after refactoring persistence layer or implement and test
         return false;
     }
 
@@ -347,7 +337,7 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
     public boolean removeWorkoutExercise(Workout workout, WorkoutExercise exercise) throws IllegalArgumentException {
-        //TODO implement when implementing SQL database
+        //TODO remove after refactoring persistence layer or implement and test
         return false;
     }
 
@@ -366,7 +356,7 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
      * @return a list of all workout sessions scheduled between startDate and endDate, inclusive
      */
     public List<WorkoutSession> getSessionsInDateRange(LocalDate startDate,
-                                                                LocalDate endDate) {
+                                                       LocalDate endDate) {
         List<WorkoutSession> sessionsInDateRange = new ArrayList<>();
 
         LocalDate currDate = startDate;
@@ -414,7 +404,7 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
     public void updateWorkoutDate(WorkoutSession workoutSession, LocalDate newDate) throws IllegalArgumentException {
-        //TODO implement when implementing SQL database
+        //TODO remove after refactoring persistence layer or implement and test
     }
 
     /**
@@ -423,7 +413,7 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
      * @param workoutSession the workout to change the state of
      */
     public void toggleWorkoutComplete(WorkoutSession workoutSession) {
-        //TODO implement when implementing SQL database
+        //TODO remove after refactoring persistence layer or implement and test
     }
 
     /**
@@ -435,7 +425,7 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
     public boolean toggleExerciseComplete(WorkoutSession workoutSession, WorkoutSessionExercise exercise) throws IllegalArgumentException {
-        //TODO implement when implementing SQL database
+        //TODO remove after refactoring persistence layer or implement and test
         return false;
     }
 
