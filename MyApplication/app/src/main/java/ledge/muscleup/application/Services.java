@@ -23,7 +23,7 @@ public class Services {
      */
     public static InterfaceDataAccess createDataAccess(String dbName) {
         if (dataAccessService == null) {
-            dataAccessService = new DataAccess(dbName);
+            dataAccessService = new DataAccessStub(dbName);
             dataAccessService.open(Main.getDBPathName());
         }
         return dataAccessService;
