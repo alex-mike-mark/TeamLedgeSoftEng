@@ -32,8 +32,9 @@ public class DataAccess implements InterfaceDataAccess {
     private String dbPath = "jdbc:hsqldb:hsql:database/DB";
 
     private Connection connection;
+    private String command;
     private Statement statement;
-    private ResultSet result;
+    private ResultSet resultSet;
 
     /**
      * Constructor for DataAccess
@@ -45,35 +46,31 @@ public class DataAccess implements InterfaceDataAccess {
     }
 
     /**
-     * Opens the stub database and populates it with some default values
+     * Opens the database
      */
     @Override
     public void open() {
-        try
-        {
+        try {
             Class.forName("org.hsqldb.jdbc.JDBCDriver").newInstance();
             connection = DriverManager.getConnection(dbPath, "SA", "");
             statement = connection.createStatement();
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             sqlError(e);
         }
         System.out.println("Opened " + dbType + " database " + dbName);
     }
 
     /**
-     * Close the stub database
+     * Close the database
      */
     @Override
     public void close() {
-        try
-        {
-            result = statement.executeQuery(SHUTDOWN_CMD);
+        try {
+            resultSet = statement.executeQuery(SHUTDOWN_CMD);
             connection.close();
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             sqlError(e);
         }
         System.out.println("Closed " + dbType + " database " + dbName);
