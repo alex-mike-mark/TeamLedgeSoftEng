@@ -29,7 +29,7 @@ public class DataAccess implements InterfaceDataAccess {
 
     private String dbName;
     private String dbType = "HSQLDB";
-    private String dbPath = "jdbc:hsqldb:file:DB";
+    private String dbPath = "jdbc:hsqldb:hsql:database/DB";
 
     private Connection connection;
     private Statement statement;
@@ -51,8 +51,8 @@ public class DataAccess implements InterfaceDataAccess {
     public void open() {
         try
         {
-            Class.forName("org.hsqldb.jdbcDriver").newInstance();
-            connection = DriverManager.getConnection(dbPath, "admin", "");
+            Class.forName("org.hsqldb.jdbc.JDBCDriver").newInstance();
+            connection = DriverManager.getConnection(dbPath, "SA", "");
             statement = connection.createStatement();
         }
         catch (Exception e)
