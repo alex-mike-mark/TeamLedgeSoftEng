@@ -29,7 +29,7 @@ public class DataAccess implements InterfaceDataAccess {
 
     private String dbName;
     private String dbType = "HSQLDB";
-    private String dbPath = "jdbc:hsqldb:hsql:database/DB";
+    private String dbPathPrefix = "jdbc:hsqldb:file:";
 
     private Connection connection;
     private String command;
@@ -49,10 +49,10 @@ public class DataAccess implements InterfaceDataAccess {
      * Opens the database
      */
     @Override
-    public void open() {
+    public void open(String dbPath) {
         try {
-            Class.forName("org.hsqldb.jdbc.JDBCDriver").newInstance();
-            connection = DriverManager.getConnection(dbPath, "SA", "");
+            Class.forName("org.hsqldb.jdbcDriver").newInstance();
+            connection = DriverManager.getConnection(dbPathPrefix + dbPath, "SA", "");
             statement = connection.createStatement();
         }
         catch (Exception e) {

@@ -53,7 +53,7 @@ public class DataAccessStub implements InterfaceDataAccess {
     /**
      * Opens the stub database and populates it with some default values
      */
-    public void open() {
+    public void open(String dbPath) {
 
         Exercise exercise;
         WorkoutExercise workoutExercise;

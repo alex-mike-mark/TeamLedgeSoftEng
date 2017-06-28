@@ -13,7 +13,7 @@ public interface InterfaceDataAccess extends InterfaceExerciseDataAccess,
     /**
      * Opens the stub database and populates it with some default values
      */
-    void open();
+    void open(String dbPath);
 
     /**
      * Close the stub database

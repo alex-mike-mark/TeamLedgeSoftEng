@@ -170,7 +170,7 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      */
     TemplateAccessWorkoutSessions() {
         dataAccess = new TemplateDataAccessStub("testDB");
-        dataAccess.open();
+        dataAccess.open("testDB");
     }
 
     /**
@@ -364,7 +364,7 @@ class TemplateDataAccessStub implements InterfaceDataAccess {
     /**
      * Opens the stub database and populates it with some default values
      */
-    public void open() {
+    public void open(String dbPath) {
 
         Exercise exercise;
         WorkoutExercise workoutExercise;
