@@ -159,6 +159,12 @@ class TemplateDataAccessStub implements InterfaceDataAccess {
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
+        workoutSession = new WorkoutSession(
+                (workoutsByName.get("Welcome to the Gun Show")),
+                LocalDate.now(),
+                false);
+        workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
+
         System.out.println("Opened " + dbType + " database " + dbName);
     }
 
