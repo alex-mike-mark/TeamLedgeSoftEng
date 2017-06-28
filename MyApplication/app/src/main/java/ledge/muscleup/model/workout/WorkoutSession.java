@@ -124,6 +124,17 @@ public class WorkoutSession {
     }
 
     /**
+     * Returns the experience value of the workout session, which is a sum of the values of its exercises
+     * @return the experience value of the workout session
+     */
+    public int getExperienceValue() {
+        int total = 0;
+        for (WorkoutSessionExercise exercise: exerciseList) {
+            total+= exercise.getExperienceValue();
+        }
+        return total;
+    }
+    /**
      * Log an exercise as complete
      * @param exercise the exercise to complete
      * @throws IllegalArgumentException if passed a {@code null} parameter
