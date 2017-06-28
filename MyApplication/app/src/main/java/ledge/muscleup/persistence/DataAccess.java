@@ -31,7 +31,7 @@ public class DataAccess implements InterfaceDataAccess {
 
     private String dbName;
     private String dbType = "HSQLDB";
-    private String dbPath = "jdbc:hsqldb:hsql:database/DB";
+    private String dbPathPrefix = "jdbc:hsqldb:file:";
 
     private Connection connection;
     private String command;
@@ -55,10 +55,10 @@ public class DataAccess implements InterfaceDataAccess {
      * Opens the database
      */
     @Override
-    public void open() {
+    public void open(String dbPath) {
         try {
-            Class.forName("org.hsqldb.jdbc.JDBCDriver").newInstance();
-            connection = DriverManager.getConnection(dbPath, "SA", "");
+            Class.forName("org.hsqldb.jdbcDriver").newInstance();
+            connection = DriverManager.getConnection(dbPathPrefix + dbPath, "SA", "");
             statement = connection.createStatement();
         }
         catch (Exception e) {
@@ -253,6 +253,19 @@ public class DataAccess implements InterfaceDataAccess {
      */
     @Override
     public boolean moveWorkoutExercise(Workout workout, WorkoutExercise exercise, int index) throws IllegalArgumentException {
+        return false;
+    }
+
+    /**
+     * Removes an exercise from a workout in the database
+     *
+     * @param workout  the workout to remove an exercise from
+     * @param exercise the exercise to remove from the list
+     * @return the exercise that was removed, or {@code null} if the exercise couldn't be found
+     * @throws IllegalArgumentException if passed a {@code null} parameter
+     */
+    @Override
+    public boolean addExerciseToWorkout(Workout workout, WorkoutExercise exercise) {
         return false;
     }
 

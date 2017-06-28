@@ -4,8 +4,7 @@ import java.util.List;
 
 import ledge.muscleup.application.Services;
 import ledge.muscleup.model.exercise.Exercise;
-import ledge.muscleup.persistence.DataAccessStub;
-import ledge.muscleup.persistence.InterfaceDataAccess;
+import ledge.muscleup.persistence.DataAccess;
 
 /**
  * This class contains methods for retrieving, adding, and removing exercises from the database,
@@ -16,13 +15,13 @@ import ledge.muscleup.persistence.InterfaceDataAccess;
  * @since 2017-06-05
  */
 public class AccessExercises implements InterfaceAccessExercises {
-    private InterfaceDataAccess dataAccess;
+    private DataAccess dataAccess;
 
     /**
      * Constructor for AccessExercises, which initializes the dataAccess variable to the stub database
      */
     public AccessExercises() {
-        dataAccess = (DataAccessStub) Services.getDataAccess();
+        dataAccess = (DataAccess) Services.getDataAccess();
     }
 
     /**

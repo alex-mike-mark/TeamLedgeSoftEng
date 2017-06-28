@@ -3,6 +3,7 @@ package ledge.muscleup.model.business;
 import junit.framework.TestCase;
 
 import org.joda.time.LocalDate;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -249,7 +250,7 @@ class TemplateAccessExercises implements InterfaceAccessExercises {
      */
     TemplateAccessExercises() {
         dataAccess = new TemplateDataAccessStub("testDB");
-        dataAccess.open();
+        dataAccess.open("testDB");
     }
 
     /**

@@ -8,8 +8,7 @@ import ledge.muscleup.application.Services;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.WorkoutSession;
-import ledge.muscleup.persistence.DataAccessStub;
-import ledge.muscleup.persistence.InterfaceDataAccess;
+import ledge.muscleup.persistence.DataAccess;
 
 /**
  * This class contains methods for retrieving, adding, and removing workout sessions from the
@@ -20,13 +19,13 @@ import ledge.muscleup.persistence.InterfaceDataAccess;
  * @since 2017-06-07
  */
 public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
-    private InterfaceDataAccess dataAccess;
+    private DataAccess dataAccess;
 
     /**
      * Constructor for AccessWorkoutSessions, which initializes the dataAccess variable to the stub database
      */
     public AccessWorkoutSessions() {
-        dataAccess = (DataAccessStub) Services.getDataAccess();
+        dataAccess = (DataAccess) Services.getDataAccess();
     }
 
     /**

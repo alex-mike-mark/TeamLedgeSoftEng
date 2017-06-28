@@ -6,8 +6,7 @@ import ledge.muscleup.application.Services;
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.workout.Workout;
-import ledge.muscleup.persistence.DataAccessStub;
-import ledge.muscleup.persistence.InterfaceDataAccess;
+import ledge.muscleup.persistence.DataAccess;
 
 /**
  * This class contains methods for retrieving, adding, and removing workouts from the database, and
@@ -18,13 +17,13 @@ import ledge.muscleup.persistence.InterfaceDataAccess;
  * @since 2017-06-05
  */
 public class AccessWorkouts implements InterfaceAccessWorkouts {
-    private InterfaceDataAccess dataAccess;
+    private DataAccess dataAccess;
 
     /**
      * Constructor for AccessWorkouts, which initializes the dataAccess variable to the stub database
      */
     public AccessWorkouts() {
-        dataAccess = (DataAccessStub) Services.getDataAccess();
+        dataAccess = (DataAccess) Services.getDataAccess();
     }
 
     /**
