@@ -69,4 +69,5 @@ public class ExerciseQuantityTest  extends TestCase {
 
         System.out.println("Finished testExerciseQuantity");
     }
+
 }

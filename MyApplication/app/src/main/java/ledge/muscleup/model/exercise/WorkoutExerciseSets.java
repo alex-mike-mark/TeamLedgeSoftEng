@@ -30,14 +30,20 @@ public class WorkoutExerciseSets extends WorkoutExercise{
             this.recommendedSets = recommendedSets;
         }
     }
-
+    /**
+     * Returns the recommended sets for the exercise. It returns an interface, so if there is
+     * specific functionality required by a certain implementation, you need to find another way.
+     * @return the recommended sets and weight of exercise
+     */
     public InterfaceExerciseQuantity getQuantity() { return recommendedSets; }
 
     /**
-     * Updates the exercise with the new recommended sets
-     *
-     * @param quantity the recommended quantity to update the exercise to
-     * @return a boolean representing if the suggested quantity could be updated
+     * Updates the recommendedSets.
+     * Note, this method takes in a generic InterfaceExerciseQuantity where specific subclasses require
+     * specific implementations of that interface. Type checking MUST happen in the implementation.
+     * I am quite aware this isn't great but whatever.
+     * @param quantity
+     * @return
      */
     @Override
     public boolean updateQuantity(InterfaceExerciseQuantity quantity) {

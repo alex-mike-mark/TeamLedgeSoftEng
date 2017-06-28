@@ -33,11 +33,20 @@ public class WorkoutExerciseDistance extends WorkoutExercise{
     }
 
     /**
-     * Returns the recommended distance of exercise for the exercise
+     * Returns the recommended distance for the exercise. It returns an interface, so if there is
+     * specific functionality required by a certain implementation, you need to find another way.
      * @return the recommended distance of exercise
      */
     public InterfaceExerciseQuantity getQuantity() { return recommendedDistance; }
 
+    /**
+     * Updates the quantity for a given WorkoutExercise.
+     * Note, this method takes in a generic InterfaceExerciseQuantity where specific subclasses require
+     * specific implementations of that interface. Type checking MUST happen in the implementation.
+     * I am quite aware this isn't great but whatever.
+     * @param quantity
+     * @return
+     */
     @Override
     public boolean updateQuantity(InterfaceExerciseQuantity quantity) {
         boolean updated = false;
