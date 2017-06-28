@@ -20,15 +20,19 @@ public class WorkoutExerciseDurationTest extends TestCase {
     WorkoutExerciseDuration workoutExerciseDuration1, workoutExerciseDuration2, workoutExerciseDuration3;
     Exercise exercise1;
 
+    final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
+    final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
+    final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
+
     /**
      * Initializes several instances of WorkoutExerciseDuration to set up testing
      */
     @Before
     public void setUp(){
-        workoutExerciseDuration1 = new WorkoutExerciseDuration(new Exercise("Run From Your Past", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), new ExerciseDuration(692040, TimeUnit.HOURS));
-        workoutExerciseDuration2 = new WorkoutExerciseDuration(new Exercise("Swim With The Fishes", ExerciseIntensity.MEDIUM, ExerciseType.LEG), new ExerciseDuration(5, TimeUnit.HOURS));
+        workoutExerciseDuration1 = new WorkoutExerciseDuration(new Exercise("Run From Your Past", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), xpHighIntensity,new ExerciseDuration(692040, TimeUnit.HOURS));
+        workoutExerciseDuration2 = new WorkoutExerciseDuration(new Exercise("Swim With The Fishes", ExerciseIntensity.MEDIUM, ExerciseType.LEG), xpMediumIntensity,new ExerciseDuration(5, TimeUnit.HOURS));
         exercise1 = new Exercise("Run From Your Past", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, true);
-        workoutExerciseDuration3 = new WorkoutExerciseDuration(exercise1, new ExerciseDuration(2, TimeUnit.HOURS));
+        workoutExerciseDuration3 = new WorkoutExerciseDuration(exercise1, xpHighIntensity,new ExerciseDuration(2, TimeUnit.HOURS));
     }
 
     /**
