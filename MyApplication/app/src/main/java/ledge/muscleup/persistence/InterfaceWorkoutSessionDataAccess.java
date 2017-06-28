@@ -16,7 +16,7 @@ import ledge.muscleup.model.workout.WorkoutSession;
  * @version 1.0
  * @since 2017-06-07
  */
-public interface InterfaceWorkoutSessionDataAccess {
+public interface InterfaceWorkoutSessionDataAccess extends InterfaceDataAccess{
 
     /**
      * A method that returns a list of all workout sessions in the database
