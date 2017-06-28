@@ -28,7 +28,9 @@ import java.util.Enumeration;
 import java.util.List;
 
 import ledge.muscleup.R;
+import ledge.muscleup.business.AccessExperience;
 import ledge.muscleup.business.AccessWorkoutSessions;
+import ledge.muscleup.business.InterfaceAccessExperience;
 import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 import ledge.muscleup.model.workout.WorkoutSession;
@@ -55,7 +57,7 @@ public class WorkoutSessionActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final InterfaceAccessWorkoutSessions aws = new AccessWorkoutSessions();
-
+        final InterfaceAccessExperience ae = new AccessExperience();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_session_checklist);
 
@@ -84,7 +86,8 @@ public class WorkoutSessionActivity extends Activity {
                 Intent appInfo = new Intent(WorkoutSessionActivity.this, CompletedWorkoutActivity.class);
                 LocalDate date = workoutSession.getDate();
                 appInfo.putExtra("workoutSessionDate", formatter.print(date));
-                //TODO- Method call to update user's xp with completed workout xp value. User's xp not yet implemented.
+                int previousExperienceTotal = ae.getExperienceTotalOnDate(LocalDate.now());
+                ae.addExperienceTotal(LocalDate.now(), previousExperienceTotal + workoutSession.getExperienceValue());
                 startActivity(appInfo);
             }
         });

@@ -24,8 +24,10 @@ import org.w3c.dom.Text;
 import java.util.List;
 
 import ledge.muscleup.R;
+import ledge.muscleup.business.AccessExperience;
 import ledge.muscleup.business.AccessWorkoutSessions;
 import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
+import ledge.muscleup.business.LevelCalculator;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 import ledge.muscleup.model.workout.WorkoutSession;
 
@@ -43,12 +45,14 @@ public class CompletedWorkoutActivity extends Activity {
     private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
     private ListItemAdapter adapter;
     private WorkoutSession workoutSession;  //the workout session in view
+    private AccessExperience accessExperience;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_completed_workout);
 
+        accessExperience = new AccessExperience();
         ListView listView = (ListView) findViewById(R.id.completedExerciseList);
 
         getWorkoutSessionInView();
@@ -60,12 +64,12 @@ public class CompletedWorkoutActivity extends Activity {
         completedWorkoutTotalXP.setText("Total Experience Gained:  +" + String.valueOf(workoutSession.getExperienceValue() + " XP"));
 
         TextView currentLevel = (TextView) findViewById(R.id.completedWorkoutCurrentLevel);
-        currentLevel.setText("Current Level:  " + "currLevel");
-        //TODO replace with the actual current level once we have level functionality
+        int level = LevelCalculator.calculateLevel(accessExperience.getExperienceTotalOnDate(LocalDate.now()));
+        currentLevel.setText("Current Level:  " + String.valueOf(level));
 
         TextView xpToNextLevel = (TextView) findViewById(R.id.completedWorkoutXPNeeded);
-        xpToNextLevel.setText("Experience To Next Level:  " + "nextLevelXP");
-        //TODO replace with the actual next level xp needed once we have level functionality
+        int xpTillNextLevel = LevelCalculator.calculateXPTillNextLevel(level, accessExperience.getExperienceTotalOnDate(LocalDate.now()));
+        xpToNextLevel.setText("Experience Till Next Level:  " + String.valueOf(xpTillNextLevel) + " XP");
 
         adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_completed_exercise, workoutSession.getWorkoutSessionExercises());
         listView.setAdapter(adapter);
