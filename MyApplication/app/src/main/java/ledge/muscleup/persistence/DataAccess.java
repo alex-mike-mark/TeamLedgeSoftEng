@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
@@ -35,6 +37,10 @@ public class DataAccess implements InterfaceDataAccess {
     private String command;
     private Statement statement;
     private ResultSet resultSet;
+
+    private List<Workout> workoutsByName;
+    private List<Exercise> exercisesByName;
+    private List<WorkoutSession> workoutSessionsByDate;
 
     /**
      * Constructor for DataAccess
@@ -134,7 +140,27 @@ public class DataAccess implements InterfaceDataAccess {
      */
     @Override
     public List<Workout> getWorkoutsList() {
-        return null;
+        workoutsByName = new ArrayList<Workout>();
+
+        try
+        {
+            command = "Select * from Workouts";
+            rs3 = st1.executeQuery(cmdString);
+            // ResultSetMetaData md2 = rs3.getMetaData();
+            while (rs3.next())
+            {
+                myID = rs3.getString("StudentID");
+                myStudentName = rs3.getString("Name");
+                myAddress = rs3.getString("Address");
+                student = new Student(myID, myStudentName, myAddress);
+                students.add(student);
+            }
+            rs3.close();
+        } catch (Exception e)
+        {
+            processSQLError(e);
+        }
+        return workoutsByName;
     }
 
     /**
