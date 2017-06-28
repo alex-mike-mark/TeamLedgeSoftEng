@@ -3,16 +3,17 @@ package ledge.muscleup.presentation;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,7 +25,10 @@ import java.util.List;
 
 import ledge.muscleup.R;
 import ledge.muscleup.business.AccessWorkoutSessions;
+
 import ledge.muscleup.model.schedule.ScheduleWeek;
+import ledge.muscleup.business.AccessWorkouts;
+import ledge.muscleup.business.InterfaceAccessWorkouts;
 import ledge.muscleup.model.workout.WorkoutSession;
 
 /**
@@ -41,19 +45,24 @@ public class ScheduleActivity extends Activity {
 	private AccessWorkoutSessions aws;
     private ScheduleWeek scheduleWeek;
     private List<WorkoutSession> sessionList;
+    private InterfaceAccessWorkouts aw;
 
     private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd");
+    private static final DateTimeFormatter monthDayYearFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         aws = new AccessWorkoutSessions();
+
         scheduleWeek = new ScheduleWeek(aws.getCurrentWeekSessions());
 
+        aw = new AccessWorkouts();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_list_display);
 
         populateList();
-
+        setWeekRangeTitle();
     }
 
     private void populateList(){
@@ -79,6 +88,14 @@ public class ScheduleActivity extends Activity {
             }
         });
 
+        final Button currentWeekBtn = (Button) findViewById(R.id.button_currentWeek);
+        currentWeekBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showCurrentWeek();
+            }
+        });
+
+
         final Button prevBtn = (Button) findViewById(R.id.button_previous);
         prevBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -87,6 +104,14 @@ public class ScheduleActivity extends Activity {
         });
     }
 
+    /**
+     * Overrides the onBackPressed method to jump to the MainActivity whenever the back button is pressed here
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(ScheduleActivity.this, MainActivity.class));
+    }
 
     /**
      * Creates listeners for each workout in the schedule
@@ -99,12 +124,14 @@ public class ScheduleActivity extends Activity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
-                Intent appInfo = new Intent(ScheduleActivity.this, WorkoutSessionActivity.class);
-                LocalDate date = workoutSessionList.get(position).getDate();
-                DateTimeFormatter  formatter= DateTimeFormat.forPattern("MM/dd/yyyy");
+                if (workoutSessionList.get(position).getName() != null) {   //workout scheduled on day
+                    Intent appInfo = new Intent(ScheduleActivity.this, WorkoutSessionActivity.class);
+                    LocalDate date = workoutSessionList.get(position).getDate();
+                    DateTimeFormatter  formatter= DateTimeFormat.forPattern("MM/dd/yyyy");
 
-                appInfo.putExtra("workoutSessionDate", formatter.print(date));
-                startActivity(appInfo);
+                    appInfo.putExtra("workoutSessionDate", formatter.print(date));
+                    startActivity(appInfo);
+                }
             }
         });
     }
@@ -115,10 +142,11 @@ public class ScheduleActivity extends Activity {
     public void showNextWeek(){
         adapter.clear();
 
-        aws.nextWeek(scheduleWeek);
+        aws.setToNextWeek(scheduleWeek);
         sessionList = scheduleWeek.getWorkoutSessionList();
 
         populateList();
+        setWeekRangeTitle();
     }
 
     /**
@@ -127,10 +155,31 @@ public class ScheduleActivity extends Activity {
     public void showLastWeek(){
         adapter.clear();
 
-        aws.lastWeek(scheduleWeek);
+        aws.setToLastWeek(scheduleWeek);
         sessionList = scheduleWeek.getWorkoutSessionList();
 
         populateList();
+        setWeekRangeTitle();
+    }
+
+    public void showCurrentWeek() {
+        adapter.clear();
+        aws.setToCurrentWeek(scheduleWeek);
+        sessionList = scheduleWeek.getWorkoutSessionList();
+
+        populateList();
+        setWeekRangeTitle();
+    }
+
+    /**
+     * Sets the Activity title shown on screen to display the range of dates for current week
+     */
+    public void setWeekRangeTitle() {
+        TextView titleView = (TextView) findViewById(R.id.activity_title);
+        LocalDate startOfWeek = sessionList.get(0).getDate();
+        LocalDate endOfWeek = sessionList.get(sessionList.size() - 1).getDate();
+        String title = monthDayYearFormatter.print(startOfWeek) + " - " + monthDayYearFormatter.print(endOfWeek);
+        titleView.setText(title);
     }
 
     /**
@@ -160,7 +209,7 @@ public class ScheduleActivity extends Activity {
         private class ViewHolder {
             TextView sessionDate;
             TextView sessionWorkoutName;
-            Button removeButton;
+            Button addOrRemoveButton;
         }
 
         /**
@@ -172,7 +221,7 @@ public class ScheduleActivity extends Activity {
          */
         @Override
         public View getView(final int index, View convertView, @NonNull ViewGroup parent) {
-            ViewHolder viewHolder;
+            final ViewHolder viewHolder;
 
             final View returnedView;
 
@@ -181,7 +230,7 @@ public class ScheduleActivity extends Activity {
                 convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_workout_session, parent, false);
                 viewHolder.sessionDate = (TextView) convertView.findViewById(R.id.scheduleDate);
                 viewHolder.sessionWorkoutName = (TextView) convertView.findViewById(R.id.scheduleWorkoutName);
-                viewHolder.removeButton = (Button) convertView.findViewById(R.id.removeWorkoutSessionButton);
+                viewHolder.addOrRemoveButton = (Button) convertView.findViewById(R.id.addOrRemoveWorkoutSessionButton);
 
                 returnedView = convertView;
                 convertView.setTag(viewHolder);
@@ -194,17 +243,46 @@ public class ScheduleActivity extends Activity {
 
             viewHolder.sessionDate.setText(formatter.print(session.getDate()));
             viewHolder.sessionWorkoutName.setText(session.getName());
-            viewHolder.removeButton.setText("X");
+            if (session.getName() == null) {//no workout scheduled, add button
+                viewHolder.addOrRemoveButton.setText("+");
+                viewHolder.addOrRemoveButton.setTextColor(Color.GREEN);
+                viewHolder.addOrRemoveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        PopupMenu menu = new PopupMenu(ScheduleActivity.this, viewHolder.addOrRemoveButton);
 
-            viewHolder.removeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    aws.removeWorkoutSession(sessionList.get(index));
-                    WorkoutSession emptySession = new WorkoutSession(sessionList.get(index).getDate());
-                    sessionList.set(index, emptySession);
-                    notifyDataSetChanged();
-                }
-            });
+                        List<String> workoutNames = aw.getWorkoutNamesList();
+                        for (String name: workoutNames) {
+                            menu.getMenu().add(name);
+
+                        }
+                        menu.show();
+                        menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                            @Override
+                            public boolean onMenuItemClick(MenuItem item) {
+                                String workoutName = item.getTitle().toString();
+                                WorkoutSession session = new WorkoutSession(aw.getWorkout(workoutName), sessionList.get(index).getDate(), false);
+                                sessionList.set(index, session);
+                                aws.insertWorkoutSession(session);
+                                notifyDataSetChanged();
+                                return true;
+                            }
+                        });
+                    }
+                });
+            } else {
+                viewHolder.addOrRemoveButton.setText("X");
+                viewHolder.addOrRemoveButton.setTextColor(Color.RED);
+                viewHolder.addOrRemoveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        aws.removeWorkoutSession(sessionList.get(index));
+                        WorkoutSession emptySession = new WorkoutSession(sessionList.get(index).getDate());
+                        sessionList.set(index, emptySession);
+                        notifyDataSetChanged();
+                    }
+                });
+            }
 
             return returnedView;
         }

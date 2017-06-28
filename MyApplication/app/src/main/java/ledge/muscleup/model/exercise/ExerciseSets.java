@@ -56,7 +56,7 @@ public class ExerciseSets implements InterfaceExerciseSets {
         ExerciseSets setsAndReps;
         boolean isEqual = false;
 
-        if (other instanceof ExerciseSets) {
+        if (other instanceof ExerciseSets && !(other instanceof ExerciseSetsAndWeight)) {
             setsAndReps = (ExerciseSets) other;
             if (this.sets == setsAndReps.getSets() && this.reps == setsAndReps.getReps()) {
                 isEqual = true;

@@ -1,6 +1,6 @@
 package ledge.muscleup.model.exercise;
 
-import java.text.DecimalFormat;
+import ledge.muscleup.model.exercise.enums.TimeUnit;
 
 /**
  * Used to track the length of time for exercises to be done for a certain

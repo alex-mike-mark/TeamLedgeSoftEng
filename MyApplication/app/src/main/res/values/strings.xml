@@ -7,4 +7,9 @@
     <string name="btn_next">Next</string>
     <string name="btn_previous">Previous</string>
     <string name="warning">Warning</string>
+    <string name="btn_currentWeek">Current Week</string>
+    <string name="text_workoutCompleted">Workout Completed!</string>
+    <string name="text_exercisesCompleted">Exercises Completed:</string>
+    <string name="btn_backToSchedule">Back</string>
+    <string name="text_levelUp">LEVEL UP!</string>
 </resources>

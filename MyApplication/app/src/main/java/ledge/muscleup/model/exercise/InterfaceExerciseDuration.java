@@ -1,5 +1,7 @@
 package ledge.muscleup.model.exercise;
 
+import ledge.muscleup.model.exercise.enums.TimeUnit;
+
 /**
  * The interface for tracking the length in minutes for exercises to be done for a certain
  * length of time, such as cycling for 30 minutes

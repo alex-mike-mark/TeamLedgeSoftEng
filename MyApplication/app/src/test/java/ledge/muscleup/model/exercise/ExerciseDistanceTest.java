@@ -5,6 +5,8 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
+import ledge.muscleup.model.exercise.enums.DistanceUnit;
+
 /**
  * ExerciseDistanceTest.java used to test ExerciseDistance.java
  *
