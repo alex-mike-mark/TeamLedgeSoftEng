@@ -5,6 +5,8 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
+import ledge.muscleup.model.exercise.enums.*;
+
 /**
  * WorkoutExerciseTest.java used to test WorkoutExercise.java
  *
@@ -25,12 +27,12 @@ public class WorkoutExerciseTest extends TestCase {
     @Before
     public void setUp(){
 
-        workoutExercise1 = new WorkoutExercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(5, 4), xpHighIntensity);
-        workoutExercise2 = new WorkoutExercise("Deadlifts", ExerciseIntensity.MEDIUM, ExerciseType.LEG, new ExerciseSets(5, 4), xpMediumIntensity);
+        workoutExercise1 = new WorkoutExerciseSets(new Exercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), xpHighIntensity,new ExerciseSets(5, 4));
+        workoutExercise2 = new WorkoutExerciseSets(new Exercise("Deadlifts", ExerciseIntensity.MEDIUM, ExerciseType.LEG), xpMediumIntensity, new ExerciseSets(5, 4));
         exercise1 = new Exercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, true);
-        workoutExercise3 = new WorkoutExercise(exercise1, new ExerciseSets(5, 4), xpHighIntensity);
+        workoutExercise3 = new WorkoutExerciseSets(exercise1, xpHighIntensity, new ExerciseSets(5, 4));
         exercise2 = new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM, true);
-        workoutExercise4 = new WorkoutExercise(exercise2, new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS), xpLowIntensity);
+        workoutExercise4 = new WorkoutExerciseSetsAndWeight(exercise2, xpLowIntensity, new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
     }
 
     /**
@@ -61,31 +63,31 @@ public class WorkoutExerciseTest extends TestCase {
         assertEquals(ExerciseType.FULL_BODY, workoutExercise3.getType());
         assertEquals(ExerciseType.ARM, workoutExercise4.getType());
 
-        assertTrue(workoutExercise1.getRecommendedQuantity().equals(new ExerciseSets(5, 4)));
-        assertTrue(workoutExercise2.getRecommendedQuantity().equals(new ExerciseSets(5, 4)));
-        assertTrue(workoutExercise3.getRecommendedQuantity().equals(new ExerciseSets(5, 4)));
-        assertTrue(workoutExercise4.getRecommendedQuantity().equals(new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS)));
+        assertTrue(workoutExercise1.getQuantity().equals(new ExerciseSets(5, 4)));
+        assertTrue(workoutExercise2.getQuantity().equals(new ExerciseSets(5, 4)));
+        assertTrue(workoutExercise3.getQuantity().equals(new ExerciseSets(5, 4)));
+        assertTrue(workoutExercise4.getQuantity().equals(new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS)));
 
-        assertFalse(workoutExercise1.getRecommendedQuantity().equals(new ExerciseSets(3, 10)));
-        assertFalse(workoutExercise2.getRecommendedQuantity().equals(new ExerciseSets(4, 5)));
-        assertFalse(workoutExercise3.getRecommendedQuantity().equals(new ExerciseSets(5, 6)));
-        assertFalse(workoutExercise4.getRecommendedQuantity().equals(new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.KG)));
-        assertFalse(workoutExercise4.getRecommendedQuantity().equals(new ExerciseSetsAndWeight(2, 15, 10, WeightUnit.LBS)));
+        assertFalse(workoutExercise1.getQuantity().equals(new ExerciseSets(3, 10)));
+        assertFalse(workoutExercise2.getQuantity().equals(new ExerciseSets(4, 5)));
+        assertFalse(workoutExercise3.getQuantity().equals(new ExerciseSets(5, 6)));
+        assertFalse(workoutExercise4.getQuantity().equals(new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.KG)));
+        assertFalse(workoutExercise4.getQuantity().equals(new ExerciseSetsAndWeight(2, 15, 10, WeightUnit.LBS)));
 
-        workoutExercise1.updateRecommendedQuantity(new ExerciseSets(3, 10));
-        workoutExercise2.updateRecommendedQuantity(new ExerciseSets(3, 10));
-        workoutExercise3.updateRecommendedQuantity(new ExerciseSets(3, 10));
-        workoutExercise4.updateRecommendedQuantity(new ExerciseSetsAndWeight(2, 10, 20, WeightUnit.LBS));
+        workoutExercise1.updateQuantity(new ExerciseSets(3, 10));
+        workoutExercise2.updateQuantity(new ExerciseSets(3, 10));
+        workoutExercise3.updateQuantity(new ExerciseSets(3, 10));
+        workoutExercise4.updateQuantity(new ExerciseSetsAndWeight(2, 10, 20, WeightUnit.LBS));
 
-        assertTrue(workoutExercise1.getRecommendedQuantity().equals(new ExerciseSets(3, 10)));
-        assertTrue(workoutExercise2.getRecommendedQuantity().equals(new ExerciseSets(3, 10)));
-        assertTrue(workoutExercise3.getRecommendedQuantity().equals(new ExerciseSets(3, 10)));
-        assertTrue(workoutExercise4.getRecommendedQuantity().equals(new ExerciseSetsAndWeight(2, 10, 20, WeightUnit.LBS)));
+        assertTrue(workoutExercise1.getQuantity().equals(new ExerciseSets(3, 10)));
+        assertTrue(workoutExercise2.getQuantity().equals(new ExerciseSets(3, 10)));
+        assertTrue(workoutExercise3.getQuantity().equals(new ExerciseSets(3, 10)));
+        assertTrue(workoutExercise4.getQuantity().equals(new ExerciseSetsAndWeight(2, 10, 20, WeightUnit.LBS)));
 
-        assertFalse(workoutExercise1.getRecommendedQuantity().equals(new ExerciseSets(5, 4)));
-        assertFalse(workoutExercise2.getRecommendedQuantity().equals(new ExerciseSets(5, 4)));
-        assertFalse(workoutExercise3.getRecommendedQuantity().equals(new ExerciseSets(5, 4)));
-        assertFalse(workoutExercise4.getRecommendedQuantity().equals(new ExerciseSetsAndWeight(3, 15, 15, WeightUnit.LBS)));
+        assertFalse(workoutExercise1.getQuantity().equals(new ExerciseSets(5, 4)));
+        assertFalse(workoutExercise2.getQuantity().equals(new ExerciseSets(5, 4)));
+        assertFalse(workoutExercise3.getQuantity().equals(new ExerciseSets(5, 4)));
+        assertFalse(workoutExercise4.getQuantity().equals(new ExerciseSetsAndWeight(3, 15, 15, WeightUnit.LBS)));
 
         assertFalse(workoutExercise1.equals(workoutExercise2));
         assertFalse(workoutExercise2.equals(workoutExercise1));

@@ -1,5 +1,8 @@
 package ledge.muscleup.model.exercise;
 
+import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
+import ledge.muscleup.model.exercise.enums.ExerciseType;
+
 /**
  * An exercise which contains a suggested amount of exercise and for which the exercise can be
  * marked completed
@@ -71,7 +74,7 @@ public class WorkoutSessionExercise {
      * @return the recommended quantity of exercise
      */
     public InterfaceExerciseQuantity getRecommendedQuantity() {
-        return exercise.getRecommendedQuantity();
+        return exercise.getQuantity();
     }
 
     /**

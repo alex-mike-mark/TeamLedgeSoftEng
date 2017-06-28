@@ -2,6 +2,8 @@ package ledge.muscleup.model.exercise;
 
 import java.text.DecimalFormat;
 
+import ledge.muscleup.model.exercise.enums.DistanceUnit;
+
 /**
  * Used to track distance metrics for exercises such as running
  *

@@ -8,17 +8,19 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import ledge.muscleup.model.exercise.Exercise;
+import ledge.muscleup.model.exercise.WorkoutExerciseDistance;
+import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
+import ledge.muscleup.model.exercise.WorkoutExerciseSets;
+import ledge.muscleup.model.exercise.WorkoutExerciseSetsAndWeight;
+import ledge.muscleup.model.exercise.enums.*;
 import ledge.muscleup.business.InterfaceAccessWorkouts;
-import ledge.muscleup.model.exercise.DistanceUnit;
+
 import ledge.muscleup.model.exercise.ExerciseDistance;
 import ledge.muscleup.model.exercise.ExerciseDuration;
-import ledge.muscleup.model.exercise.ExerciseIntensity;
 import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
-import ledge.muscleup.model.exercise.ExerciseType;
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
-import ledge.muscleup.model.exercise.TimeUnit;
-import ledge.muscleup.model.exercise.WeightUnit;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.workout.Workout;
 
@@ -97,28 +99,28 @@ public class AccessWorkoutsTest extends TestCase {
         // Workouts by object already in list
         List<Workout> workoutList1 = new ArrayList<>();
         workoutList1.add(new Workout("Never Skip Leg Day", false, new WorkoutExercise[]{
-                new WorkoutExercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG,
-                        new ExerciseSets(4, 15), xpMediumIntensity),
-                new WorkoutExercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG,
-                        new ExerciseSets(3, 10), xpMediumIntensity)
+                new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
+                        xpMediumIntensity,new ExerciseSets(4, 15)),
+                new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
+                        xpMediumIntensity, new ExerciseSets(3, 10))
         }));
         workoutList1.add(new Workout("Marathon Training Starts Here", false, new WorkoutExercise[]{
-                new WorkoutExercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO,
-                        new ExerciseDistance(2.5, DistanceUnit.MILES), xpHighIntensity),
-                new WorkoutExercise("Exercise Bike", ExerciseIntensity.MEDIUM, ExerciseType.CARDIO,
-                        new ExerciseDuration(45, TimeUnit.MINUTES), xpMediumIntensity)
+                new WorkoutExerciseDistance(new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO),
+                        xpHighIntensity, new ExerciseDistance(2.5, DistanceUnit.MILES)),
+                new WorkoutExerciseDuration(new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM, ExerciseType.CARDIO),
+                        xpMediumIntensity, new ExerciseDuration(45, TimeUnit.MINUTES))
         }));
         workoutList1.add(new Workout("Welcome to the Gun Show", false, new WorkoutExercise[]{
-                new WorkoutExercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM,
-                        new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS), xpLowIntensity),
-                new WorkoutExercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM,
-                        new ExerciseSets(2, 15), xpHighIntensity)
+                new WorkoutExerciseSetsAndWeight(new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM),
+                        xpLowIntensity, new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS)),
+                new WorkoutExerciseSets(new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM),
+                        xpHighIntensity, new ExerciseSets(2, 15))
         }));
         workoutList1.add(new Workout("Work that Core, Get that Score!", false, new WorkoutExercise[]{
-                new WorkoutExercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE,
-                        new ExerciseSets(2, 25), xpLowIntensity),
-                new WorkoutExercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE,
-                        new ExerciseSets(2, 15), xpHighIntensity)
+                new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE),
+                        xpLowIntensity, new ExerciseSets(2, 25)),
+                new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
+                        xpHighIntensity, new ExerciseSets(2, 15))
         }));
 
         List<Workout> workoutList2 = dataAccess.getWorkoutsList();
@@ -248,8 +250,8 @@ public class AccessWorkoutsTest extends TestCase {
         assertEquals(2, dataAccess.getWorkout("Never Skip Leg Day").numExercises());
 
         dataAccess.addExerciseToWorkout(new Workout("Never Skip Leg Day"),
-                new WorkoutExercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG,
-                        new ExerciseSets(3, 10), xpMediumIntensity));
+                new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
+                        xpMediumIntensity ,new ExerciseSets(3, 10)));
 
         assertEquals(3, dataAccess.getWorkout("Never Skip Leg Day").numExercises());
 
@@ -276,31 +278,31 @@ public class AccessWorkoutsTest extends TestCase {
         System.out.println("\nStarting testRemoveExercise");
 
         Workout workout = dataAccess.getWorkout("Never Skip Leg Day");
-        WorkoutExercise workoutExercise = new WorkoutExercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG,
-                new ExerciseSets(4, 15), xpMediumIntensity);
+        WorkoutExercise workoutExercise = new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
+                xpMediumIntensity, new ExerciseSets(4, 15));
 
         assertEquals(2, dataAccess.getWorkout("Never Skip Leg Day").numExercises());
         dataAccess.removeExerciseFromWorkout(workout, workoutExercise);
         assertEquals(1, dataAccess.getWorkout("Never Skip Leg Day").numExercises());
 
-        workoutExercise = new WorkoutExercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG,
-                new ExerciseSets(3, 10), xpMediumIntensity);
+        workoutExercise = new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
+                xpMediumIntensity ,new ExerciseSets(3, 10));
 
         assertEquals(1, dataAccess.getWorkout("Never Skip Leg Day").numExercises());
         dataAccess.removeExerciseFromWorkout(workout, workoutExercise);
         assertEquals(0, dataAccess.getWorkout("Never Skip Leg Day").numExercises());
 
         workout = dataAccess.getWorkout("Marathon Training Starts Here");
-        workoutExercise = new WorkoutExercise("Exercise Bike", ExerciseIntensity.MEDIUM, ExerciseType.CARDIO,
-                new ExerciseDuration(45, TimeUnit.MINUTES), xpMediumIntensity);
+        workoutExercise = new WorkoutExerciseDuration(new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM, ExerciseType.CARDIO),
+                xpMediumIntensity, new ExerciseDuration(45, TimeUnit.MINUTES));
 
 
         assertEquals(2, dataAccess.getWorkout("Marathon Training Starts Here").numExercises());
         dataAccess.removeExerciseFromWorkout(workout, workoutExercise);
         assertEquals(1, dataAccess.getWorkout("Marathon Training Starts Here").numExercises());
 
-        workoutExercise = new WorkoutExercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO,
-                new ExerciseDistance(2.5, DistanceUnit.MILES), xpHighIntensity);
+        workoutExercise = new WorkoutExerciseDistance(new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO),
+                xpHighIntensity, new ExerciseDistance(2.5, DistanceUnit.MILES));
 
         assertEquals(1, dataAccess.getWorkout("Marathon Training Starts Here").numExercises());
         dataAccess.removeExerciseFromWorkout(workout, workoutExercise);

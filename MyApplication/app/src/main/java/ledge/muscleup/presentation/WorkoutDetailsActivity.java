@@ -18,13 +18,11 @@ import java.util.Enumeration;
 import java.util.List;
 
 import ledge.muscleup.R;
-import ledge.muscleup.application.Services;
 import ledge.muscleup.business.AccessWorkouts;
 import ledge.muscleup.business.InterfaceAccessWorkouts;
 import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.workout.Workout;
-import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
  * WorkoutDetailsActivity displays a list of exercises for a workout
@@ -136,7 +134,7 @@ public class WorkoutDetailsActivity extends Activity {
             WorkoutExercise exercise = exerciseList.get(index);
 
             viewHolder.exerciseName.setText(exercise.getName());
-            String exerciseInfo = exercise.getRecommendedQuantity().toString();
+            String exerciseInfo = exercise.getQuantity().toString();
             viewHolder.exerciseInfo.setText(exerciseInfo);
 
             return returnedView;

@@ -5,6 +5,9 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
+import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
+import ledge.muscleup.model.exercise.enums.ExerciseType;
+
 /**
  * WorkoutSessionExerciseTest.java used to test WorkoutSessionExercise.java
  *
@@ -14,22 +17,26 @@ import org.junit.Test;
  */
 public class WorkoutSessionExerciseTest extends TestCase {
     WorkoutSessionExercise workoutSessionExercise1, workoutSessionExercise2, workoutSessionExercise3;
-    WorkoutExercise workoutExercise1, workoutExercise2;
+
+    WorkoutExerciseSets powerClean1, powerClean2, deadlift;
 
     final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
     final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
     final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
+
 
     /**
      * Initializes several instances of WorkoutSessionExercise to setup testing
      */
     @Before
     public void setUp(){
-        workoutExercise1 = new WorkoutExercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, new ExerciseSets(5, 4), xpHighIntensity);
-        workoutSessionExercise1 = new WorkoutSessionExercise(workoutExercise1, false);
-        workoutExercise2 = new WorkoutExercise("Deadlifts", ExerciseIntensity.MEDIUM, ExerciseType.LEG, new ExerciseSets(5, 4), xpMediumIntensity);
-        workoutSessionExercise2 = new WorkoutSessionExercise(workoutExercise2, false);
-        workoutSessionExercise3 = new WorkoutSessionExercise(workoutExercise1, true);
+        powerClean1 = new WorkoutExerciseSets(new Exercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), xpHighIntensity,new ExerciseSets(5,4));
+        powerClean2 = new WorkoutExerciseSets(new Exercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), xpHighIntensity, new ExerciseSets(5,4));
+        deadlift = new WorkoutExerciseSets(new Exercise("Deadlifts", ExerciseIntensity.MEDIUM, ExerciseType.LEG), xpMediumIntensity,new ExerciseSets(5,4));
+
+        workoutSessionExercise1 = new WorkoutSessionExercise(powerClean1, false);
+        workoutSessionExercise2 = new WorkoutSessionExercise(deadlift, false);
+        workoutSessionExercise3 = new WorkoutSessionExercise(powerClean2, true);
     }
 
     /**
@@ -55,7 +62,7 @@ public class WorkoutSessionExerciseTest extends TestCase {
         assertEquals(ExerciseIntensity.HIGH, workoutSessionExercise3.getIntensity());
 
         assertEquals(ExerciseType.FULL_BODY, workoutSessionExercise1.getType());
-        assertEquals(ExerciseType.LEG, workoutSessionExercise2.getType());
+        assertEquals(ExerciseType.LEG, workoutSessionExercise2.getType());//TODO: Make  this not fail.
         assertEquals(ExerciseType.FULL_BODY, workoutSessionExercise3.getType());
 
         assertTrue(workoutSessionExercise1.getRecommendedQuantity().equals(new ExerciseSets(5, 4)));

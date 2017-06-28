@@ -1,5 +1,7 @@
 package ledge.muscleup.model.exercise;
 
+import ledge.muscleup.model.exercise.enums.WeightUnit;
+
 /**
  * Used to track the number of sets, the number of reps in each set and the weight used for
  * strength-building exercises

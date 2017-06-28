@@ -13,8 +13,7 @@ import java.util.Map;
 
 import ledge.muscleup.business.InterfaceAccessExercises;
 import ledge.muscleup.model.exercise.Exercise;
-import ledge.muscleup.model.exercise.ExerciseIntensity;
-import ledge.muscleup.model.exercise.ExerciseType;
+import ledge.muscleup.model.exercise.enums.*;
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;

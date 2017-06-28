@@ -5,6 +5,9 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
+import ledge.muscleup.model.exercise.enums.DistanceUnit;
+import ledge.muscleup.model.exercise.enums.TimeUnit;
+
 /**
  * ExerciseQuantityTest.java used to test InterfaceExerciseQuantity.java
  *
@@ -66,4 +69,5 @@ public class ExerciseQuantityTest  extends TestCase {
 
         System.out.println("Finished testExerciseQuantity");
     }
+
 }
