@@ -2,6 +2,10 @@ package ledge.muscleup.persistence;
 
 import org.joda.time.LocalDate;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.List;
 
 import ledge.muscleup.model.exercise.Exercise;
@@ -13,7 +17,7 @@ import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
 
 /**
- * This is it. THE REAL DEAL. ARE YOU READ?!?!?!?!?
+ * This is it. THE REAL DEAL. ARE YOU READY?!?!?!?!?
  *
  * @author Cole Kehler
  * @version 2.0
@@ -21,13 +25,41 @@ import ledge.muscleup.model.workout.WorkoutSession;
  */
 
 public class DataAccess implements InterfaceDataAccess {
+    private final String SHUTDOWN_CMD = "shutdown compact";
+
+    private String dbName;
+    private String dbType = "HSQLDB";
+    private String dbPath = "jdbc:hsqldb:file:DB";
+
+    private Connection connection;
+    private Statement statement;
+    private ResultSet result;
+
+    /**
+     * Constructor for DataAccess
+     *
+     * @param dbName the name of the database
+     */
+    public DataAccess (String dbName) {
+        this.dbName = dbName;
+    }
 
     /**
      * Opens the stub database and populates it with some default values
      */
     @Override
     public void open() {
-
+        try
+        {
+            Class.forName("org.hsqldb.jdbcDriver").newInstance();
+            connection = DriverManager.getConnection(dbPath, "admin", "");
+            statement = connection.createStatement();
+        }
+        catch (Exception e)
+        {
+            sqlError(e);
+        }
+        System.out.println("Opened " + dbType + " database " + dbName);
     }
 
     /**
@@ -35,7 +67,16 @@ public class DataAccess implements InterfaceDataAccess {
      */
     @Override
     public void close() {
-
+        try
+        {
+            result = statement.executeQuery(SHUTDOWN_CMD);
+            connection.close();
+        }
+        catch (Exception e)
+        {
+            sqlError(e);
+        }
+        System.out.println("Closed " + dbType + " database " + dbName);
     }
 
     /**
@@ -320,5 +361,20 @@ public class DataAccess implements InterfaceDataAccess {
     @Override
     public boolean removeWorkoutSession(ScheduleWeek scheduleWeek, int dayOfWeek) throws IllegalArgumentException {
         return false;
+    }
+
+    /**
+     * Gets the error message message of an SQL exception and prints the stack trace
+     * @param e the exception thrown
+     * @return the error message for the SQL exception
+     */
+    private String sqlError(Exception e)
+    {
+        String result; //the error message to print
+
+        result = "SQL Error: " + e.getMessage();
+        e.printStackTrace();;
+
+        return result;
     }
 }
