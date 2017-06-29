@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import ledge.muscleup.model.exercise.Exercise;
@@ -52,7 +53,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
 
     private Connection connection;
     private Statement statement;
-    private ResultSet resultSet;
+    private ResultSet resultSet, resultSet2;
 
     /**
      * Constructor for DataAccess
@@ -145,7 +146,102 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      */
     @Override
     public WorkoutSession getWorkoutSession(LocalDate dateOfSession) {
-        return null;
+        ArrayList<WorkoutSessionExercise> workoutSessionExerciseList = new ArrayList<>();
+        Exercise exercise;
+        WorkoutExercise workoutExercise;
+        WorkoutSession workoutSession = null;
+
+        String workoutName = null, exerciseName;
+        int xpValue, duration, sets, reps;
+        double distance, weight;
+        DistanceUnit distanceUnit;
+        TimeUnit timeUnit;
+        WeightUnit weightUnit;
+        LocalDate scheduledDate = null;
+        ExerciseIntensity intensity;
+        ExerciseType type;
+        boolean exerciseFavourite, workoutComplete = false, exerciseComplete;
+
+        try {
+            resultSet = statement.executeQuery(
+                    "SELECT		W.Name AS WorkoutName, " +
+                    "			WS.ScheduleDate, " +
+                    "			WS.Complete AS WorkoutComplete, " +
+                    "			E.Name AS ExerciseName, " +
+                    "			EI.Intensity, " +
+                    "			ET.Type, " +
+                    "			E.Favourite, " +
+                    "			WE.Distance, " +
+                    "			DiU.DistanceUnit, " +
+                    "			WE.Duration, " +
+                    "			DuU.DurationUnit, " +
+                    "			WE.Sets, " +
+                    "			WE.Reps, " +
+                    "			WE.Weight, " +
+                    "			WU.WeightUnit,  " +
+                    "			WSE.Complete AS ExerciseComplete " +
+                    "FROM		WorkoutSessions WS " +
+                    "LEFT JOIN	Workouts W " +
+                    "			ON WS.WorkoutID = W.ID " +
+                    "LEFT JOIN	WorkoutSessionContents WSC " +
+                    "			ON WSC.WorkoutSessionID = WS.ID " +
+                    "LEFT JOIN	WorkoutSessionExercises WSE " +
+                    "			ON WSC.ExerciseID = WSE.ID " +
+                    "LEFT JOIN	WorkoutExercises WE " +
+                    "			ON WSE.WorkoutExerciseID = WE.ID " +
+                    "LEFT JOIN	DistanceUnits DiU " +
+                    "			ON WE.DistanceUnitID = DiU.ID " +
+                    "LEFT JOIN	DurationUnits DuU " +
+                    "			ON WE.DurationUnitID = DuU.ID " +
+                    "LEFT JOIN	WeightUnits WU " +
+                    "			ON WE.WeightUnitID = WU.ID " +
+                    "LEFT JOIN	Exercises E " +
+                    "			ON WE.ExerciseID = E.ID " +
+                    "LEFT JOIN  ExerciseIntensities EI " +
+                    "           ON E.IntensityID = EI.ID  " +
+                    "LEFT JOIN  ExerciseTypes ET " +
+                    "           ON E.TypeID = ET.ID " +
+                    "WHERE		WS.ScheduleDate = " + format.print(dateOfSession));
+
+            while (resultSet.next()) {
+                if (workoutName == null) {
+                    workoutName = resultSet.getString("WorkoutName");
+                    scheduledDate = new LocalDate(resultSet.getDate("ScheduleDate"));
+                    workoutComplete = resultSet.getBoolean("WorkoutComplete");
+                }
+
+                exerciseName = resultSet.getString("ExerciseName");
+                intensity = ExerciseIntensity.valueOf(resultSet.getString("Intensity"));
+                type = ExerciseType.valueOf(resultSet.getString("Type"));
+                exerciseFavourite = resultSet.getBoolean("Favourite");
+                exercise = new Exercise(exerciseName, intensity, type, exerciseFavourite);
+
+                xpValue = XP_PER_INTENSITY * ExerciseIntensity.valueOf(resultSet.getString("Intensity")).ordinal();
+                distance = resultSet.getDouble("Distance");
+                distanceUnit = DistanceUnit.valueOf(resultSet.getString("DistanceUnit"));
+                duration = resultSet.getInt("Duration");
+                timeUnit = TimeUnit.valueOf(resultSet.getString("DurationUnit"));
+                sets = resultSet.getInt("Sets");
+                reps = resultSet.getInt("Reps");
+                weight = resultSet.getDouble("Weight");
+                weightUnit = WeightUnit.valueOf(resultSet.getString("WeightUnit"));
+                workoutExercise = createWorkoutExercise(exercise, xpValue, distance, distanceUnit, duration,
+                        timeUnit, sets, reps, weight, weightUnit);
+
+                exerciseComplete = resultSet.getBoolean("ExerciseCompleted");
+                workoutSessionExerciseList.add(new WorkoutSessionExercise(workoutExercise, exerciseComplete));
+            }
+
+            if (workoutName != null)
+                workoutSession = new WorkoutSession(workoutName, scheduledDate, workoutComplete, workoutSessionExerciseList);
+
+            resultSet.close();
+        }
+        catch (Exception e) {
+            sqlError(e);
+        }
+
+        return workoutSession;
     }
 
     /**
@@ -157,7 +253,114 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      */
     @Override
     public List<WorkoutSession> getSessionsInDateRange(LocalDate startDate, LocalDate endDate) {
-        return null;
+        ArrayList<WorkoutSession> workoutSessionList = new ArrayList<>();
+        ArrayList<WorkoutSessionExercise> workoutSessionExerciseList = new ArrayList<>();
+        Exercise exercise;
+        WorkoutExercise workoutExercise;
+        WorkoutSession workoutSession;
+
+        String workoutName = null, exerciseName;
+        int xpValue, duration, sets, reps;
+        double distance, weight;
+        DistanceUnit distanceUnit;
+        TimeUnit timeUnit;
+        WeightUnit weightUnit;
+        LocalDate scheduledDate = null;
+        ExerciseIntensity intensity;
+        ExerciseType type;
+        boolean exerciseFavourite, workoutComplete = false, exerciseComplete;
+
+        try {
+            resultSet = statement.executeQuery(
+                    "SELECT		W.Name AS WorkoutName, " +
+                    "			WS.ScheduledDate, " +
+                    "			WS.Complete AS WorkoutComplete, " +
+                    "			E.Name AS ExerciseName, " +
+                    "			EI.Intensity, " +
+                    "			ET.Type, " +
+                    "			E.Favourite, " +
+                    "			WE.Distance, " +
+                    "			DiU.DistanceUnit, " +
+                    "			WE.Duration, " +
+                    "			DuU.DurationUnit, " +
+                    "			WE.Sets, " +
+                    "			WE.Reps, " +
+                    "			WE.Weight, " +
+                    "			WU.WeightUnit,  " +
+                    "			WSE.Complete AS ExerciseComplete " +
+                    "FROM		WorkoutSessions WS " +
+                    "LEFT JOIN	Workouts W " +
+                    "			ON WS.WorkoutID = W.ID " +
+                    "LEFT JOIN	WorkoutSessionContents WSC " +
+                    "			ON WSC.WorkoutSessionID = WS.ID " +
+                    "LEFT JOIN	WorkoutSessionExercises WSE " +
+                    "			ON WSC.ExerciseID = WSE.ID " +
+                    "LEFT JOIN	WorkoutExercises WE " +
+                    "			ON WSE.WorkoutExerciseID = WE.ID " +
+                    "LEFT JOIN	DistanceUnits DiU " +
+                    "			ON WE.DistanceUnitID = DiU.ID " +
+                    "LEFT JOIN	DurationUnits DuU " +
+                    "			ON WE.DurationUnitID = DuU.ID " +
+                    "LEFT JOIN	WeightUnits WU " +
+                    "			ON WE.WeightUnitID = WU.ID " +
+                    "LEFT JOIN	Exercises E " +
+                    "			ON WE.ExerciseID = E.ID " +
+                    "LEFT JOIN  ExerciseIntensities EI " +
+                    "           ON E.IntensityID = EI.ID  " +
+                    "LEFT JOIN  ExerciseTypes ET " +
+                    "           ON E.TypeID = ET.ID " +
+                    "WHERE		DATEDIFF('day', WS.ScheduledDate, DATE'" + format.print(startDate) + "') <= 0" +
+                    "           AND DATEDIFF('day', WS.ScheduledDate, DATE'" + format.print(endDate) + "') >= 0");
+
+            while (resultSet.next()) {
+                if (workoutName == null) {
+                    workoutName = resultSet.getString("WorkoutName");
+                    scheduledDate = new LocalDate(resultSet.getDate("ScheduledDate"));
+                    workoutComplete = resultSet.getBoolean("WorkoutComplete");
+                }
+                else if (!workoutName.equals(resultSet.getString("WorkoutName"))) {
+                    workoutSession = new WorkoutSession(workoutName, scheduledDate, workoutComplete, workoutSessionExerciseList);
+                    workoutSessionList.add(workoutSession);
+
+                    workoutName = resultSet.getString("WorkoutName");
+                    scheduledDate = new LocalDate(resultSet.getDate("ScheduleDate"));
+                    workoutComplete = resultSet.getBoolean("WorkoutComplete");
+                }
+
+                exerciseName = resultSet.getString("ExerciseName");
+                intensity = ExerciseIntensity.valueOf(resultSet.getString("Intensity"));
+                type = ExerciseType.valueOf(resultSet.getString("Type"));
+                exerciseFavourite = resultSet.getBoolean("Favourite");
+                exercise = new Exercise(exerciseName, intensity, type, exerciseFavourite);
+
+                xpValue = XP_PER_INTENSITY * ExerciseIntensity.valueOf(resultSet.getString("Intensity")).ordinal();
+                distance = resultSet.getDouble("Distance");
+                distanceUnit = DistanceUnit.valueOf(resultSet.getString("DistanceUnit"));
+                duration = resultSet.getInt("Duration");
+                timeUnit = TimeUnit.valueOf(resultSet.getString("DurationUnit"));
+                sets = resultSet.getInt("Sets");
+                reps = resultSet.getInt("Reps");
+                weight = resultSet.getDouble("Weight");
+                weightUnit = WeightUnit.valueOf(resultSet.getString("WeightUnit"));
+                workoutExercise = createWorkoutExercise(exercise, xpValue, distance, distanceUnit, duration,
+                        timeUnit, sets, reps, weight, weightUnit);
+
+                exerciseComplete = resultSet.getBoolean("ExerciseCompleted");
+                workoutSessionExerciseList.add(new WorkoutSessionExercise(workoutExercise, exerciseComplete));
+            }
+
+            if (workoutName != null) {
+                workoutSession = new WorkoutSession(workoutName, scheduledDate, workoutComplete, workoutSessionExerciseList);
+                workoutSessionList.add(workoutSession);
+            }
+
+            resultSet.close();
+        }
+        catch (Exception e) {
+            sqlError(e);
+        }
+
+        return workoutSessionList;
     }
 
     /**
@@ -167,7 +370,60 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      */
     @Override
     public void insertWorkoutSession(WorkoutSession workoutSession) {
+        int workoutID, workoutSessionID, workoutExerciseID, workoutSessionExerciseID;
 
+        try {
+            resultSet = statement.executeQuery(
+                    "SELECT	W.ID " +
+                    "FROM	Workouts W " +
+                    "WHERE	W.Name = " + workoutSession.getName());
+            if (resultSet.next()) {
+                workoutID = resultSet.getInt("ID");
+
+                statement.executeQuery(
+                        "INSERT INTO    WorkoutSessions (ScheduleDate, WorkoutID, Complete) " +
+                        "VALUES         (" + format.print(workoutSession.getDate()) + ", " + workoutID + ", " + ", FALSE)");
+
+                resultSet = statement.executeQuery(
+                        "SELECT	MAX(WS.ID) " +
+                        "FROM	WorkoutSessions WS");
+                if (resultSet.next()) {
+                    workoutSessionID = resultSet.getInt("ID");
+
+                    resultSet = statement.executeQuery(
+                            "SELECT		WE.ID " +
+                            "FROM		WorkoutExercise WE " +
+                            "LEFT JOIN	Exercise E " +
+                            "			ON WE.ExerciseID = E.ID " +
+                            "RIGHT JOIN	WorkoutContents WC " +
+                            "			ON WE.ID = WC.ExerciseID " +
+                            "WHERE		WC.WorkoutID = " + workoutID);
+
+                    while (resultSet.next()) {
+                        workoutExerciseID = resultSet.getInt("ID");
+                        statement.executeQuery(
+                                "INSERT INTO    WorkoutSessionExercises (WorkoutExerciseID, Complete) " +
+                                "VALUES         (" + workoutExerciseID + ", FALSE) ");
+
+                        resultSet2 = statement.executeQuery(
+                                "SELECT	MAX(WSE.ID) " +
+                                "FROM	WorkoutSessionExercises WSE ");
+                        if (resultSet2.next()) {
+                            workoutSessionExerciseID = resultSet2.getInt("ID");
+
+                            statement.executeQuery(
+                                    "INSERT INTO    WorkoutSessionContents (WorkoutSessionID, ExerciseID) " +
+                                    "VALUES         (" + workoutSessionID + ", " + workoutSessionExerciseID + ") ");
+                        }
+                    }
+                }
+            }
+
+            resultSet.close();
+        }
+        catch (Exception e) {
+            sqlError(e);
+        }
     }
 
     /**
@@ -177,7 +433,45 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      */
     @Override
     public void removeWorkoutSession(WorkoutSession workoutSession) {
+        int workoutSessionID;
+        String command;
 
+        try {
+            resultSet = statement.executeQuery(
+                    "SELECT	WS.ID " +
+                    "FROM	WorkoutSessions WS " +
+                    "WHERE	WS.ScheduledDate = " + format.print(workoutSession.getDate()));
+            if (resultSet.next()) {
+                workoutSessionID = resultSet.getInt("ID");
+
+                resultSet = statement.executeQuery(
+                        "SELECT	WSC.ExerciseID " +
+                                "FROM	WorkoutSessionContents WSC " +
+                                "WHERE	WSC.WorkoutSessionID = " + workoutSessionID);
+
+                statement.executeQuery(
+                        "DELETE FROM	WorkoutSessionContents WSC " +
+                                "WHERE		    WSC.WorkoutSessionID = " + workoutSessionID);
+
+                command = "DELETE FROM  WorkoutSessionExercises WSE" +
+                        "WHERE        WSE.ID IN (";
+                if (resultSet.next())
+                    command += resultSet.getInt("ExerciseID");
+                while (resultSet.next())
+                    command += ", " + resultSet.getInt("ExerciseID");
+                command += ")";
+                statement.executeQuery(command);
+
+                statement.executeQuery(
+                        "DELETE FROM	WorkoutSession WS " +
+                        "WHERE		    WS.ScheduledDate = " + format.print(workoutSession.getDate()));
+            }
+
+            resultSet.close();
+        }
+        catch (Exception e) {
+            sqlError(e);
+        }
     }
 
     /**
@@ -188,47 +482,6 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
     @Override
     public void toggleWorkoutComplete(WorkoutSession workoutSession) {
 
-    }
-
-    /**
-     * Toggles the completed state of an exercise in a workout in the database
-     *
-     * @param workoutSession the workout which contains the exercise
-     * @param exercise       the exercise to complete
-     * @return a boolean representing whether the exercise was marked as completed or not
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    @Override
-    public boolean toggleExerciseComplete(WorkoutSession workoutSession, WorkoutSessionExercise exercise) throws IllegalArgumentException {
-        return false;
-    }
-
-    /**
-     * Adds a workout session to a given day in the database
-     *
-     * @param scheduleWeek   the week to add the workout to
-     * @param workoutSession the workout session to add
-     * @param dayOfWeek      the day of the week to add the workout session to
-     * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
-     *                                  > DateTimeConstants.SUNDAY}
-     */
-    @Override
-    public void addWorkoutSession(ScheduleWeek scheduleWeek, WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException {
-
-    }
-
-    /**
-     * Removes a workout from a given day in the database
-     *
-     * @param scheduleWeek the week to remove the workout from
-     * @param dayOfWeek    the day to remove the workout from
-     * @return a boolean representing if a workout was removed
-     * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
-     *                                  > DateTimeConstants.SUNDAY}
-     */
-    @Override
-    public boolean removeWorkoutSession(ScheduleWeek scheduleWeek, int dayOfWeek) throws IllegalArgumentException {
-        return false;
     }
 
     /**
@@ -282,7 +535,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                                                   DistanceUnit distanceUnit, int duration, TimeUnit timeUnit,
                                                   int sets, int reps, double weight, WeightUnit weightUnit) {
         WorkoutExercise workoutExercise = null;
-        InterfaceExerciseQuantity exerciseQuantity = null;
+        InterfaceExerciseQuantity exerciseQuantity;
 
         if (distance != NULL_NUM) {
             exerciseQuantity = new ExerciseDistance(distance, distanceUnit);
