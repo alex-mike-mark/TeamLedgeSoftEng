@@ -38,14 +38,6 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
     }
 
     /**
-     * This method gets a list of workout sessions in the database
-     * @return a list of the workout sessions stored in the database
-     */
-    public List<WorkoutSession> getWorkoutSessionsList() {
-        return dataAccess.getWorkoutSessionsList();
-    }
-
-    /**
      * A method that returns a list of workout sessions scheduled in a date range
      * @param startDate the first date of the date range
      * @param endDate the last date of the date range
@@ -79,18 +71,6 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      */
     public void removeWorkoutSession(WorkoutSession workoutSession) {
         dataAccess.removeWorkoutSession(workoutSession);
-    }
-
-    /**
-     * Sets the scheduled date of a workout
-     *
-     * @param workoutSession the workout to change the date for
-     * @param newDate        the new date of the workout
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    public void setWorkoutDate(WorkoutSession workoutSession, LocalDate newDate) throws IllegalArgumentException {
-        workoutSession.setDate(newDate);
-        dataAccess.updateWorkoutDate(workoutSession, newDate);
     }
 
     /**
