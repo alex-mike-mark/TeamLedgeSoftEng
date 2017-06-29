@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import ledge.muscleup.business.InterfaceAccessExercises;
 import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
@@ -68,9 +69,9 @@ public class ScheduleWeekTest {
     @Test
     public void getWeekdayTest(){
         Assert.assertTrue("Returned unexpected weekday value",
-                scheduleWeek.getWeekday(DateTimeConstants.MONDAY).isEqual(new LocalDate(2017, 6, 5)));
+                scheduleWeek.getWeekday(DateTimeConstants.MONDAY).isEqual(new LocalDate().withDayOfWeek(DateTimeConstants.MONDAY)));
         Assert.assertTrue("Returned unexpected weekday value",
-                scheduleWeek.getWeekday(DateTimeConstants.SUNDAY).isEqual(new LocalDate(2017, 6, 11)));
+                scheduleWeek.getWeekday(DateTimeConstants.SUNDAY).isEqual(new LocalDate().withDayOfWeek(DateTimeConstants.SUNDAY)));
     }
 
     /**
@@ -80,15 +81,15 @@ public class ScheduleWeekTest {
     @Test
     public void scheduledWorkoutsTest(){
         Assert.assertFalse("Returned that day is empty when it isn't",
-                scheduleWeek.isDayEmpty(DateTimeConstants.MONDAY));
+                scheduleWeek.isDayEmpty(DateTimeConstants.TUESDAY));
         Assert.assertTrue("Returned that day isn't empty when it is",
-                scheduleWeek.isDayEmpty(DateTimeConstants.SATURDAY));
+                scheduleWeek.isDayEmpty(DateTimeConstants.THURSDAY));
 
         Assert.assertEquals("Returned a workout for a day where there shouldn't be one",
-                scheduleWeek.getScheduledWorkout(DateTimeConstants.MONDAY), null);
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.THURSDAY).getName(), null);
         Assert.assertEquals("Didn't return the workout scheduled for a day",
-                scheduleWeek.getScheduledWorkout(DateTimeConstants.SATURDAY).getName(),
-                "Work that Core, Get that Score!");
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.TUESDAY).getName(),
+                "Never Skip Leg Day");
     }
 
     /**
@@ -105,47 +106,35 @@ public class ScheduleWeekTest {
                 scheduleWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart.plusWeeks(1));
         Assert.assertEquals("Returned unexpected workout",
                 scheduleWeek.getScheduledWorkout(DateTimeConstants.TUESDAY).getName(),
-                "Never Skip Leg Day");
-        Assert.assertEquals("Returned unexpected workout",
-                scheduleWeek.getScheduledWorkout(DateTimeConstants.THURSDAY).getName(),
                 "Marathon Training Starts Here");
 
-        dataAccess.setToLastWeek(scheduleWeek);
+        dataAccess.setToCurrentWeek(scheduleWeek);
+        Assert.assertEquals("Improperly Set to Current week",
+                scheduleWeek.getWeekday(DateTimeConstants.MONDAY), LocalDate.now().withDayOfWeek(DateTimeConstants.MONDAY));
+        Assert.assertEquals("Returned unexpected workout",
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.TUESDAY).getName(), "Never Skip Leg Day");
+        Assert.assertEquals("Returned unexpected workout",
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.WEDNESDAY).getName(), "Work that Core, Get that Score!");
+        Assert.assertEquals("Returned unexpected workout",
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.FRIDAY).getName(), "Never Skip Leg Day");
 
+
+        dataAccess.setToLastWeek(scheduleWeek);
         Assert.assertEquals("Improperly decremented week",
-                scheduleWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart);
+                scheduleWeek.getWeekday(DateTimeConstants.MONDAY), LocalDate.now().withDayOfWeek(DateTimeConstants.MONDAY).minusWeeks(1));
         Assert.assertEquals("Returned unexpected workout",
                 scheduleWeek.getScheduledWorkout(DateTimeConstants.THURSDAY).getName(),
                 "Welcome to the Gun Show");
-        Assert.assertEquals("Returned unexpected workout",
-                scheduleWeek.getScheduledWorkout(DateTimeConstants.FRIDAY).getName(),
-                "Never Skip Leg Day");
-        Assert.assertEquals("Returned unexpected workout",
-                scheduleWeek.getScheduledWorkout(DateTimeConstants.SATURDAY).getName(),
-                "Work that Core, Get that Score!");
+
 
         dataAccess.setToLastWeek(scheduleWeek);
 
         Assert.assertEquals("Improperly decremented week",
-                scheduleWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart.minusWeeks(1));
+                scheduleWeek.getWeekday(DateTimeConstants.MONDAY), LocalDate.now().withDayOfWeek(DateTimeConstants.MONDAY).minusWeeks(2));
         Assert.assertEquals("Returned unexpected workout",
-                scheduleWeek.getScheduledWorkout(DateTimeConstants.MONDAY), null);
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.MONDAY).getName(), null);
         Assert.assertEquals("Returned unexpected workout",
-                scheduleWeek.getScheduledWorkout(DateTimeConstants.SUNDAY), null);
-
-        dataAccess.setToNextWeek(scheduleWeek);
-
-        Assert.assertEquals("Improperly incremented week",
-                scheduleWeek.getWeekday(DateTimeConstants.MONDAY), currWeekStart);
-        Assert.assertEquals("Returned unexpected workout",
-                scheduleWeek.getScheduledWorkout(DateTimeConstants.THURSDAY).getName(),
-                "Welcome to the Gun Show");
-        Assert.assertEquals("Returned unexpected workout",
-                scheduleWeek.getScheduledWorkout(DateTimeConstants.FRIDAY).getName(),
-                "Never Skip Leg Day");
-        Assert.assertEquals("returned unexpected workout",
-                scheduleWeek.getScheduledWorkout(DateTimeConstants.SATURDAY).getName(),
-                "Work that Core, Get that Score!");
+                scheduleWeek.getScheduledWorkout(DateTimeConstants.SUNDAY).getName(), null);
     }
 
     /**
@@ -154,14 +143,12 @@ public class ScheduleWeekTest {
     @Test
     public void addRemoveWorkoutTest(){
         Assert.assertFalse("Removed a workout when there isn't one",
-                scheduleWeek.removeWorkoutSession(DateTimeConstants.WEDNESDAY));
-        Assert.assertTrue("Didn't remove workout",
                 scheduleWeek.removeWorkoutSession(DateTimeConstants.THURSDAY));
+        Assert.assertTrue("Didn't remove workout",
+                scheduleWeek.removeWorkoutSession(DateTimeConstants.WEDNESDAY));
 
         Assert.assertEquals("Improperly deleted a workout",
                 scheduleWeek.getScheduledWorkout(DateTimeConstants.WEDNESDAY), null);
-        Assert.assertEquals("Improperly deleted a workout",
-                scheduleWeek.getScheduledWorkout(DateTimeConstants.THURSDAY), null);
     }
 }
 
@@ -169,7 +156,7 @@ public class ScheduleWeekTest {
  * A template WorkoutSession accessor that creates a template database stub for use in testing
  */
 class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
-    private TemplateDataAccessStub dataAccess;
+    TemplateDataAccessStub dataAccess;
 
     /**
      * The default constructor for the TemplateAccessWorkoutSessions
@@ -204,13 +191,12 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
 
     /**
      * A method that returns a list of workout sessions scheduled in the current week
-     *
      * @return a list of all workout sessions scheduled in the current week
      */
     @Override
     public List<WorkoutSession> getCurrentWeekSessions() {
-        //TODO remove after refactoring persistence layer or implement and test
-        return null;
+        LocalDate firstOfThisWeek = new LocalDate().withDayOfWeek(DateTimeConstants.MONDAY);
+        return dataAccess.getSessionsInDateRange(firstOfThisWeek, firstOfThisWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
     }
 
     /**
@@ -240,8 +226,10 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      */
     @Override
     public void toggleWorkoutCompleted(WorkoutSession workoutSession) {
-        //TODO remove after refactoring persistence layer or implement and test
+        workoutSession.toggleCompleted();
+        dataAccess.toggleWorkoutComplete(workoutSession);
     }
+
 
     /**
      * Log an exercise in a workout as complete
@@ -253,8 +241,7 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      */
     @Override
     public boolean completeWorkoutExercise(WorkoutSession workoutSession, WorkoutSessionExercise exercise) throws IllegalArgumentException {
-        //TODO remove after refactoring persistence layer or implement and test
-        return false;
+        return workoutSession.completeExercise(exercise) && dataAccess.toggleExerciseComplete(workoutSession, exercise);
     }
 
     /**
@@ -268,7 +255,8 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      */
     @Override
     public void addWorkoutSession(ScheduleWeek scheduleWeek, WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException {
-        //TODO remove after refactoring persistence layer or implement and test
+        scheduleWeek.addWorkoutSession(workoutSession, dayOfWeek);
+        dataAccess.addWorkoutSession(scheduleWeek, workoutSession, dayOfWeek);
     }
 
     /**
@@ -282,38 +270,7 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      */
     @Override
     public boolean removeWorkoutSession(ScheduleWeek scheduleWeek, int dayOfWeek) throws IllegalArgumentException {
-        //TODO remove after refactoring persistence layer or implement and test
-        return false;
-    }
-
-    /**
-     * Sets the manager to contain the scheduled workouts for the previous week
-     *
-     * @param scheduleWeek the week to change
-     */
-    @Override
-    public void setToLastWeek(ScheduleWeek scheduleWeek) {
-        //TODO remove after refactoring persistence layer or implement and test
-    }
-
-    /**
-     * Sets the manager to contain the scheduled workouts for the following week
-     *
-     * @param scheduleWeek the week to change
-     */
-    @Override
-    public void setToNextWeek(ScheduleWeek scheduleWeek) {
-        //TODO remove after refactoring persistence layer or implement and test
-    }
-
-    /**
-     * Sets the manager to contain the scheduled workouts for the current week
-     *
-     * @param scheduleWeek the week to change
-     */
-    @Override
-    public void setToCurrentWeek(ScheduleWeek scheduleWeek) {
-        //TODO remove after refactoring persistence layer or implement and test
+        return scheduleWeek.removeWorkoutSession(dayOfWeek) && dataAccess.removeWorkoutSession(scheduleWeek, dayOfWeek);
     }
 
     /**
@@ -324,8 +281,52 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      */
     @Override
     public ScheduleWeek newScheduledWeek(LocalDate dayInWeek) {
-        //TODO remove after refactoring persistence layer or implement and test
-        return null;
+        LocalDate firstDayOfWeek = dayInWeek.withDayOfWeek(DateTimeConstants.MONDAY);
+        return new ScheduleWeek(getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1)));
+    }
+
+    /**
+     * Sets the manager to contain the scheduled workouts for the previous week
+     *
+     * @param scheduleWeek the week to change
+     */
+    @Override
+    public void setToLastWeek(ScheduleWeek scheduleWeek) {
+        LocalDate firstDayOfWeek;
+        List<WorkoutSession> weekWorkouts;
+
+        firstDayOfWeek = scheduleWeek.getWeekday(DateTimeConstants.MONDAY).minusWeeks(1);
+        weekWorkouts = getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
+        scheduleWeek.lastWeek(weekWorkouts);
+    }
+
+    /**
+     * Sets the manager to contain the scheduled workouts for the following week
+     *
+     * @param scheduleWeek the week to change
+     */
+    @Override
+    public void setToNextWeek(ScheduleWeek scheduleWeek) {
+        LocalDate firstDayOfWeek;
+        List<WorkoutSession> weekWorkouts;
+
+        firstDayOfWeek = scheduleWeek.getWeekday(DateTimeConstants.MONDAY).plusWeeks(1);
+        weekWorkouts = getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
+        scheduleWeek.nextWeek(weekWorkouts);
+    }
+
+    /**
+     * Sets the manager to contain the scheduled workouts for the current week
+     * @param scheduleWeek the week to change
+     */
+    @Override
+    public void setToCurrentWeek(ScheduleWeek scheduleWeek) {
+        LocalDate firstDayOfWeek;
+        List<WorkoutSession> weekWorkouts;
+
+        firstDayOfWeek = LocalDate.now().withDayOfWeek(DateTimeConstants.MONDAY);
+        weekWorkouts = getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
+        scheduleWeek.currentWeek(weekWorkouts);
     }
 }
 
@@ -432,34 +433,34 @@ class TemplateDataAccessStub implements InterfaceExerciseDataAccess, InterfaceWo
         workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience, new ExerciseSets(2, 15));
         workout.addExercise(workoutExercise);
 
-        workoutSessionsByDate = new HashMap<>();
+        workoutSessionsByDate = new TreeMap<>();
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Welcome to the Gun Show")),
-                new LocalDate(2017, 06, 8),
+                new LocalDate().minusWeeks(1).withDayOfWeek(DateTimeConstants.THURSDAY),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Never Skip Leg Day")),
-                new LocalDate(2017, 06, 9),
+                new LocalDate().withDayOfWeek(DateTimeConstants.TUESDAY),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Work that Core, Get that Score!")),
-                new LocalDate(2017, 06, 10),
+                new LocalDate().withDayOfWeek(DateTimeConstants.WEDNESDAY),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Never Skip Leg Day")),
-                new LocalDate(2017, 06, 13),
+                new LocalDate().withDayOfWeek(DateTimeConstants.FRIDAY),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Marathon Training Starts Here")),
-                new LocalDate(2017, 06, 15),
+                new LocalDate().plusWeeks(1).withDayOfWeek(DateTimeConstants.TUESDAY),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
