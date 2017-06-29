@@ -1,5 +1,7 @@
 package ledge.muscleup.persistence;
 
+import android.util.Log;
+
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -9,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import ledge.muscleup.model.exercise.Exercise;
@@ -156,7 +159,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      * @return a list of all workout sessions scheduled between startDate and endDate, inclusive
      */
     @Override
-    public List<WorkoutSession> getSessionsInDateRange(LocalDate startDate, LocalDate endDate) {
+    public List<WorkoutSession> getSessionsInDateRange(LocalDate startDate, LocalDate endDate) {//TODONow
         return null;
     }
 
@@ -166,7 +169,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      * @param workoutSession the new workout session to insert into the database
      */
     @Override
-    public void insertWorkoutSession(WorkoutSession workoutSession) {
+    public void insertWorkoutSession(WorkoutSession workoutSession) {//TODO
 
     }
 
@@ -176,7 +179,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      * @param workoutSession the workout session to remove from the database
      */
     @Override
-    public void removeWorkoutSession(WorkoutSession workoutSession) {
+    public void removeWorkoutSession(WorkoutSession workoutSession) {//TODO
 
     }
 
@@ -186,49 +189,18 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      * @param workoutSession the workout to change the state of
      */
     @Override
-    public void toggleWorkoutComplete(WorkoutSession workoutSession) {
+    public void toggleWorkoutComplete(WorkoutSession workoutSession) {//TODO
+        DateTimeFormatter sqlDateFormatter = DateTimeFormat.forPattern("yyyy-mm-dd");
+        String sessionDate = sqlDateFormatter.print(workoutSession.getDate());
 
-    }
-
-    /**
-     * Toggles the completed state of an exercise in a workout in the database
-     *
-     * @param workoutSession the workout which contains the exercise
-     * @param exercise       the exercise to complete
-     * @return a boolean representing whether the exercise was marked as completed or not
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    @Override
-    public boolean toggleExerciseComplete(WorkoutSession workoutSession, WorkoutSessionExercise exercise) throws IllegalArgumentException {
-        return false;
-    }
-
-    /**
-     * Adds a workout session to a given day in the database
-     *
-     * @param scheduleWeek   the week to add the workout to
-     * @param workoutSession the workout session to add
-     * @param dayOfWeek      the day of the week to add the workout session to
-     * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
-     *                                  > DateTimeConstants.SUNDAY}
-     */
-    @Override
-    public void addWorkoutSession(ScheduleWeek scheduleWeek, WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException {
-
-    }
-
-    /**
-     * Removes a workout from a given day in the database
-     *
-     * @param scheduleWeek the week to remove the workout from
-     * @param dayOfWeek    the day to remove the workout from
-     * @return a boolean representing if a workout was removed
-     * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
-     *                                  > DateTimeConstants.SUNDAY}
-     */
-    @Override
-    public boolean removeWorkoutSession(ScheduleWeek scheduleWeek, int dayOfWeek) throws IllegalArgumentException {
-        return false;
+        try{
+            resultSet = statement.executeQuery("" +
+                    "UPDATE     WorkoutSessions WS " +
+                    "SET        Complete = True " +
+                    "WHERE      ScheduledDate = "+ sessionDate);
+        }catch(Exception e){
+            Log.d("SQL",sqlError(e));
+        }
     }
 
     /**
@@ -237,7 +209,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      * @return a list of all workouts in the database
      */
     @Override
-    public List<Workout> getWorkoutsList() {
+    public List<Workout> getWorkoutsList() {//TODO
         return null;
     }
 
@@ -247,7 +219,8 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      * @return a list of names of all workouts in the database
      */
     @Override
-    public List<String> getWorkoutNamesList() {
+    public List<String> getWorkoutNamesList() {//TODO
+        List<String>theList = new  ArrayList<String>();
         return null;
     }
 
@@ -259,7 +232,19 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      */
     @Override
     public Workout getWorkout(String workoutName) {
-        return null;
+        Workout workout = null;
+        Workout maybeWorkout;
+        List<Workout> workoutList = getWorkoutsList();
+        Iterator<Workout> workoutIterator = workoutList.iterator();
+
+        while(workoutIterator.hasNext()){
+            maybeWorkout = workoutIterator.next();
+            if(maybeWorkout.equals(workoutName)){
+                workout = maybeWorkout;
+            }
+        }
+
+        return workout;
     }
 
     /**
