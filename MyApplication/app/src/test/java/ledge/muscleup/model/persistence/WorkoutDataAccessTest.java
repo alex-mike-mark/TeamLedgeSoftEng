@@ -8,7 +8,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import ledge.muscleup.business.InterfaceAccessWorkouts;
 import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.ExerciseDistance;
 import ledge.muscleup.model.exercise.ExerciseDuration;
@@ -28,9 +27,13 @@ import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.persistence.InterfaceWorkoutDataAccess;
 
 /**
- * Created by koope on 2017-06-29.
+ * Used for testing the InterfaceWorkoutDataAccess persistence interface
+ *
+ * @author: Ryan Koop
+ * @version: 1.0
+ * @since 2017-06-29
+ *
  */
-
 public class WorkoutDataAccessTest extends TestCase {
     InterfaceWorkoutDataAccess dataAccess;
     final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
@@ -38,14 +41,14 @@ public class WorkoutDataAccessTest extends TestCase {
     final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
 
     /**
-     * Constructor for the AccessWorkoutsTest
+     * Constructor for the WorkoutDataAccessTest
      */
     public WorkoutDataAccessTest(String arg0) {
         super(arg0);
     }
 
     /**
-     * Initializes the AccessWorkouts to be used in the test
+     * Initializes the WorkoutDataAccess to be used in the test
      */
     @Before
     public void setUp() {

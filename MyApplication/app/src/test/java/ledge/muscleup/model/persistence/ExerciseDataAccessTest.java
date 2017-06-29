@@ -8,29 +8,32 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import ledge.muscleup.business.InterfaceAccessExercises;
-import ledge.muscleup.model.persistence.TemplateDataAccessStub;
 import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
 import ledge.muscleup.model.exercise.enums.ExerciseType;
 import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
 
 /**
- * Created by Ryan on 2017-06-29.
+ * Used for testing the InterfaceExerciseDataAccess persistence interface
+ *
+ * @author: Ryan Koop
+ * @version: 1.0
+ * @since 2017-06-29
+ *
  */
 
 public class ExerciseDataAccessTest extends TestCase {
     InterfaceExerciseDataAccess dataAccess;
 
     /**
-     * Constructor for the AccessExercisesTest
+     * Constructor for the ExerciseDataAccessTest
      */
     public ExerciseDataAccessTest(String arg0) {
         super(arg0);
     }
 
     /**
-     * Initializes the AccessExercises to be used in the test
+     * Initializes the ExerciseDataAccess to be used in the test
      */
     @Before
     public void setUp() {

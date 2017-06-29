@@ -10,7 +10,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
 import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.WorkoutExercise;
@@ -23,9 +22,13 @@ import ledge.muscleup.model.workout.WorkoutSession;
 import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
 
 /**
- * Created by Ryan on 2017-06-29.
+ * Used for testing the InterfaceWorkoutSessionDataAccess persistence interface
+ *
+ * @author: Ryan Koop
+ * @version: 1.0
+ * @since 2017-06-29
+ *
  */
-
 public class WorkoutSessionDataAccessTest extends TestCase {
     InterfaceWorkoutSessionDataAccess dataAccess;
     final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
@@ -34,7 +37,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
 
     ScheduleWeek scheduleWeek;
     /**
-     * Constructor for the AccessWorkoutSessionsTest
+     * Constructor for the WorkoutSessoionDataAccessTest
      */
     public WorkoutSessionDataAccessTest(String arg0)
     {
@@ -42,7 +45,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
     }
 
     /**
-     * Initializes the AccessWorkoutSessions to be used in the test
+     * Initializes the WorkoutSessionDataAccess to be used in the test
      */
     @Before
     public void setUp()
@@ -157,7 +160,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
 
 
     /**
-     * Tests that inserting a workout sessions works properly
+     * Tests that inserting a workout session works properly
      */
     @Test
     public void testInsertWorkoutSession() {
@@ -195,7 +198,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
     }
 
     /**
-     * Tests that removing a workout sessions works properly
+     * Tests that removing a workout session works properly
      */
     @Test
     public void testRemoveWorkoutSession() {
