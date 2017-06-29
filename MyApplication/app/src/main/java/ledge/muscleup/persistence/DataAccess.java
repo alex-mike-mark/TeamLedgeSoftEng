@@ -680,7 +680,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
     }
 
     /**
-     * Gets a list of names of all exercises in the database
+     * Gets a list of names of all workouts in the database
      *
      * @return a list of names of all workouts in the database
      */
