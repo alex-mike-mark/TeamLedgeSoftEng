@@ -79,7 +79,6 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      * @param workoutSession the workout to change the state of
      */
     public void toggleWorkoutCompleted(WorkoutSession workoutSession) {
-        workoutSession.toggleCompleted();
         dataAccess.toggleWorkoutComplete(workoutSession);
     }
 
