@@ -26,12 +26,6 @@ public interface InterfaceAccessWorkoutSessions {
     WorkoutSession getWorkoutSession(LocalDate dateOfSession);
 
     /**
-     * This method gets a list of workout sessions in the database
-     * @return a list of the workout sessions stored in the database
-     */
-    List<WorkoutSession> getWorkoutSessionsList();
-
-    /**
      * A method that returns a list of workout sessions scheduled in a date range
      * @param startDate the first date of the date range
      * @param endDate the last date of the date range
@@ -57,15 +51,6 @@ public interface InterfaceAccessWorkoutSessions {
      * @param workoutSession the workout session to be removed
      */
     void removeWorkoutSession(WorkoutSession workoutSession);
-
-    /**
-     * Sets the scheduled date of a workout
-     *
-     * @param workoutSession the workout to change the date for
-     * @param newDate the new date of the workout
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    void setWorkoutDate(WorkoutSession workoutSession, LocalDate newDate) throws IllegalArgumentException;
 
     /**
      * Toggles the completed state of a workout

@@ -16,7 +16,7 @@ import ledge.muscleup.model.workout.WorkoutSession;
  * @version 1.0
  * @since 2017-06-07
  */
-public interface InterfaceWorkoutSessionDataAccess {
+public interface InterfaceWorkoutSessionDataAccess extends InterfaceDataAccess{
 
     /**
      * A method that returns a list of all workout sessions in the database
@@ -52,16 +52,6 @@ public interface InterfaceWorkoutSessionDataAccess {
      * @param workoutSession the workout session to remove from the database
      */
     void removeWorkoutSession(WorkoutSession workoutSession);
-
-    /**
-     * Updates the scheduled date of a workout in the database
-     *
-     * @param workoutSession the workout to change the date for
-     * @param newDate        the new date of the workout
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    void updateWorkoutDate(WorkoutSession workoutSession, LocalDate newDate)
-            throws IllegalArgumentException;
 
     /**
      * Toggles the completed state of a workout in the database
