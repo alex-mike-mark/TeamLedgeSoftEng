@@ -33,7 +33,6 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
     private String dbPathPrefix = "jdbc:hsqldb:file:";
 
     private Connection connection;
-    private String command;
     private Statement statement;
     private ResultSet resultSet;
 
@@ -84,7 +83,39 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      */
     @Override
     public List<Exercise> getExercisesList() {
-        return null;
+        List<Exercise> exerciseList = new ArrayList<>();
+        String name;
+        ExerciseIntensity intensity;
+        ExerciseType type;
+        boolean favourite;
+
+        try {
+            resultSet = statement.executeQuery(
+                    "SELECT     E.Name, " +
+                    "           EI.Intensity, " +
+                    "           ET.Type, " +
+                    "           E.Favourite " +
+                    "FROM       Exercises E " +
+                    "LEFT JOIN  ExerciseIntensities EI " +
+                    "           ON E.IntensityID = EI.ID " +
+                    "LEFT JOIN  ExerciseTypes ET " +
+                    "           ON E.TypeID = ET.ID");
+
+            while (resultSet.next()) {
+                name = resultSet.getString("Name");
+                intensity = ExerciseIntensity.valueOf(resultSet.getString("Intensity"));
+                type = ExerciseType.valueOf(resultSet.getString("Type"));
+                favourite = resultSet.getBoolean("Favourite");
+
+                exerciseList.add(new Exercise(name, intensity, type, favourite));
+            }
+            resultSet.close();
+        }
+        catch (Exception e) {
+            sqlError(e);
+        }
+
+        return exerciseList;
     }
 
     /**
