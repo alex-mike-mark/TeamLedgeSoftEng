@@ -9,9 +9,9 @@ import java.sql.Statement;
 import java.util.List;
 
 import ledge.muscleup.model.exercise.Exercise;
-import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
-import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
+import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
+import ledge.muscleup.model.exercise.enums.ExerciseType;
 import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
@@ -24,7 +24,7 @@ import ledge.muscleup.model.workout.WorkoutSession;
  * @since 2017-06-27
  */
 
-public class DataAccess implements InterfaceDataAccess {
+public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkoutDataAccess, InterfaceWorkoutSessionDataAccess {
     private final String SHUTDOWN_CMD = "shutdown compact";
 
     private String dbName;
@@ -83,177 +83,35 @@ public class DataAccess implements InterfaceDataAccess {
      */
     @Override
     public List<Exercise> getExercisesList() {
-        return null;
-    }
+        List<Exercise> exerciseList = null;
+        String name;
+        ExerciseIntensity intensity;
+        ExerciseType type;
+        boolean favourite;
 
-    /**
-     * Gets a list of names of all exercises in the database
-     *
-     * @return a list of names of all exercises in the database
-     */
-    @Override
-    public List<String> getExerciseNamesList() {
-        return null;
-    }
+        try
+        {
+            command = "SELECT   Name " +
+                      "FROM     Exercises";
+            resultSet = statement.executeQuery(command);
 
-    /**
-     * Retrieves an exercise from the database with the name given as parameter
-     *
-     * @param exerciseName - the name of the exercise to retrieve from the database
-     * @return The exercise with name exerciseName, or null if no exercise exists with that name
-     */
-    @Override
-    public Exercise getExercise(String exerciseName) {
-        return null;
-    }
+            while (resultSet.next())
+            {
+                name = resultSet.getString("Name");
+                intensity = ExerciseIntensity.values()[resultSet.getInt("IntensityID")];
+                type = ExerciseType.values()[resultSet.getInt("TypeID")];
+                favourite = resultSet.getBoolean("Favourite");
 
-    /**
-     * Adds an exercise to the database
-     *
-     * @param exercise the exercise to be added to the database
-     */
-    @Override
-    public void insertExercise(Exercise exercise) {
+                exerciseList.add(new Exercise(name, intensity, type, favourite));
+            }
+            resultSet.close();
+        }
+        catch (Exception e)
+        {
+            sqlError(e);
+        }
 
-    }
-
-    /**
-     * Removes an exercise from the database, if it exists
-     *
-     * @param exercise the exercise to remove from the database
-     */
-    @Override
-    public void removeExercise(Exercise exercise) {
-
-    }
-
-    /**
-     * Gets a list of all workouts in the database
-     *
-     * @return a list of all workouts in the database
-     */
-    @Override
-    public List<Workout> getWorkoutsList() {
-        return null;
-    }
-
-    /**
-     * Gets a list of names of all exercises in the database
-     *
-     * @return a list of names of all workouts in the database
-     */
-    @Override
-    public List<String> getWorkoutNamesList() {
-        return null;
-    }
-
-    /**
-     * Retrieves a workout from the database with the name given as parameter
-     *
-     * @param workoutName the name of the workout to retrieve from the database
-     * @return The workout with name workoutName, or null if no workout exists with that name
-     */
-    @Override
-    public Workout getWorkout(String workoutName) {
-        return null;
-    }
-
-    /**
-     * Adds a workout to the database
-     *
-     * @param workout the workout to be added to the database
-     */
-    @Override
-    public void insertWorkout(Workout workout) {
-
-    }
-
-    /**
-     * Removes a workout from the database, if it exists
-     *
-     * @param workout the workout to remove from the database
-     */
-    @Override
-    public void removeWorkout(Workout workout) {
-
-    }
-
-    /**
-     * Updates the recommended quantity of exercise for a given exercise in a given workout in the database
-     *
-     * @param workout  the workout that contains the exercise to update
-     * @param exercise the exercise to set the quantity for
-     * @param quantity the quantity to assign to the exercise
-     * @return a boolean representing if the exercise was found and updated in the workout
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    @Override
-    public boolean updateExerciseQuantity(Workout workout, WorkoutExercise exercise, InterfaceExerciseQuantity quantity) throws IllegalArgumentException {
-        return false;
-    }
-
-    /**
-     * Toggles the favourite state of an exercise in the database
-     *
-     * @param workout the workout to update the status of
-     */
-    @Override
-    public void toggleExerciseFavourite(Workout workout) {
-
-    }
-
-    /**
-     * Adds an exercise stored in the database to a workout stored in the database with the given
-     * quantity of the exercise to be done
-     *
-     * @param workout  the workout to add an exercise to
-     * @param exercise the exercise to add to the workout
-     * @return true if exercise was added successfully, false otherwise
-     */
-    @Override
-    public boolean addWorkoutExercise(Workout workout, WorkoutExercise exercise) {
-        return false;
-    }
-
-    /**
-     * Move the position of an exercise in the list of exercises in the database
-     *
-     * @param workout  the workout to change the order of exercises for
-     * @param exercise the exercise to change the position of
-     * @param index    the index of the exercise to move
-     * @return a boolean representing if the exercise was found and moved to the new index
-     * @throws IllegalArgumentException if passed a {@code null} parameter or if {@code index} is
-     *                                  outside the bounds of the list of exercises
-     */
-    @Override
-    public boolean moveWorkoutExercise(Workout workout, WorkoutExercise exercise, int index) throws IllegalArgumentException {
-        return false;
-    }
-
-    /**
-     * Removes an exercise from a workout in the database
-     *
-     * @param workout  the workout to remove an exercise from
-     * @param exercise the exercise to remove from the list
-     * @return the exercise that was removed, or {@code null} if the exercise couldn't be found
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    @Override
-    public boolean addExerciseToWorkout(Workout workout, WorkoutExercise exercise) {
-        return false;
-    }
-
-    /**
-     * Removes an exercise from a workout in the database
-     *
-     * @param workout  the workout to remove an exercise from
-     * @param exercise the exercise to remove from the list
-     * @return the exercise that was removed, or {@code null} if the exercise couldn't be found
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    @Override
-    public boolean removeWorkoutExercise(Workout workout, WorkoutExercise exercise) throws IllegalArgumentException {
-        return false;
+        return exerciseList;
     }
 
     /**
@@ -311,18 +169,6 @@ public class DataAccess implements InterfaceDataAccess {
     }
 
     /**
-     * Updates the scheduled date of a workout in the database
-     *
-     * @param workoutSession the workout to change the date for
-     * @param newDate        the new date of the workout
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    @Override
-    public void updateWorkoutDate(WorkoutSession workoutSession, LocalDate newDate) throws IllegalArgumentException {
-
-    }
-
-    /**
      * Toggles the completed state of a workout in the database
      *
      * @param workoutSession the workout to change the state of
@@ -371,6 +217,37 @@ public class DataAccess implements InterfaceDataAccess {
     @Override
     public boolean removeWorkoutSession(ScheduleWeek scheduleWeek, int dayOfWeek) throws IllegalArgumentException {
         return false;
+    }
+
+    /**
+     * Gets a list of all workouts in the database
+     *
+     * @return a list of all workouts in the database
+     */
+    @Override
+    public List<Workout> getWorkoutsList() {
+        return null;
+    }
+
+    /**
+     * Gets a list of names of all exercises in the database
+     *
+     * @return a list of names of all workouts in the database
+     */
+    @Override
+    public List<String> getWorkoutNamesList() {
+        return null;
+    }
+
+    /**
+     * Retrieves a workout from the database with the name given as parameter
+     *
+     * @param workoutName the name of the workout to retrieve from the database
+     * @return The workout with name workoutName, or null if no workout exists with that name
+     */
+    @Override
+    public Workout getWorkout(String workoutName) {
+        return null;
     }
 
     /**

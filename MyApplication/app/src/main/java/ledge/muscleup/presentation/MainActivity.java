@@ -35,6 +35,12 @@ public class MainActivity extends AppCompatActivity {
         Main.startUp();
     }
 
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Main.shutDown();
+    }
+
     /**
      * opens the WorkoutActivity
      * @param view
