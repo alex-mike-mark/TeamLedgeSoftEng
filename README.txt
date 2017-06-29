@@ -100,12 +100,15 @@ Also contained is our hopes, dreams and endless passion for working out, though 
 
 ###Log Location###
 The log for iteration 1 is in this google doc: <https://docs.google.com/document/d/18dOXb27PLIrS7kjHcLGODmWes66gZQpesqNNg8ew2Go/edit>
-The logs for iteration 2 is in this google doc: <https://docs.google.com/document/d/1U3ojEM5CPwwEfbJQhXPyOEgiolTkioJ4-ktY7Vx_Tt4/edit>
+The log for iteration 2 is in this google doc: <https://docs.google.com/document/d/1U3ojEM5CPwwEfbJQhXPyOEgiolTkioJ4-ktY7Vx_Tt4/edit>
 
 ###New Features and Where to Find Them###
 The major features implemented in this release are:
 New and improved look and feel
-The ability to view and navigate a weekly view for scheduled workouts
-The ability to jump to the current date when navigating scheduled workouts
-The ability to add and remove scheduled workouts
-The ability to complete a scheduled workout and gain experience points
+The ability to view and navigate a weekly view under Scheduled Workouts (press "next" or "previous")
+The ability to jump to the current date when navigating Scheduled Workouts (press "current week" button)
+The ability to add and remove scheduled workouts in Scheduled Workouts (press "+" or "x")
+The ability to complete a scheduled workout and view experience points gained (check all exercises and click "Complete Workout")
+
+###Known Code Smells###
+The builder pattern should be used to help construct objects 
