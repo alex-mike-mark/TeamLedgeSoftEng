@@ -83,7 +83,6 @@ public class WorkoutSessionActivity extends Activity {
                     Intent appInfo = new Intent(WorkoutSessionActivity.this, CompletedWorkoutActivity.class);
                     LocalDate date = workoutSession.getDate();
                     appInfo.putExtra("workoutSessionDate", formatter.print(date));
-                    //TODO- Method call to update user's xp with completed workout xp value. User's xp not yet implemented.
                     startActivity(appInfo);
                 }
             });
