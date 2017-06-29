@@ -199,7 +199,29 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      */
     @Override
     public List<Workout> getWorkoutsList() {
-        return null;
+        Workout workout;
+        String workoutName = null;
+        List<Workout> workoutsByName = new ArrayList<>();
+
+        try
+        {
+            command =
+                    "SELECT W.Name " +
+                    "FROM Workouts W";
+            resultSet = statement.executeQuery(command);
+
+            while (resultSet.next())
+            {
+                workoutName = resultSet.getString("Name");
+                workout = new Workout(workoutName);
+                workoutsByName.add(workout);
+            }
+            resultSet.close();
+        } catch (Exception e)
+        {
+            sqlError(e);
+        }
+        return workoutsByName;
     }
 
     /**
@@ -209,7 +231,24 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      */
     @Override
     public List<String> getWorkoutNamesList() {
-        return null;
+        String workoutName = null;
+        List<String> nameList = new ArrayList<>();
+
+        try
+        {
+            command = "Select * from Workouts";
+            resultSet = statement.executeQuery(command);
+            while (resultSet.next())
+            {
+                workoutName = resultSet.getString("Name");
+                nameList.add(workoutName);
+            }
+            resultSet.close();
+        } catch (Exception e)
+        {
+            sqlError(e);
+        }
+        return nameList;
     }
 
     /**
