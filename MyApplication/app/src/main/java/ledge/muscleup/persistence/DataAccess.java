@@ -320,6 +320,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                 else if (!workoutName.equals(resultSet.getString("WorkoutName"))) {
                     workoutSession = new WorkoutSession(workoutName, scheduledDate, workoutComplete, workoutSessionExerciseList);
                     workoutSessionList.add(workoutSession);
+                    workoutSessionExerciseList = new ArrayList<>();
 
                     workoutName = resultSet.getString("WorkoutName");
                     scheduledDate = new LocalDate(resultSet.getDate("ScheduleDate"));
@@ -496,27 +497,94 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      * @return a list of all workouts in the database
      */
     public List<Workout> getWorkoutsList() {
-        Workout workout;
-        String workoutName;
-        List<Workout> workoutsByName = new ArrayList<>();
+        ArrayList<Workout> workoutList = new ArrayList<>();
+        ArrayList<WorkoutExercise> workoutExerciseList = new ArrayList<>();
+        Exercise exercise;
+
+        String workoutName = null, exerciseName;
+        int xpValue, duration, sets, reps;
+        double distance, weight;
+        DistanceUnit distanceUnit;
+        TimeUnit timeUnit;
+        WeightUnit weightUnit;
+        ExerciseIntensity intensity;
+        ExerciseType type;
+        boolean workoutFavourite = false;
 
         try
         {
             resultSet = statement.executeQuery(
-                    "SELECT *" +
-                    "FROM   Workouts");
-            while (resultSet.next())
-            {
-                workoutName = resultSet.getString("Name");
-                workout = new Workout(workoutName);
-                workoutsByName.add(workout);
+                    "SELECT		W.Name AS WorkoutName, " +
+                    "			E.Name AS ExerciseName, " +
+                    "			EI.Intensity, " +
+                    "			ET.Type, " +
+                    "			W.Favourite, " +
+                    "			WE.Distance, " +
+                    "			DiU.DistanceUnit, " +
+                    "			WE.Duration, " +
+                    "			DuU.DurationUnit, " +
+                    "			WE.Sets, " +
+                    "			WE.Reps, " +
+                    "			WE.Weight, " +
+                    "			WU.WeightUnit " +
+                    "FROM		Workouts W " +
+                    "LEFT JOIN	WorkoutContents WC " +
+                    "			ON WC.WorkoutID = W.ID " +
+                    "LEFT JOIN	WorkoutExercises WE " +
+                    "			ON WC.ExerciseID = WE.ID " +
+                    "LEFT JOIN	DistanceUnits DiU " +
+                    "			ON WE.DistanceUnitID = DiU.ID " +
+                    "LEFT JOIN	DurationUnits DuU " +
+                    "			ON WE.DurationUnitID = DuU.ID " +
+                    "LEFT JOIN	WeightUnits WU " +
+                    "			ON WE.WeightUnitID = WU.ID " +
+                    "LEFT JOIN	Exercises E " +
+                    "			ON WE.ExerciseID = E.ID " +
+                    "LEFT JOIN  ExerciseIntensities EI " +
+                    "           ON E.IntensityID = EI.ID  " +
+                    "LEFT JOIN  ExerciseTypes ET " +
+                    "           ON E.TypeID = ET.ID ");
+
+            while (resultSet.next()) {
+                if (workoutName == null) {
+                    workoutName = resultSet.getString("WorkoutName");
+                    workoutFavourite = resultSet.getBoolean("Favourite");
+                }
+                else if (!workoutName.equals(resultSet.getString("WorkoutName"))) {
+                    workoutList.add(new Workout(workoutName, workoutFavourite, (WorkoutExercise[]) workoutExerciseList.toArray()));
+                    workoutExerciseList = new ArrayList<>();
+
+                    workoutName = resultSet.getString("WorkoutName");
+                    workoutFavourite = resultSet.getBoolean("WorkoutFavourite");
+                }
+
+                exerciseName = resultSet.getString("ExerciseName");
+                intensity = ExerciseIntensity.valueOf(resultSet.getString("Intensity"));
+                type = ExerciseType.valueOf(resultSet.getString("Type"));
+                exercise = new Exercise(exerciseName, intensity, type);
+
+                xpValue = XP_PER_INTENSITY * ExerciseIntensity.valueOf(resultSet.getString("Intensity")).ordinal();
+                distance = resultSet.getDouble("Distance");
+                distanceUnit = DistanceUnit.valueOf(resultSet.getString("DistanceUnit"));
+                duration = resultSet.getInt("Duration");
+                timeUnit = TimeUnit.valueOf(resultSet.getString("DurationUnit"));
+                sets = resultSet.getInt("Sets");
+                reps = resultSet.getInt("Reps");
+                weight = resultSet.getDouble("Weight");
+                weightUnit = WeightUnit.valueOf(resultSet.getString("WeightUnit"));
+                workoutExerciseList.add(createWorkoutExercise(exercise, xpValue, distance, distanceUnit,
+                        duration, timeUnit, sets, reps, weight, weightUnit));
             }
+
+            if (workoutName != null)
+                workoutList.add(new Workout(workoutName, workoutFavourite, (WorkoutExercise[]) workoutExerciseList.toArray()));
+
             resultSet.close();
         }
         catch (Exception e) {
             sqlError(e);
         }
-        return workoutsByName;
+        return workoutList;
     }
 
     /**
