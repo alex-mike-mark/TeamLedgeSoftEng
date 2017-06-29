@@ -442,9 +442,25 @@ public class AccessWorkoutSessionsTest extends TestCase {
      */
     @Test
     public void testNewScheduledWeek() {
-        //newScheduledWeek(LocalDate dayInWeek)
-        // TODO
         System.out.println("\nStarting testNewScheduledWeek");
+
+        List<WorkoutSession> workoutSessions = new ArrayList<>();
+
+        workoutSessions.add(new WorkoutSession(
+                new Workout("Welcome to the Gun Show", false, new WorkoutExercise[]{
+                        new WorkoutExerciseSetsAndWeight(new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM),
+                                xpLowIntensity, new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS)),
+                        new WorkoutExerciseSets(new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM),
+                                xpLowIntensity, new ExerciseSets(2, 15))
+
+                }),
+                LocalDate.now(),
+                false));
+
+        ScheduleWeek scheduleWeek = new ScheduleWeek(workoutSessions);
+
+        assertNotNull(dataAccess.newScheduledWeek(LocalDate.now()));
+        assertEquals(scheduleWeek.toString(), dataAccess.newScheduledWeek(LocalDate.now()).toString());
 
         System.out.println("Finishing testNewScheduledWeek\n");
     }
@@ -469,7 +485,7 @@ public class AccessWorkoutSessionsTest extends TestCase {
         //setToCurrentWeek(ScheduleWeek scheduleWeek)
         // TODO
         System.out.println("\nStarting testSetToCurrentWeek");
-        
+
         System.out.println("Finishing testSetToCurrentWeek\n");
     }
 
