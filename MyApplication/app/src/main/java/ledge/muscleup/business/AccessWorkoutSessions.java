@@ -83,44 +83,6 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
         dataAccess.toggleWorkoutComplete(workoutSession);
     }
 
-    /**
-     * Log an exercise in a workout as complete
-     *
-     * @param workoutSession the workout which contains the exercise
-     * @param exercise       the exercise to complete
-     * @return a boolean representing whether the exercise was marked as completed or not
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    public boolean completeWorkoutExercise(WorkoutSession workoutSession, WorkoutSessionExercise exercise) throws IllegalArgumentException {
-        return workoutSession.completeExercise(exercise) && dataAccess.toggleExerciseComplete(workoutSession, exercise);
-    }
-
-    /**
-     * Adds a workout session to a given day of a scheduled week
-     *
-     * @param scheduleWeek  the week to add the workout to
-     * @param workoutSession the workout session to add
-     * @param dayOfWeek      the day of the week to add the workout session to
-     * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
-     *                                  > DateTimeConstants.SUNDAY}
-     */
-    public void addWorkoutSession(ScheduleWeek scheduleWeek, WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException {
-        scheduleWeek.addWorkoutSession(workoutSession, dayOfWeek);
-        dataAccess.addWorkoutSession(scheduleWeek, workoutSession, dayOfWeek);
-    }
-
-    /**
-     * Removes a workout from a given day of a scheduled week
-     *
-     * @param scheduleWeek the week to remove the workout from
-     * @param dayOfWeek     the day to remove the workout from
-     * @return a boolean representing if a workout was removed
-     * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
-     *                                  > DateTimeConstants.SUNDAY}
-     */
-    public boolean removeWorkoutSession(ScheduleWeek scheduleWeek, int dayOfWeek) throws IllegalArgumentException {
-        return scheduleWeek.removeWorkoutSession(dayOfWeek) && dataAccess.removeWorkoutSession(scheduleWeek, dayOfWeek);
-    }
 
     /**
      * Creates a new ScheduleWeek based on the given date
