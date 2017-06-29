@@ -198,7 +198,6 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      * @return a boolean representing whether the exercise was marked as completed or not
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    @Override
     public boolean toggleExerciseComplete(WorkoutSession workoutSession, WorkoutSessionExercise exercise) throws IllegalArgumentException {
         return false;
     }
@@ -212,7 +211,6 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
      *                                  > DateTimeConstants.SUNDAY}
      */
-    @Override
     public void addWorkoutSession(ScheduleWeek scheduleWeek, WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException {
 
     }
@@ -226,7 +224,6 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
      *                                  > DateTimeConstants.SUNDAY}
      */
-    @Override
     public boolean removeWorkoutSession(ScheduleWeek scheduleWeek, int dayOfWeek) throws IllegalArgumentException {
         return false;
     }
@@ -258,8 +255,18 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
         {
                     resultSet = statement.executeQuery(
                                     "SELECT     W.Name AS WorkoutName, " +
-                                    "           E.Name," +
-                                    "           "
+                                    "			E.Name AS ExerciseName, " +
+                                    "			EI.Intensity, " +
+                                    "			ET.Type, " +
+                                    "			E.Favourite, " +
+                                    "			WE.Distance, " +
+                                    "			DIU.DistanceUnit, " +
+                                    "			WE.Duration, " +
+                                    "			DUU.DurationUnit, " +
+                                    "			WE.Sets, " +
+                                    "			WE.Reps, " +
+                                    "			WE.Weight, " +
+                                    "			WU.WeightUnit  " +
                                     "FROM       Workouts W " +
                                     "LEFT JOIN  WorkoutContents WC " +
                                     "           ON W.ID = WC.WorkoutID " +
@@ -280,9 +287,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
 
             while (resultSet.next())
             {
-                if(workoutName == null){
 
-                }
                 workoutName = resultSet.getString("Name");
                 workout = new Workout(workoutName);
 
@@ -304,6 +309,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                 workoutExercise = createWorkoutExercise(exercise, xpValue, distance, distanceUnit, duration,
                         timeUnit, sets, reps, weight, weightUnit);
 
+                workout.addExercise(workoutExercise);
 
                 workoutList.add(workout);
             }
