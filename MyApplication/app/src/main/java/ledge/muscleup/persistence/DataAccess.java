@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import ledge.muscleup.model.exercise.Exercise;
@@ -224,9 +225,27 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      *
      * @return a list of all workouts in the database
      */
-    @Override
     public List<Workout> getWorkoutsList() {
-        return null;
+        Workout workout;
+        String workoutName = null;
+        List<Workout> workoutsByName = new ArrayList<>();
+
+        try
+        {
+            command = "Select * from Workouts";
+            resultSet = statement.executeQuery(command);
+            while (resultSet.next())
+            {
+                workoutName = resultSet.getString("Name");
+                workout = new Workout(workoutName);
+                workoutsByName.add(workout);
+            }
+            resultSet.close();
+        } catch (Exception e)
+        {
+            sqlError(e);
+        }
+        return workoutsByName;
     }
 
     /**
@@ -234,9 +253,25 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      *
      * @return a list of names of all workouts in the database
      */
-    @Override
     public List<String> getWorkoutNamesList() {
-        return null;
+        String workoutName = null;
+        List<String> nameList = new ArrayList<>();
+
+        try
+        {
+            command = "Select * from Workouts";
+            resultSet = statement.executeQuery(command);
+            while (resultSet.next())
+            {
+                workoutName = resultSet.getString("Name");
+                nameList.add(workoutName);
+            }
+            resultSet.close();
+        } catch (Exception e)
+        {
+            sqlError(e);
+        }
+        return nameList;
     }
 
     /**
