@@ -1,4 +1,4 @@
-package ledge.muscleup.persistence;
+package ledge.muscleup.model.persistence;
 
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
@@ -9,35 +9,42 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import ledge.muscleup.model.exercise.WorkoutExerciseDistance;
-import ledge.muscleup.model.exercise.WorkoutExerciseSets;
-import ledge.muscleup.model.exercise.WorkoutExerciseSetsAndWeight;
-import ledge.muscleup.model.exercise.enums.*;
 import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.ExerciseDistance;
 import ledge.muscleup.model.exercise.ExerciseDuration;
 import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
-import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
-import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.WorkoutExercise;
-import ledge.muscleup.model.exercise.WorkoutSessionExercise;
-import ledge.muscleup.model.schedule.ScheduleWeek;
+import ledge.muscleup.model.exercise.WorkoutExerciseDistance;
+import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
+import ledge.muscleup.model.exercise.WorkoutExerciseSets;
+import ledge.muscleup.model.exercise.WorkoutExerciseSetsAndWeight;
+import ledge.muscleup.model.exercise.enums.DistanceUnit;
+import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
+import ledge.muscleup.model.exercise.enums.ExerciseType;
+import ledge.muscleup.model.exercise.enums.TimeUnit;
+import ledge.muscleup.model.exercise.enums.WeightUnit;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
+import ledge.muscleup.persistence.InterfaceDataAccess;
+import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
+import ledge.muscleup.persistence.InterfaceWorkoutDataAccess;
+import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
 
 /**
- * A stub implementation of the database for Iteration 1
+ * A template database stub for use in testing the ScheduleManager that needs an accessor, which in
+ * turn needs a database stub
+ * constructor parameter
  *
- * @author Ryan Koop
+ * @author Matthew Smidt
  * @version 1.0
- * @since 2017-06-04
+ * @since 2017-06-25
  */
 
-public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWorkoutDataAccess,
-        InterfaceWorkoutSessionDataAccess{
+class TemplateDataAccessStub implements InterfaceExerciseDataAccess, InterfaceWorkoutDataAccess,
+        InterfaceWorkoutSessionDataAccess {
     private String dbName;
-    private String dbType = "stub";
+    private String dbType = "testing template";
 
     private Map<String, Workout> workoutsByName;
     private Map<String, Exercise> exercisesByName;
@@ -47,7 +54,7 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
      * Constructor for DataAccessStub
      * @param dbName the name of the database
      */
-    public DataAccessStub (String dbName) {
+    public TemplateDataAccessStub(String dbName) {
         this.dbName = dbName;
     }
 
@@ -88,46 +95,37 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
         workoutsByName.put(workout.getName(), workout);
         exercise = exercisesByName.get("Bicep Curls");
         int exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExerciseSetsAndWeight(exercisesByName.get("Bicep Curls"), exerciseExperience, new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
-        workout.addExercise(workoutExercise);
-
-
-        workoutExercise = new WorkoutExerciseSets(exercisesByName.get("Push-Ups"), exerciseExperience, new ExerciseSets(2, 15));
         workoutExercise = new WorkoutExerciseSetsAndWeight(exercise, exerciseExperience,new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
         workout.addExercise(workoutExercise);
         exercise = exercisesByName.get("Push-Ups");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience,new ExerciseSets(2, 15));
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience, new ExerciseSets(2, 15));
         workout.addExercise(workoutExercise);
 
         workout = new Workout("Never Skip Leg Day");
         workoutsByName.put(workout.getName(), workout);
-
         exercise = exercisesByName.get("Squats");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience,new ExerciseSets(4, 15));
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience, new ExerciseSets(4, 15));
         workout.addExercise(workoutExercise);
         exercise = exercisesByName.get("Lunges");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience,new ExerciseSets(3, 10));
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience, new ExerciseSets(3, 10));
         workout.addExercise(workoutExercise);
 
         workout = new Workout("Marathon Training Starts Here");
         workoutsByName.put(workout.getName(), workout);
-
         exercise = exercisesByName.get("Running");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
         workoutExercise = new WorkoutExerciseDistance(exercise, exerciseExperience,new ExerciseDistance(2.5, DistanceUnit.MILES));
         workout.addExercise(workoutExercise);
         exercise = exercisesByName.get("Exercise Bike");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExerciseDuration(exercise, exerciseExperience,new ExerciseDuration(45, TimeUnit.MINUTES));
-
+        workoutExercise = new WorkoutExerciseDuration(exercise, exerciseExperience, new ExerciseDuration(45, TimeUnit.MINUTES));
         workout.addExercise(workoutExercise);
 
         workout = new Workout("Work that Core, Get that Score!");
         workoutsByName.put(workout.getName(), workout);
-
         exercise = exercisesByName.get("Crunches");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
         workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience,new ExerciseSets(2, 25));
@@ -226,7 +224,7 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
      * @return a list of all workout sessions scheduled between startDate and endDate, inclusive
      */
     public List<WorkoutSession> getSessionsInDateRange(LocalDate startDate,
-                                                                LocalDate endDate) {
+                                                       LocalDate endDate) {
         List<WorkoutSession> sessionsInDateRange = new ArrayList<>();
 
         LocalDate currDate = startDate;
@@ -274,4 +272,5 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
     public void toggleWorkoutComplete(WorkoutSession workoutSession) {
         workoutSessionsByDate.get(workoutSession.getDate()).toggleCompleted();
     }
+
 }

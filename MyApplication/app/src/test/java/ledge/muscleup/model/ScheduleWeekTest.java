@@ -526,49 +526,6 @@ class TemplateDataAccessStub implements InterfaceExerciseDataAccess, InterfaceWo
      */
     @Override
     public void toggleWorkoutComplete(WorkoutSession workoutSession) {
-        //TODO remove after refactoring persistence layer or implement and test
-    }
-
-    /**
-     * Toggles the completed state of an exercise in a workout in the database
-     *
-     * @param workoutSession the workout which contains the exercise
-     * @param exercise       the exercise to complete
-     * @return a boolean representing whether the exercise was marked as completed or not
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    @Override
-    public boolean toggleExerciseComplete(WorkoutSession workoutSession, WorkoutSessionExercise exercise) throws IllegalArgumentException {
-        //TODO remove after refactoring persistence layer or implement and test
-        return false;
-    }
-
-    /**
-     * Adds a workout session to a given day in the database
-     *
-     * @param scheduleWeek  the week to add the workout to
-     * @param workoutSession the workout session to add
-     * @param dayOfWeek      the day of the week to add the workout session to
-     * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
-     *                                  > DateTimeConstants.SUNDAY}
-     */
-    @Override
-    public void addWorkoutSession(ScheduleWeek scheduleWeek, WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException {
-        //TODO remove after refactoring persistence layer or implement and test
-    }
-
-    /**
-     * Removes a workout from a given day in the database
-     *
-     * @param scheduleWeek the week to remove the workout from
-     * @param dayOfWeek     the day to remove the workout from
-     * @return a boolean representing if a workout was removed
-     * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
-     *                                  > DateTimeConstants.SUNDAY}
-     */
-    @Override
-    public boolean removeWorkoutSession(ScheduleWeek scheduleWeek, int dayOfWeek) throws IllegalArgumentException {
-        //TODO remove after refactoring persistence layer or implement and test
-        return false;
+        workoutSessionsByDate.get(workoutSession.getDate()).toggleCompleted();
     }
 }
