@@ -209,6 +209,7 @@ public class ScheduleActivity extends Activity {
         private class ViewHolder {
             TextView sessionDate;
             TextView sessionWorkoutName;
+            TextView sessionCompleted;
             Button addOrRemoveButton;
         }
 
@@ -231,6 +232,7 @@ public class ScheduleActivity extends Activity {
                 viewHolder.sessionDate = (TextView) convertView.findViewById(R.id.scheduleDate);
                 viewHolder.sessionWorkoutName = (TextView) convertView.findViewById(R.id.scheduleWorkoutName);
                 viewHolder.addOrRemoveButton = (Button) convertView.findViewById(R.id.addOrRemoveWorkoutSessionButton);
+                viewHolder.sessionCompleted = (TextView) convertView.findViewById(R.id.scheduleIsCompleted);
 
                 returnedView = convertView;
                 convertView.setTag(viewHolder);
@@ -243,6 +245,15 @@ public class ScheduleActivity extends Activity {
 
             viewHolder.sessionDate.setText(formatter.print(session.getDate()));
             viewHolder.sessionWorkoutName.setText(session.getName());
+
+            if (session.isComplete()) { //display complete, hide add/remove button
+                viewHolder.sessionCompleted.setVisibility(View.VISIBLE);
+                viewHolder.addOrRemoveButton.setVisibility(View.INVISIBLE);
+            } else { //hide complete, display add/remove button
+                viewHolder.sessionCompleted.setVisibility(View.INVISIBLE);
+                viewHolder.addOrRemoveButton.setVisibility(View.VISIBLE);
+            }
+
             if (session.getName() == null) {//no workout scheduled, add button
                 viewHolder.addOrRemoveButton.setText("+");
                 viewHolder.addOrRemoveButton.setTextColor(Color.GREEN);

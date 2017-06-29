@@ -25,15 +25,6 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/filter_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:textAlignment="viewStart"
-        android:textColor="@color/colorAccent"
-        android:textSize="18sp" />
-
         <ListView
             android:id="@+id/list_panel"
             android:layout_width="match_parent"
