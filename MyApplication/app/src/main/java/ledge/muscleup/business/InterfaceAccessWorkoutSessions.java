@@ -60,38 +60,6 @@ public interface InterfaceAccessWorkoutSessions {
     void toggleWorkoutCompleted(WorkoutSession workoutSession);
 
     /**
-     * Log an exercise in a workout as complete
-     *
-     * @param workoutSession the workout which contains the exercise
-     * @param exercise the exercise to complete
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     * @return a boolean representing whether the exercise was marked as completed or not
-     */
-    boolean completeWorkoutExercise(WorkoutSession workoutSession, WorkoutSessionExercise exercise) throws IllegalArgumentException;
-
-    /**
-     * Adds a workout session to a given day of a scheduled week
-     *
-     * @param scheduleWeek the week to add the workout to
-     * @param workoutSession the workout session to add
-     * @param dayOfWeek the day of the week to add the workout session to
-     * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
-     * > DateTimeConstants.SUNDAY}
-     */
-    void addWorkoutSession(ScheduleWeek scheduleWeek, WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException;
-
-    /**
-     * Removes a workout from a given day of a scheduled week
-     *
-     * @param scheduleWeek the week to remove the workout from
-     * @param dayOfWeek the day to remove the workout from
-     * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
-     * > DateTimeConstants.SUNDAY}
-     * @return a boolean representing if a workout was removed
-     */
-    boolean removeWorkoutSession(ScheduleWeek scheduleWeek, int dayOfWeek) throws IllegalArgumentException;
-
-    /**
      * Sets the manager to contain the scheduled workouts for the previous week
      *
      * @param scheduleWeek the week to change
