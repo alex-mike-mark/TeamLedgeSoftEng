@@ -1,5 +1,6 @@
 package ledge.muscleup.application;
 
+import ledge.muscleup.persistence.DataAccess;
 import ledge.muscleup.persistence.DataAccessStub;
 import ledge.muscleup.persistence.InterfaceDataAccess;
 
@@ -22,8 +23,8 @@ public class Services {
      */
     public static InterfaceDataAccess createDataAccess(String dbName) {
         if (dataAccessService == null) {
-            dataAccessService = new DataAccessStub(dbName);
-            dataAccessService.open();
+            dataAccessService = new DataAccess(dbName);
+            dataAccessService.open(Main.getDBPathName());
         }
         return dataAccessService;
     }
