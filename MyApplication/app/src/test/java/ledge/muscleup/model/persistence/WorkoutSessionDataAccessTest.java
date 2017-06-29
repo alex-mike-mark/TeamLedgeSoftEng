@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -52,6 +53,14 @@ public class WorkoutSessionDataAccessTest extends TestCase {
     {
         dataAccess = new TemplateDataAccessStub("Test Workout Sessions");
         dataAccess.open();
+    }
+
+    /**
+     * Closes the DataAccess connection
+     */
+    @After
+    public void tearDown() {
+        dataAccess.close();
     }
 
     /**

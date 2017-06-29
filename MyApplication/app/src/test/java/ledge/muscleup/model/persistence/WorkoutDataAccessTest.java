@@ -2,6 +2,7 @@ package ledge.muscleup.model.persistence;
 
 import junit.framework.TestCase;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -54,6 +55,14 @@ public class WorkoutDataAccessTest extends TestCase {
     public void setUp() {
         dataAccess = new TemplateDataAccessStub("Test Workout");
         dataAccess.open();
+    }
+
+    /**
+     * Closes the DataAccess connection
+     */
+    @After
+    public void tearDown() {
+        dataAccess.close();
     }
 
     /**
