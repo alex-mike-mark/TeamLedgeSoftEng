@@ -56,6 +56,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
     private Connection connection;
     private Statement statement;
     private ResultSet resultSet;
+    private String command;
 
     /**
      * Constructor for DataAccess
@@ -208,9 +209,27 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      *
      * @return a list of all workouts in the database
      */
-    @Override
-    public List<Workout> getWorkoutsList() {//TODO
-        return null;
+    public List<Workout> getWorkoutsList() {
+        Workout workout;
+        String workoutName = null;
+        List<Workout> workoutsByName = new ArrayList<>();
+
+        try
+        {
+            command = "Select * from Workouts";
+            resultSet = statement.executeQuery(command);
+            while (resultSet.next())
+            {
+                workoutName = resultSet.getString("Name");
+                workout = new Workout(workoutName);
+                workoutsByName.add(workout);
+            }
+            resultSet.close();
+        } catch (Exception e)
+        {
+            sqlError(e);
+        }
+        return workoutsByName;
     }
 
     /**
@@ -218,10 +237,25 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      *
      * @return a list of names of all workouts in the database
      */
-    @Override
-    public List<String> getWorkoutNamesList() {//TODO
-        List<String>theList = new  ArrayList<String>();
-        return null;
+    public List<String> getWorkoutNamesList() {
+        String workoutName = null;
+        List<String> nameList = new ArrayList<>();
+
+        try
+        {
+            command = "Select * from Workouts";
+            resultSet = statement.executeQuery(command);
+            while (resultSet.next())
+            {
+                workoutName = resultSet.getString("Name");
+                nameList.add(workoutName);
+            }
+            resultSet.close();
+        } catch (Exception e)
+        {
+            sqlError(e);
+        }
+        return nameList;
     }
 
     /**
