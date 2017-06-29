@@ -54,16 +54,6 @@ public interface InterfaceWorkoutSessionDataAccess extends InterfaceDataAccess{
     void removeWorkoutSession(WorkoutSession workoutSession);
 
     /**
-     * Updates the scheduled date of a workout in the database
-     *
-     * @param workoutSession the workout to change the date for
-     * @param newDate        the new date of the workout
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    void updateWorkoutDate(WorkoutSession workoutSession, LocalDate newDate)
-            throws IllegalArgumentException;
-
-    /**
      * Toggles the completed state of a workout in the database
      *
      * @param workoutSession the workout to change the state of
