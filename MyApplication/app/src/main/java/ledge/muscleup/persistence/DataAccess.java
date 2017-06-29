@@ -44,6 +44,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
     private static final String SHUTDOWN_CMD = "shutdown compact";
     private static final DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd");
     private static final int NULL_NUM = -1;
+    private static final int XP_PER_INTENSITY = 10;
 
     private String dbName;
     private String dbType = "HSQLDB";
