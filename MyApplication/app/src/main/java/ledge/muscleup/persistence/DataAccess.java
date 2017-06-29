@@ -9,7 +9,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 
 import ledge.muscleup.model.exercise.Exercise;
@@ -29,12 +29,11 @@ import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
 import ledge.muscleup.model.exercise.enums.ExerciseType;
 import ledge.muscleup.model.exercise.enums.TimeUnit;
 import ledge.muscleup.model.exercise.enums.WeightUnit;
-import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
 
 /**
- * This is it. THE REAL DEAL. ARE YOU READY?!?!?!?!?
+ * This is THE REAL implementation of the HSQLDB
  *
  * @author Cole Kehler
  * @version 2.0
@@ -466,14 +465,13 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                         "DELETE FROM	WorkoutSession WS " +
                         "WHERE		    WS.ScheduledDate = " + format.print(workoutSession.getDate()));
             }
-
             resultSet.close();
-        }
+		}
         catch (Exception e) {
             sqlError(e);
         }
     }
-
+		
     /**
      * Toggles the completed state of a workout in the database
      *
@@ -481,7 +479,15 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      */
     @Override
     public void toggleWorkoutComplete(WorkoutSession workoutSession) {
-
+        try {
+            statement.executeQuery(
+                    "UPDATE     WorkoutSessions WS " +
+                    "SET        Complete = True " +
+                    "WHERE      ScheduledDate = DATE'" + format.print(workoutSession.getDate()) + "'");
+        }
+        catch(Exception e) {
+            sqlError(e);
+        }
     }
 
     /**
@@ -489,9 +495,28 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      *
      * @return a list of all workouts in the database
      */
-    @Override
     public List<Workout> getWorkoutsList() {
-        return null;
+        Workout workout;
+        String workoutName;
+        List<Workout> workoutsByName = new ArrayList<>();
+
+        try
+        {
+            resultSet = statement.executeQuery(
+                    "SELECT *" +
+                    "FROM   Workouts");
+            while (resultSet.next())
+            {
+                workoutName = resultSet.getString("Name");
+                workout = new Workout(workoutName);
+                workoutsByName.add(workout);
+            }
+            resultSet.close();
+        }
+        catch (Exception e) {
+            sqlError(e);
+        }
+        return workoutsByName;
     }
 
     /**
@@ -499,9 +524,26 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      *
      * @return a list of names of all workouts in the database
      */
-    @Override
     public List<String> getWorkoutNamesList() {
-        return null;
+        String workoutName;
+        List<String> nameList = new ArrayList<>();
+
+        try
+        {
+            resultSet = statement.executeQuery(
+                    "SELECT *" +
+                    "FROM   Workouts");
+            while (resultSet.next())
+            {
+                workoutName = resultSet.getString("Name");
+                nameList.add(workoutName);
+            }
+            resultSet.close();
+        }
+        catch (Exception e) {
+            sqlError(e);
+        }
+        return nameList;
     }
 
     /**
@@ -512,7 +554,19 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      */
     @Override
     public Workout getWorkout(String workoutName) {
-        return null;
+        Workout workout = null;
+        Workout maybeWorkout;
+        List<Workout> workoutList = getWorkoutsList();
+        Iterator<Workout> workoutIterator = workoutList.iterator();
+
+        while(workoutIterator.hasNext()){
+            maybeWorkout = workoutIterator.next();
+            if(maybeWorkout.equals(workoutName)){
+                workout = maybeWorkout;
+            }
+        }
+
+        return workout;
     }
 
     /**
