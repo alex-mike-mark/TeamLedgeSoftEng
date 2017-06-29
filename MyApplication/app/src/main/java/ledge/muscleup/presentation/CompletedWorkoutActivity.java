@@ -59,14 +59,6 @@ public class CompletedWorkoutActivity extends Activity {
         TextView completedWorkoutTotalXP = (TextView) findViewById(R.id.completedWorkoutTotalXP);
         completedWorkoutTotalXP.setText("Total Experience Gained:  +" + String.valueOf(workoutSession.getExperienceValue() + " XP"));
 
-        TextView currentLevel = (TextView) findViewById(R.id.completedWorkoutCurrentLevel);
-        currentLevel.setText("Current Level:  " + "currLevel");
-        //TODO replace with the actual current level once we have level functionality
-
-        TextView xpToNextLevel = (TextView) findViewById(R.id.completedWorkoutXPNeeded);
-        xpToNextLevel.setText("Experience To Next Level:  " + "nextLevelXP");
-        //TODO replace with the actual next level xp needed once we have level functionality
-
         adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_completed_exercise, workoutSession.getWorkoutSessionExercises());
         listView.setAdapter(adapter);
 
