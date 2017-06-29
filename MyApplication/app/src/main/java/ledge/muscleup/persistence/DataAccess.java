@@ -190,7 +190,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
     @Override
     public void toggleWorkoutComplete(WorkoutSession workoutSession) {//TODO
         DateTimeFormatter sqlDateFormatter = DateTimeFormat.forPattern("yyyy-mm-dd");
-        String sessionDate = workoutSession.getDate().toString(sqlDateFormatter);
+        String sessionDate = sqlDateFormatter.print(workoutSession.getDate());
 
         try{
             resultSet = statement.executeQuery("" +
