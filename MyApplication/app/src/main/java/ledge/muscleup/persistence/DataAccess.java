@@ -138,27 +138,25 @@ public class DataAccess implements InterfaceDataAccess {
      *
      * @return a list of all workouts in the database
      */
-    @Override
     public List<Workout> getWorkoutsList() {
-        workoutsByName = new ArrayList<Workout>();
+        Workout workout;
+        String workoutName = null;
+        workoutsByName = new ArrayList<>();
 
         try
         {
             command = "Select * from Workouts";
-            rs3 = st1.executeQuery(cmdString);
-            // ResultSetMetaData md2 = rs3.getMetaData();
-            while (rs3.next())
+            resultSet = statement.executeQuery(command);
+            while (resultSet.next())
             {
-                myID = rs3.getString("StudentID");
-                myStudentName = rs3.getString("Name");
-                myAddress = rs3.getString("Address");
-                student = new Student(myID, myStudentName, myAddress);
-                students.add(student);
+                workoutName = resultSet.getString("Name");
+                workout = new Workout(workoutName);
+                workoutsByName.add(workout);
             }
-            rs3.close();
+            resultSet.close();
         } catch (Exception e)
         {
-            processSQLError(e);
+            sqlError(e);
         }
         return workoutsByName;
     }
@@ -168,9 +166,25 @@ public class DataAccess implements InterfaceDataAccess {
      *
      * @return a list of names of all workouts in the database
      */
-    @Override
     public List<String> getWorkoutNamesList() {
-        return null;
+        String workoutName = null;
+        List<String> nameList = new ArrayList<>();
+
+        try
+        {
+            command = "Select * from Workouts";
+            resultSet = statement.executeQuery(command);
+            while (resultSet.next())
+            {
+                workoutName = resultSet.getString("Name");
+                nameList.add(workoutName);
+            }
+            resultSet.close();
+        } catch (Exception e)
+        {
+            sqlError(e);
+        }
+        return nameList;
     }
 
     /**
