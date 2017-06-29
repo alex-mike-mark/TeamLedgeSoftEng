@@ -237,33 +237,85 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      */
     @Override
     public List<Workout> getWorkoutsList() {
-        Workout workout;
-        String workoutName = null;
-        List<Workout> workoutsByName = new ArrayList<>();
+        ArrayList<Workout> workoutList = new ArrayList<>();
+        Exercise exercise = null;
+        Workout workout = null;
+        WorkoutExercise workoutExercise = null;
+
+        String workoutName = null, exerciseName = null;
+        int xpValue = NULL_NUM, duration = NULL_NUM, sets = NULL_NUM, reps = NULL_NUM;
+        double distance = NULL_NUM, weight =NULL_NUM;
+        DistanceUnit distanceUnit = null;
+        TimeUnit timeUnit = null;
+        WeightUnit weightUnit = null;
+        LocalDate scheduledDate = null;
+        ExerciseIntensity intensity = null;
+        ExerciseType type = null;
+        boolean workoutFavourite = false, exerciseFavourite = false, workoutComplete = false, exerciseComplete = false;
 
         try
         {
-            command =
-                    "SELECT W.Name " +
-                    "FROM Workouts W";
-            resultSet = statement.executeQuery(command);
+                    resultSet = statement.executeQuery(
+                                    "SELECT     W.Name AS WorkoutName, " +
+                                    "           E.Name," +
+                                    "           "
+                                    "FROM       Workouts W " +
+                                    "LEFT JOIN  WorkoutContents WC " +
+                                    "           ON W.ID = WC.WorkoutID " +
+                                    "LEFT JOIN  WorkoutExercises WE " +
+                                    "           ON WE.ID = WC.ExerciseID " +
+                                    "LEFT JOIN  Exercises E " +
+                                    "           ON E.ID = WE.ExerciseID " +
+                                    "LEFT JOIN  DistanceUnits DIU " +
+                                      "           ON DIU.ID = WE.DistanceUnitID " +
+                                      "LEFT JOIN  DurationUnits DUU " +
+                                    "           ON DUU.ID = WE.DurationUnitID " +
+                                    "LEFT JOIN  WeightUnits WU " +
+                                    "           ON WU.ID = WE.WeightUnitID " +
+                                    "LEFT JOIN  ExerciseIntensities EI " +
+                                    "           ON E.IntensityID = EI.ID " +
+                                    "LEFT JOIN  ExerciseTypes ET "  +
+                                    "           ON E.TypeID = ET.ID");
 
             while (resultSet.next())
             {
+                if(workoutName == null){
+
+                }
                 workoutName = resultSet.getString("Name");
                 workout = new Workout(workoutName);
-                workoutsByName.add(workout);
+
+                exerciseName = resultSet.getString("ExerciseName");
+                intensity = ExerciseIntensity.valueOf(resultSet.getString("Intensity"));
+                type = ExerciseType.valueOf(resultSet.getString("Type"));
+                exerciseFavourite = resultSet.getBoolean("Favourite");
+                exercise = new Exercise(exerciseName, intensity, type, exerciseFavourite);
+
+                xpValue = XP_PER_INTENSITY * ExerciseIntensity.valueOf(resultSet.getString("Intensity")).ordinal();
+                distance = resultSet.getDouble("Distance");
+                distanceUnit = DistanceUnit.valueOf(resultSet.getString("DistanceUnit"));
+                duration = resultSet.getInt("Duration");
+                timeUnit = TimeUnit.valueOf(resultSet.getString("DurationUnit"));
+                sets = resultSet.getInt("Sets");
+                reps = resultSet.getInt("Reps");
+                weight = resultSet.getDouble("Weight");
+                weightUnit = WeightUnit.valueOf(resultSet.getString("WeightUnit"));
+                workoutExercise = createWorkoutExercise(exercise, xpValue, distance, distanceUnit, duration,
+                        timeUnit, sets, reps, weight, weightUnit);
+
+
+                workoutList.add(workout);
             }
             resultSet.close();
         } catch (Exception e)
         {
             sqlError(e);
         }
-        return workoutsByName;
+        return workoutList;
     }
 
     /**
-     * Gets a list of names of all exercises in the database
+     * Gets a list of names of all workouts in the database
      *
      * @return a list of names of all workouts in the database
      */
@@ -274,8 +326,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
 
         try
         {
-            command = "Select * from Workouts";
-            resultSet = statement.executeQuery(command);
+            resultSet = statement.executeQuery("Select * from Workouts");
             while (resultSet.next())
             {
                 workoutName = resultSet.getString("Name");
