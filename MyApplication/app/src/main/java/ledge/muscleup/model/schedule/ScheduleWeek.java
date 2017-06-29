@@ -94,7 +94,7 @@ public class ScheduleWeek {
         if (!isDayWithinWeek(dayOfWeek))
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         else
-            return workoutSessions[dayOfWeek - 1] != null;
+            return workoutSessions[dayOfWeek - 1] == null || workoutSessions[dayOfWeek - 1].getName() == null;
     }
 
     /**
@@ -149,7 +149,7 @@ public class ScheduleWeek {
 
         if (!isDayWithinWeek(dayOfWeek))
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        else if (workoutSessions[dayOfWeek - 1] != null) {
+        else if (workoutSessions[dayOfWeek - 1] != null && workoutSessions[dayOfWeek -1].getName() != null) {
             workoutSessions[dayOfWeek - 1] = null;
             removed = true;
         }
@@ -201,5 +201,21 @@ public class ScheduleWeek {
         for (int i = 0; i < workoutSessions.length; i++)
             if (workoutSessions[i] == null)
                 workoutSessions[i] = new WorkoutSession(firstDayOfWeek.plusDays(i));
+    }
+
+    /**
+     * Returns the number of actual sessions in a list of sessions, as some of them may just be a
+     * date with a null workout name
+     * @param sessionList a list of sessions (may contain sessions that are just a date with no workout)
+     * @return number of actual sessions (dates with workouts)
+     */
+    public int getNumSessionsInWeek(List<WorkoutSession> sessionList) {
+        int numSessions = 0;
+        for (WorkoutSession session: sessionList) {
+            if (session.getName() != null) {
+                numSessions++;
+            }
+        }
+        return numSessions;
     }
 }

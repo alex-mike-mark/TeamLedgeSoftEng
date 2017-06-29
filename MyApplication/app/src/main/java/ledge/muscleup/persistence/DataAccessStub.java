@@ -264,6 +264,6 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
      * @param workoutSession the workout to change the state of
      */
     public void toggleWorkoutComplete(WorkoutSession workoutSession) {
-        //TODO implement when implementing SQL database
+        workoutSessionsByDate.get(workoutSession.getDate()).toggleCompleted();
     }
 }

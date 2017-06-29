@@ -92,6 +92,11 @@ Also contained is our hopes, dreams and endless passion for working out, though 
 			workout
 				WorkoutSessionTest
 				WorkoutTest
+			persistence
+				ExerciseDataAccessTest
+				WorkoutDataAccessTest
+				WorkoutSessionDataAccessTest
+				TemplateDataAccessStub
 			AllTests
 			ScheduleManagerTest.java
 				ScheduleManagerTest
@@ -99,16 +104,37 @@ Also contained is our hopes, dreams and endless passion for working out, though 
 				TemplateDataAccessStub
 
 ###Log Location###
+
 The log for iteration 1 is in this google doc: <https://docs.google.com/document/d/18dOXb27PLIrS7kjHcLGODmWes66gZQpesqNNg8ew2Go/edit>
 The log for iteration 2 is in this google doc: <https://docs.google.com/document/d/1U3ojEM5CPwwEfbJQhXPyOEgiolTkioJ4-ktY7Vx_Tt4/edit>
 
 ###New Features and Where to Find Them###
+
 The major features implemented in this release are:
-New and improved look and feel
-The ability to view and navigate a weekly view under Scheduled Workouts (press "next" or "previous")
-The ability to jump to the current date when navigating Scheduled Workouts (press "current week" button)
-The ability to add and remove scheduled workouts in Scheduled Workouts (press "+" or "x")
-The ability to complete a scheduled workout and view experience points gained (check all exercises and click "Complete Workout")
+
+-New and improved look and feel
+-The ability to view and navigate a weekly view under Scheduled Workouts (press "next" or "previous")
+-The ability to jump to the current date when navigating Scheduled Workouts (press "current week" button)
+-The ability to add and remove scheduled workouts in Scheduled Workouts (press "+" or "x")
+-The ability to complete a scheduled workout and view experience points gained
+	- Press on a scheduled workout in the Scheduled Workouts view to go to a view displaying a list of exericses in the workout
+	  session to do. 
+	- Click the "Complete Workout" button in this view and it opens an activity view the experience gained
+	  from completing the workout.
+		NOTE: We decided to push back the level and xp system to Iteration 3 due to time constraints.
+		      For now, this activity simply displays the experience the user WOULD gain, however the implementation
+		      for tracking user xp was pushed back to Iteration 3, so the user does not actually gain this experience for now.
+		      Once the level and xp system is implemented in Iteration 3, this screen will also display the user's current level
+	              and the experience they now need to get to the next level
+-The view under Scheduled Workouts now shows "Completed" underneath the name of completed workout sessions. Pressing on a completed workout session
+ allows the user to view the exercises that were in that completed workout session
+
 
 ###Known Code Smells###
-The builder pattern should be used to help construct objects 
+
+-The builder pattern should be used to help construct objects
+-The presentation layer is calling toString() methods for exercise quantitites
+-The queries we have written for accessing our database are potentially insecure, as no measures have yet been taken to prevent SQL injection. 
+
+We are aware that these code smells still exist, and thus realize we have technical debt, but did not have time to fix these up in Iteration
+2. Our plan is to make fixing these smells up a priority early in Iteration 3.
