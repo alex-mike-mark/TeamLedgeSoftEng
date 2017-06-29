@@ -52,6 +52,27 @@ public class WorkoutSession {
     }
 
     /**
+     * The constructor for the WorkoutSession class, which is created for a given workout
+     *
+     * @param name the name of the workout
+     * @param exerciseList the list of WorkoutSessionExercises for this WorkoutSession
+     * @param scheduledDate the date to create the WorkoutSession for
+     * @param isComplete whether the session has been completed or not
+     * @throws IllegalArgumentException if passed a {@code null} parameter
+     */
+    public WorkoutSession(String name, LocalDate scheduledDate, boolean isComplete, ArrayList<WorkoutSessionExercise> exerciseList) throws IllegalArgumentException {
+        if (exerciseList == null || scheduledDate == null) {
+            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
+        }
+        else {
+            this.name = name;
+            this.scheduledDate = scheduledDate;
+            this.isComplete = isComplete;
+            this.exerciseList = exerciseList;
+        }
+    }
+
+    /**
      * The constructor for the WorkoutSession class, which is created with no workout
      * @param scheduledDate the date to create the WorkoutSession for
      * @throws IllegalArgumentException if passed a {@code null} parameter

@@ -39,7 +39,7 @@ public class ExerciseDataAccessTest extends TestCase {
     @Before
     public void setUp() {
         dataAccess = new TemplateDataAccessStub("Test Exercise");
-        dataAccess.open();
+        dataAccess.open("Test Exercise");
     }
 
     /**

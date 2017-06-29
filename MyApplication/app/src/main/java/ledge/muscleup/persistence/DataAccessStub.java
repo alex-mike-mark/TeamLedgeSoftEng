@@ -54,7 +54,7 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
     /**
      * Opens the stub database and populates it with some default values
      */
-    public void open() {
+    public void open(String dbPath) {
 
         Exercise exercise;
         WorkoutExercise workoutExercise;
@@ -209,14 +209,6 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
      */
     public Workout getWorkout(String workoutName) {
         return workoutsByName.get(workoutName);
-    }
-
-    /**
-     * A method that returns a list of all workout sessions in the database
-     * @return a list of all workout sessions in the database
-     */
-    public List<WorkoutSession> getWorkoutSessionsList() {
-        return new ArrayList<>(workoutSessionsByDate.values());
     }
 
     /**

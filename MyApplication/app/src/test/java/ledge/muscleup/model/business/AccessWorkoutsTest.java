@@ -161,7 +161,7 @@ class TemplateAccessWorkouts implements InterfaceAccessWorkouts {
      */
     TemplateAccessWorkouts() {
         dataAccess = new TemplateDataAccessStub("testDB");
-        dataAccess.open();
+        dataAccess.open("testDB");
     }
 
     /**

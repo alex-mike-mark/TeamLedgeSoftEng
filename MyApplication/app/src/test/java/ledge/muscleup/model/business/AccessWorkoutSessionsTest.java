@@ -419,7 +419,7 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      */
     TemplateAccessWorkoutSessions() {
         dataAccess = new TemplateDataAccessStub("testDB");
-        dataAccess.open();
+        dataAccess.open("testDB");
     }
 
     /**

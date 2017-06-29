@@ -31,7 +31,7 @@ import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
  *
  */
 public class WorkoutSessionDataAccessTest extends TestCase {
-    InterfaceWorkoutSessionDataAccess dataAccess;
+    TemplateDataAccessStub dataAccess;
     final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
     final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
     final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
@@ -52,7 +52,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
     public void setUp()
     {
         dataAccess = new TemplateDataAccessStub("Test Workout Sessions");
-        dataAccess.open();
+        dataAccess.open("dbPath");
     }
 
     /**

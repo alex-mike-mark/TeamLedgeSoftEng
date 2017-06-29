@@ -6,6 +6,7 @@
     <string name="btn_completeWorkout">COMPLETE WORKOUT</string>
     <string name="btn_next">Next</string>
     <string name="btn_previous">Previous</string>
+    <string name="warning">Warning</string>
     <string name="btn_currentWeek">Current Week</string>
     <string name="text_workoutCompleted">Workout Completed!</string>
     <string name="text_exercisesCompleted">Exercises Completed:</string>

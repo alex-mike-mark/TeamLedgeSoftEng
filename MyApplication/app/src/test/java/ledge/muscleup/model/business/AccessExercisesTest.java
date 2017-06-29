@@ -77,7 +77,7 @@ class TemplateAccessExercises implements InterfaceAccessExercises {
      */
     TemplateAccessExercises() {
         dataAccess = new TemplateDataAccessStub("testDB");
-        dataAccess.open();
+        dataAccess.open("testDB");
     }
 
     /**

@@ -54,7 +54,7 @@ public class WorkoutDataAccessTest extends TestCase {
     @Before
     public void setUp() {
         dataAccess = new TemplateDataAccessStub("Test Workout");
-        dataAccess.open();
+        dataAccess.open("Test Workout");
     }
 
     /**
