@@ -19,12 +19,6 @@ import ledge.muscleup.model.workout.WorkoutSession;
 public interface InterfaceWorkoutSessionDataAccess extends InterfaceDataAccess{
 
     /**
-     * A method that returns a list of all workout sessions in the database
-     * @return a list of all workout sessions in the database
-     */
-    List<WorkoutSession> getWorkoutSessionsList();
-
-    /**
      * Retrieves a workout session scheduled on the given date from the database, if it exists. If
      * no workout session is found for that date, returns null.
      * @param dateOfSession the date to get the workout session for

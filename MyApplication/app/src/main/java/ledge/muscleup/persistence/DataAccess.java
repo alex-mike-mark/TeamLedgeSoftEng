@@ -119,16 +119,6 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
     }
 
     /**
-     * A method that returns a list of all workout sessions in the database
-     *
-     * @return a list of all workout sessions in the database
-     */
-    @Override
-    public List<WorkoutSession> getWorkoutSessionsList() {
-        return null;
-    }
-
-    /**
      * Retrieves a workout session scheduled on the given date from the database, if it exists. If
      * no workout session is found for that date, returns null.
      *
