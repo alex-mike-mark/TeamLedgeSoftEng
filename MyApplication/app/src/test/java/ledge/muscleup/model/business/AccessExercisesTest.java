@@ -2,25 +2,15 @@ package ledge.muscleup.model.business;
 
 import junit.framework.TestCase;
 
-import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import ledge.muscleup.business.InterfaceAccessExercises;
 import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.enums.*;
-import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
-import ledge.muscleup.model.exercise.WorkoutExercise;
-import ledge.muscleup.model.exercise.WorkoutSessionExercise;
-import ledge.muscleup.model.schedule.ScheduleWeek;
-import ledge.muscleup.model.workout.Workout;
-import ledge.muscleup.model.workout.WorkoutSession;
-import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
  * AccessExercisesTest.java used to test AccessExercises.java
