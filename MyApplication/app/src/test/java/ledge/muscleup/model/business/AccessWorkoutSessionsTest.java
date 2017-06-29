@@ -1,10 +1,14 @@
 package ledge.muscleup.model.business;
 
+import android.util.Log;
+
 import junit.framework.TestCase;
 
+import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 
+import org.joda.time.format.DateTimeFormatter;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,6 +21,7 @@ import ledge.muscleup.model.exercise.ExerciseDistance;
 import ledge.muscleup.model.exercise.ExerciseDuration;
 import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
+import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WorkoutExerciseDistance;
 import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
@@ -42,6 +47,7 @@ public class AccessWorkoutSessionsTest extends TestCase {
     final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
     final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
 
+    ScheduleWeek scheduleWeek;
     /**
      * Constructor for the AccessWorkoutSessionsTest
      */
@@ -66,25 +72,25 @@ public class AccessWorkoutSessionsTest extends TestCase {
     public void testGetWorkoutSession() {
         System.out.println("\nStarting testGetWorkoutSession");
 
-        WorkoutSession workoutSession = dataAccess.getWorkoutSession(new LocalDate(2017, 06, 8));
+        WorkoutSession workoutSession = dataAccess.getWorkoutSession(new LocalDate().minusWeeks(1).withDayOfWeek(DateTimeConstants.THURSDAY));
         assertNotNull(workoutSession);
         assertEquals("Welcome to the Gun Show", workoutSession.getName());
-        assertEquals(new LocalDate(2017, 06, 8), workoutSession.getDate());
+        assertEquals(new LocalDate().minusWeeks(1).withDayOfWeek(DateTimeConstants.THURSDAY), workoutSession.getDate());
 
-        workoutSession = dataAccess.getWorkoutSession(new LocalDate(2017, 06, 9));
+        workoutSession = dataAccess.getWorkoutSession(new LocalDate().withDayOfWeek(DateTimeConstants.TUESDAY));
         assertNotNull(workoutSession);
         assertEquals("Never Skip Leg Day", workoutSession.getName());
-        assertEquals(new LocalDate(2017, 06, 9), workoutSession.getDate());
+        assertEquals(new LocalDate().withDayOfWeek(DateTimeConstants.TUESDAY), workoutSession.getDate());
 
-        workoutSession = dataAccess.getWorkoutSession(new LocalDate(2017, 06, 10));
+        workoutSession = dataAccess.getWorkoutSession(new LocalDate().withDayOfWeek(DateTimeConstants.WEDNESDAY));
         assertNotNull(workoutSession);
         assertEquals("Work that Core, Get that Score!", workoutSession.getName());
-        assertEquals(new LocalDate(2017, 06, 10), workoutSession.getDate());
+        assertEquals(new LocalDate().withDayOfWeek(DateTimeConstants.WEDNESDAY), workoutSession.getDate());
 
-        workoutSession = dataAccess.getWorkoutSession(new LocalDate(2017, 06, 15));
+        workoutSession = dataAccess.getWorkoutSession(new LocalDate().plusWeeks(1).withDayOfWeek(DateTimeConstants.TUESDAY));
         assertNotNull(workoutSession);
         assertEquals("Marathon Training Starts Here", workoutSession.getName());
-        assertEquals(new LocalDate(2017, 06, 15), workoutSession.getDate());
+        assertEquals(new LocalDate().plusWeeks(1).withDayOfWeek(DateTimeConstants.TUESDAY), workoutSession.getDate());
 
         workoutSession = dataAccess.getWorkoutSession(new LocalDate(2000, 01, 01));
         assertNull(workoutSession);
@@ -92,81 +98,6 @@ public class AccessWorkoutSessionsTest extends TestCase {
         System.out.println("Finishing testGetWorkoutSession\n");
     }
 
-    /**
-     * Tests that getting a workout session list works properly
-     */
-    @Test
-    public void testGetWorkoutSessionsList() {
-        System.out.println("\nStarting testGetWorkoutSessionsList");
-
-        List<WorkoutSession> workoutSessionList1 = new ArrayList<>();
-
-        workoutSessionList1.add(new WorkoutSession(
-                new Workout("Marathon Training Starts Here", false, new WorkoutExercise[]{
-                        new WorkoutExerciseDistance(new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO),
-                                xpHighIntensity, new ExerciseDistance(2.50, DistanceUnit.MILES)),
-                        new WorkoutExerciseDuration(new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM, ExerciseType.CARDIO),
-                                xpMediumIntensity, new ExerciseDuration(45, TimeUnit.MINUTES))
-                }),
-                new LocalDate(2017, 06, 15),
-                false));
-        workoutSessionList1.add(new WorkoutSession(
-                new Workout("Welcome to the Gun Show", false, new WorkoutExercise[]{
-                        new WorkoutExerciseSetsAndWeight(new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM),
-                                xpLowIntensity, new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS)),
-                        new WorkoutExerciseSets(new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM),
-                                xpLowIntensity, new ExerciseSets(2, 15))
-
-                }),
-                new LocalDate(2017, 06, 8),
-                false));
-        workoutSessionList1.add(new WorkoutSession(
-                new Workout("Never Skip Leg Day", false, new WorkoutExercise[]{
-                        new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
-                                xpLowIntensity, new ExerciseSets(4, 15)),
-                        new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
-                                xpLowIntensity, new ExerciseSets(3, 10))
-
-                }),
-                new LocalDate(2017, 06, 13),
-                false));
-        workoutSessionList1.add(new WorkoutSession(
-                new Workout("Never Skip Leg Day", false, new WorkoutExercise[]{
-                        new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
-                                xpLowIntensity, new ExerciseSets(4, 15)),
-                        new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
-                                xpLowIntensity, new ExerciseSets(3, 10))
-
-                }),
-                new LocalDate(2017, 06, 9),
-                false));
-        workoutSessionList1.add(new WorkoutSession(
-                new Workout("Work that Core, Get that Score!", false, new WorkoutExercise[]{
-                        new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE),
-                                xpLowIntensity, new ExerciseSets(2, 25)),
-                        new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
-                                xpHighIntensity, new ExerciseSets(2, 15))
-                }),
-                new LocalDate(2017, 06, 10),
-                false));
-        workoutSessionList1.add(new WorkoutSession(
-                new Workout("Welcome to the Gun Show", false, new WorkoutExercise[]{
-                        new WorkoutExerciseSetsAndWeight(new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM),
-                                xpLowIntensity, new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS)),
-                        new WorkoutExerciseSets(new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM),
-                                xpLowIntensity, new ExerciseSets(2, 15))
-
-                }),
-                LocalDate.now(),
-                false));
-
-        List<WorkoutSession> workoutSessionList2 = dataAccess.getWorkoutSessionsList();
-        assertNotNull(workoutSessionList2);
-        assertEquals(6, workoutSessionList2.size());
-        assertEquals(workoutSessionList1.toString(), workoutSessionList2.toString());
-
-        System.out.println("Finishing testGetWorkoutSessionsList\n");
-    }
 
     /**
      * Tests getting workout sessions in a specified date range works properly
@@ -175,6 +106,7 @@ public class AccessWorkoutSessionsTest extends TestCase {
     public void testGetSessionsInDateRange() {
         System.out.println("\nStarting testGetSessionsInDateRange");
 
+        scheduleWeek = dataAccess.newScheduledWeek(LocalDate.now());
         List<WorkoutSession> workoutSessionList1 = new ArrayList<>();
 
         workoutSessionList1.add(new WorkoutSession(
@@ -185,7 +117,7 @@ public class AccessWorkoutSessionsTest extends TestCase {
                                 xpLowIntensity, new ExerciseSets(3, 10))
 
                 }),
-                new LocalDate(2017, 06, 9),
+                new LocalDate().withDayOfWeek(DateTimeConstants.TUESDAY),
                 false));
 
         workoutSessionList1.add(new WorkoutSession(
@@ -195,33 +127,45 @@ public class AccessWorkoutSessionsTest extends TestCase {
                         new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
                                 xpHighIntensity, new ExerciseSets(2, 15))
                 }),
-                new LocalDate(2017, 06, 10),
+                new LocalDate().withDayOfWeek(DateTimeConstants.WEDNESDAY),
+                false));
+
+        workoutSessionList1.add(new WorkoutSession(
+                new Workout("Never Skip Leg Day", false, new WorkoutExercise[]{
+                        new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
+                                xpLowIntensity, new ExerciseSets(4, 15)),
+                        new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
+                                xpLowIntensity, new ExerciseSets(3, 10))
+
+                }),
+                new LocalDate().withDayOfWeek(DateTimeConstants.FRIDAY),
                 false));
 
         List<WorkoutSession> workoutSessionList2 = dataAccess
-                .getSessionsInDateRange(new LocalDate(2017, 06, 9), new LocalDate(2017, 06, 11));
+                .getSessionsInDateRange(LocalDate.now().withDayOfWeek(DateTimeConstants.MONDAY), LocalDate.now().withDayOfWeek(DateTimeConstants.SUNDAY));
 
         assertNotNull(workoutSessionList2);
-        assertEquals(2, workoutSessionList2.size());
+        assertEquals(3, scheduleWeek.getNumSessionsInWeek(workoutSessionList2));
         assertEquals(workoutSessionList1.toString(), workoutSessionList2.toString());
 
         // First WorkoutSession in List
         workoutSessionList2 = dataAccess
-                .getSessionsInDateRange(new LocalDate(2017, 06, 8), new LocalDate(2017, 06, 8));
+                .getSessionsInDateRange(LocalDate.now().withDayOfWeek(DateTimeConstants.TUESDAY), LocalDate.now().withDayOfWeek(DateTimeConstants.TUESDAY));
         assertNotNull(workoutSessionList2);
-        assertEquals(1, workoutSessionList2.size());
+        assertEquals(1, scheduleWeek.getNumSessionsInWeek(workoutSessionList2));
 
         // Last WorkoutSession in List
         workoutSessionList2 = dataAccess
-                .getSessionsInDateRange(new LocalDate(2017, 06, 15), new LocalDate(2017, 06, 15));
+                .getSessionsInDateRange(LocalDate.now().withDayOfWeek(DateTimeConstants.WEDNESDAY), LocalDate.now().withDayOfWeek(DateTimeConstants.WEDNESDAY));
         assertNotNull(workoutSessionList2);
-        assertEquals(1, workoutSessionList2.size());
+        assertEquals(1, scheduleWeek.getNumSessionsInWeek(workoutSessionList2));
 
         // No WorkoutSession in range
         workoutSessionList2 = dataAccess
-                .getSessionsInDateRange(new LocalDate(2017, 06, 16), new LocalDate(2017, 06, 25));
+                .getSessionsInDateRange(LocalDate.now().withDayOfWeek(DateTimeConstants.THURSDAY), LocalDate.now().withDayOfWeek(DateTimeConstants.THURSDAY));
         assertNotNull(workoutSessionList2);
-        assertEquals(0, workoutSessionList2.size());
+
+        assertEquals(0, scheduleWeek.getNumSessionsInWeek(workoutSessionList2));
 
         System.out.println("Finishing testGetSessionsInDateRange\n");
     }
@@ -236,20 +180,53 @@ public class AccessWorkoutSessionsTest extends TestCase {
         List<WorkoutSession> workoutSessionList1 = new ArrayList<>();
 
         workoutSessionList1.add(new WorkoutSession(
-                new Workout("Welcome to the Gun Show", false, new WorkoutExercise[]{
-                        new WorkoutExerciseSetsAndWeight(new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM),
-                                xpLowIntensity, new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS)),
-                        new WorkoutExerciseSets(new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM),
-                                xpLowIntensity, new ExerciseSets(2, 15))
+                new Workout("Never Skip Leg Day", false, new WorkoutExercise[]{
+                        new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false),
+                                xpMediumIntensity, new ExerciseSets(4, 15)),
+                        new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false),
+                                xpLowIntensity, new ExerciseSets(3, 10))
 
                 }),
-                LocalDate.now(),
+                new LocalDate().withDayOfWeek(DateTimeConstants.TUESDAY),
+                false));
+
+        workoutSessionList1.add(new WorkoutSession(
+                new Workout("Work that Core, Get that Score!", false, new WorkoutExercise[]{
+                        new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE, false),
+                                xpLowIntensity, new ExerciseSets(2, 25)),
+                        new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE, false),
+                                xpHighIntensity, new ExerciseSets(2, 15))
+            }),
+                new LocalDate().withDayOfWeek(DateTimeConstants.WEDNESDAY),
+                false));
+
+        workoutSessionList1.add(new WorkoutSession(
+                new Workout("Never Skip Leg Day", false, new WorkoutExercise[]{
+                        new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false),
+                                xpMediumIntensity, new ExerciseSets(4, 15)),
+                        new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false),
+                                xpLowIntensity, new ExerciseSets(3, 10))
+
+                }),
+                new LocalDate().withDayOfWeek(DateTimeConstants.FRIDAY),
                 false));
 
         assertNotNull(dataAccess.getCurrentWeekSessions());
         assertEquals(workoutSessionList1.toString(), dataAccess.getCurrentWeekSessions().toString());
 
         System.out.println("Finishing testGetCurrentWeekSessions\n");
+    }
+
+    /**
+     * Tests that new scheduled week works properly
+     */
+    @Test
+    public void testNewScheduledWeek() {
+        System.out.println("\nStarting testNewScheduledWeek");
+        ScheduleWeek scheduleWeek = dataAccess.newScheduledWeek(LocalDate.now());
+        assertNotNull(scheduleWeek);
+        assertEquals(3, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
+        System.out.println("Finishing testNewScheduledWeek\n");
     }
 
     /**
@@ -260,7 +237,8 @@ public class AccessWorkoutSessionsTest extends TestCase {
         System.out.println("\nStarting testInsertWorkoutSession");
 
         // Insert new WorkoutSession
-        assertEquals(6, dataAccess.getWorkoutSessionsList().size());
+        scheduleWeek = dataAccess.newScheduledWeek(LocalDate.now());
+        assertEquals(3, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
 
         dataAccess.insertWorkoutSession(new WorkoutSession(
                 new Workout("Work that Core, Get that Score!", false, new WorkoutExercise[]{
@@ -269,10 +247,11 @@ public class AccessWorkoutSessionsTest extends TestCase {
                         new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
                                 xpHighIntensity, new ExerciseSets(2, 15))
                 }),
-                new LocalDate(2017, 06, 05),
+                LocalDate.now().withDayOfWeek(DateTimeConstants.THURSDAY),
                 false));
 
-        assertEquals(7, dataAccess.getWorkoutSessionsList().size());
+        scheduleWeek = dataAccess.newScheduledWeek(LocalDate.now());
+        assertEquals(4, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
 
         // Trying to insert new WorkoutSession on same day as a previously added WorkoutSession
         dataAccess.insertWorkoutSession(new WorkoutSession(
@@ -282,9 +261,10 @@ public class AccessWorkoutSessionsTest extends TestCase {
                         new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
                                 xpHighIntensity, new ExerciseSets(2, 15))
                 }),
-                new LocalDate(2017, 06, 05),
+                LocalDate.now().withDayOfWeek(DateTimeConstants.THURSDAY),
                 false));
-        assertEquals(7, dataAccess.getWorkoutSessionsList().size());
+        scheduleWeek = dataAccess.newScheduledWeek(LocalDate.now());
+        assertEquals(4, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
 
         System.out.println("Finishing testInsertWorkoutSession\n");
     }
@@ -297,7 +277,8 @@ public class AccessWorkoutSessionsTest extends TestCase {
         System.out.println("\nStarting testRemoveWorkoutSession");
 
         // Remove middle WorkoutSession from list
-        assertEquals(6, dataAccess.getWorkoutSessionsList().size());
+        scheduleWeek = dataAccess.newScheduledWeek(LocalDate.now());
+        assertEquals(3, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));;
 
         dataAccess.removeWorkoutSession(new WorkoutSession(
                 new Workout("Work that Core, Get that Score!", false, new WorkoutExercise[]{
@@ -306,9 +287,10 @@ public class AccessWorkoutSessionsTest extends TestCase {
                         new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
                                 xpHighIntensity, new ExerciseSets(2, 15))
                 }),
-                new LocalDate(2017, 06, 10),
+                new LocalDate().withDayOfWeek(DateTimeConstants.WEDNESDAY),
                 false));
-        assertEquals(5, dataAccess.getWorkoutSessionsList().size());
+        scheduleWeek = dataAccess.newScheduledWeek(LocalDate.now());
+        assertEquals(2, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
 
         // Trying to remove on a day where nothing exists
         dataAccess.removeWorkoutSession(new WorkoutSession(
@@ -318,58 +300,45 @@ public class AccessWorkoutSessionsTest extends TestCase {
                         new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
                                 xpHighIntensity, new ExerciseSets(2, 15))
                 }),
-                new LocalDate(2017, 06, 05),
+                new LocalDate().withDayOfWeek(DateTimeConstants.WEDNESDAY),
                 false));
-        assertEquals(5, dataAccess.getWorkoutSessionsList().size());
+        scheduleWeek = dataAccess.newScheduledWeek(LocalDate.now());
+        assertEquals(2, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
 
         // Remove First WorkoutSession in list
-        assertEquals(5, dataAccess.getWorkoutSessionsList().size());
+        scheduleWeek = dataAccess.newScheduledWeek(LocalDate.now());
+        assertEquals(2, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
 
         dataAccess.removeWorkoutSession(new WorkoutSession(
-                new Workout("Welcome to the Gun Show", false, new WorkoutExercise[]{
-                        new WorkoutExerciseSetsAndWeight(new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM),
-                                xpLowIntensity, new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS)),
-                        new WorkoutExerciseSets(new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM),
-                                xpLowIntensity, new ExerciseSets(2, 15))
+                        new Workout("Never Skip Leg Day", false, new WorkoutExercise[]{
+                                new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false),
+                                        xpMediumIntensity, new ExerciseSets(4, 15)),
+                                new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false),
+                                        xpLowIntensity, new ExerciseSets(3, 10))
 
-                }),
-                new LocalDate(2017, 06, 8),
-                false));
-        assertEquals(4, dataAccess.getWorkoutSessionsList().size());
+                        }),
+                        new LocalDate().withDayOfWeek(DateTimeConstants.TUESDAY),
+                        false));
+        scheduleWeek = dataAccess.newScheduledWeek(LocalDate.now());
+        assertEquals(1, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
 
         // Remove Last WorkoutSession in list
-        assertEquals(4, dataAccess.getWorkoutSessionsList().size());
+        scheduleWeek = dataAccess.newScheduledWeek(LocalDate.now());
+        assertEquals(1, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
         dataAccess.removeWorkoutSession(new WorkoutSession(
-                new Workout("Marathon Training Starts Here", false, new WorkoutExercise[]{
-                        new WorkoutExerciseDistance(new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO),
-                                xpHighIntensity, new ExerciseDistance(2.50, DistanceUnit.MILES)),
-                        new WorkoutExerciseDuration(new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM, ExerciseType.CARDIO),
-                                xpMediumIntensity, new ExerciseDuration(45, TimeUnit.MINUTES))
+                new Workout("Never Skip Leg Day", false, new WorkoutExercise[]{
+                        new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false),
+                                xpMediumIntensity, new ExerciseSets(4, 15)),
+                        new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false),
+                                xpLowIntensity, new ExerciseSets(3, 10))
+
                 }),
-                new LocalDate(2017, 06, 15),
+                new LocalDate().withDayOfWeek(DateTimeConstants.FRIDAY),
                 false));
-        assertEquals(3, dataAccess.getWorkoutSessionsList().size());
+        scheduleWeek = dataAccess.newScheduledWeek(LocalDate.now());
+        assertEquals(0, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
 
         System.out.println("Finishing testRemoveWorkoutSession\n");
-    }
-
-    /**
-     * Tests that setting workout date works properly
-     */
-    @Test
-    public void testSetWorkoutDate() {
-        System.out.println("\nStarting testSetWorkoutDate");
-
-        LocalDate localDate = new LocalDate(2017, 6, 10);
-
-        WorkoutSession workoutSession1 = dataAccess.getWorkoutSession(localDate);
-        dataAccess.setWorkoutDate(workoutSession1, LocalDate.now());
-
-        WorkoutSession workoutSession2 = dataAccess.getWorkoutSession(LocalDate.now());
-
-        assertNotSame(workoutSession1, workoutSession2);
-
-        System.out.println("Finishing testSetWorkoutDate\n");
     }
 
     /**
@@ -379,7 +348,7 @@ public class AccessWorkoutSessionsTest extends TestCase {
     public void testToggleWorkoutCompleted() {
         System.out.println("\nStarting testToggleWorkoutCompleted");
 
-        LocalDate localDate = new LocalDate(2017, 6, 8);
+        LocalDate localDate = new LocalDate(LocalDate.now().withDayOfWeek(DateTimeConstants.TUESDAY));
 
         WorkoutSession workoutSession1 = dataAccess.getWorkoutSession(localDate);
         assertFalse(workoutSession1.isComplete());
@@ -392,71 +361,15 @@ public class AccessWorkoutSessionsTest extends TestCase {
     }
 
     /**
-     * Tests that complete workout exercise works properly
-     */
-    @Test
-    public void testCompleteWorkoutExercise() {
-        System.out.println("\nStarting testCompleteWorkoutExercise");
-
-        LocalDate localDate = new LocalDate(2017, 6, 10);
-
-        WorkoutSession workoutSession1 = dataAccess.getWorkoutSession(localDate);
-        WorkoutExerciseSets workoutExerciseSets = new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE),
-                xpLowIntensity, new ExerciseSets(2, 25));
-        WorkoutSessionExercise workoutSessionExercise = new WorkoutSessionExercise(workoutExerciseSets, false);
-
-
-        // TODO
-        // Should return true, is returning false, so is not changing isComplete
-        //assertTrue(dataAccess.completeWorkoutExercise(workoutSession1, workoutSessionExercise));
-
-        System.out.println("Finishing testCompleteWorkoutExercise\n");
-    }
-
-    /**
-     * Tests that adding a workout session to a given day works properly
-     */
-    @Test
-    public void testAddWorkoutSession() {
-        //addWorkoutSession(ScheduleWeek scheduleWeek, WorkoutSession workoutSession, int dayOfWeek)
-        // TODO
-        System.out.println("\nStarting testAddWorkoutSession");
-
-        System.out.println("Finishing testAddWorkoutSession\n");
-    }
-
-    /**
-     * Tests that removing a workout session from a given day works properly
-     */
-    @Test
-    public void testRemoveWorkoutSessionDay() {
-        //removeWorkoutSession(ScheduleWeek scheduleWeek, int dayOfWeek)
-        // TODO
-        System.out.println("\nStarting testRemoveWorkoutSessionDay");
-
-        System.out.println("Finishing testRemoveWorkoutSessionDay\n");
-    }
-
-    /**
-     * Tests that new scheduled week works properly
-     */
-    @Test
-    public void testNewScheduledWeek() {
-        //newScheduledWeek(LocalDate dayInWeek)
-        // TODO
-        System.out.println("\nStarting testNewScheduledWeek");
-
-        System.out.println("Finishing testNewScheduledWeek\n");
-    }
-
-    /**
      * Tests that set to next week works properly
      */
     @Test
     public void testSetToNextWeek() {
-        //setToNextWeek(ScheduleWeek scheduleWeek)
-        // TODO
         System.out.println("\nStarting testSetToNextWeek");
+        scheduleWeek = dataAccess.newScheduledWeek(LocalDate.now());
+        dataAccess.setToNextWeek(scheduleWeek);
+        assertEquals(LocalDate.now().plusWeeks(1).withDayOfWeek(DateTimeConstants.MONDAY), scheduleWeek.getWeekday(DateTimeConstants.MONDAY));
+        assertEquals(1, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
 
         System.out.println("Finishing testSetToNextWeek\n");
     }
@@ -466,11 +379,29 @@ public class AccessWorkoutSessionsTest extends TestCase {
      */
     @Test
     public void testSetToCurrentWeek() {
-        //setToCurrentWeek(ScheduleWeek scheduleWeek)
-        // TODO
+
         System.out.println("\nStarting testSetToCurrentWeek");
-        
+        scheduleWeek = dataAccess.newScheduledWeek(LocalDate.now());
+        dataAccess.setToNextWeek(scheduleWeek);
+        assertEquals(LocalDate.now().plusWeeks(1).withDayOfWeek(DateTimeConstants.MONDAY), scheduleWeek.getWeekday(DateTimeConstants.MONDAY));
+        assertEquals(1, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
+        dataAccess.setToCurrentWeek(scheduleWeek);
+        assertEquals(LocalDate.now().withDayOfWeek(DateTimeConstants.MONDAY), scheduleWeek.getWeekday(DateTimeConstants.MONDAY));
+        assertEquals(3, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
         System.out.println("Finishing testSetToCurrentWeek\n");
+    }
+
+    /**
+     * Tests that set to last week works properly
+     */
+    public void testSetToLastWeek() {
+        System.out.println("\nStarting testSetToLastWeek");
+        scheduleWeek = dataAccess.newScheduledWeek(LocalDate.now());
+        dataAccess.setToLastWeek(scheduleWeek);
+        assertEquals(LocalDate.now().minusWeeks(1).withDayOfWeek(DateTimeConstants.MONDAY), scheduleWeek.getWeekday(DateTimeConstants.MONDAY));
+        assertEquals(1, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
+
+        System.out.println("Finishing testSetToLastWeek\n");
     }
 
 }
@@ -498,16 +429,6 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
     @Override
     public WorkoutSession getWorkoutSession(LocalDate dateOfSession) {
         return dataAccess.getWorkoutSession(dateOfSession);
-    }
-
-    /**
-     * This method gets a list of workout sessions in the database
-     *
-     * @return a list of the workout sessions stored in the database
-     */
-    @Override
-    public List<WorkoutSession> getWorkoutSessionsList() {
-        return dataAccess.getWorkoutSessionsList();
     }
 
     /**
@@ -550,19 +471,6 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
     @Override
     public void removeWorkoutSession(WorkoutSession workoutSession) {
         dataAccess.removeWorkoutSession(workoutSession);
-    }
-
-    /**
-     * Sets the scheduled date of a workout
-     *
-     * @param workoutSession the workout to change the date for
-     * @param newDate        the new date of the workout
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    @Override
-    public void setWorkoutDate(WorkoutSession workoutSession, LocalDate newDate) throws IllegalArgumentException {
-        workoutSession.setDate(newDate);
-        dataAccess.updateWorkoutDate(workoutSession, newDate);
     }
 
     /**
