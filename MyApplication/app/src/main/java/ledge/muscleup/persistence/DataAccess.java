@@ -1,5 +1,7 @@
 package ledge.muscleup.persistence;
 
+import android.util.Log;
+
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -187,6 +189,17 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      */
     @Override
     public void toggleWorkoutComplete(WorkoutSession workoutSession) {//TODO
+        DateTimeFormatter sqlDateFormatter = DateTimeFormat.forPattern("yyyy-mm-dd");
+        String sessionDate = workoutSession.getDate().toString(sqlDateFormatter);
+
+        try{
+            resultSet = statement.executeQuery("" +
+                    "UPDATE     WorkoutSessions WS " +
+                    "SET        Complete = True " +
+                    "WHERE      SCHEDULEDDATE = "+ sessionDate);
+        }catch(Exception e){
+            Log.d("SQL",sqlError(e));
+        }
 
     }
 
@@ -218,7 +231,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      * @return The workout with name workoutName, or null if no workout exists with that name
      */
     @Override
-    public Workout getWorkout(String workoutName) {//TODO
+    public Workout getWorkout(String workoutName) {
         Workout workout = null;
         Workout maybeWorkout;
         List<Workout> workoutList = getWorkoutsList();
