@@ -64,49 +64,6 @@
             android:paddingBottom="20sp"
             android:paddingTop="20sp" />
 
-        <TextView
-            android:id="@+id/levelUpText"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:fontFamily="serif"
-            android:textColor="@color/colorAccent"
-            android:textSize="48sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:paddingBottom="20sp"
-            android:paddingTop="20sp"
-            android:text="@string/text_levelUp"/>
-
-        <TextView
-            android:id="@+id/completedWorkoutCurrentLevel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:fontFamily="serif"
-            android:textColor="@color/colorAccent"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:paddingBottom="20sp"
-            android:paddingTop="20sp" />
-
-
-        <TextView
-            android:id="@+id/completedWorkoutXPNeeded"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:fontFamily="serif"
-            android:textColor="@color/colorAccent"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:paddingBottom="20sp"
-            android:paddingTop="20sp" />
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
