@@ -196,11 +196,10 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
             resultSet = statement.executeQuery("" +
                     "UPDATE     WorkoutSessions WS " +
                     "SET        Complete = True " +
-                    "WHERE      SCHEDULEDDATE = "+ sessionDate);
+                    "WHERE      ScheduledDate = "+ sessionDate);
         }catch(Exception e){
             Log.d("SQL",sqlError(e));
         }
-
     }
 
     /**
