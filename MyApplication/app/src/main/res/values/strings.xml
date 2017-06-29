@@ -11,4 +11,5 @@
     <string name="text_exercisesCompleted">Exercises Completed:</string>
     <string name="btn_backToSchedule">Back</string>
     <string name="text_levelUp">LEVEL UP!</string>
+    <string name="text_completed">Completed</string>
 </resources>
