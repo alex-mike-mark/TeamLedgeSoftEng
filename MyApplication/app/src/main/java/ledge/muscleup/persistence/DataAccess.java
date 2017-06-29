@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import ledge.muscleup.model.exercise.Exercise;
@@ -83,35 +84,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      */
     @Override
     public List<Exercise> getExercisesList() {
-        List<Exercise> exerciseList = null;
-        String name;
-        ExerciseIntensity intensity;
-        ExerciseType type;
-        boolean favourite;
-
-        try
-        {
-            command = "SELECT   Name " +
-                      "FROM     Exercises";
-            resultSet = statement.executeQuery(command);
-
-            while (resultSet.next())
-            {
-                name = resultSet.getString("Name");
-                intensity = ExerciseIntensity.values()[resultSet.getInt("IntensityID")];
-                type = ExerciseType.values()[resultSet.getInt("TypeID")];
-                favourite = resultSet.getBoolean("Favourite");
-
-                exerciseList.add(new Exercise(name, intensity, type, favourite));
-            }
-            resultSet.close();
-        }
-        catch (Exception e)
-        {
-            sqlError(e);
-        }
-
-        return exerciseList;
+        return null;
     }
 
     /**
