@@ -150,12 +150,12 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
         WorkoutExercise workoutExercise;
         WorkoutSession workoutSession = null;
 
-        String workoutName = null, exerciseName;
+        String workoutName = null, exerciseName, distanceUnitString, timeUnitString, weightUnitString;
         int xpValue, duration, sets, reps;
         double distance, weight;
-        DistanceUnit distanceUnit;
-        TimeUnit timeUnit;
-        WeightUnit weightUnit;
+        DistanceUnit distanceUnit = null;
+        TimeUnit timeUnit = null;
+        WeightUnit weightUnit = null;
         LocalDate scheduledDate = null;
         ExerciseIntensity intensity;
         ExerciseType type;
@@ -164,7 +164,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
         try {
             resultSet = statement.executeQuery(
                     "SELECT		W.Name AS WorkoutName, " +
-                    "			WS.ScheduleDate, " +
+                    "			WS.ScheduledDate, " +
                     "			WS.Complete AS WorkoutComplete, " +
                     "			E.Name AS ExerciseName, " +
                     "			EI.Intensity, " +
@@ -178,7 +178,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                     "			WE.Reps, " +
                     "			WE.Weight, " +
                     "			WU.WeightUnit,  " +
-                    "			WSE.Complete AS ExerciseComplete " +
+                    "			WSE.Complete AS ExerciseCompleted " +
                     "FROM		WorkoutSessions WS " +
                     "LEFT JOIN	Workouts W " +
                     "			ON WS.WorkoutID = W.ID " +
@@ -200,12 +200,12 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                     "           ON E.IntensityID = EI.ID  " +
                     "LEFT JOIN  ExerciseTypes ET " +
                     "           ON E.TypeID = ET.ID " +
-                    "WHERE		WS.ScheduleDate = " + format.print(dateOfSession));
+                    "WHERE		WS.ScheduledDate = DATE'" + format.print(dateOfSession) + "'");
 
             while (resultSet.next()) {
                 if (workoutName == null) {
                     workoutName = resultSet.getString("WorkoutName");
-                    scheduledDate = new LocalDate(resultSet.getDate("ScheduleDate"));
+                    scheduledDate = new LocalDate(resultSet.getDate("ScheduledDate"));
                     workoutComplete = resultSet.getBoolean("WorkoutComplete");
                 }
 
@@ -217,13 +217,32 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
 
                 xpValue = XP_PER_INTENSITY * ExerciseIntensity.valueOf(resultSet.getString("Intensity")).ordinal();
                 distance = resultSet.getDouble("Distance");
-                distanceUnit = DistanceUnit.valueOf(resultSet.getString("DistanceUnit"));
+                if (resultSet.wasNull())
+                    distance = NULL_NUM;
+                distanceUnitString = resultSet.getString("DistanceUnit");
+                if (!resultSet.wasNull())
+                    distanceUnit = DistanceUnit.valueOf(distanceUnitString);
+
                 duration = resultSet.getInt("Duration");
-                timeUnit = TimeUnit.valueOf(resultSet.getString("DurationUnit"));
+                if (resultSet.wasNull())
+                    duration = NULL_NUM;
+                timeUnitString = resultSet.getString("DurationUnit");
+                if (!resultSet.wasNull())
+                    timeUnit = TimeUnit.valueOf(timeUnitString);
+
                 sets = resultSet.getInt("Sets");
+                if (resultSet.wasNull())
+                    sets = NULL_NUM;
                 reps = resultSet.getInt("Reps");
+                if (resultSet.wasNull())
+                    reps = NULL_NUM;
+
                 weight = resultSet.getDouble("Weight");
-                weightUnit = WeightUnit.valueOf(resultSet.getString("WeightUnit"));
+                if (resultSet.wasNull())
+                    weight = NULL_NUM;
+                weightUnitString = resultSet.getString("WeightUnit");
+                if (!resultSet.wasNull())
+                    weightUnit = WeightUnit.valueOf(weightUnitString);
                 workoutExercise = createWorkoutExercise(exercise, xpValue, distance, distanceUnit, duration,
                         timeUnit, sets, reps, weight, weightUnit);
 
@@ -258,12 +277,12 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
         WorkoutExercise workoutExercise;
         WorkoutSession workoutSession;
 
-        String workoutName = null, exerciseName;
+        String workoutName = null, exerciseName, distanceUnitString, timeUnitString, weightUnitString;
         int xpValue, duration, sets, reps;
         double distance, weight;
-        DistanceUnit distanceUnit;
-        TimeUnit timeUnit;
-        WeightUnit weightUnit;
+        DistanceUnit distanceUnit = null;
+        TimeUnit timeUnit = null;
+        WeightUnit weightUnit = null;
         LocalDate scheduledDate = null;
         ExerciseIntensity intensity;
         ExerciseType type;
@@ -286,7 +305,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                     "			WE.Reps, " +
                     "			WE.Weight, " +
                     "			WU.WeightUnit,  " +
-                    "			WSE.Complete AS ExerciseComplete " +
+                    "			WSE.Complete AS ExerciseCompleted " +
                     "FROM		WorkoutSessions WS " +
                     "LEFT JOIN	Workouts W " +
                     "			ON WS.WorkoutID = W.ID " +
@@ -323,7 +342,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                     workoutSessionExerciseList = new ArrayList<>();
 
                     workoutName = resultSet.getString("WorkoutName");
-                    scheduledDate = new LocalDate(resultSet.getDate("ScheduleDate"));
+                    scheduledDate = new LocalDate(resultSet.getDate("ScheduledDate"));
                     workoutComplete = resultSet.getBoolean("WorkoutComplete");
                 }
 
@@ -335,13 +354,32 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
 
                 xpValue = XP_PER_INTENSITY * ExerciseIntensity.valueOf(resultSet.getString("Intensity")).ordinal();
                 distance = resultSet.getDouble("Distance");
-                distanceUnit = DistanceUnit.valueOf(resultSet.getString("DistanceUnit"));
+                if (resultSet.wasNull())
+                    distance = NULL_NUM;
+                distanceUnitString = resultSet.getString("DistanceUnit");
+                if (!resultSet.wasNull())
+                    distanceUnit = DistanceUnit.valueOf(distanceUnitString);
+
                 duration = resultSet.getInt("Duration");
-                timeUnit = TimeUnit.valueOf(resultSet.getString("DurationUnit"));
+                if (resultSet.wasNull())
+                    duration = NULL_NUM;
+                timeUnitString = resultSet.getString("DurationUnit");
+                if (!resultSet.wasNull())
+                    timeUnit = TimeUnit.valueOf(timeUnitString);
+
                 sets = resultSet.getInt("Sets");
+                if (resultSet.wasNull())
+                    sets = NULL_NUM;
                 reps = resultSet.getInt("Reps");
+                if (resultSet.wasNull())
+                    reps = NULL_NUM;
+
                 weight = resultSet.getDouble("Weight");
-                weightUnit = WeightUnit.valueOf(resultSet.getString("WeightUnit"));
+                if (resultSet.wasNull())
+                    weight = NULL_NUM;
+                weightUnitString = resultSet.getString("WeightUnit");
+                if (!resultSet.wasNull())
+                    weightUnit = WeightUnit.valueOf(weightUnitString);
                 workoutExercise = createWorkoutExercise(exercise, xpValue, distance, distanceUnit, duration,
                         timeUnit, sets, reps, weight, weightUnit);
 
@@ -376,24 +414,24 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
             resultSet = statement.executeQuery(
                     "SELECT	W.ID " +
                     "FROM	Workouts W " +
-                    "WHERE	W.Name = " + workoutSession.getName());
+                    "WHERE	W.Name = '" + workoutSession.getName() + "'");
             if (resultSet.next()) {
                 workoutID = resultSet.getInt("ID");
 
                 statement.executeQuery(
-                        "INSERT INTO    WorkoutSessions (ScheduleDate, WorkoutID, Complete) " +
-                        "VALUES         (" + format.print(workoutSession.getDate()) + ", " + workoutID + ", " + ", FALSE)");
+                        "INSERT INTO    WorkoutSessions (ScheduledDate, WorkoutID, Complete) " +
+                        "VALUES         (DATE'" + format.print(workoutSession.getDate()) + "', " + workoutID + ", FALSE)");
 
                 resultSet = statement.executeQuery(
-                        "SELECT	MAX(WS.ID) " +
+                        "SELECT	MAX(WS.ID) AS NewestID " +
                         "FROM	WorkoutSessions WS");
                 if (resultSet.next()) {
-                    workoutSessionID = resultSet.getInt("ID");
+                    workoutSessionID = resultSet.getInt("NewestID");
 
                     resultSet = statement.executeQuery(
                             "SELECT		WE.ID " +
-                            "FROM		WorkoutExercise WE " +
-                            "LEFT JOIN	Exercise E " +
+                            "FROM		WorkoutExercises WE " +
+                            "LEFT JOIN	Exercises E " +
                             "			ON WE.ExerciseID = E.ID " +
                             "RIGHT JOIN	WorkoutContents WC " +
                             "			ON WE.ID = WC.ExerciseID " +
@@ -406,10 +444,10 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                                 "VALUES         (" + workoutExerciseID + ", FALSE) ");
 
                         resultSet2 = statement.executeQuery(
-                                "SELECT	MAX(WSE.ID) " +
+                                "SELECT	MAX(WSE.ID) AS NewestID " +
                                 "FROM	WorkoutSessionExercises WSE ");
                         if (resultSet2.next()) {
-                            workoutSessionExerciseID = resultSet2.getInt("ID");
+                            workoutSessionExerciseID = resultSet2.getInt("NewestID");
 
                             statement.executeQuery(
                                     "INSERT INTO    WorkoutSessionContents (WorkoutSessionID, ExerciseID) " +
@@ -440,7 +478,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
             resultSet = statement.executeQuery(
                     "SELECT	WS.ID " +
                     "FROM	WorkoutSessions WS " +
-                    "WHERE	WS.ScheduledDate = " + format.print(workoutSession.getDate()));
+                    "WHERE	WS.ScheduledDate = DATE'" + format.print(workoutSession.getDate()) + "'");
             if (resultSet.next()) {
                 workoutSessionID = resultSet.getInt("ID");
 
@@ -451,10 +489,10 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
 
                 statement.executeQuery(
                         "DELETE FROM	WorkoutSessionContents WSC " +
-                                "WHERE		    WSC.WorkoutSessionID = " + workoutSessionID);
+                        "WHERE		    WSC.WorkoutSessionID = " + workoutSessionID);
 
-                command = "DELETE FROM  WorkoutSessionExercises WSE" +
-                        "WHERE        WSE.ID IN (";
+                command = "DELETE FROM  WorkoutSessionExercises WSE " +
+                          "WHERE        WSE.ID IN (";
                 if (resultSet.next())
                     command += resultSet.getInt("ExerciseID");
                 while (resultSet.next())
@@ -463,8 +501,8 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                 statement.executeQuery(command);
 
                 statement.executeQuery(
-                        "DELETE FROM	WorkoutSession WS " +
-                        "WHERE		    WS.ScheduledDate = " + format.print(workoutSession.getDate()));
+                        "DELETE FROM	WorkoutSessions WS " +
+                        "WHERE		    WS.ScheduledDate = DATE'" + format.print(workoutSession.getDate()) + "'");
             }
             resultSet.close();
 		}
@@ -483,8 +521,8 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
         try {
             statement.executeQuery(
                     "UPDATE     WorkoutSessions WS " +
-                    "SET        Complete = True " +
-                    "WHERE      ScheduledDate = DATE'" + format.print(workoutSession.getDate()) + "'");
+                    "SET        WS.Complete = True " +
+                    "WHERE      WS.ScheduledDate = DATE'" + format.print(workoutSession.getDate()) + "'");
         }
         catch(Exception e) {
             sqlError(e);
@@ -501,12 +539,12 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
         ArrayList<WorkoutExercise> workoutExerciseList = new ArrayList<>();
         Exercise exercise;
 
-        String workoutName = null, exerciseName;
+        String workoutName = null, exerciseName, distanceUnitString, timeUnitString, weightUnitString;
         int xpValue, duration, sets, reps;
         double distance, weight;
-        DistanceUnit distanceUnit;
-        TimeUnit timeUnit;
-        WeightUnit weightUnit;
+        DistanceUnit distanceUnit = null;
+        TimeUnit timeUnit = null;
+        WeightUnit weightUnit = null;
         ExerciseIntensity intensity;
         ExerciseType type;
         boolean workoutFavourite = false;
@@ -551,11 +589,11 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                     workoutFavourite = resultSet.getBoolean("Favourite");
                 }
                 else if (!workoutName.equals(resultSet.getString("WorkoutName"))) {
-                    workoutList.add(new Workout(workoutName, workoutFavourite, (WorkoutExercise[]) workoutExerciseList.toArray()));
+                    workoutList.add(new Workout(workoutName, workoutFavourite, workoutExerciseList.toArray(new WorkoutExercise[workoutExerciseList.size()])));
                     workoutExerciseList = new ArrayList<>();
 
                     workoutName = resultSet.getString("WorkoutName");
-                    workoutFavourite = resultSet.getBoolean("WorkoutFavourite");
+                    workoutFavourite = resultSet.getBoolean("Favourite");
                 }
 
                 exerciseName = resultSet.getString("ExerciseName");
@@ -565,19 +603,39 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
 
                 xpValue = XP_PER_INTENSITY * ExerciseIntensity.valueOf(resultSet.getString("Intensity")).ordinal();
                 distance = resultSet.getDouble("Distance");
-                distanceUnit = DistanceUnit.valueOf(resultSet.getString("DistanceUnit"));
+                if (resultSet.wasNull())
+                    distance = NULL_NUM;
+                distanceUnitString = resultSet.getString("DistanceUnit");
+                if (!resultSet.wasNull())
+                    distanceUnit = DistanceUnit.valueOf(distanceUnitString);
+
                 duration = resultSet.getInt("Duration");
-                timeUnit = TimeUnit.valueOf(resultSet.getString("DurationUnit"));
+                if (resultSet.wasNull())
+                    duration = NULL_NUM;
+                timeUnitString = resultSet.getString("DurationUnit");
+                if (!resultSet.wasNull())
+                    timeUnit = TimeUnit.valueOf(timeUnitString);
+
                 sets = resultSet.getInt("Sets");
+                if (resultSet.wasNull())
+                    sets = NULL_NUM;
                 reps = resultSet.getInt("Reps");
+                if (resultSet.wasNull())
+                    reps = NULL_NUM;
+
                 weight = resultSet.getDouble("Weight");
-                weightUnit = WeightUnit.valueOf(resultSet.getString("WeightUnit"));
+                if (resultSet.wasNull())
+                    weight = NULL_NUM;
+                weightUnitString = resultSet.getString("WeightUnit");
+                if (!resultSet.wasNull())
+                    weightUnit = WeightUnit.valueOf(weightUnitString);
+
                 workoutExerciseList.add(createWorkoutExercise(exercise, xpValue, distance, distanceUnit,
                         duration, timeUnit, sets, reps, weight, weightUnit));
             }
 
             if (workoutName != null)
-                workoutList.add(new Workout(workoutName, workoutFavourite, (WorkoutExercise[]) workoutExerciseList.toArray()));
+                workoutList.add(new Workout(workoutName, workoutFavourite, workoutExerciseList.toArray(new WorkoutExercise[workoutExerciseList.size()])));
 
             resultSet.close();
         }
@@ -627,9 +685,9 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
         List<Workout> workoutList = getWorkoutsList();
         Iterator<Workout> workoutIterator = workoutList.iterator();
 
-        while(workoutIterator.hasNext()){
+        while(workoutIterator.hasNext() && workout == null){
             maybeWorkout = workoutIterator.next();
-            if(maybeWorkout.equals(workoutName)){
+            if(maybeWorkout.getName().equals(workoutName)){
                 workout = maybeWorkout;
             }
         }
@@ -659,11 +717,11 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
         WorkoutExercise workoutExercise = null;
         InterfaceExerciseQuantity exerciseQuantity;
 
-        if (distance != NULL_NUM) {
+        if (distance != NULL_NUM && distanceUnit != null) {
             exerciseQuantity = new ExerciseDistance(distance, distanceUnit);
             workoutExercise = new WorkoutExerciseDistance(exercise, xpValue, (ExerciseDistance)exerciseQuantity);
         }
-        else if (duration != NULL_NUM) {
+        else if (duration != NULL_NUM && timeUnit != null) {
             exerciseQuantity = new ExerciseDuration(duration, timeUnit);
             workoutExercise = new WorkoutExerciseDuration(exercise, xpValue, (ExerciseDuration)exerciseQuantity);
 
@@ -673,7 +731,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
             workoutExercise = new WorkoutExerciseSets(exercise, xpValue, (ExerciseSets)exerciseQuantity);
 
         }
-        else if (weight != NULL_NUM) {
+        else if (weight != NULL_NUM && weightUnit != null) {
             exerciseQuantity = new ExerciseSetsAndWeight(sets, reps, weight, weightUnit);
             workoutExercise = new WorkoutExerciseSetsAndWeight(exercise, xpValue, (ExerciseSetsAndWeight)exerciseQuantity);
         }
