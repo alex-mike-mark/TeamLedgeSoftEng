@@ -482,7 +482,6 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      */
     @Override
     public void toggleWorkoutCompleted(WorkoutSession workoutSession) {
-        workoutSession.toggleCompleted();
         dataAccess.toggleWorkoutComplete(workoutSession);
     }
 
