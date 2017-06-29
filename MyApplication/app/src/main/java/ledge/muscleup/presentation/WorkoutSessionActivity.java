@@ -3,18 +3,13 @@ package ledge.muscleup.presentation;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,9 +17,6 @@ import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import ledge.muscleup.R;
@@ -44,8 +36,7 @@ import ledge.muscleup.model.workout.WorkoutSession;
 public class WorkoutSessionActivity extends Activity {
 
     private WorkoutSession workoutSession;  //the workout session in view
-    private CheckboxAdapter adapter;
-    private int numCompletedExercises;      //number of exercises checked off as completed
+    private ListItemAdapter adapter;
     private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
 
     /**
@@ -57,7 +48,7 @@ public class WorkoutSessionActivity extends Activity {
         final InterfaceAccessWorkoutSessions aws = new AccessWorkoutSessions();
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_workout_session_checklist);
+        setContentView(R.layout.activity_workout_session_in_progress);
 
         ListView listView = (ListView) findViewById(R.id.checklist);
         final List<WorkoutSessionExercise> exerciseList = getExercisesInWorkoutSession();
@@ -69,25 +60,35 @@ public class WorkoutSessionActivity extends Activity {
         TextView sessionNameTextView = (TextView) findViewById(R.id.workoutSessionName);
         sessionNameTextView.setText(workoutSession.getName());
 
-        numCompletedExercises = 0;
-
-        adapter = new CheckboxAdapter(getApplicationContext(), R.layout.activity_workout_session_exercise, exerciseList);
+        adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_workout_session_exercise, exerciseList);
 
         listView.setAdapter(adapter);
         listView.setItemsCanFocus(true);
 
         Button completeWorkoutButton = (Button) findViewById(R.id.btn_completeWorkout);
-        completeWorkoutButton.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                aws.toggleWorkoutCompleted(workoutSession);
-                Intent appInfo = new Intent(WorkoutSessionActivity.this, CompletedWorkoutActivity.class);
-                LocalDate date = workoutSession.getDate();
-                appInfo.putExtra("workoutSessionDate", formatter.print(date));
-                //TODO- Method call to update user's xp with completed workout xp value. User's xp not yet implemented.
-                startActivity(appInfo);
-            }
-        });
+        if(workoutSession.isComplete()) {
+            completeWorkoutButton.setText("Back");
+            completeWorkoutButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(WorkoutSessionActivity.this, ScheduleActivity.class));
+                }
+            });
+        } else {
+            completeWorkoutButton.setText("Complete");
+            completeWorkoutButton.setOnClickListener(new Button.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    aws.toggleWorkoutCompleted(workoutSession);
+                    Intent appInfo = new Intent(WorkoutSessionActivity.this, CompletedWorkoutActivity.class);
+                    LocalDate date = workoutSession.getDate();
+                    appInfo.putExtra("workoutSessionDate", formatter.print(date));
+                    //TODO- Method call to update user's xp with completed workout xp value. User's xp not yet implemented.
+                    startActivity(appInfo);
+                }
+            });
+        }
+
     }
 
     /**
@@ -118,43 +119,40 @@ public class WorkoutSessionActivity extends Activity {
 
     /**
      * A custom extension of the ArrayAdapter class, used for displaying exercise name and quantity
-     * along with a checkbox beside it in a ListView
+     *
      */
-    private class CheckboxAdapter extends ArrayAdapter {
+    private class ListItemAdapter extends ArrayAdapter {
         private List<WorkoutSessionExercise> exerciseList;
         Context context;
 
         /**
-         * A constructor for a CheckboxAdapter, which is a custom ArrayAdapter used for displaying
-         * exercise name and quantity along with a checkbox of whether it's been completed
+         * A constructor for a ListItemAdapter, which is a custom ArrayAdapter used for displaying
+         * exercise name and quantity
          * @param context The activity's context
          * @param resourceId the layout resource used for the adapter
          * @param exerciseList a list of exercises in the workout session
          */
-        public CheckboxAdapter(Context context, int resourceId, List<WorkoutSessionExercise> exerciseList) {
+        public ListItemAdapter(Context context, int resourceId, List<WorkoutSessionExercise> exerciseList) {
             super(context, resourceId, exerciseList);
             this.exerciseList = exerciseList;
             this.context = context;
         }
 
         /**
-         * A wrapper class holding the different elements of a single list item in the checklist view
+         * A wrapper class holding the different elements of a single list item in the list view
          */
         private class ViewHolder {
             TextView exerciseName;
             TextView exerciseQuantity;
-            CheckBox completed;
         }
 
 
         /**
-         * Returns a view containing the workout session exercise name and quantity along with a checkbox
-         * for each exercise in the workout session
+         * Returns a view containing the workout session exercise name and quantity
          * @param index the index of the exercise in the exercise list
          * @param convertView the view used for conversion
          * @param parent the parent ViewGroup
-         * @return a view containing the workout session exercise name and quantity along with a
-         * checkbox for each exercise in the workout session
+         * @return a view containing the workout session exercise name and quantity
          */
         @Override
         public View getView(final int index, View convertView, @NonNull ViewGroup parent) {
@@ -164,15 +162,14 @@ public class WorkoutSessionActivity extends Activity {
 
             if (convertView == null) {
                 viewHolder = new ViewHolder();
-                convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_workout_session_exercise, parent, false);
+                convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_workout_session_exercise, parent, false);
                 viewHolder.exerciseName = (TextView) convertView.findViewById(R.id.workoutSessionExerciseName);
                 viewHolder.exerciseQuantity = (TextView) convertView.findViewById(R.id.workoutSessionExerciseQuantity);
-                viewHolder.completed = (CheckBox)convertView.findViewById(R.id.exerciseCompletedCheckbox);
 
                 returnedView = convertView;
                 convertView.setTag(viewHolder);
             } else {
-                viewHolder= (ViewHolder) convertView.getTag();
+                viewHolder = (ViewHolder) convertView.getTag();
                 returnedView = convertView;
             }
 
@@ -180,30 +177,7 @@ public class WorkoutSessionActivity extends Activity {
 
             viewHolder.exerciseName.setText(sessionExercise.getName());
             viewHolder.exerciseQuantity.setText(sessionExercise.getRecommendedQuantity().toString());
-            viewHolder.completed.setChecked(exerciseList.get(index).isComplete());
-            viewHolder.completed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    exerciseList.get(index).toggleCompleted();
 
-                    if (isChecked) {
-                        numCompletedExercises++;
-                    } else {
-                        numCompletedExercises--;
-                    }
-
-                    Button completeWorkoutButton = (Button) findViewById(R.id.btn_completeWorkout);
-                    if(numCompletedExercises == workoutSession.numExercises()) {
-                        //all exercises in workout session are completed, enable button
-                        completeWorkoutButton.setEnabled(true);
-                        completeWorkoutButton.setClickable(true);
-                    } else {
-                        //not all exercises in workout session are completed, disable button
-                        completeWorkoutButton.setEnabled(false);
-                        completeWorkoutButton.setClickable(false);
-                    }
-                }
-            });
             return returnedView;
         }
     }
