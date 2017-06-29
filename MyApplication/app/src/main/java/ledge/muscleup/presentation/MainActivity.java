@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
         Main.startUp();
     }
 
+    /**
+     * Cleans up the application when destroyed
+     */
     protected void onDestroy() {
         super.onDestroy();
 
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * opens the WorkoutActivity
+     * Opens the WorkoutActivity
      * @param view
      */
     public void openWorkouts(View view) {
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * opens the  ExerciseActivity
+     * Opens the ExerciseActivity
      * @param view
      */
     public void openExercises(View view) {
@@ -59,11 +62,18 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Opens the ScheduleActivity
+     * @param view
+     */
     public void openSchedule(View view) {
         Intent intent = new Intent(this, ScheduleActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Copies all database files to the device
+     */
     private void copyDatabaseToDevice() {
         final String DB_PATH = "db";
 
@@ -93,6 +103,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Copies all assets files to a given directory, provided they don't already exists
+     * @param assets the files in the assets folder
+     * @param directory the directory to copy to
+     * @throws IOException when an error occuring while reading or writing
+     */
     public void copyAssetsToDirectory(String[] assets, File directory) throws IOException {
         AssetManager assetManager = getAssets();
 

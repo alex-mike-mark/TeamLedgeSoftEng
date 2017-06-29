@@ -19,11 +19,18 @@ public class Main {
         Services.createDataAccess(dbName);
     }
 
+    /**
+     * Close the database
+     */
     public static void shutDown()
     {
         Services.closeDataAccess();
     }
 
+    /**
+     * Get the path of the database file
+     * @return the path of the database file
+     */
     public static String getDBPathName() {
         if (dbPathName == null)
             return dbName;
@@ -31,6 +38,10 @@ public class Main {
             return dbPathName;
     }
 
+    /**
+     * Set the path of the database file
+     * @param pathName the new path of the database file
+     */
     public static void setDBPathName(String pathName) {
         dbPathName = pathName;
     }
