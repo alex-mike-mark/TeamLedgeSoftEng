@@ -1,6 +1,8 @@
 package ledge.muscleup.persistence;
 
 import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,9 +12,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ledge.muscleup.model.exercise.Exercise;
+import ledge.muscleup.model.exercise.ExerciseDistance;
+import ledge.muscleup.model.exercise.ExerciseDuration;
+import ledge.muscleup.model.exercise.ExerciseSets;
+import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
+import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
+import ledge.muscleup.model.exercise.WorkoutExercise;
+import ledge.muscleup.model.exercise.WorkoutExerciseDistance;
+import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
+import ledge.muscleup.model.exercise.WorkoutExerciseSets;
+import ledge.muscleup.model.exercise.WorkoutExerciseSetsAndWeight;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
+import ledge.muscleup.model.exercise.enums.DistanceUnit;
 import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
 import ledge.muscleup.model.exercise.enums.ExerciseType;
+import ledge.muscleup.model.exercise.enums.TimeUnit;
+import ledge.muscleup.model.exercise.enums.WeightUnit;
 import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
@@ -26,7 +41,9 @@ import ledge.muscleup.model.workout.WorkoutSession;
  */
 
 public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkoutDataAccess, InterfaceWorkoutSessionDataAccess {
-    private final String SHUTDOWN_CMD = "shutdown compact";
+    private static final String SHUTDOWN_CMD = "shutdown compact";
+    private static final DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd");
+    private static final int NULL_NUM = -1;
 
     private String dbName;
     private String dbType = "HSQLDB";
@@ -242,6 +259,50 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
     @Override
     public Workout getWorkout(String workoutName) {
         return null;
+    }
+
+    /**
+     * Handles the creation of a workout exercise based on the values that are stored with a workout exercise
+     * in the database
+     *
+     * @param exercise the exercise for the workout exercise
+     * @param xpValue the xp value for the workout exercise
+     * @param distance the recommended distance
+     * @param distanceUnit the unit of measure for the distance
+     * @param duration the recommended duration
+     * @param timeUnit the unit of measure for the duration
+     * @param sets the recommended number of sets
+     * @param reps the recommended number of reps
+     * @param weight the recommended weight
+     * @param weightUnit the unit of measure for the weight
+     * @return the workout exercise based on the passed values
+     */
+    private WorkoutExercise createWorkoutExercise(Exercise exercise, int xpValue, double distance,
+                                                  DistanceUnit distanceUnit, int duration, TimeUnit timeUnit,
+                                                  int sets, int reps, double weight, WeightUnit weightUnit) {
+        WorkoutExercise workoutExercise = null;
+        InterfaceExerciseQuantity exerciseQuantity = null;
+
+        if (distance != NULL_NUM) {
+            exerciseQuantity = new ExerciseDistance(distance, distanceUnit);
+            workoutExercise = new WorkoutExerciseDistance(exercise, xpValue, (ExerciseDistance)exerciseQuantity);
+        }
+        else if (duration != NULL_NUM) {
+            exerciseQuantity = new ExerciseDuration(duration, timeUnit);
+            workoutExercise = new WorkoutExerciseDuration(exercise, xpValue, (ExerciseDuration)exerciseQuantity);
+
+        }
+        else if (sets != NULL_NUM && reps != NULL_NUM) {
+            exerciseQuantity = new ExerciseSets(sets, reps);
+            workoutExercise = new WorkoutExerciseSets(exercise, xpValue, (ExerciseSets)exerciseQuantity);
+
+        }
+        else if (weight != NULL_NUM) {
+            exerciseQuantity = new ExerciseSetsAndWeight(sets, reps, weight, weightUnit);
+            workoutExercise = new WorkoutExerciseSetsAndWeight(exercise, xpValue, (ExerciseSetsAndWeight)exerciseQuantity);
+        }
+
+        return workoutExercise;
     }
 
     /**
