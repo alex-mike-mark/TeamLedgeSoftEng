@@ -33,7 +33,7 @@ public class WorkoutExerciseSubsTest extends TestCase{
     @Before
     public void setUp(){
         xp = 10;
-        exercise1 = new Exercise("DUMMY", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY,false);
+        exercise1 = new Exercise("DUMMY", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY);
 
         sets = new ExerciseSets(10,10);
         setsAndWeight = new ExerciseSetsAndWeight(10,10,10, WeightUnit.KG);

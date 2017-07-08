@@ -31,7 +31,7 @@ public class WorkoutExerciseDurationTest extends TestCase {
     public void setUp(){
         workoutExerciseDuration1 = new WorkoutExerciseDuration(new Exercise("Run From Your Past", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), xpHighIntensity,new ExerciseDuration(692040, TimeUnit.HOURS));
         workoutExerciseDuration2 = new WorkoutExerciseDuration(new Exercise("Swim With The Fishes", ExerciseIntensity.MEDIUM, ExerciseType.LEG), xpMediumIntensity,new ExerciseDuration(5, TimeUnit.HOURS));
-        exercise1 = new Exercise("Run From Your Past", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, true);
+        exercise1 = new Exercise("Run From Your Past", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY);
         workoutExerciseDuration3 = new WorkoutExerciseDuration(exercise1, xpHighIntensity,new ExerciseDuration(2, TimeUnit.HOURS));
     }
 
