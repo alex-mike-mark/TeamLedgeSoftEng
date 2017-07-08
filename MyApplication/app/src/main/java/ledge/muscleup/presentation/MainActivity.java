@@ -72,6 +72,11 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    public void openProgressReport(View view) {
+        Intent intent = new Intent (this, ProgressReportActivty.class);
+        startActivity(intent);
+    }
+
     /**
      * Copies all database files to the device
      */

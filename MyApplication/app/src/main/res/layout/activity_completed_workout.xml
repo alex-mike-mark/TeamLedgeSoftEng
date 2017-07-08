@@ -79,7 +79,7 @@
                 android:textAlignment="center"
                 android:textSize="24sp"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="@string/btn_backToSchedule"/>
+                android:text="@string/btn_back"/>
         </RelativeLayout>
 
     </LinearLayout>
