@@ -14,9 +14,7 @@ public class LevelCalculator {
         boolean isLevel = false;
         while (!isLevel) {
             Level currLevel = new Level(levelNum);
-            Log.d("CurrLevel", String.valueOf(currLevel.getLevelNumber()) + " " + String.valueOf(currLevel.getXpRequired()));
             Level nextLevel = new Level(levelNum + 1);
-            Log.d("NextLevel", String.valueOf(nextLevel.getLevelNumber()) + " " + String.valueOf(nextLevel.getXpRequired()));
             if (currLevel.getXpRequired() <= experiencePoints && nextLevel.getXpRequired() > experiencePoints) {
                 isLevel = true;
             } else {

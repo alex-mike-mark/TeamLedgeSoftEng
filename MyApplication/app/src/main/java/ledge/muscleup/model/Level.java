@@ -23,12 +23,4 @@ public class Level {
     public int getXpRequired() {
         return this.xpRequired;
     }
-
-   /* public boolean isCurrentLevel(int xp) {
-        boolean isCurrentLevel = false;
-        if (xp >= this.xpRequired && xp < this.nextLevel.xpRequired) {
-            isCurrentLevel = true;
-        }
-        return isCurrentLevel;
-    } */
 }
