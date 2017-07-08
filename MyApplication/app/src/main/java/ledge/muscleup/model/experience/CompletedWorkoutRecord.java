@@ -1,5 +1,6 @@
 package ledge.muscleup.model.experience;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 /**
@@ -16,7 +17,7 @@ public class CompletedWorkoutRecord {
     private String workoutName;
     private int experienceGained;
     private int experienceAfterCompletion;
-    private LocalDate dateOfCompletion;
+    private DateTime dateOfCompletion;
 
     /**
      * The default constructor for a CompletedWorkoutRecord
@@ -26,7 +27,7 @@ public class CompletedWorkoutRecord {
      * @param dateOfCompletion the date the workout was completed
      */
     public CompletedWorkoutRecord(String workoutName, int experienceBeforeCompletion,
-                                  int experienceAfterCompletion, LocalDate dateOfCompletion) {
+                                  int experienceAfterCompletion, DateTime dateOfCompletion) {
         this.workoutName = workoutName;
         this.experienceAfterCompletion = experienceAfterCompletion;
         this.experienceGained = experienceAfterCompletion - experienceBeforeCompletion;
@@ -62,6 +63,6 @@ public class CompletedWorkoutRecord {
      * @return the date this workout was completed
      */
     public LocalDate getDateOfCompletion() {
-        return dateOfCompletion;
+        return dateOfCompletion.toLocalDate();
     }
 }
