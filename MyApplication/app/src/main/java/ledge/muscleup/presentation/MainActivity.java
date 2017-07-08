@@ -1,5 +1,6 @@
 package ledge.muscleup.presentation;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +18,7 @@ import ledge.muscleup.R;
 import ledge.muscleup.application.Main;
 import ledge.muscleup.application.Services;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     public static final String dbName="workout_till_you_dropout";
 
     /**
