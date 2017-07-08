@@ -1,5 +1,6 @@
 package ledge.muscleup.persistence;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -29,6 +30,7 @@ import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
 import ledge.muscleup.model.exercise.enums.ExerciseType;
 import ledge.muscleup.model.exercise.enums.TimeUnit;
 import ledge.muscleup.model.exercise.enums.WeightUnit;
+import ledge.muscleup.model.experience.CompletedWorkoutRecord;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
 
@@ -40,7 +42,8 @@ import ledge.muscleup.model.workout.WorkoutSession;
  * @since 2017-06-27
  */
 
-public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkoutDataAccess, InterfaceWorkoutSessionDataAccess {
+public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkoutDataAccess,
+        InterfaceWorkoutSessionDataAccess, InterfaceExperienceDataAccess {
     private static final String SHUTDOWN_CMD = "shutdown compact";
     private static final DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd");
     private static final int NULL_NUM = -1;
@@ -752,6 +755,107 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
         }
 
         return workout;
+    }
+
+    /**
+     * Returns the list of all completed workout records
+     *
+     * @return a list of all completed workout records
+     */
+    @Override
+    public List<CompletedWorkoutRecord> getCompletedWorkoutsInDateRange() {
+        List<CompletedWorkoutRecord> completedWorkoutRecordList = new ArrayList<>();
+        CompletedWorkoutRecord completedWorkoutRecord = null;
+        String workoutName = null;
+        DateTime loggedDate = null;
+        int currentXP = -1;
+        int previousXP;
+
+        try
+        {
+            resultSet = statement.executeQuery(
+                    "SELECT         W.Name, " +
+                    "               PH.LoggedDate, " +
+                    "               PH.CurrentXP " +
+                    "FROM           ProgressHistory PH " +
+                    "LEFT JOIN      WorkoutSession WS" +
+                    "               ON PH.WorkoutSessionID = WS.ID " +
+                    "LEFT JOIN      Workouts W" +
+                    "               ON WS.WorkoutID = W.ID " +
+                    "ORDER BY       PH.LoggedDate DESC ");
+
+            while (resultSet.next())
+            {
+                previousXP = resultSet.getInt("CurrentXP");
+
+                if (workoutName != null) {
+                    completedWorkoutRecord = new CompletedWorkoutRecord(workoutName, previousXP, currentXP, loggedDate);
+                    completedWorkoutRecordList.add(completedWorkoutRecord);
+                }
+
+                workoutName = resultSet.getString("Name");
+                loggedDate = new DateTime(resultSet.getDate("LoggedDate"));
+                currentXP = previousXP;
+            }
+
+            if (workoutName != null) {
+                completedWorkoutRecord = new CompletedWorkoutRecord(workoutName, 0, currentXP, loggedDate);
+                completedWorkoutRecordList.add(completedWorkoutRecord);
+            }
+
+            resultSet.close();
+        }
+        catch (Exception e) {
+            sqlError(e);
+        }
+
+        return completedWorkoutRecordList;
+    }
+
+    /**
+     * Returns the most recent completed workout
+     *
+     * @return the most recent completed workout
+     */
+    @Override
+    public CompletedWorkoutRecord getMostRecentCompletedWorkout() {
+        CompletedWorkoutRecord completedWorkoutRecord = null;
+        String workoutName;
+        DateTime loggedDate;
+        int currentXP;
+        int previousXP = 0;
+
+        try {
+            resultSet = statement.executeQuery(
+                    "SELECT TOP 2   W.Name, " +
+                    "               PH.LoggedDate, " +
+                    "               PH.CurrentXP " +
+                    "FROM           ProgressHistory PH " +
+                    "LEFT JOIN      WorkoutSession WS" +
+                    "               ON PH.WorkoutSessionID = WS.ID " +
+                    "LEFT JOIN      Workouts W" +
+                    "               ON WS.WorkoutID = W.ID " +
+                    "ORDER BY       PH.LoggedDate DESC ");
+
+            if (resultSet.next())
+            {
+                workoutName = resultSet.getString("Name");
+                loggedDate = new DateTime(resultSet.getDate("LoggedDate"));
+                currentXP = resultSet.getInt("CurrentXP");
+
+                if (resultSet.next())
+                    previousXP = resultSet.getInt("CurrentXP");
+
+                completedWorkoutRecord = new CompletedWorkoutRecord(workoutName, previousXP, currentXP, loggedDate);
+            }
+
+            resultSet.close();
+        }
+        catch (Exception e) {
+            sqlError(e);
+        }
+
+        return completedWorkoutRecord;
     }
 
     /**
