@@ -538,7 +538,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
             sqlError(e);
         }
     }
-		
+
     /**
      * Toggles the completed state of a workout in the database
      *
@@ -546,11 +546,35 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      */
     @Override
     public void toggleWorkoutComplete(WorkoutSession workoutSession) {
+        int workoutSessionID, previousXPValue = 0;
+
         try {
-            statement.executeQuery(
-                    "UPDATE     WorkoutSessions WS " +
-                    "SET        WS.Complete = True " +
+            //get the ID of the workout session to be updated
+            resultSet = statement.executeQuery(
+                    "SELECT     WS.ID" +
+                    "FROM       WorkoutSessions WS " +
                     "WHERE      WS.ScheduledDate = DATE'" + format.print(workoutSession.getDate()) + "'");
+            if (resultSet.next()) {
+                workoutSessionID = resultSet.getInt("ID");
+
+                //mark the workout as complete
+                statement.executeQuery(
+                        "UPDATE     WorkoutSessions WS " +
+                        "SET        WS.Complete = True " +
+                        "WHERE      WS.ID = " + workoutSessionID);
+
+                //get the last experience value from the history table
+                resultSet = statement.executeQuery(
+                        "SELECT TOP 1   PH.CurrentXP " +
+                        "FROM           ProgressHistory PH " +
+                        "ORDER BY       LoggedDate DESC ");
+                if (resultSet.next())
+                    previousXPValue = resultSet.getInt("CurrentXP");
+
+                statement.executeQuery(
+                        "INSERT INTO    ProgressHistory (WorkoutSessionID, LoggedDate, CurrentXP) " +
+                        "VALUES         (" + workoutSessionID + ", CURRENT_TIMESTAMP, "  + (previousXPValue + workoutSession.getExperienceValue()) + ")");
+            }
         }
         catch(Exception e) {
             sqlError(e);
