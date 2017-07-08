@@ -10,21 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import ledge.muscleup.R;
-import ledge.muscleup.application.Services;
 import ledge.muscleup.business.AccessWorkouts;
 import ledge.muscleup.business.InterfaceAccessWorkouts;
-import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 import ledge.muscleup.model.workout.Workout;
-import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
  * WorkoutActivity displays a list of workouts that the user can click on to view list of exercises
@@ -52,13 +46,10 @@ public class WorkoutActivity extends Activity {
         ListView listView = (ListView) findViewById(R.id.list_panel);
         workoutList = aw.getWorkoutsList();
 
-        TextView filter = (TextView) findViewById(R.id.filter_title);
-        filter.setText("Filter: none");
-
         TextView title = (TextView) findViewById(R.id.activity_title);
         title.setText("Workout Collection");
 
-        adapter = new ListItemAdapter(getApplicationContext(), R.layout.activity_workout_session_exercise, workoutList);
+        adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_workout, workoutList);
         listView.setAdapter(adapter);
         listView.setItemsCanFocus(true);
 

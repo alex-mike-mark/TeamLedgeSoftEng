@@ -1,23 +1,25 @@
 package ledge.muscleup.model.business;
 
+import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
-import ledge.muscleup.model.exercise.DistanceUnit;
+import ledge.muscleup.model.exercise.WorkoutExerciseDistance;
+import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
+import ledge.muscleup.model.exercise.WorkoutExerciseSets;
+import ledge.muscleup.model.exercise.WorkoutExerciseSetsAndWeight;
+import ledge.muscleup.model.exercise.enums.*;
 import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.ExerciseDistance;
 import ledge.muscleup.model.exercise.ExerciseDuration;
-import ledge.muscleup.model.exercise.ExerciseIntensity;
 import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
-import ledge.muscleup.model.exercise.ExerciseType;
 import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
-import ledge.muscleup.model.exercise.TimeUnit;
-import ledge.muscleup.model.exercise.WeightUnit;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 import ledge.muscleup.model.schedule.ScheduleWeek;
@@ -54,7 +56,7 @@ class TemplateDataAccessStub implements InterfaceDataAccess {
     /**
      * Opens the stub database and populates it with some default values
      */
-    public void open() {
+    public void open(String dbPath) {
 
         Exercise exercise;
         WorkoutExercise workoutExercise;
@@ -88,75 +90,74 @@ class TemplateDataAccessStub implements InterfaceDataAccess {
         workoutsByName.put(workout.getName(), workout);
         exercise = exercisesByName.get("Bicep Curls");
         int exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExercise(exercise, new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS),
-                exerciseExperience);
-        addExerciseToWorkout(workout, workoutExercise);
+        workoutExercise = new WorkoutExerciseSetsAndWeight(exercise, exerciseExperience,new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
+        workout.addExercise(workoutExercise);
         exercise = exercisesByName.get("Push-Ups");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExercise(exercise, new ExerciseSets(2, 15), exerciseExperience);
-        addExerciseToWorkout(workout, workoutExercise);
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience, new ExerciseSets(2, 15));
+        workout.addExercise(workoutExercise);
 
         workout = new Workout("Never Skip Leg Day");
         workoutsByName.put(workout.getName(), workout);
         exercise = exercisesByName.get("Squats");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExercise(exercise, new ExerciseSets(4, 15), exerciseExperience);
-        addExerciseToWorkout(workout, workoutExercise);
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience, new ExerciseSets(4, 15));
+        workout.addExercise(workoutExercise);
         exercise = exercisesByName.get("Lunges");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExercise(exercise, new ExerciseSets(3, 10), exerciseExperience);
-        addExerciseToWorkout(workout, workoutExercise);
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience, new ExerciseSets(3, 10));
+        workout.addExercise(workoutExercise);
 
         workout = new Workout("Marathon Training Starts Here");
         workoutsByName.put(workout.getName(), workout);
         exercise = exercisesByName.get("Running");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExercise(exercise, new ExerciseDistance(2.5, DistanceUnit.MILES), exerciseExperience);
-        addExerciseToWorkout(workout, workoutExercise);
+        workoutExercise = new WorkoutExerciseDistance(exercise, exerciseExperience,new ExerciseDistance(2.5, DistanceUnit.MILES));
+        workout.addExercise(workoutExercise);
         exercise = exercisesByName.get("Exercise Bike");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExercise(exercise, new ExerciseDuration(45, TimeUnit.MINUTES), exerciseExperience);
-        addExerciseToWorkout(workout, workoutExercise);
+        workoutExercise = new WorkoutExerciseDuration(exercise, exerciseExperience, new ExerciseDuration(45, TimeUnit.MINUTES));
+        workout.addExercise(workoutExercise);
 
         workout = new Workout("Work that Core, Get that Score!");
         workoutsByName.put(workout.getName(), workout);
         exercise = exercisesByName.get("Crunches");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExercise(exercise, new ExerciseSets(2, 25), exerciseExperience);
-        addExerciseToWorkout(workout, workoutExercise);
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience,new ExerciseSets(2, 25));
+        workout.addExercise(workoutExercise);
         exercise = exercisesByName.get("Bicycle Kicks");
         exerciseExperience = (exercise.getIntensity().ordinal() + 1) * xpPerIntensityLevel;
-        workoutExercise = new WorkoutExercise(exercise, new ExerciseSets(2, 15), exerciseExperience);
-        addExerciseToWorkout(workout, workoutExercise);
+        workoutExercise = new WorkoutExerciseSets(exercise, exerciseExperience,new ExerciseSets(2, 15));
+        workout.addExercise(workoutExercise);
 
-        workoutSessionsByDate = new HashMap<>();
+        workoutSessionsByDate = new TreeMap<>();
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Welcome to the Gun Show")),
-                new LocalDate(2017, 06, 8),
+                new LocalDate().minusWeeks(1).withDayOfWeek(DateTimeConstants.THURSDAY),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Never Skip Leg Day")),
-                new LocalDate(2017, 06, 9),
+                new LocalDate().withDayOfWeek(DateTimeConstants.TUESDAY),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Work that Core, Get that Score!")),
-                new LocalDate(2017, 06, 10),
+                new LocalDate().withDayOfWeek(DateTimeConstants.WEDNESDAY),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Never Skip Leg Day")),
-                new LocalDate(2017, 06, 13),
+                new LocalDate().withDayOfWeek(DateTimeConstants.FRIDAY),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Marathon Training Starts Here")),
-                new LocalDate(2017, 06, 15),
+                new LocalDate().plusWeeks(1).withDayOfWeek(DateTimeConstants.TUESDAY),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
@@ -179,14 +180,6 @@ class TemplateDataAccessStub implements InterfaceDataAccess {
     }
 
     /**
-     * Gets a list of names of all exercises in the database
-     * @return a list of names of all exercises in the database
-     */
-    public List<String> getExerciseNamesList() {
-        return new ArrayList<>(exercisesByName.keySet());
-    }
-
-    /**
      * Gets a list of all workouts in the database
      * @return a list of all workouts in the database
      */
@@ -203,143 +196,12 @@ class TemplateDataAccessStub implements InterfaceDataAccess {
     }
 
     /**
-     * Retrieves an exercise from the database with the name given as parameter
-     * @param exerciseName- the name of the exercise to retrieve from the database
-     * @return The exercise with name exerciseName, or null if no exercise exists with that name
-     */
-    public Exercise getExercise(String exerciseName) {
-        return exercisesByName.get(exerciseName);
-    }
-
-    /**
      * Retrieves a workout from the database with the name given as parameter
      * @param workoutName the name of the workout to retrieve from the database
      * @return The workout with name workoutName, or null if no workout exists with that name
      */
     public Workout getWorkout(String workoutName) {
         return workoutsByName.get(workoutName);
-    }
-
-    /**
-     * Adds an exercise to the database
-     * @param exercise the exercise to be added to the database
-     */
-
-    public void insertExercise(Exercise exercise) {
-        exercisesByName.put(exercise.getName(), exercise);
-    }
-
-    /**
-     * Adds a workout to the database
-     * @param workout the workout to be added to the database
-     */
-
-    public void insertWorkout(Workout workout) {
-        workoutsByName.put(workout.getName(), workout);
-    }
-
-    /**
-
-     * Adds an exercise to a workout in the database, if both the workout and the exercise exist in
-     * the database
-     * @param workout the workout to add the exercise to
-     * @param exercise the exercise to add to the workout
-     *
-     * @return a boolean indicating whether the exercise was properly added to the workout
-     */
-    public boolean addExerciseToWorkout (Workout workout, WorkoutExercise exercise) {
-        boolean added = false;
-        Workout dbWorkout;
-
-        if (workoutsByName.containsKey(workout.getName())) {
-            dbWorkout = workoutsByName.get(workout.getName());
-            if (exercisesByName.containsKey(exercise.getName())) {
-                dbWorkout.addExercise(exercise);
-                added = true;
-            }
-        }
-        return added;
-    }
-
-    /**
-     * Removes an exercise from the database, if it exists
-     * @param exercise the exercise to remove from the database
-     */
-
-    public void removeExercise(Exercise exercise) {
-        exercisesByName.remove(exercise.getName());
-    }
-
-    /**
-     * Removes a workout from the database, if it exists
-     * @param workout the workout to remove from the database
-     */
-
-    public void removeWorkout(Workout workout) {
-        workoutsByName.remove(workout.getName());
-    }
-    /**
-     * Updates the recommended quantity of exercise for a given exercise in a given workout in the database
-     *
-     * @param workout  the workout that contains the exercise to update
-     * @param exercise the exercise to set the quantity for
-     * @param quantity the quantity to assign to the exercise
-     * @return a boolean representing if the exercise was found and updated in the workout
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    public boolean updateExerciseQuantity(Workout workout, WorkoutExercise exercise, InterfaceExerciseQuantity quantity) throws IllegalArgumentException {
-        //TODO remove after refactoring persistence layer or implement and test
-        return false;
-    }
-
-    /**
-     * Toggles the favourite state of an exercise in the database
-     *
-     * @param workout the workout to update the status of
-     */
-    public void toggleExerciseFavourite(Workout workout) {
-        //TODO remove after refactoring persistence layer or implement and test
-    }
-
-    /**
-     * Adds an exercise stored in the database to a workout stored in the database with the given
-     * quantity of the exercise to be done
-     *
-     * @param workout  the workout to add an exercise to
-     * @param exercise the exercise to add to the workout
-     * @return true if exercise was added successfully, false otherwise
-     */
-    public boolean addWorkoutExercise(Workout workout, WorkoutExercise exercise) {
-        //TODO remove after refactoring persistence layer or implement and test
-        return false;
-    }
-
-    /**
-     * Move the position of an exercise in the list of exercises in the database
-     *
-     * @param workout  the workout to change the order of exercises for
-     * @param exercise the exercise to change the position of
-     * @param index    the index of the exercise to move
-     * @return a boolean representing if the exercise was found and moved to the new index
-     * @throws IllegalArgumentException if passed a {@code null} parameter or if {@code index} is
-     *                                  outside the bounds of the list of exercises
-     */
-    public boolean moveWorkoutExercise(Workout workout, WorkoutExercise exercise, int index) throws IllegalArgumentException {
-        //TODO remove after refactoring persistence layer or implement and test
-        return false;
-    }
-
-    /**
-     * Removes an exercise from a workout in the database
-     *
-     * @param workout  the workout to remove an exercise from
-     * @param exercise the exercise to remove from the list
-     * @return the exercise that was removed, or {@code null} if the exercise couldn't be found
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    public boolean removeWorkoutExercise(Workout workout, WorkoutExercise exercise) throws IllegalArgumentException {
-        //TODO remove after refactoring persistence layer or implement and test
-        return false;
     }
 
     /**
@@ -398,62 +260,12 @@ class TemplateDataAccessStub implements InterfaceDataAccess {
     }
 
     /**
-     * Updates the scheduled date of a workout in the database
-     *
-     * @param workoutSession the workout to change the date for
-     * @param newDate        the new date of the workout
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    public void updateWorkoutDate(WorkoutSession workoutSession, LocalDate newDate) throws IllegalArgumentException {
-        //TODO remove after refactoring persistence layer or implement and test
-    }
-
-    /**
      * Toggles the completed state of a workout in the database
      *
      * @param workoutSession the workout to change the state of
      */
     public void toggleWorkoutComplete(WorkoutSession workoutSession) {
-        //TODO remove after refactoring persistence layer or implement and test
+        workoutSessionsByDate.get(workoutSession.getDate()).toggleCompleted();
     }
 
-    /**
-     * Toggles the completed state of an exercise in a workout in the database
-     *
-     * @param workoutSession the workout which contains the exercise
-     * @param exercise       the exercise to complete
-     * @return a boolean representing whether the exercise was marked as completed or not
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    public boolean toggleExerciseComplete(WorkoutSession workoutSession, WorkoutSessionExercise exercise) throws IllegalArgumentException {
-        //TODO remove after refactoring persistence layer or implement and test
-        return false;
-    }
-
-    /**
-     * Adds a workout session to a given day in the database
-     *
-     * @param scheduleWeek  the week to add the workout to
-     * @param workoutSession the workout session to add
-     * @param dayOfWeek      the day of the week to add the workout session to
-     * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
-     *                                  > DateTimeConstants.SUNDAY}
-     */
-    public void addWorkoutSession(ScheduleWeek scheduleWeek, WorkoutSession workoutSession, int dayOfWeek) throws IllegalArgumentException {
-        //TODO implement when implementing SQL database
-    }
-
-    /**
-     * Removes a workout from a given day in the database
-     *
-     * @param scheduleWeek the week to remove the workout from
-     * @param dayOfWeek     the day to remove the workout from
-     * @return a boolean representing if a workout was removed
-     * @throws IllegalArgumentException if {@code dayOfWeek < DateTimeConstants.MONDAY || dayOfWeek
-     *                                  > DateTimeConstants.SUNDAY}
-     */
-    public boolean removeWorkoutSession(ScheduleWeek scheduleWeek, int dayOfWeek) throws IllegalArgumentException {
-        //TODO implement when implementing SQL database
-        return false;
-    }
 }

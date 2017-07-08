@@ -1,57 +1,26 @@
 package ledge.muscleup.model.exercise;
 
+import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
+import ledge.muscleup.model.exercise.enums.ExerciseType;
+
 /**
- * An exercise which contains a contains a suggested amount of exercise, which can be modified
- *
- * @author Cole Kehler
- * @version 1.0
- * @since 2017-06-03
+ * Created by Alexander on 2017-06-24.
  */
 
-public class WorkoutExercise {
+public abstract class WorkoutExercise {
     private Exercise exercise;
-    private InterfaceExerciseQuantity recommendedQuantity;
     private int experienceValue;
 
-    /**
-     * The constructor for the WorkoutExercise class that creates a new Exercise
-     *
-     * @param name         the name of the exercise
-     * @param intensity    the intensity of the exercise
-     * @param exerciseType the type of the exercise
-     * @param recommendedQuantity the quantity of exercise recommended for the exercise
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    public WorkoutExercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType,
-                           InterfaceExerciseQuantity recommendedQuantity, int xpValue) throws IllegalArgumentException {
-        if(name == null || intensity == null || exerciseType == null || recommendedQuantity == null) {
+    public WorkoutExercise(Exercise exercise, int xpValue) throws IllegalArgumentException {
+        if(exercise==null) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
-        else {
-            exercise = new Exercise(name, intensity, exerciseType);
-            this.recommendedQuantity = recommendedQuantity;
+        else{
+            this.exercise = exercise;
             this.experienceValue = xpValue;
         }
     }
 
-    /**
-     * The constructor for the WorkoutExercise class that uses an existing Exercise
-     *
-     * @param exercise the exercise to create a WorkoutExercise instance for
-     * @param recommendedQuantity the quantity of exercise recommended for the exercise
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    public WorkoutExercise(Exercise exercise,
-                           InterfaceExerciseQuantity recommendedQuantity, int xpValue) throws IllegalArgumentException {
-        if(exercise == null || recommendedQuantity == null) {
-            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        }
-        else {
-            this.exercise = exercise;
-            this.recommendedQuantity = recommendedQuantity;
-            this.experienceValue = xpValue;
-        }
-    }
 
     /**
      * Returns the name of the exercise
@@ -81,31 +50,21 @@ public class WorkoutExercise {
     }
 
     /**
-     * Returns the recommended quantity of exercise for the exercise
-     *
-     * @return the recommended quantity of exercise
+     * Returns the quantity of the exercise in question. It returns an interface, so if there is
+     * specific functionality required by a certain implementation, you need to find another way.
+     * @return the quantity of the exercise as the interface it implements.
      */
-    public InterfaceExerciseQuantity getRecommendedQuantity() { return recommendedQuantity; }
+    public abstract InterfaceExerciseQuantity getQuantity();
 
     /**
-     * Updates the exercise with the new recommended quantity
-     *
-     * @param quantity the recommended quantity to update the exercise to
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     * @return a boolean representing if the suggested quantity could be updated
+     * Updates the quantity for a given WorkoutExercise.
+     * Note, this method takes in a generic InterfaceExerciseQuantity where specific subclasses require
+     * specific implementations of that interface. Type checking MUST happen in the implementation.
+     * I am quite aware this isn't great but whatever.
+     * @param quantity
+     * @return
      */
-    public boolean updateRecommendedQuantity(InterfaceExerciseQuantity quantity) throws IllegalArgumentException {
-        boolean quantityUpdated = false;
-
-        if (quantity == null)
-            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        else if (recommendedQuantity.getClass().isInstance(quantity)) {
-            recommendedQuantity = quantity;
-            quantityUpdated = true;
-        }
-
-        return quantityUpdated;
-    }
+    public abstract boolean updateQuantity(InterfaceExerciseQuantity quantity);
 
     /**
      * Returns the experience value of the WorkoutExercise
@@ -123,8 +82,7 @@ public class WorkoutExercise {
      */
     public boolean equals(WorkoutExercise other){
         return (other != null &&
-                getName().equals(other.getName()) &&
-                recommendedQuantity.equals(other.getRecommendedQuantity()));
+                getName().equals(other.getName()));
     }
 
     /**
@@ -134,6 +92,6 @@ public class WorkoutExercise {
      */
     @Override
     public String toString() {
-        return exercise.toString() + "\n  Recommended: " + recommendedQuantity.toString();
+        return exercise.toString();
     }
 }
