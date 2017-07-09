@@ -24,9 +24,22 @@ import java.util.List;
 import ledge.muscleup.R;
 import ledge.muscleup.model.workout.WorkoutSession;
 
+/**
+ * ProgressReportActivity displays various metrics of the user's progress, including their current
+ * level, progress towards next level, number of workouts completed and experience gained in the
+ * last week and month, and a list of recently completed workouts
+ *
+ * @author Ryan Koop
+ * @version 1.0
+ * @since 2017-07-07
+ */
 public class ProgressReportActivty extends Activity {
     private ListItemAdapter adapter;
 
+    /**
+     *  onCreate initializes WorkoutDetailsActivity
+     * @param savedInstanceState contains context from last activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +106,8 @@ public class ProgressReportActivty extends Activity {
     }
 
     /**
-     * A custom extension of the ArrayAdapter class, used for displaying workout session date and name
+     * A custom extension of the ArrayAdapter class, used for displaying date workout was completed,
+     * completed workout name, and xp gained from completed workout
      */
     private class ListItemAdapter extends ArrayAdapter {
         private List<WorkoutSession> sessionList;
@@ -101,7 +115,7 @@ public class ProgressReportActivty extends Activity {
 
         /**
          * A constructor for a ListItemAdapter, which is a custom ArrayAdapter used for displaying
-         * workout session date and name
+         * date workout was completed, completed workout name, and xp gained from completed workout
          * @param context The activity's context
          * @param resourceId the layout resource used for the adapter
          * @param sessionList a list of workout sessions
@@ -114,7 +128,8 @@ public class ProgressReportActivty extends Activity {
 
         /**
          * A wrapper class holding the different elements of a single list item in the list view.
-         * Contains 1 TextView for date and 1 TextView for name, as well as a remove button
+         * Contains 1 TextView for completed date , 1 TextView for completed workout name, and 1
+         * TextView for xpGained
          */
         private class ViewHolder {
             TextView completedDate;
@@ -127,7 +142,8 @@ public class ProgressReportActivty extends Activity {
          * @param index the index of the session in the session list
          * @param convertView the view used for conversion
          * @param parent the parent ViewGroup
-         * @return a view containing the workout session date and name
+         * @return a view containing the date workout was completed, completed workout name,
+         * and xp gained from completed workout
          */
         @Override
         public View getView(final int index, View convertView, @NonNull ViewGroup parent) {

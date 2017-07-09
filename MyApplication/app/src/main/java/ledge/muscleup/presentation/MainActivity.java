@@ -71,6 +71,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Opens the ProgressReportActivity
+     * @param view
+     */
     public void openProgressReport(View view) {
         Intent intent = new Intent (this, ProgressReportActivty.class);
         startActivity(intent);
