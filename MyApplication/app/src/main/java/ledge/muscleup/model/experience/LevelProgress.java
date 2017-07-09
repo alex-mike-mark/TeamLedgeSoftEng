@@ -30,7 +30,7 @@ public class LevelProgress {
             totalCurrXP = mostRecentWorkoutRecords.getExperienceAfterCompletion();
             do {
                 totalCurrXP -= XP_INCREASE_PER_LEVEL * level++;
-            } while (totalCurrXP > XP_INCREASE_PER_LEVEL * level);
+            } while (totalCurrXP >= XP_INCREASE_PER_LEVEL * level);
 
             currLevel = level - 1;
             nextLevelXPProgress = totalCurrXP;
