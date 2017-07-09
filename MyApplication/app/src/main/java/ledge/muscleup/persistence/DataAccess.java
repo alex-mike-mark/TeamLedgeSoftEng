@@ -47,7 +47,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
     private static final String SHUTDOWN_CMD = "shutdown compact";
     private static final DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd");
     private static final int NULL_NUM = -1;
-    private static final int XP_PER_INTENSITY = 10;
+    private static final int XP_PER_INTENSITY = 50;
 
     private String dbName;
     private String dbType = "HSQLDB";
@@ -224,7 +224,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                 exercise = new Exercise(exerciseName, intensity, type, exerciseFavourite);
 
                 //build a workout exercise using the exercise
-                xpValue = XP_PER_INTENSITY * ExerciseIntensity.valueOf(resultSet.getString("Intensity")).ordinal();
+                xpValue = XP_PER_INTENSITY * (ExerciseIntensity.valueOf(resultSet.getString("Intensity")).ordinal() + 1);
                 distance = resultSet.getDouble("Distance");
                 if (resultSet.wasNull())
                     distance = NULL_NUM;
@@ -368,7 +368,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                 exercise = new Exercise(exerciseName, intensity, type, exerciseFavourite);
 
                 //build a workout exercise using the exercise
-                xpValue = XP_PER_INTENSITY * ExerciseIntensity.valueOf(resultSet.getString("Intensity")).ordinal();
+                xpValue = XP_PER_INTENSITY * (ExerciseIntensity.valueOf(resultSet.getString("Intensity")).ordinal() + 1);
                 distance = resultSet.getDouble("Distance");
                 if (resultSet.wasNull())
                     distance = NULL_NUM;
@@ -550,11 +550,12 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
     @Override
     public void toggleWorkoutComplete(WorkoutSession workoutSession) {
         int workoutSessionID, previousXPValue = 0;
-
+        
         try {
+
             //get the ID of the workout session to be updated
             resultSet = statement.executeQuery(
-                    "SELECT     WS.ID" +
+                    "SELECT     WS.ID " +
                     "FROM       WorkoutSessions WS " +
                     "WHERE      WS.ScheduledDate = DATE'" + format.print(workoutSession.getDate()) + "'");
             if (resultSet.next()) {
@@ -661,7 +662,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                 exercise = new Exercise(exerciseName, intensity, type);
 
                 //build a workout exercise using the exercise
-                xpValue = XP_PER_INTENSITY * ExerciseIntensity.valueOf(resultSet.getString("Intensity")).ordinal();
+                xpValue = XP_PER_INTENSITY * (ExerciseIntensity.valueOf(resultSet.getString("Intensity")).ordinal() + 1);
                 distance = resultSet.getDouble("Distance");
                 if (resultSet.wasNull())
                     distance = NULL_NUM;
@@ -778,9 +779,9 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                     "               PH.LoggedDate, " +
                     "               PH.CurrentXP " +
                     "FROM           ProgressHistory PH " +
-                    "LEFT JOIN      WorkoutSession WS" +
+                    "LEFT JOIN      WorkoutSessions WS " +
                     "               ON PH.WorkoutSessionID = WS.ID " +
-                    "LEFT JOIN      Workouts W" +
+                    "LEFT JOIN      Workouts W " +
                     "               ON WS.WorkoutID = W.ID " +
                     "ORDER BY       PH.LoggedDate DESC ");
 
@@ -831,9 +832,9 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                     "               PH.LoggedDate, " +
                     "               PH.CurrentXP " +
                     "FROM           ProgressHistory PH " +
-                    "LEFT JOIN      WorkoutSession WS" +
+                    "LEFT JOIN      WorkoutSessions WS " +
                     "               ON PH.WorkoutSessionID = WS.ID " +
-                    "LEFT JOIN      Workouts W" +
+                    "LEFT JOIN      Workouts W " +
                     "               ON WS.WorkoutID = W.ID " +
                     "ORDER BY       PH.LoggedDate DESC ");
 
