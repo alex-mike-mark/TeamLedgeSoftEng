@@ -101,6 +101,10 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    /**
+     * Opens the ProgressReportActivity
+     * @param view
+     */
     public void openProgressReport(View view) {
         Intent intent = new Intent (this, ProgressReportActivity.class);
         startActivity(intent);
