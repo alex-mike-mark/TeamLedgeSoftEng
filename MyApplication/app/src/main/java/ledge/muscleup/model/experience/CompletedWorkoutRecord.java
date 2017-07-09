@@ -28,10 +28,14 @@ public class CompletedWorkoutRecord {
      */
     public CompletedWorkoutRecord(String workoutName, int experienceBeforeCompletion,
                                   int experienceAfterCompletion, DateTime dateOfCompletion) {
-        this.workoutName = workoutName;
-        this.experienceAfterCompletion = experienceAfterCompletion;
-        this.experienceGained = experienceAfterCompletion - experienceBeforeCompletion;
-        this.dateOfCompletion = dateOfCompletion;
+        if (workoutName == null || dateOfCompletion == null)
+            throw(new IllegalArgumentException("Invalid or null data passed to a method"));
+        else {
+            this.workoutName = workoutName;
+            this.experienceAfterCompletion = experienceAfterCompletion;
+            this.experienceGained = experienceAfterCompletion - experienceBeforeCompletion;
+            this.dateOfCompletion = dateOfCompletion;
+        }
     }
 
     /**
