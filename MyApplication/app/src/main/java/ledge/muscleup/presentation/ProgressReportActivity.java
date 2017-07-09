@@ -3,15 +3,9 @@ package ledge.muscleup.presentation;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.PopupMenu;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -24,7 +18,7 @@ import java.util.List;
 import ledge.muscleup.R;
 import ledge.muscleup.model.workout.WorkoutSession;
 
-public class ProgressReportActivty extends Activity {
+public class ProgressReportActivity extends Activity {
     private ListItemAdapter adapter;
 
     @Override
@@ -75,7 +69,7 @@ public class ProgressReportActivty extends Activity {
         backButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(ProgressReportActivty.this, MainActivity.class));
+                    startActivity(new Intent(ProgressReportActivity.this, MainActivity.class));
                 }
         });
 
@@ -89,7 +83,7 @@ public class ProgressReportActivty extends Activity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(ProgressReportActivty.this, MainActivity.class));
+        startActivity(new Intent(ProgressReportActivity.this, MainActivity.class));
     }
 
     /**
