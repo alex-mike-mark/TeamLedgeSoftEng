@@ -46,7 +46,7 @@ public class ProgressReportActivity extends Activity {
         setContentView(R.layout.activity_progress_report);
 
         CompletedWorkoutRecord mostRecentRecord = ae.getMostRecentCompletedWorkout();
-        ExperienceHistory experienceHistory = new ExperienceHistory(ae.getCompletedWorkouts())
+        ExperienceHistory experienceHistory = new ExperienceHistory(ae.getCompletedWorkouts());
         TextView currLevelTextView = (TextView) findViewById(R.id.currentLevel);
 
         String currLevelString = "LEVEL " + experienceHistory.getCurrLevel();
