@@ -10,8 +10,7 @@ import ledge.muscleup.model.exercise.WorkoutExercise;
 import static java.util.Collections.enumeration;
 
 /**
- * Stores information about workouts, which consists of a workout name, a set of exercises and
- * whether the workout is a favourite workout
+ * Stores information about workouts, which consists of a workout name and a set of exercises
  *
  * @author Alexander Mark
  * @version 1.0

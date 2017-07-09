@@ -105,15 +105,13 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
         String name;
         ExerciseIntensity intensity;
         ExerciseType type;
-        boolean favourite;
 
         try {
             //get the exercises from the db
             resultSet = statement.executeQuery(
                     "SELECT     E.Name, " +
                     "           EI.Intensity, " +
-                    "           ET.Type, " +
-                    "           E.Favourite " +
+                    "           ET.Type " +
                     "FROM       Exercises E " +
                     "LEFT JOIN  ExerciseIntensities EI " +
                     "           ON E.IntensityID = EI.ID " +
@@ -171,7 +169,6 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                     "			E.Name AS ExerciseName, " +
                     "			EI.Intensity, " +
                     "			ET.Type, " +
-                    "			E.Favourite, " +
                     "			WE.Distance, " +
                     "			DiU.DistanceUnit, " +
                     "			WE.Duration, " +
@@ -292,7 +289,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
         LocalDate scheduledDate = null;
         ExerciseIntensity intensity;
         ExerciseType type;
-        boolean exerciseFavourite, workoutComplete = false, exerciseComplete;
+        boolean workoutComplete = false, exerciseComplete;
 
         try {
             //get the workout sessions from the db
@@ -303,7 +300,6 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                     "			E.Name AS ExerciseName, " +
                     "			EI.Intensity, " +
                     "			ET.Type, " +
-                    "			E.Favourite, " +
                     "			WE.Distance, " +
                     "			DiU.DistanceUnit, " +
                     "			WE.Duration, " +
@@ -581,7 +577,6 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                     "			E.Name AS ExerciseName, " +
                     "			EI.Intensity, " +
                     "			ET.Type, " +
-                    "			W.Favourite, " +
                     "			WE.Distance, " +
                     "			DiU.DistanceUnit, " +
                     "			WE.Duration, " +
