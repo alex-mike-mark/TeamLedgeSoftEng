@@ -34,9 +34,7 @@ public class LevelProgress {
 
             currLevel = level - 1;
             nextLevelXPProgress = totalCurrXP;
-            nextLevelXPTotal = 0;
-            for (int i = 1; i <= level; i++)
-                nextLevelXPTotal += XP_INCREASE_PER_LEVEL * i;
+            nextLevelXPTotal = level * XP_INCREASE_PER_LEVEL;
         }
         else {
             currLevel = 0;
