@@ -16,6 +16,11 @@ import android.widget.TextView;
 import java.util.List;
 
 import ledge.muscleup.R;
+import ledge.muscleup.business.AccessExperience;
+import ledge.muscleup.business.InterfaceAccessExperience;
+import ledge.muscleup.model.experience.CompletedWorkoutRecord;
+import ledge.muscleup.model.experience.ExperienceHistory;
+import ledge.muscleup.model.experience.LevelProgress;
 import ledge.muscleup.model.workout.WorkoutSession;
 
 
@@ -30,7 +35,7 @@ import ledge.muscleup.model.workout.WorkoutSession;
  */
 public class ProgressReportActivity extends Activity {
     private ListItemAdapter adapter;
-
+    private static final InterfaceAccessExperience ae = new AccessExperience();
     /**
      *  onCreate initializes WorkoutDetailsActivity
      * @param savedInstanceState contains context from last activity
@@ -40,14 +45,16 @@ public class ProgressReportActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress_report);
 
+        CompletedWorkoutRecord mostRecentRecord = ae.getMostRecentCompletedWorkout();
+        ExperienceHistory experienceHistory = new ExperienceHistory(ae.getCompletedWorkouts())
         TextView currLevelTextView = (TextView) findViewById(R.id.currentLevel);
-        int currLevelNum = 5;
-        String currLevelString = "LEVEL " + currLevelNum;
+
+        String currLevelString = "LEVEL " + experienceHistory.getCurrLevel();
         currLevelTextView.setText(currLevelString);
 
         TextView xpNeededTextView = (TextView) findViewById(R.id.nextLevelXPNeeded);
-        int xpGained = 250;
-        int xpNeeded = 1000;
+        int xpGained = experienceHistory.getNextLevelXPProgress();
+        int xpNeeded = experienceHistory.getNextLevelXPTotal();
         String xpString = "Level Up: " + xpGained + " XP / " + xpNeeded + " XP";
         xpNeededTextView.setText(xpString);
 
@@ -55,27 +62,27 @@ public class ProgressReportActivity extends Activity {
         double progressPercentage = (double) xpGained / xpNeeded * 100;
         bar.setProgress((int) progressPercentage);
 
-        int numCompletedLast7Days = 3;
+        int numCompletedLast7Days = experienceHistory.getNumWorkoutsCompleted(7);
         TextView completedLast7DaysTextView = (TextView) findViewById(R.id.numCompletedLast7Days);
         completedLast7DaysTextView.setText(String.valueOf(numCompletedLast7Days));
 
-        int numCompletedLast30Days = 15;
+        int numCompletedLast30Days = experienceHistory.getNumWorkoutsCompleted(30);
         TextView completedLast30DaysTextView = (TextView) findViewById(R.id.numCompletedLast30Days);
         completedLast30DaysTextView.setText(String.valueOf(numCompletedLast30Days));
 
-        int xpGainedLast7Days = 650;
+        int xpGainedLast7Days = experienceHistory.getXPGained(7);
         TextView xpGainedLast7DaysTextView = (TextView) findViewById(R.id.xpGainedLast7Days);
         xpGainedLast7DaysTextView.setText(String.valueOf(xpGainedLast7Days));
 
-        int xpGainedLast30Days = 3138;
+        int xpGainedLast30Days = experienceHistory.getXPGained(30);
         TextView xpGainedLast30DaysTextView = (TextView) findViewById(R.id.xpGainedLast30Days);
         xpGainedLast30DaysTextView.setText(String.valueOf(xpGainedLast30Days));
 
-        int levelsGainedLast7Days = 1;
+        int levelsGainedLast7Days = experienceHistory.getLevelsGained(7);
         TextView levelsGainedLast7DaysTextView = (TextView) findViewById(R.id.levelsGainedLast7Days);
         levelsGainedLast7DaysTextView.setText(String.valueOf(levelsGainedLast7Days));
 
-        int levelsGainedLast30Days = 6;
+        int levelsGainedLast30Days = experienceHistory.getLevelsGained(30);
         TextView levelsGainedLast30DaysTextView = (TextView) findViewById(R.id.levelsGainedLast30Days);
         levelsGainedLast30DaysTextView.setText(String.valueOf(levelsGainedLast30Days));
 
