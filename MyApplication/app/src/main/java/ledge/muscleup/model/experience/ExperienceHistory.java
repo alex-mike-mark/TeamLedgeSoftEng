@@ -2,7 +2,10 @@ package ledge.muscleup.model.experience;
 
 import org.joda.time.LocalDate;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import static java.util.Collections.enumeration;
@@ -16,19 +19,23 @@ import static java.util.Collections.enumeration;
  * @since 2017-07-08
  */
 
-public class ExperienceHistory implements Enumeration {
-    private CompletedWorkoutRecord[] completedWorkoutRecordList;
+public class ExperienceHistory {
+    private List<CompletedWorkoutRecord> completedWorkoutRecordList;
     private LevelProgress currentLevelProgress;
-    private int currElement;
 
     /**
      * The default constructor for the ExperienceHistory class
      * @param completedWorkoutRecordList a list of completed workout records
      */
-    public ExperienceHistory(CompletedWorkoutRecord[] completedWorkoutRecordList) {
-        this.currentLevelProgress = new LevelProgress(completedWorkoutRecordList[0]);
-        this.completedWorkoutRecordList = completedWorkoutRecordList;
-        this.currElement = 0;
+    public ExperienceHistory(List<CompletedWorkoutRecord> completedWorkoutRecordList) {
+        if (completedWorkoutRecordList != null) {
+            this.currentLevelProgress = new LevelProgress(completedWorkoutRecordList.get(0));
+            this.completedWorkoutRecordList = completedWorkoutRecordList;
+        }
+        else {
+            this.currentLevelProgress = new LevelProgress(null);
+            this.completedWorkoutRecordList = new ArrayList<>();
+        }
     }
 
     /**
@@ -37,11 +44,11 @@ public class ExperienceHistory implements Enumeration {
      * @return the amount of
      */
     public int getNumWorkoutsCompleted(int numDays) {
-        int i = 0;
         int numWorkoutsCompleted = 0;
         LocalDate endDate = new LocalDate().minusDays(numDays);
+        Iterator<CompletedWorkoutRecord> iterator = completedWorkoutRecordList.iterator();
 
-        while (completedWorkoutRecordList[i++].getDateOfCompletion().isAfter(endDate))
+        while (iterator.hasNext() && iterator.next().getDateOfCompletion().isAfter(endDate))
             numWorkoutsCompleted++;
 
         return numWorkoutsCompleted;
@@ -53,12 +60,19 @@ public class ExperienceHistory implements Enumeration {
      * @return the amount of experience gained
      */
     public int getXPGained(int numDays) {
-        int i = 0;
         int xpGained = 0;
         LocalDate endDate = new LocalDate().minusDays(numDays);
+        boolean beforeEndDate = false;
+        CompletedWorkoutRecord completedWorkoutRecord;
+        Iterator<CompletedWorkoutRecord> iterator = completedWorkoutRecordList.iterator();
 
-        while (completedWorkoutRecordList[i].getDateOfCompletion().isAfter(endDate))
-            xpGained += completedWorkoutRecordList[i++].getExperienceGained();
+        while (iterator.hasNext() && !beforeEndDate) {
+            completedWorkoutRecord = iterator.next();
+            if (!completedWorkoutRecord.getDateOfCompletion().isAfter(endDate))
+                beforeEndDate = true;
+            else
+                xpGained += completedWorkoutRecord.getExperienceGained();
+        }
 
         return xpGained;
     }
@@ -69,17 +83,25 @@ public class ExperienceHistory implements Enumeration {
      * @return the number of levels gained
      */
     public int getLevelsGained(int numDays) {
-        int i = 0;
-        int levelsGained = 0;
         LocalDate endDate = new LocalDate().minusDays(numDays);
-        LevelProgress originalProgress;
+        boolean beforeEndDate = false;
+        CompletedWorkoutRecord completedWorkoutRecord;
+        CompletedWorkoutRecord prevCompletedWorkoutRecord = null;
+        int levelsGained = 0;
+        Iterator<CompletedWorkoutRecord> iterator = completedWorkoutRecordList.iterator();
 
-        while (completedWorkoutRecordList[i].getDateOfCompletion().isAfter(endDate))
-            i++;
+        while (iterator.hasNext() && !beforeEndDate) {
+            completedWorkoutRecord = iterator.next();
+            if (!completedWorkoutRecord.getDateOfCompletion().isAfter(endDate))
+                beforeEndDate = true;
+            else
+                prevCompletedWorkoutRecord = completedWorkoutRecord;
+        }
 
-        originalProgress = new LevelProgress(completedWorkoutRecordList[--i]);
+        if (prevCompletedWorkoutRecord != null)
+            levelsGained = currentLevelProgress.getCurrLevel() - new LevelProgress(prevCompletedWorkoutRecord).getCurrLevel();
 
-        return currentLevelProgress.getCurrLevel() - originalProgress.getCurrLevel();
+        return levelsGained;
     }
 
     /**
@@ -107,36 +129,10 @@ public class ExperienceHistory implements Enumeration {
     }
 
     /**
-     * Initializes an enumeration of CompletedWorkoutRecords
+     * Returns an enumeration for traversing over the CompletedWorkoutRecords in the history
+     * @return an enumeration of the CompletedWorkoutRecords
      */
-    public void initEnumeration() {
-        currElement = 0;
-    }
-
-    /**
-     * Tests if this enumeration contains more elements.
-     *
-     * @return <code>true</code> if and only if this enumeration object
-     * contains at least one more element to provide;
-     * <code>false</code> otherwise.
-     */
-    @Override
-    public boolean hasMoreElements() {
-        return currElement < completedWorkoutRecordList.length;
-    }
-
-    /**
-     * Returns the next element of this enumeration if this enumeration
-     * object has at least one more element to provide.
-     *
-     * @return the next element of this enumeration.
-     * @throws NoSuchElementException if no more elements exist.
-     */
-    @Override
-    public Object nextElement() {
-        if (!hasMoreElements())
-            throw new NoSuchElementException();
-        else
-            return completedWorkoutRecordList[currElement++];
+    public Enumeration<CompletedWorkoutRecord> getCompletedWorkoutsEnumeration() {
+        return enumeration(completedWorkoutRecordList);
     }
 }
