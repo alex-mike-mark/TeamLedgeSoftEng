@@ -24,7 +24,7 @@ public class ProgressReportActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_progress_report_activty);
+        setContentView(R.layout.activity_progress_report);
 
         TextView currLevelTextView = (TextView) findViewById(R.id.currentLevel);
         int currLevelNum = 5;

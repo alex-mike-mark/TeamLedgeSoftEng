@@ -48,7 +48,7 @@ public class WorkoutSessionActivity extends Activity {
         final InterfaceAccessWorkoutSessions aws = new AccessWorkoutSessions();
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_workout_session_in_progress);
+        setContentView(R.layout.activity_workout_session);
 
         ListView listView = (ListView) findViewById(R.id.checklist);
         final List<WorkoutSessionExercise> exerciseList = getExercisesInWorkoutSession();
