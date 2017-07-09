@@ -1,41 +1,53 @@
-package ledge.muscleup.model.business;
+package ledge.muscleup.model.unit.persistence;
 
 import junit.framework.TestCase;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ledge.muscleup.business.InterfaceAccessExercises;
 import ledge.muscleup.model.exercise.Exercise;
-import ledge.muscleup.model.exercise.enums.*;
+import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
+import ledge.muscleup.model.exercise.enums.ExerciseType;
+import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
 
 /**
- * AccessExercisesTest.java used to test AccessExercises.java
+ * Used for testing the InterfaceExerciseDataAccess persistence interface
  *
- * @author Matthew Smidt
- * @version 1.0
- * @since 2017-06-24
+ * @author: Ryan Koop
+ * @version: 1.0
+ * @since 2017-06-29
+ *
  */
 
-public class AccessExercisesTest extends TestCase {
-    InterfaceAccessExercises dataAccess;
+public class ExerciseDataAccessTest extends TestCase {
+    InterfaceExerciseDataAccess dataAccess;
 
     /**
-     * Constructor for the AccessExercisesTest
+     * Constructor for the ExerciseDataAccessTest
      */
-    public AccessExercisesTest(String arg0) {
+    public ExerciseDataAccessTest(String arg0) {
         super(arg0);
     }
 
     /**
-     * Initializes the AccessExercises to be used in the test
+     * Initializes the ExerciseDataAccess to be used in the test
      */
     @Before
     public void setUp() {
-        dataAccess = new TemplateAccessExercises();
+        dataAccess = new TemplateDataAccessStub("Test Exercise");
+        dataAccess.open("Test Exercise");
+    }
+
+    /**
+     * Closes the DataAccess connection
+     */
+    @After
+    public void tearDown() {
+        dataAccess.close();
     }
 
     /**
@@ -63,30 +75,6 @@ public class AccessExercisesTest extends TestCase {
         assertEquals(exerciseList1.toString(), exerciseList2.toString());
 
         System.out.println("Finishing testGetExercisesList\n");
-    }
-}
-
-/**
- * A template Exercises accessor that creates a template database stub for use in testing
- */
-class TemplateAccessExercises implements InterfaceAccessExercises {
-    private TemplateDataAccessStub dataAccess;
-
-    /**
-     * The default constructor for the TemplateAccessExercises
-     */
-    TemplateAccessExercises() {
-        dataAccess = new TemplateDataAccessStub("testDB");
-        dataAccess.open("testDB");
-    }
-
-    /**
-     * This method gets exercises stored in the database in the form of a list
-     * @return a list of exercises in the database
-     */
-    @Override
-    public List<Exercise> getExercisesList() {
-        return dataAccess.getExercisesList();
     }
 }
 

@@ -10,12 +10,11 @@ package ledge.muscleup.model.experience;
  */
 
 public class LevelProgress {
-    static final int XP_INCREASE_PER_LEVEL = 500;
+    private static final int XP_INCREASE_PER_LEVEL = 500;
 
-    private CompletedWorkoutRecord mostRecentWorkoutRecords;
-    int currLevel;
-    int nextLevelXPProgress;
-    int nextLevelXPTotal;
+    private int currLevel;
+    private int nextLevelXPProgress;
+    private int nextLevelXPTotal;
 
     /**
      * The default constructor for the LevelProgress class
@@ -25,18 +24,23 @@ public class LevelProgress {
         int totalCurrXP;
         int level = 0;
 
-        this.mostRecentWorkoutRecords = mostRecentWorkoutRecords;
+        if (mostRecentWorkoutRecords != null) {
+            //calculate the current level, the progress towards the next level and the xp needed to reach
+            //the next level
+            totalCurrXP = mostRecentWorkoutRecords.getExperienceAfterCompletion();
+            do {
+                totalCurrXP -= XP_INCREASE_PER_LEVEL * level++;
+            } while (totalCurrXP > XP_INCREASE_PER_LEVEL * level);
 
-        //calculate the current level, the progress towards the next level and the xp needed to reach
-        //the next level
-        totalCurrXP = mostRecentWorkoutRecords.getExperienceAfterCompletion();
-        do {
-            totalCurrXP -= XP_INCREASE_PER_LEVEL * level++;
-        } while (totalCurrXP > XP_INCREASE_PER_LEVEL * level);
-
-        currLevel = level;
-        nextLevelXPProgress = totalCurrXP;
-        nextLevelXPTotal = XP_INCREASE_PER_LEVEL * level;
+            currLevel = level;
+            nextLevelXPProgress = totalCurrXP;
+            nextLevelXPTotal = XP_INCREASE_PER_LEVEL * level;
+        }
+        else {
+            currLevel = 0;
+            nextLevelXPProgress = 0;
+            nextLevelXPTotal = XP_INCREASE_PER_LEVEL;
+        }
     }
 
     /**

@@ -1,4 +1,4 @@
-package ledge.muscleup.model.business;
+package ledge.muscleup.model.unit.business;
 
 import junit.framework.TestCase;
 
@@ -20,7 +20,6 @@ import ledge.muscleup.model.exercise.ExerciseDistance;
 import ledge.muscleup.model.exercise.ExerciseDuration;
 import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
-import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.workout.Workout;
 

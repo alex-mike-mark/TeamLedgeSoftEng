@@ -10,14 +10,24 @@ package ledge.muscleup.model;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import ledge.muscleup.model.business.AccessExercisesTest;
-import ledge.muscleup.model.business.AccessWorkoutSessionsTest;
-import ledge.muscleup.model.business.AccessWorkoutsTest;
-import ledge.muscleup.model.persistence.ExerciseDataAccessTest;
-import ledge.muscleup.model.persistence.WorkoutDataAccessTest;
-import ledge.muscleup.model.persistence.WorkoutSessionDataAccessTest;
-import ledge.muscleup.model.workout.*;
-import ledge.muscleup.model.exercise.*;
+import ledge.muscleup.model.unit.business.AccessExercisesTest;
+import ledge.muscleup.model.unit.business.AccessWorkoutSessionsTest;
+import ledge.muscleup.model.unit.business.AccessWorkoutsTest;
+import ledge.muscleup.model.unit.model.exercise.ExerciseDistanceTest;
+import ledge.muscleup.model.unit.model.exercise.ExerciseDurationTest;
+import ledge.muscleup.model.unit.model.exercise.ExerciseQuantityTest;
+import ledge.muscleup.model.unit.model.exercise.ExerciseSetsAndWeightTest;
+import ledge.muscleup.model.unit.model.exercise.ExerciseSetsTest;
+import ledge.muscleup.model.unit.model.exercise.ExerciseTest;
+import ledge.muscleup.model.unit.model.exercise.WorkoutExerciseDurationTest;
+import ledge.muscleup.model.unit.model.exercise.WorkoutExerciseSubsTest;
+import ledge.muscleup.model.unit.model.exercise.WorkoutSessionExerciseTest;
+import ledge.muscleup.model.unit.model.schedule.ScheduleWeekTest;
+import ledge.muscleup.model.unit.model.workout.WorkoutSessionTest;
+import ledge.muscleup.model.unit.model.workout.WorkoutTest;
+import ledge.muscleup.model.unit.persistence.ExerciseDataAccessTest;
+import ledge.muscleup.model.unit.persistence.WorkoutDataAccessTest;
+import ledge.muscleup.model.unit.persistence.WorkoutSessionDataAccessTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({

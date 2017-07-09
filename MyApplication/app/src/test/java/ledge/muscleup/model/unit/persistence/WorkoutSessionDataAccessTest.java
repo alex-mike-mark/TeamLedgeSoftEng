@@ -1,4 +1,4 @@
-package ledge.muscleup.model.persistence;
+package ledge.muscleup.model.unit.persistence;
 
 import junit.framework.TestCase;
 
@@ -20,7 +20,6 @@ import ledge.muscleup.model.exercise.enums.ExerciseType;
 import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
-import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
 
 /**
  * Used for testing the InterfaceWorkoutSessionDataAccess persistence interface

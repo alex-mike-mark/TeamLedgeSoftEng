@@ -1,4 +1,4 @@
-package ledge.muscleup.model;
+package ledge.muscleup.model.unit.model.schedule;
 
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
@@ -12,9 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import ledge.muscleup.business.InterfaceAccessExercises;
 import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
-import ledge.muscleup.business.InterfaceAccessWorkouts;
 import ledge.muscleup.model.exercise.WorkoutExerciseDistance;
 import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
 import ledge.muscleup.model.exercise.WorkoutExerciseSets;
@@ -25,14 +23,11 @@ import ledge.muscleup.model.exercise.ExerciseDistance;
 import ledge.muscleup.model.exercise.ExerciseDuration;
 import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
-import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 
 import ledge.muscleup.model.exercise.WorkoutExercise;
-import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
-import ledge.muscleup.persistence.InterfaceDataAccess;
 import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
 import ledge.muscleup.persistence.InterfaceWorkoutDataAccess;
 import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;

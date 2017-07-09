@@ -1,10 +1,16 @@
-package ledge.muscleup.model.exercise;
+package ledge.muscleup.model.unit.model.exercise;
 
 import junit.framework.TestCase;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import ledge.muscleup.model.exercise.Exercise;
+import ledge.muscleup.model.exercise.ExerciseSets;
+import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
+import ledge.muscleup.model.exercise.WorkoutExercise;
+import ledge.muscleup.model.exercise.WorkoutExerciseSets;
+import ledge.muscleup.model.exercise.WorkoutExerciseSetsAndWeight;
 import ledge.muscleup.model.exercise.enums.*;
 
 /**

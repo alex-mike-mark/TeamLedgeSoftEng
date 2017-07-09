@@ -2,6 +2,11 @@ package ledge.muscleup.model.experience;
 
 import org.joda.time.LocalDate;
 
+import java.util.Enumeration;
+import java.util.NoSuchElementException;
+
+import static java.util.Collections.enumeration;
+
 /**
  * A history of all workouts completed in a given time period and the current experience level of
  * the user
@@ -11,9 +16,10 @@ import org.joda.time.LocalDate;
  * @since 2017-07-08
  */
 
-public class ExperienceHistory {
+public class ExperienceHistory implements Enumeration {
     private CompletedWorkoutRecord[] completedWorkoutRecordList;
     private LevelProgress currentLevelProgress;
+    private int currElement;
 
     /**
      * The default constructor for the ExperienceHistory class
@@ -22,6 +28,7 @@ public class ExperienceHistory {
     public ExperienceHistory(CompletedWorkoutRecord[] completedWorkoutRecordList) {
         this.currentLevelProgress = new LevelProgress(completedWorkoutRecordList[0]);
         this.completedWorkoutRecordList = completedWorkoutRecordList;
+        this.currElement = 0;
     }
 
     /**
@@ -97,5 +104,39 @@ public class ExperienceHistory {
      */
     public int getNextLevelXPTotal() {
         return currentLevelProgress.getNextLevelXPTotal();
+    }
+
+    /**
+     * Initializes an enumeration of CompletedWorkoutRecords
+     */
+    public void initEnumeration() {
+        currElement = 0;
+    }
+
+    /**
+     * Tests if this enumeration contains more elements.
+     *
+     * @return <code>true</code> if and only if this enumeration object
+     * contains at least one more element to provide;
+     * <code>false</code> otherwise.
+     */
+    @Override
+    public boolean hasMoreElements() {
+        return currElement < completedWorkoutRecordList.length;
+    }
+
+    /**
+     * Returns the next element of this enumeration if this enumeration
+     * object has at least one more element to provide.
+     *
+     * @return the next element of this enumeration.
+     * @throws NoSuchElementException if no more elements exist.
+     */
+    @Override
+    public Object nextElement() {
+        if (!hasMoreElements())
+            throw new NoSuchElementException();
+        else
+            return completedWorkoutRecordList[currElement++];
     }
 }
