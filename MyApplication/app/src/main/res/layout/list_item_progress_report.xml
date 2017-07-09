@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum = "1"
+    android:paddingTop="20sp"
+    android:paddingBottom="20sp"
+    >
+
+    <TextView
+
+        android:id="@+id/completedDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight ="0.2"
+        android:gravity = "left"
+        android:textColor = "@color/colorAccent"
+        android:textSize="30sp"
+        android:paddingLeft="10sp"/>
+
+
+    <TextView
+        android:layout_weight="0.7"
+        android:id="@+id/completedWorkoutName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp"
+            />
+
+    <TextView
+        android:id="@+id/xpGainedFromWorkout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.10"
+        android:gravity="right"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:focusable="false"/>
+</LinearLayout>

@@ -72,6 +72,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Opens the ProgressReportActivity
+     * @param view
+     */
+    public void openProgressReport(View view) {
+        Intent intent = new Intent (this, ProgressReportActivty.class);
+        startActivity(intent);
+    }
+
+    /**
      * Copies all database files to the device
      */
     private void copyDatabaseToDevice() {

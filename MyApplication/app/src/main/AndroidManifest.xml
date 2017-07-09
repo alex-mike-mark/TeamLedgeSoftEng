@@ -21,7 +21,8 @@
         <activity android:name=".presentation.WorkoutDetailsActivity" />
         <activity android:name=".presentation.ScheduleActivity" />
         <activity android:name=".presentation.WorkoutSessionActivity" />
-        <activity android:name=".presentation.CompletedWorkoutActivity"></activity>
+        <activity android:name=".presentation.CompletedWorkoutActivity" />
+        <activity android:name=".presentation.ProgressReportActivty"></activity>
     </application>
 
 </manifest>
