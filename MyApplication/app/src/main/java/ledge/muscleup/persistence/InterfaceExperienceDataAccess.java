@@ -18,7 +18,7 @@ public interface InterfaceExperienceDataAccess extends InterfaceDataAccess {
      * Returns the list of all completed workout records
      * @return a list of all completed workout records
      */
-    List<CompletedWorkoutRecord> getCompletedWorkoutsInDateRange();
+    List<CompletedWorkoutRecord> getCompletedWorkouts();
 
     /**
      * Returns the most recent completed workout

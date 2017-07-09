@@ -763,7 +763,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
      * @return a list of all completed workout records
      */
     @Override
-    public List<CompletedWorkoutRecord> getCompletedWorkoutsInDateRange() {
+    public List<CompletedWorkoutRecord> getCompletedWorkouts() {
         List<CompletedWorkoutRecord> completedWorkoutRecordList = new ArrayList<>();
         CompletedWorkoutRecord completedWorkoutRecord = null;
         String workoutName = null;
