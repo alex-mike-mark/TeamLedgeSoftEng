@@ -16,27 +16,28 @@
         android:layout_weight ="0.2"
         android:gravity = "left"
         android:textColor = "@color/colorAccent"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:paddingLeft="10sp"/>
 
 
     <TextView
-        android:layout_weight="0.7"
+        android:layout_weight="0.6"
         android:id="@+id/completedWorkoutName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="left"
         android:textColor="@color/colorAccent"
-        android:textSize="30sp"
+        android:textSize="24sp"
             />
 
     <TextView
         android:id="@+id/xpGainedFromWorkout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.10"
+        android:layout_weight="0.2"
         android:gravity="right"
-        android:textAlignment="center"
         android:textSize="24sp"
+        android:paddingRight="10sp"
+        android:textColor="@color/colorAccent"
         android:focusable="false"/>
 </LinearLayout>
