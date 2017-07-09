@@ -1,4 +1,4 @@
-package ledge.muscleup.model.persistence;
+package ledge.muscleup.model.unit.persistence;
 
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
@@ -26,7 +26,6 @@ import ledge.muscleup.model.exercise.enums.TimeUnit;
 import ledge.muscleup.model.exercise.enums.WeightUnit;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
-import ledge.muscleup.persistence.InterfaceDataAccess;
 import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
 import ledge.muscleup.persistence.InterfaceWorkoutDataAccess;
 import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
