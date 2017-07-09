@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.joda.time.LocalDate;
@@ -24,9 +25,12 @@ import org.w3c.dom.Text;
 import java.util.List;
 
 import ledge.muscleup.R;
+import ledge.muscleup.business.AccessExperience;
 import ledge.muscleup.business.AccessWorkoutSessions;
+import ledge.muscleup.business.InterfaceAccessExperience;
 import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
+import ledge.muscleup.model.experience.ExperienceHistory;
 import ledge.muscleup.model.workout.WorkoutSession;
 
 /**
@@ -43,6 +47,7 @@ public class CompletedWorkoutActivity extends Activity {
     private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
     private ListItemAdapter adapter;
     private WorkoutSession workoutSession;  //the workout session in view
+    private final InterfaceAccessExperience ae = new AccessExperience();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +75,22 @@ public class CompletedWorkoutActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        ExperienceHistory experienceHistory = new ExperienceHistory(ae.getCompletedWorkouts());
+        TextView currLevelTextView = (TextView) findViewById(R.id.currentLevel);
+
+        String currLevelString = "LEVEL " + experienceHistory.getCurrLevel();
+        currLevelTextView.setText(currLevelString);
+
+        TextView xpNeededTextView = (TextView) findViewById(R.id.nextLevelXPNeeded);
+        int xpGained = experienceHistory.getNextLevelXPProgress();
+        int xpNeeded = experienceHistory.getNextLevelXPTotal();
+        String xpString = "Level Up: " + xpGained + " XP / " + xpNeeded + " XP";
+        xpNeededTextView.setText(xpString);
+
+        ProgressBar bar = (ProgressBar) findViewById(R.id.progressBar);
+        double progressPercentage = (double) xpGained / xpNeeded * 100;
+        bar.setProgress((int) progressPercentage);
     }
 
     /**
