@@ -67,6 +67,8 @@ public class WorkoutSessionActivity extends Activity {
 
         Button completeWorkoutButton = (Button) findViewById(R.id.btn_completeWorkout);
         if(workoutSession.isComplete()) {
+            TextView completedTextView = (TextView) findViewById(R.id.workoutSessionIsCompleted);
+            completedTextView.setVisibility(View.VISIBLE);
             completeWorkoutButton.setText("Back");
             completeWorkoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override

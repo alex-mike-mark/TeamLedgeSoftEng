@@ -48,6 +48,16 @@
         android:paddingTop="50dp"
         android:paddingBottom="50dp"/>
 
+    <TextView
+        android:id="@+id/workoutSessionIsCompleted"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="@string/text_completed"
+        android:textColor="@android:color/holo_green_light"
+        android:textSize="48sp"
+        android:visibility="gone"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
