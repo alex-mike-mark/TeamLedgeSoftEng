@@ -1,12 +1,17 @@
 package ledge.muscleup.presentation;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+
+import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -15,9 +20,11 @@ import java.io.InputStreamReader;
 
 import ledge.muscleup.R;
 import ledge.muscleup.application.Main;
-import ledge.muscleup.application.Services;
+import ledge.muscleup.business.AccessWorkoutSessions;
+import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
+import ledge.muscleup.model.workout.WorkoutSession;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     public static final String dbName="workout_till_you_dropout";
 
     /**
@@ -33,6 +40,29 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Main.startUp();
+
+        InterfaceAccessWorkoutSessions aws = new AccessWorkoutSessions();
+        final WorkoutSession currentDaySession = aws.getWorkoutSession(LocalDate.now());
+
+        Button currentDayWorkoutButton = (Button)  findViewById(R.id.btn_currentDayWorkoutSession);
+        if (currentDaySession == null) {
+            currentDayWorkoutButton.setText("Today's Scheduled Workout:" + System.getProperty("line.separator") + "None Scheduled");
+            currentDayWorkoutButton.setClickable(false);
+            currentDayWorkoutButton.setAlpha(0.5f);
+        } else {
+            currentDayWorkoutButton.setText("Today's Workout:"  + System.getProperty("line.separator") + currentDaySession.getName());
+            currentDayWorkoutButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent appInfo = new Intent(MainActivity.this, WorkoutSessionActivity.class);
+                    LocalDate date = currentDaySession.getDate();
+                    DateTimeFormatter formatter= DateTimeFormat.forPattern("MM/dd/yyyy");
+
+                    appInfo.putExtra("workoutSessionDate", formatter.print(date));
+                    startActivity(appInfo);
+                }
+            });
+        }
     }
 
     /**
@@ -76,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void openProgressReport(View view) {
-        Intent intent = new Intent (this, ProgressReportActivty.class);
+        Intent intent = new Intent (this, ProgressReportActivity.class);
         startActivity(intent);
     }
 
