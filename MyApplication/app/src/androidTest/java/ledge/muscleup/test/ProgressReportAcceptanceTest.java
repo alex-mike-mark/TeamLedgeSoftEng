@@ -6,16 +6,18 @@ package ledge.muscleup.test;
 
 import ledge.muscleup.presentation.ExerciseActivity;
 import ledge.muscleup.presentation.MainActivity;
+import ledge.muscleup.presentation.ProgressReportActivty;
+
 import com.robotium.solo.*;
 import android.test.ActivityInstrumentationTestCase2;
 
 import org.junit.Test;
 
 
-public class ExerciseAcceptanceTest extends ActivityInstrumentationTestCase2<MainActivity> {
+public class ProgressReportAcceptanceTest extends ActivityInstrumentationTestCase2<MainActivity> {
     private Solo solo;
 
-    public ExerciseAcceptanceTest() {
+    public ProgressReportAcceptanceTest() {
         super(MainActivity.class);
     }
 
@@ -34,7 +36,7 @@ public class ExerciseAcceptanceTest extends ActivityInstrumentationTestCase2<Mai
     @Test
     public void testRun() {
         solo.clickOnButton("Exercises");
-        solo.assertCurrentActivity("We aren't in the exercise activity!", ExerciseActivity.class);
+        solo.assertCurrentActivity("We aren't in the prog report activity!", ProgressReportActivty.class);
         //ensure it is displaying things.
         solo.goBack();
     }
