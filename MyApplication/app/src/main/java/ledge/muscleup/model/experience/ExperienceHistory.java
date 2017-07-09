@@ -28,7 +28,7 @@ public class ExperienceHistory {
      * @param completedWorkoutRecordList a list of completed workout records
      */
     public ExperienceHistory(List<CompletedWorkoutRecord> completedWorkoutRecordList) {
-        if (completedWorkoutRecordList != null) {
+        if (completedWorkoutRecordList != null && !completedWorkoutRecordList.isEmpty()) {
             this.currentLevelProgress = new LevelProgress(completedWorkoutRecordList.get(0));
             this.completedWorkoutRecordList = completedWorkoutRecordList;
         }
