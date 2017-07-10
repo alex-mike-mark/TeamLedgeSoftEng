@@ -769,21 +769,21 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
         try
         {
             resultSet = statement.executeQuery(
-                    "SELECT     W.Name " +
-                    "FROM       ( " +
-                    "               SELECT      W.Name, " +
-                    "                           COUNT(W.Name) AS WorkoutFreq " +
-                    "               FROM        Workouts W " +
-                    "               RIGHT JOIN  WorkoutSessions WS " +
-                    "                           ON W.ID = WS.WorkoutID " +
-                    "               RIGHT JOIN  ProgressHistory PH " +
-                    "               ON WS.ID = PH.WorkoutSessionID " +
-                    "               GROUP BY    W.Name " +
-                    "               ORDER BY    WorkoutFreq DESC " +
-                    "           ) WF " +
-                    "RIGHT JOIN Workouts W " +
-                    "           ON WF.Name = W.Name " +
-                    "ORDER BY   WF.WorkoutFreq ");
+                    "SELECT TOP 1   W.Name " +
+                    "FROM           ( " +
+                    "                   SELECT      W.Name, " +
+                    "                               COUNT(W.Name) AS WorkoutFreq " +
+                    "                   FROM        Workouts W " +
+                    "                   RIGHT JOIN  WorkoutSessions WS " +
+                    "                               ON W.ID = WS.WorkoutID " +
+                    "                   RIGHT JOIN  ProgressHistory PH " +
+                    "                   ON WS.ID = PH.WorkoutSessionID " +
+                    "                   GROUP BY    W.Name " +
+                    "                   ORDER BY    WorkoutFreq DESC " +
+                    "               ) WF " +
+                    "RIGHT JOIN     Workouts W " +
+                    "               ON WF.Name = W.Name " +
+                    "ORDER BY       WF.WorkoutFreq ");
 
             if (resultSet.next())
                 workoutName = resultSet.getString("Name");
