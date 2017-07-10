@@ -254,7 +254,12 @@ public class ScheduleActivity extends Activity {
                 viewHolder.addOrRemoveButton.setVisibility(View.INVISIBLE);
             } else { //hide complete, display add/remove button
                 viewHolder.sessionCompleted.setVisibility(View.INVISIBLE);
-                viewHolder.addOrRemoveButton.setVisibility(View.VISIBLE);
+                if (session.getDate().isBefore(LocalDate.now().minusWeeks(1))) { //can't add or remove workouts from over a week ago
+                    viewHolder.addOrRemoveButton.setVisibility(View.INVISIBLE);
+                } else {
+                    viewHolder.addOrRemoveButton.setVisibility(View.VISIBLE);
+                }
+
             }
 
             if (session.getName() == null) {//no workout scheduled, add button
