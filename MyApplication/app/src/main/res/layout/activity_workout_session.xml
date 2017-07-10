@@ -49,6 +49,17 @@
         android:paddingBottom="50dp"/>
 
     <TextView
+        android:id="@+id/workoutSessionIsExpired"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="@string/text_workoutSessionExpired"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="48sp"
+        android:visibility="gone"/>
+
+
+    <TextView
         android:id="@+id/workoutSessionIsCompleted"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

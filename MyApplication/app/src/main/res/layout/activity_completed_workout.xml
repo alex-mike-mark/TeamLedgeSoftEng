@@ -61,20 +61,8 @@
             android:textSize="24sp"
             android:textStyle="bold"
             android:textAlignment="center"
-            android:paddingBottom="20sp"
-            android:paddingTop="20sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:fontFamily="serif"
-            android:textColor="@color/colorAccent"
-            android:textSize="75sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:paddingBottom="20sp"
-            android:paddingTop="20sp"/>
+            android:paddingTop="20sp"
+            android:paddingBottom="20sp"/>
 
     <TextView
         android:id="@+id/currentLevel"

@@ -127,7 +127,7 @@ public class ScheduleActivity extends Activity {
                 if (workoutSessionList.get(position).getName() != null) {   //workout scheduled on day
                     Intent appInfo = new Intent(ScheduleActivity.this, WorkoutSessionActivity.class);
                     LocalDate date = workoutSessionList.get(position).getDate();
-                    DateTimeFormatter  formatter= DateTimeFormat.forPattern("MM/dd/yyyy");
+                    DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
 
                     appInfo.putExtra("workoutSessionDate", formatter.print(date));
                     startActivity(appInfo);
@@ -244,6 +244,9 @@ public class ScheduleActivity extends Activity {
             WorkoutSession session = sessionList.get(index);
 
             viewHolder.sessionDate.setText(formatter.print(session.getDate()));
+            if(session.getDate().isEqual(LocalDate.now())) {
+                viewHolder.sessionDate.setTextColor(Color.rgb(255, 128, 0));
+            }
             viewHolder.sessionWorkoutName.setText(session.getName());
 
             if (session.isComplete()) { //display complete, hide add/remove button
@@ -251,7 +254,12 @@ public class ScheduleActivity extends Activity {
                 viewHolder.addOrRemoveButton.setVisibility(View.INVISIBLE);
             } else { //hide complete, display add/remove button
                 viewHolder.sessionCompleted.setVisibility(View.INVISIBLE);
-                viewHolder.addOrRemoveButton.setVisibility(View.VISIBLE);
+                if (session.getDate().isBefore(LocalDate.now().minusWeeks(1))) { //can't add or remove workouts from over a week ago
+                    viewHolder.addOrRemoveButton.setVisibility(View.INVISIBLE);
+                } else {
+                    viewHolder.addOrRemoveButton.setVisibility(View.VISIBLE);
+                }
+
             }
 
             if (session.getName() == null) {//no workout scheduled, add button
