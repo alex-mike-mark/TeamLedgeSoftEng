@@ -212,6 +212,15 @@ public class DataAccessStub implements InterfaceExerciseDataAccess, InterfaceWor
     }
 
     /**
+     * Retrieves the name of a the workout that has been completed the least amount of times
+     * @return the workout that has been ocmpleted the least amount of times
+     */
+    @Override
+    public String getLeastCompletedWorkout() {
+        return null;
+    }
+
+    /**
      * A method that returns a list of workout sessions scheduled in a date range
      * @param startDate the first date of the date range
      * @param endDate the last date of the date range
