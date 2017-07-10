@@ -48,7 +48,7 @@ public class WorkoutSessionActivity extends Activity {
         final InterfaceAccessWorkoutSessions aws = new AccessWorkoutSessions();
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_workout_session_in_progress);
+        setContentView(R.layout.activity_workout_session);
 
         ListView listView = (ListView) findViewById(R.id.checklist);
         final List<WorkoutSessionExercise> exerciseList = getExercisesInWorkoutSession();
@@ -67,6 +67,8 @@ public class WorkoutSessionActivity extends Activity {
 
         Button completeWorkoutButton = (Button) findViewById(R.id.btn_completeWorkout);
         if(workoutSession.isComplete()) {
+            TextView completedTextView = (TextView) findViewById(R.id.workoutSessionIsCompleted);
+            completedTextView.setVisibility(View.VISIBLE);
             completeWorkoutButton.setText("Back");
             completeWorkoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override

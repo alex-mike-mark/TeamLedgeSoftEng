@@ -50,4 +50,12 @@ public class AccessWorkouts implements InterfaceAccessWorkouts {
     public List<String> getWorkoutNamesList() {
         return dataAccess.getWorkoutNamesList();
     }
+
+    /**
+     * Retrieves the name of the workout that is suggested for the user
+     * @return the workout that is suggested for the user
+     */
+    public String getSuggestedWorkout() {
+        return dataAccess.getLeastCompletedWorkout();
+    }
 }

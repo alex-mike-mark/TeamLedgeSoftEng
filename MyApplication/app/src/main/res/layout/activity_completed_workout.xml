@@ -64,6 +64,60 @@
             android:paddingBottom="20sp"
             android:paddingTop="20sp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:fontFamily="serif"
+            android:textColor="@color/colorAccent"
+            android:textSize="75sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:paddingBottom="20sp"
+            android:paddingTop="20sp"/>
+
+    <TextView
+        android:id="@+id/currentLevel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        android:paddingBottom="20sp"
+        android:paddingTop="20sp"/>
+
+    <TextView
+        android:id="@+id/nextLevelXPNeeded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:fontFamily="serif"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:paddingBottom="20sp"
+        android:paddingTop="20sp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft = "20sp"
+        android:paddingRight="20sp"
+        android:paddingBottom="20sp">
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="false"
+            android:indeterminateOnly="false"
+            android:progressDrawable="@android:drawable/progress_horizontal"
+            android:progressTint="@color/Lime" />
+
+    </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
