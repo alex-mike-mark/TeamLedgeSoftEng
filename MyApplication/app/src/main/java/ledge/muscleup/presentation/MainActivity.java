@@ -21,7 +21,10 @@ import java.io.InputStreamReader;
 import ledge.muscleup.R;
 import ledge.muscleup.application.Main;
 import ledge.muscleup.business.AccessWorkoutSessions;
+import ledge.muscleup.business.AccessWorkouts;
 import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
+import ledge.muscleup.business.InterfaceAccessWorkouts;
+import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
 
 public class MainActivity extends Activity {
@@ -54,15 +57,28 @@ public class MainActivity extends Activity {
             currentDayWorkoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent appInfo = new Intent(MainActivity.this, WorkoutSessionActivity.class);
+                    Intent workoutSessionIntent = new Intent(MainActivity.this, WorkoutSessionActivity.class);
                     LocalDate date = currentDaySession.getDate();
                     DateTimeFormatter formatter= DateTimeFormat.forPattern("MM/dd/yyyy");
 
-                    appInfo.putExtra("workoutSessionDate", formatter.print(date));
-                    startActivity(appInfo);
+                    workoutSessionIntent.putExtra("workoutSessionDate", formatter.print(date));
+                    startActivity(workoutSessionIntent);
                 }
             });
         }
+
+        InterfaceAccessWorkouts aw = new AccessWorkouts();
+        Button suggestedWorkoutButton = (Button) findViewById(R.id.btn_suggestedWorkout);
+        final Workout suggestedWorkout = aw.getWorkout("Welcome to the Gun Show"); //TODO replace with method call to get actual suggested workout
+        suggestedWorkoutButton.setText("Today's Suggested Workout: " + System.getProperty("line.separator") + suggestedWorkout.getName());
+        suggestedWorkoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent suggestedWorkoutIntent = new Intent(MainActivity.this, WorkoutDetailsActivity.class);
+                suggestedWorkoutIntent.putExtra("workoutName", suggestedWorkout.getName());
+                startActivity(suggestedWorkoutIntent);
+            }
+        });
     }
 
     /**

@@ -26,12 +26,28 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="75sp"
+        android:paddingBottom="20sp"
         android:paddingLeft="20sp"
         android:paddingRight="20sp"
         >
         <Button
             android:id="@+id/btn_currentDayWorkoutSession"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:ellipsize="end"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="75sp"
+        android:paddingLeft="20sp"
+        android:paddingRight="20sp"
+        >
+
+        <Button
+            android:id="@+id/btn_suggestedWorkout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="24sp"
