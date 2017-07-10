@@ -13,6 +13,8 @@ import org.junit.runners.Suite;
 import ledge.muscleup.model.business.AccessExercisesTest;
 import ledge.muscleup.model.business.AccessWorkoutSessionsTest;
 import ledge.muscleup.model.business.AccessWorkoutsTest;
+import ledge.muscleup.model.integration.BusinessPersistenceSeamTest;
+import ledge.muscleup.model.integration.DataAccessHSQLDBTest;
 import ledge.muscleup.model.persistence.ExerciseDataAccessTest;
 import ledge.muscleup.model.persistence.WorkoutDataAccessTest;
 import ledge.muscleup.model.persistence.WorkoutSessionDataAccessTest;
@@ -39,10 +41,13 @@ import ledge.muscleup.model.exercise.*;
         AccessWorkoutSessionsTest.class,
         ScheduleWeekTest.class,
         WorkoutExerciseSubsTest.class,
-        //persistence
+        // persistence
         ExerciseDataAccessTest.class,
         WorkoutDataAccessTest.class,
-        WorkoutSessionDataAccessTest.class
+        WorkoutSessionDataAccessTest.class,
+        // integration
+        BusinessPersistenceSeamTest.class,
+        DataAccessHSQLDBTest.class
 })
 
 public class AllTests {

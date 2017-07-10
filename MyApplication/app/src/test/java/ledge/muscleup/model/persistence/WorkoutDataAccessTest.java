@@ -36,10 +36,10 @@ import ledge.muscleup.persistence.InterfaceWorkoutDataAccess;
  *
  */
 public class WorkoutDataAccessTest extends TestCase {
-    InterfaceWorkoutDataAccess dataAccess;
-    final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
-    final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
-    final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
+    static InterfaceWorkoutDataAccess dataAccess;
+    static final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
+    static final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
+    static final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
 
     /**
      * Constructor for the WorkoutDataAccessTest
@@ -69,7 +69,7 @@ public class WorkoutDataAccessTest extends TestCase {
      * Tests that getting a workout works properly
      */
     @Test
-    public void testGetWorkout() {
+    public static void testGetWorkout() {
         System.out.println("\nStarting testGetWorkout");
 
         // Workouts should already be in db
@@ -104,7 +104,7 @@ public class WorkoutDataAccessTest extends TestCase {
      * Tests that getting the list of workouts works properly
      */
     @Test
-    public void testGetWorkoutsList() {
+    public static void testGetWorkoutsList() {
         System.out.println("\nStarting testGetWorkoutsList");
 
         // Workouts by object already in list
@@ -145,7 +145,7 @@ public class WorkoutDataAccessTest extends TestCase {
      * Tests that getting the list of workout names works properly
      */
     @Test
-    public void testGetWorkoutNamesList() {
+    public static void testGetWorkoutNamesList() {
         System.out.println("\nStarting testGetWorkoutNamesList");
 
         // Workouts by name already in list

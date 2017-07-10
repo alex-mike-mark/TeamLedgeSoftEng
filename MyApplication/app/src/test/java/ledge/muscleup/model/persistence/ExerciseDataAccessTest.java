@@ -24,7 +24,7 @@ import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
  */
 
 public class ExerciseDataAccessTest extends TestCase {
-    InterfaceExerciseDataAccess dataAccess;
+    static InterfaceExerciseDataAccess dataAccess;
 
     /**
      * Constructor for the ExerciseDataAccessTest
@@ -54,7 +54,7 @@ public class ExerciseDataAccessTest extends TestCase {
      * Tests that getting the list of exercises works properly
      */
     @Test
-    public void testGetExercisesList() {
+    public static void testGetExercisesList() {
         System.out.println("\nStarting testGetExercisesList");
 
         // Exercises by object already in list
