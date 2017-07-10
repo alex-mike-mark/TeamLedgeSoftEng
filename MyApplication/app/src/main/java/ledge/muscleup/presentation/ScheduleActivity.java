@@ -244,6 +244,9 @@ public class ScheduleActivity extends Activity {
             WorkoutSession session = sessionList.get(index);
 
             viewHolder.sessionDate.setText(formatter.print(session.getDate()));
+            if(session.getDate().isEqual(LocalDate.now())) {
+                viewHolder.sessionDate.setTextColor(Color.rgb(255, 128, 0));
+            }
             viewHolder.sessionWorkoutName.setText(session.getName());
 
             if (session.isComplete()) { //display complete, hide add/remove button
