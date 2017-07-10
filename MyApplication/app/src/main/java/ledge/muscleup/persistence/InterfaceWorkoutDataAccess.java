@@ -37,4 +37,10 @@ public interface InterfaceWorkoutDataAccess extends InterfaceDataAccess{
      * @return The workout with name workoutName, or null if no workout exists with that name
      */
     Workout getWorkout(String workoutName);
+
+    /**
+     * Retrieves the name of a the workout that has been completed the least amount of times
+     * @return the workout that has been ocmpleted the least amount of times
+     */
+    String getLeastCompletedWorkout();
 }

@@ -759,6 +759,46 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
     }
 
     /**
+     * Retrieves the name of a the workout that has been completed the least amount of times
+     * @return the workout that has been ocmpleted the least amount of times
+     */
+    @Override
+    public String getLeastCompletedWorkout() {
+        String workoutName = null;
+
+        try
+        {
+            resultSet = statement.executeQuery(
+                    "SELECT TOP 1   W.Name " +
+                    "FROM           ( " +
+                    "                   SELECT      W.Name, " +
+                    "                               COUNT(W.Name) AS WorkoutFreq " +
+                    "                   FROM        Workouts W " +
+                    "                   RIGHT JOIN  WorkoutSessions WS " +
+                    "                               ON W.ID = WS.WorkoutID " +
+                    "                   RIGHT JOIN  ProgressHistory PH " +
+                    "                               ON WS.ID = PH.WorkoutSessionID " +
+                    "                   WHERE		DATEDIFF('day', PH.LoggedDate, CURRENT_TIMESTAMP) > 0 " +
+                    "                   GROUP BY    W.Name " +
+                    "                   ORDER BY    WorkoutFreq DESC " +
+                    "               ) WF " +
+                    "RIGHT JOIN     Workouts W " +
+                    "               ON WF.Name = W.Name " +
+                    "ORDER BY       WF.WorkoutFreq ");
+
+            if (resultSet.next())
+                workoutName = resultSet.getString("Name");
+
+            resultSet.close();
+        }
+        catch (Exception e) {
+            sqlError(e);
+        }
+
+        return workoutName;
+    }
+
+    /**
      * Returns the list of all completed workout records
      *
      * @return a list of all completed workout records

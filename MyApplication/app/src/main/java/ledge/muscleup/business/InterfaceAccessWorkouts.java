@@ -33,4 +33,10 @@ public interface InterfaceAccessWorkouts {
      * @return a list of workout names in the database
      */
     List<String> getWorkoutNamesList();
+
+    /**
+     * Retrieves the name of the workout that is suggested for the user
+     * @return the workout that is suggested for the user
+     */
+    String getSuggestedWorkout();
 }

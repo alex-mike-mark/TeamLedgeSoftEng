@@ -53,7 +53,7 @@ public class MainActivity extends Activity {
             currentDayWorkoutButton.setClickable(false);
             currentDayWorkoutButton.setAlpha(0.5f);
         } else {
-            currentDayWorkoutButton.setText("Today's Workout:"  + System.getProperty("line.separator") + currentDaySession.getName());
+            currentDayWorkoutButton.setText("Today's Scheduled Workout:"  + System.getProperty("line.separator") + currentDaySession.getName());
             currentDayWorkoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -69,13 +69,13 @@ public class MainActivity extends Activity {
 
         InterfaceAccessWorkouts aw = new AccessWorkouts();
         Button suggestedWorkoutButton = (Button) findViewById(R.id.btn_suggestedWorkout);
-        final Workout suggestedWorkout = aw.getWorkout("Welcome to the Gun Show"); //TODO replace with method call to get actual suggested workout
-        suggestedWorkoutButton.setText("Today's Suggested Workout: " + System.getProperty("line.separator") + suggestedWorkout.getName());
+        final String suggestedWorkoutName = aw.getSuggestedWorkout();
+        suggestedWorkoutButton.setText("Today's Suggested Workout: " + System.getProperty("line.separator") + suggestedWorkoutName);
         suggestedWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent suggestedWorkoutIntent = new Intent(MainActivity.this, WorkoutDetailsActivity.class);
-                suggestedWorkoutIntent.putExtra("workoutName", suggestedWorkout.getName());
+                suggestedWorkoutIntent.putExtra("workoutName", suggestedWorkoutName);
                 startActivity(suggestedWorkoutIntent);
             }
         });
