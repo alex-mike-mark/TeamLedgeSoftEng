@@ -2,6 +2,7 @@ package ledge.muscleup.test;
 
 import ledge.muscleup.presentation.MainActivity;
 import ledge.muscleup.presentation.WorkoutActivity;
+import ledge.muscleup.presentation.WorkoutDetailsActivity;
 
 import com.robotium.solo.*;
 import android.test.ActivityInstrumentationTestCase2;
@@ -32,7 +33,17 @@ public class WorkoutAcceptanceTest extends ActivityInstrumentationTestCase2<Main
     public void testRun() {
         solo.clickOnButton("Workouts");
         solo.assertCurrentActivity("We aren't in the workout activity!", WorkoutActivity.class);
-        //ensure it is displaying things.
+        //click on a workout to get some info.
+        assertTrue(solo.searchText("Welcome to the Gun Show"));//there is probably a better way to do this. Maybe db access and get a random one?
+        assertTrue(solo.searchText("Never Skip Leg Day"));
+        assertTrue(solo.searchText("Marathon Training Starts Here"));
+        assertTrue(solo.searchText("Work that Core, Get that Score!"));
+        solo.clickOnButton("Welcome to the Gun Show");//This fails. Why.
+        solo.assertCurrentActivity("We aren't in workout deets!", WorkoutDetailsActivity.class);
         solo.goBack();
+        solo.assertCurrentActivity("We aren't in the workout activity!", WorkoutActivity.class);
+        solo.goBack();
+        solo.assertCurrentActivity("We aren't in the main activity!", MainActivity.class);
+
     }
 }

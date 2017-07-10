@@ -37,7 +37,12 @@ public class WorkoutScheduleAcceptanceTest extends ActivityInstrumentationTestCa
     public void testRun() {
         solo.clickOnButton("Exercises");
         solo.assertCurrentActivity("We aren't in the schedule activity!",  ScheduleActivity.class);
-        //ensure it is displaying things.
+        //a doozy.
+        //bascally, need to check
+        //move from week to week
+        //add a workout
+        //complete a workout
+        //remove a workout
         solo.goBack();
     }
 }

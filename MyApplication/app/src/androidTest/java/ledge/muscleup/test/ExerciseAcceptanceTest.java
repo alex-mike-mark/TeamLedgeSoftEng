@@ -35,7 +35,9 @@ public class ExerciseAcceptanceTest extends ActivityInstrumentationTestCase2<Mai
     public void testRun() {
         solo.clickOnButton("Exercises");
         solo.assertCurrentActivity("We aren't in the exercise activity!", ExerciseActivity.class);
-        //ensure it is displaying things.
+        //ensure it is displaying things from the db.
+        //maybe do that ListView.getText().toString() thing.
+        //yeah.
         solo.goBack();
     }
 }
