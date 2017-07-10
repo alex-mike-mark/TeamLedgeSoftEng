@@ -52,10 +52,10 @@ public class AccessWorkouts implements InterfaceAccessWorkouts {
     }
 
     /**
-     * Retrieves the name of a the workout that has been completed the least amount of times     *
-     * @return the workout that has been ocmpleted the least amount of times
+     * Retrieves the name of the workout that is suggested for the user
+     * @return the workout that is suggested for the user
      */
-    public String getLeastCompletedWorkout() {
+    public String getSuggestedWorkout() {
         return dataAccess.getLeastCompletedWorkout();
     }
 }
