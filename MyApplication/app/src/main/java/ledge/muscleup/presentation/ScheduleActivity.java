@@ -127,7 +127,7 @@ public class ScheduleActivity extends Activity {
                 if (workoutSessionList.get(position).getName() != null) {   //workout scheduled on day
                     Intent appInfo = new Intent(ScheduleActivity.this, WorkoutSessionActivity.class);
                     LocalDate date = workoutSessionList.get(position).getDate();
-                    DateTimeFormatter  formatter= DateTimeFormat.forPattern("MM/dd/yyyy");
+                    DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
 
                     appInfo.putExtra("workoutSessionDate", formatter.print(date));
                     startActivity(appInfo);
