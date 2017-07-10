@@ -47,6 +47,6 @@ public class LevelProgressTest {
         Assert.assertEquals("Returned incorrect progress to next level",
                 levelProgress.getNextLevelXPProgress(), 50);
         Assert.assertEquals("Returned incorrect value of experience to reach next level",
-                levelProgress.getNextLevelXPTotal(), 3000);
+                levelProgress.getNextLevelXPTotal(), 1500);
     }
 }
