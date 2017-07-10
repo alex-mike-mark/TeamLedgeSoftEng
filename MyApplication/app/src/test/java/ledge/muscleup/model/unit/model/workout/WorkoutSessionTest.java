@@ -1,4 +1,4 @@
-package ledge.muscleup.model.workout;
+package ledge.muscleup.model.unit.model.workout;
 
 import junit.framework.TestCase;
 
@@ -14,11 +14,9 @@ import ledge.muscleup.model.exercise.WorkoutExerciseSets;
 import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
 import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.enums.ExerciseType;
-import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
-import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
-import ledge.muscleup.model.exercise.enums.*;
-import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WorkoutSessionExercise;
+import ledge.muscleup.model.workout.Workout;
+import ledge.muscleup.model.workout.WorkoutSession;
 
 /**
  * WorkoutSessionTest.java used to test WorkoutSession.java

@@ -1,4 +1,4 @@
-package ledge.muscleup.model.persistence;
+package ledge.muscleup.model.unit.persistence;
 
 import junit.framework.TestCase;
 

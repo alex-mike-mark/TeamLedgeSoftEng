@@ -1,10 +1,14 @@
-package ledge.muscleup.model.exercise;
+package ledge.muscleup.model.unit.model.exercise;
 
 import junit.framework.TestCase;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import ledge.muscleup.model.exercise.ExerciseDistance;
+import ledge.muscleup.model.exercise.ExerciseDuration;
+import ledge.muscleup.model.exercise.ExerciseSets;
+import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.enums.DistanceUnit;
 import ledge.muscleup.model.exercise.enums.TimeUnit;
 

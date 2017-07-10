@@ -1,4 +1,4 @@
-package ledge.muscleup.model.workout;
+package ledge.muscleup.model.unit.model.workout;
 
 import junit.framework.TestCase;
 
@@ -9,14 +9,12 @@ import org.junit.Test;
 import java.util.Enumeration;
 
 import ledge.muscleup.model.exercise.Exercise;
-import ledge.muscleup.model.exercise.enums.*;
 import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.exercise.WorkoutExerciseSets;
 import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
-import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.enums.ExerciseType;
-import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
+import ledge.muscleup.model.workout.Workout;
 
 /**
  * WorkoutTest.java used to test Workout.java
