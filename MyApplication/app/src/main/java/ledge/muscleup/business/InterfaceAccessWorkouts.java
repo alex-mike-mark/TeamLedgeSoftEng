@@ -33,4 +33,10 @@ public interface InterfaceAccessWorkouts {
      * @return a list of workout names in the database
      */
     List<String> getWorkoutNamesList();
+
+    /**
+     * Retrieves the name of a the workout that has been completed the least amount of times
+     * @return the workout that has been ocmpleted the least amount of times
+     */
+    String getLeastCompletedWorkout();
 }

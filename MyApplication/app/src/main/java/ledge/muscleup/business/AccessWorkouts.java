@@ -50,4 +50,12 @@ public class AccessWorkouts implements InterfaceAccessWorkouts {
     public List<String> getWorkoutNamesList() {
         return dataAccess.getWorkoutNamesList();
     }
+
+    /**
+     * Retrieves the name of a the workout that has been completed the least amount of times     *
+     * @return the workout that has been ocmpleted the least amount of times
+     */
+    public String getLeastCompletedWorkout() {
+        return dataAccess.getLeastCompletedWorkout();
+    }
 }
