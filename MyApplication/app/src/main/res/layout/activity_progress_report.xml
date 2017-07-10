@@ -203,22 +203,4 @@
         android:divider="@color/colorAccent"
         android:dividerHeight="1dp" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="20sp">
-
-        <Button
-            android:id="@+id/backToMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            android:textColor="@color/colorPrimaryDark"
-            android:text="@string/btn_back"/>
-    </RelativeLayout>
-
 </LinearLayout>

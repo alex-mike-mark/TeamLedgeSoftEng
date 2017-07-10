@@ -10,12 +10,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import ledge.muscleup.R;
+import ledge.muscleup.business.AccessExperience;
+import ledge.muscleup.business.InterfaceAccessExperience;
+import ledge.muscleup.model.experience.CompletedWorkoutRecord;
+import ledge.muscleup.model.experience.ExperienceHistory;
+import ledge.muscleup.model.experience.LevelProgress;
 import ledge.muscleup.model.workout.WorkoutSession;
 
 
@@ -30,7 +41,8 @@ import ledge.muscleup.model.workout.WorkoutSession;
  */
 public class ProgressReportActivity extends Activity {
     private ListItemAdapter adapter;
-
+    private static final InterfaceAccessExperience ae = new AccessExperience();
+    private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd");
     /**
      *  onCreate initializes WorkoutDetailsActivity
      * @param savedInstanceState contains context from last activity
@@ -40,14 +52,15 @@ public class ProgressReportActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress_report);
 
+        ExperienceHistory experienceHistory = new ExperienceHistory(ae.getCompletedWorkouts());
         TextView currLevelTextView = (TextView) findViewById(R.id.currentLevel);
-        int currLevelNum = 5;
-        String currLevelString = "LEVEL " + currLevelNum;
+
+        String currLevelString = "LEVEL " + experienceHistory.getCurrLevel();
         currLevelTextView.setText(currLevelString);
 
         TextView xpNeededTextView = (TextView) findViewById(R.id.nextLevelXPNeeded);
-        int xpGained = 250;
-        int xpNeeded = 1000;
+        int xpGained = experienceHistory.getNextLevelXPProgress();
+        int xpNeeded = experienceHistory.getNextLevelXPTotal();
         String xpString = "Level Up: " + xpGained + " XP / " + xpNeeded + " XP";
         xpNeededTextView.setText(xpString);
 
@@ -55,40 +68,42 @@ public class ProgressReportActivity extends Activity {
         double progressPercentage = (double) xpGained / xpNeeded * 100;
         bar.setProgress((int) progressPercentage);
 
-        int numCompletedLast7Days = 3;
+        int numCompletedLast7Days = experienceHistory.getNumWorkoutsCompleted(7);
         TextView completedLast7DaysTextView = (TextView) findViewById(R.id.numCompletedLast7Days);
         completedLast7DaysTextView.setText(String.valueOf(numCompletedLast7Days));
 
-        int numCompletedLast30Days = 15;
+        int numCompletedLast30Days = experienceHistory.getNumWorkoutsCompleted(30);
         TextView completedLast30DaysTextView = (TextView) findViewById(R.id.numCompletedLast30Days);
         completedLast30DaysTextView.setText(String.valueOf(numCompletedLast30Days));
 
-        int xpGainedLast7Days = 650;
+        int xpGainedLast7Days = experienceHistory.getXPGained(7);
         TextView xpGainedLast7DaysTextView = (TextView) findViewById(R.id.xpGainedLast7Days);
         xpGainedLast7DaysTextView.setText(String.valueOf(xpGainedLast7Days));
 
-        int xpGainedLast30Days = 3138;
+        int xpGainedLast30Days = experienceHistory.getXPGained(30);
         TextView xpGainedLast30DaysTextView = (TextView) findViewById(R.id.xpGainedLast30Days);
         xpGainedLast30DaysTextView.setText(String.valueOf(xpGainedLast30Days));
 
-        int levelsGainedLast7Days = 1;
+        int levelsGainedLast7Days = experienceHistory.getLevelsGained(7);
         TextView levelsGainedLast7DaysTextView = (TextView) findViewById(R.id.levelsGainedLast7Days);
         levelsGainedLast7DaysTextView.setText(String.valueOf(levelsGainedLast7Days));
 
-        int levelsGainedLast30Days = 6;
+        int levelsGainedLast30Days = experienceHistory.getLevelsGained(30);
         TextView levelsGainedLast30DaysTextView = (TextView) findViewById(R.id.levelsGainedLast30Days);
         levelsGainedLast30DaysTextView.setText(String.valueOf(levelsGainedLast30Days));
 
-        Button backButton = (Button) findViewById(R.id.backToMenu);
-        backButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(ProgressReportActivity.this, MainActivity.class));
-                }
-        });
+        Enumeration<CompletedWorkoutRecord> enumeration = experienceHistory.getCompletedWorkoutsEnumeration();
+        final int numRecent = 3;
+        int count = 0;
+        List<CompletedWorkoutRecord> recentlyCompleted = new ArrayList<>();
+       while (enumeration.hasMoreElements() && count < numRecent) {
+            recentlyCompleted.add(enumeration.nextElement());
+            count++;
+        }
 
-        List recentlyCompleted = null;
         adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_progress_report, recentlyCompleted);
+        ListView listView = (ListView) findViewById(R.id.recentlyCompletedWorkouts);
+        listView.setAdapter(adapter);
     }
 
     /**
@@ -105,7 +120,7 @@ public class ProgressReportActivity extends Activity {
      * completed workout name, and xp gained from completed workout
      */
     private class ListItemAdapter extends ArrayAdapter {
-        private List<WorkoutSession> sessionList;
+        private List<CompletedWorkoutRecord> recordList;
         Context context;
 
         /**
@@ -113,11 +128,11 @@ public class ProgressReportActivity extends Activity {
          * date workout was completed, completed workout name, and xp gained from completed workout
          * @param context The activity's context
          * @param resourceId the layout resource used for the adapter
-         * @param sessionList a list of workout sessions
+         * @param recordList a list of workout sessions
          */
-        public ListItemAdapter(Context context, int resourceId, List<WorkoutSession> sessionList) {
-            super(context, resourceId, sessionList);
-            this.sessionList = sessionList;
+        public ListItemAdapter(Context context, int resourceId, List<CompletedWorkoutRecord> recordList) {
+            super(context, resourceId, recordList);
+            this.recordList = recordList;
             this.context = context;
         }
 
@@ -160,11 +175,11 @@ public class ProgressReportActivity extends Activity {
                 returnedView = convertView;
             }
 
-            WorkoutSession session = sessionList.get(index);
+            CompletedWorkoutRecord currRecord = recordList.get(index);
 
-            viewHolder.completedDate.setText("Date");
-            viewHolder.completedWorkoutName.setText("WorkoutName");
-            viewHolder.xpGained.setText("+xp");
+            viewHolder.completedDate.setText(formatter.print(currRecord.getDateOfCompletion()));
+            viewHolder.completedWorkoutName.setText(currRecord.getWorkoutName());
+            viewHolder.xpGained.setText("+" + String.valueOf(currRecord.getExperienceGained()) + " XP");
 
             return returnedView;
         }
