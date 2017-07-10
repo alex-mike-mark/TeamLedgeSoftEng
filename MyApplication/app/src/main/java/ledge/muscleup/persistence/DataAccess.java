@@ -777,7 +777,8 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                     "                   RIGHT JOIN  WorkoutSessions WS " +
                     "                               ON W.ID = WS.WorkoutID " +
                     "                   RIGHT JOIN  ProgressHistory PH " +
-                    "                   ON WS.ID = PH.WorkoutSessionID " +
+                    "                               ON WS.ID = PH.WorkoutSessionID " +
+                    "                   WHERE		DATEDIFF('day', PH.LoggedDate, CURRENT_TIMESTAMP) > 0 " +
                     "                   GROUP BY    W.Name " +
                     "                   ORDER BY    WorkoutFreq DESC " +
                     "               ) WF " +
