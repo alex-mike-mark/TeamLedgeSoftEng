@@ -53,7 +53,7 @@ public class MainActivity extends Activity {
             currentDayWorkoutButton.setClickable(false);
             currentDayWorkoutButton.setAlpha(0.5f);
         } else {
-            currentDayWorkoutButton.setText("Today's Workout:"  + System.getProperty("line.separator") + currentDaySession.getName());
+            currentDayWorkoutButton.setText("Today's Scheduled Workout:"  + System.getProperty("line.separator") + currentDaySession.getName());
             currentDayWorkoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
