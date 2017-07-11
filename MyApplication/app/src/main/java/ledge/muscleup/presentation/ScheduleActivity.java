@@ -246,6 +246,8 @@ public class ScheduleActivity extends Activity {
             viewHolder.sessionDate.setText(formatter.print(session.getDate()));
             if(session.getDate().isEqual(LocalDate.now())) {
                 viewHolder.sessionDate.setTextColor(Color.rgb(255, 128, 0));
+            } else {
+                viewHolder.sessionDate.setTextColor(Color.WHITE);
             }
             viewHolder.sessionWorkoutName.setText(session.getName());
 
