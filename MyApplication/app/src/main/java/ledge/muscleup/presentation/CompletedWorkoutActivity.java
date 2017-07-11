@@ -181,7 +181,9 @@ public class CompletedWorkoutActivity extends Activity {
             WorkoutSessionExercise sessionExercise = exerciseList.get(index);
 
             viewHolder.exerciseName.setText(sessionExercise.getName());
-            viewHolder.exerciseQuantity.setText(sessionExercise.getRecommendedQuantity().toString());
+            String recommendedQuantity = ExerciseQuantityDisplayStrings.getExerciseQuantityDisplayString(
+                    sessionExercise.getRecommendedQuantity());
+            viewHolder.exerciseQuantity.setText(recommendedQuantity);
             viewHolder.exerciseXP.setText("+" + String.valueOf(sessionExercise.getExperienceValue()) + " XP");
             return returnedView;
         }
