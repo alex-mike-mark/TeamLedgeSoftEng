@@ -77,17 +77,35 @@ public class WorkoutSessionActivity extends Activity {
                 }
             });
         } else {
-            completeWorkoutButton.setText("Complete");
-            completeWorkoutButton.setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    aws.toggleWorkoutCompleted(workoutSession);
-                    Intent appInfo = new Intent(WorkoutSessionActivity.this, CompletedWorkoutActivity.class);
-                    LocalDate date = workoutSession.getDate();
-                    appInfo.putExtra("workoutSessionDate", formatter.print(date));
-                    startActivity(appInfo);
-                }
-            });
+            if (workoutSession.getDate().isAfter(LocalDate.now())) {
+                completeWorkoutButton.setText("Back");
+                completeWorkoutButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(WorkoutSessionActivity.this, ScheduleActivity.class));
+                    }});
+            } else if (workoutSession.getDate().isBefore(LocalDate.now().minusWeeks(1))) {
+                TextView expiredTextView = (TextView) findViewById(R.id.workoutSessionIsExpired);
+                expiredTextView.setVisibility(View.VISIBLE);
+                completeWorkoutButton.setText("Back");
+                completeWorkoutButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(WorkoutSessionActivity.this, ScheduleActivity.class));
+                    }});
+            } else {
+                completeWorkoutButton.setText("Complete");
+                completeWorkoutButton.setOnClickListener(new Button.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        aws.toggleWorkoutCompleted(workoutSession);
+                        Intent appInfo = new Intent(WorkoutSessionActivity.this, CompletedWorkoutActivity.class);
+                        LocalDate date = workoutSession.getDate();
+                        appInfo.putExtra("workoutSessionDate", formatter.print(date));
+                        startActivity(appInfo);
+                    }
+                });
+            }
         }
 
     }

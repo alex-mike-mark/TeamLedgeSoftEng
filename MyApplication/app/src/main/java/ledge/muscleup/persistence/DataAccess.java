@@ -350,7 +350,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
                     workoutComplete = resultSet.getBoolean("WorkoutComplete");
                 }
                 //if the name of the workout has changed, add the old workout and create a new one
-                else if (!workoutName.equals(resultSet.getString("WorkoutName"))) {
+                else if (!scheduledDate.equals(new LocalDate(resultSet.getDate("ScheduledDate")))) {
                     workoutSession = new WorkoutSession(workoutName, scheduledDate, workoutComplete, workoutSessionExerciseList);
                     workoutSessionList.add(workoutSession);
                     workoutSessionExerciseList = new ArrayList<>();

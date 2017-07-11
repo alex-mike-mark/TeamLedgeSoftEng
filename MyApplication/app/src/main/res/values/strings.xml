@@ -13,6 +13,7 @@
     <string name="btn_back">Back</string>
     <string name="text_levelUp">LEVEL UP!</string>
     <string name="text_completed">Completed</string>
+    <string name="text_workoutSessionExpired"> Workout Session Expired: Incomplete</string>
     <string name="btn_goToSchedule">Go To Workout Schedule</string>
     <string name="text_progressReport">Progress Report</string>
 </resources>
