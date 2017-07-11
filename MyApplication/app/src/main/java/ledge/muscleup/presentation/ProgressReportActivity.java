@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -26,8 +25,6 @@ import ledge.muscleup.business.AccessExperience;
 import ledge.muscleup.business.InterfaceAccessExperience;
 import ledge.muscleup.model.experience.CompletedWorkoutRecord;
 import ledge.muscleup.model.experience.ExperienceHistory;
-import ledge.muscleup.model.experience.LevelProgress;
-import ledge.muscleup.model.workout.WorkoutSession;
 
 
 /**

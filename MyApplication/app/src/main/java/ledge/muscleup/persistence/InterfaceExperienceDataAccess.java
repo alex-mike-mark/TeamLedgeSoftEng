@@ -1,7 +1,5 @@
 package ledge.muscleup.persistence;
 
-import org.joda.time.LocalDate;
-
 import java.util.List;
 
 import ledge.muscleup.model.experience.CompletedWorkoutRecord;

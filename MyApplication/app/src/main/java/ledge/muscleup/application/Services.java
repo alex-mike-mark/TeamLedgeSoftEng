@@ -1,7 +1,6 @@
 package ledge.muscleup.application;
 
 import ledge.muscleup.persistence.DataAccess;
-import ledge.muscleup.persistence.DataAccessStub;
 import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**

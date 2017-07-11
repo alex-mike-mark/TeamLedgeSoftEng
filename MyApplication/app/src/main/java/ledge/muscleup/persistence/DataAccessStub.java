@@ -19,10 +19,7 @@ import ledge.muscleup.model.exercise.ExerciseDuration;
 import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.ExerciseSetsAndWeight;
 import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
-import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
 import ledge.muscleup.model.exercise.WorkoutExercise;
-import ledge.muscleup.model.exercise.WorkoutSessionExercise;
-import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
 

@@ -24,7 +24,6 @@ import ledge.muscleup.business.AccessWorkoutSessions;
 import ledge.muscleup.business.AccessWorkouts;
 import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
 import ledge.muscleup.business.InterfaceAccessWorkouts;
-import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
 
 public class MainActivity extends Activity {

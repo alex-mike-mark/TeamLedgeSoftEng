@@ -2,11 +2,6 @@ package ledge.muscleup.persistence;
 
 import java.util.List;
 
-
-import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
-import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
-import ledge.muscleup.model.exercise.WorkoutExercise;
-
 import ledge.muscleup.model.workout.Workout;
 
 /**
