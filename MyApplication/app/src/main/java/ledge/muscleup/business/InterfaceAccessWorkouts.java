@@ -2,8 +2,6 @@ package ledge.muscleup.business;
 
 import java.util.List;
 
-import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
-import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.workout.Workout;
 
 /**

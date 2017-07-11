@@ -931,13 +931,14 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
 
         }
         else if (sets != NULL_NUM && reps != NULL_NUM) {
-            exerciseQuantity = new ExerciseSets(sets, reps);
-            workoutExercise = new WorkoutExerciseSets(exercise, xpValue, (ExerciseSets)exerciseQuantity);
+            if (weight != NULL_NUM && weightUnit != null) {
+                exerciseQuantity = new ExerciseSetsAndWeight(sets, reps, weight, weightUnit);
+                workoutExercise = new WorkoutExerciseSetsAndWeight(exercise, xpValue, (ExerciseSetsAndWeight)exerciseQuantity);
+            } else {
+                exerciseQuantity = new ExerciseSets(sets, reps);
+                workoutExercise = new WorkoutExerciseSets(exercise, xpValue, (ExerciseSets)exerciseQuantity);
 
-        }
-        else if (weight != NULL_NUM && weightUnit != null) {
-            exerciseQuantity = new ExerciseSetsAndWeight(sets, reps, weight, weightUnit);
-            workoutExercise = new WorkoutExerciseSetsAndWeight(exercise, xpValue, (ExerciseSetsAndWeight)exerciseQuantity);
+            }
         }
 
         return workoutExercise;
