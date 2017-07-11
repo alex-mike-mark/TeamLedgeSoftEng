@@ -4,8 +4,8 @@ import ledge.muscleup.persistence.DataAccess;
 import ledge.muscleup.persistence.InterfaceDataAccess;
 
 /**
- * A class containing static methods for creating, retrieving, and closing the DataAccessStub.
- * The methods in this class also ensure that only one DataAccessStub is created
+ * A class containing static methods for creating, retrieving, and closing the DataAccess.
+ * The methods in this class also ensure that only one DataAccess is created
  *
  * @author Ryan Koop
  * @version 1.0
