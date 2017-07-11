@@ -81,6 +81,17 @@ public class MainActivity extends Activity {
     }
 
     /**
+     * Overrides the onBackPressed() method to exit the application when back is pressed while on the Main activity
+     */
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    /**
      * Cleans up the application when destroyed
      */
     protected void onDestroy() {
