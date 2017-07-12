@@ -459,6 +459,17 @@ class TemplateDataAccessStub implements InterfaceExerciseDataAccess, InterfaceWo
     }
 
     /**
+     * Retrieves the name of a the workout that has been completed the least amount of times
+     *
+     * @return the workout that has been ocmpleted the least amount of times
+     */
+    @Override
+    public String getLeastCompletedWorkout() {
+        //TODO implement or remove
+        return null;
+    }
+
+    /**
      * A method that returns a list of all workout sessions in the database
      * @return a list of all workout sessions in the database
      */
