@@ -5,7 +5,6 @@ import org.joda.time.LocalDate;
 import java.util.List;
 
 import ledge.muscleup.application.Services;
-import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.WorkoutSession;
 import ledge.muscleup.persistence.DataAccess;

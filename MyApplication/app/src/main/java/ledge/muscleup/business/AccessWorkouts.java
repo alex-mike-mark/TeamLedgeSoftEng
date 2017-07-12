@@ -3,8 +3,6 @@ package ledge.muscleup.business;
 import java.util.List;
 
 import ledge.muscleup.application.Services;
-import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
-import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.persistence.DataAccess;
 
@@ -49,5 +47,13 @@ public class AccessWorkouts implements InterfaceAccessWorkouts {
      */
     public List<String> getWorkoutNamesList() {
         return dataAccess.getWorkoutNamesList();
+    }
+
+    /**
+     * Retrieves the name of the workout that is suggested for the user
+     * @return the workout that is suggested for the user
+     */
+    public String getSuggestedWorkout() {
+        return dataAccess.getLeastCompletedWorkout();
     }
 }
