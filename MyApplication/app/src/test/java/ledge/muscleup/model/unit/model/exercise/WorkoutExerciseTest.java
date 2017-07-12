@@ -35,9 +35,9 @@ public class WorkoutExerciseTest extends TestCase {
 
         workoutExercise1 = new WorkoutExerciseSets(new Exercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), xpHighIntensity,new ExerciseSets(5, 4));
         workoutExercise2 = new WorkoutExerciseSets(new Exercise("Deadlifts", ExerciseIntensity.MEDIUM, ExerciseType.LEG), xpMediumIntensity, new ExerciseSets(5, 4));
-        exercise1 = new Exercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, true);
+        exercise1 = new Exercise("Power Cleans", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY);
         workoutExercise3 = new WorkoutExerciseSets(exercise1, xpHighIntensity, new ExerciseSets(5, 4));
-        exercise2 = new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM, true);
+        exercise2 = new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM);
         workoutExercise4 = new WorkoutExerciseSetsAndWeight(exercise2, xpLowIntensity, new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS));
     }
 

@@ -43,7 +43,7 @@ public class WorkoutSessionTest extends TestCase {
                 new WorkoutExerciseSets(new Exercise("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), xpHighIntensity,new ExerciseSets(3, 20)),
                 new WorkoutExerciseSets(new Exercise("Sit-ups", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), xpHighIntensity, new ExerciseSets(3, 20))
         };
-        workout1 = new Workout("Get Your 6 Pack Abs", true, exerciseList1);
+        workout1 = new Workout("Get Your 6 Pack Abs", exerciseList1);
 
         workoutSession1 = new WorkoutSession(workout1, LocalDate.now(), false);
 
@@ -51,7 +51,7 @@ public class WorkoutSessionTest extends TestCase {
                 new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), xpHighIntensity,new ExerciseSets(3, 20)),
                 new WorkoutExerciseSets(new Exercise("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), xpHighIntensity,new ExerciseSets(3, 20))
         };
-        workout2 = new Workout("Get Your 6 Pack Abs", true, exerciseList2);
+        workout2 = new Workout("Get Your 6 Pack Abs", exerciseList2);
 
         workoutSession2 = new WorkoutSession(workout2, LocalDate.now(), true);
 
@@ -60,7 +60,7 @@ public class WorkoutSessionTest extends TestCase {
                 new WorkoutExerciseSets(new Exercise("Russian Twists", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), xpHighIntensity,new ExerciseSets(3, 20)),
                 new WorkoutExerciseSets(new Exercise("Sit-ups", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), xpHighIntensity,new ExerciseSets(3, 20))
         };
-        workout3 = new Workout("Get Your 6 Pack Abs", true, exerciseList3);
+        workout3 = new Workout("Get Your 6 Pack Abs", exerciseList3);
 
         workoutSession3 = new WorkoutSession(workout3, LocalDate.now(), false);
     }
