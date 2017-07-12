@@ -78,10 +78,6 @@ public class Exercise {
     @Override
     public String toString()
     {
-        String result = "";
-
-        result += name + " - " + intensity + " intensity " + exerciseType + " exercise";
-
-        return result;
+        return name + " - " + intensity + " intensity " + exerciseType + " exercise";
     }
 }
