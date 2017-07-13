@@ -29,6 +29,19 @@ public class Services {
     }
 
     /**
+     * Creates and opens the database, using an alternative database implementation
+     * @param altDataAccessService the alternative database implementation
+     * @return the database
+     */
+    public static InterfaceDataAccess createDataAccess(DataAccess altDataAccessService) {
+        if (dataAccessService == null) {
+            dataAccessService = altDataAccessService;
+            dataAccessService.open(Main.getDBPathName());
+        }
+        return dataAccessService;
+    }
+
+    /**
      * Retrieves the database
      * @return the database, if it exists
      */
@@ -47,7 +60,7 @@ public class Services {
     public static void closeDataAccess() {
         if (dataAccessService != null) {
             dataAccessService.close();
+            dataAccessService = null;
         }
-        dataAccessService = null;
     }
 }
