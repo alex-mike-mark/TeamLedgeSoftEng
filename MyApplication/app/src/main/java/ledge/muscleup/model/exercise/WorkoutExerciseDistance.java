@@ -1,8 +1,5 @@
 package ledge.muscleup.model.exercise;
 
-import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
-import ledge.muscleup.model.exercise.enums.ExerciseType;
-
 /**
  * An exercise which contains a contains a suggested amount of exercise that uses distance, which can be modified
  *

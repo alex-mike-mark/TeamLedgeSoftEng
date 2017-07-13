@@ -4,8 +4,7 @@ import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
 import ledge.muscleup.model.exercise.enums.ExerciseType;
 
 /**
- * An exercise as part of a workout, which consists of an exercise name, type, intensity, and whether
- * or not this exercise is a favourite exercise
+ * An exercise as part of a workout, which consists of an exercise name, type and intensity
  *
  * @author Alexander Mark
  * @version 1.0
@@ -15,28 +14,6 @@ public class Exercise {
     private String name;
     private ExerciseIntensity intensity;
     private ExerciseType exerciseType;
-    private boolean isFavourite;
-
-    /**
-     * The default constructor for the Exercise class
-     * @param name the name of the exercise
-     * @param intensity the intensity of the exercise
-     * @param exerciseType the type of the exercise
-     * @param isFavourite whether the exercise is favourite or not
-     * @throws IllegalArgumentException if passed a {@code null} parameter
-     */
-    public Exercise(String name, ExerciseIntensity intensity, ExerciseType exerciseType,
-                       boolean isFavourite) throws IllegalArgumentException {
-        if(name == null || intensity == null || exerciseType == null) {
-            throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
-        }
-        else {
-            this.name = name;
-            this.intensity = intensity;
-            this.exerciseType = exerciseType;
-            this.isFavourite = isFavourite;
-        }
-    }
 
     /**
      * The default constructor for the Exercise class
@@ -54,7 +31,6 @@ public class Exercise {
             this.name = name;
             this.intensity = intensity;
             this.exerciseType = exerciseType;
-        	this.isFavourite = false;
         }
     }
 
@@ -86,20 +62,6 @@ public class Exercise {
     }
 
     /**
-     * Returns {@code true} if this exercise is a favourite exercise, and {@code false} otherwise
-     *
-     * @return a boolean representing is the exercise is a favourite exercise
-     */
-    public boolean isFavourite() { return isFavourite; }
-
-    /**
-     * Toggle the favourite status of the exercise
-     */
-    public void toggleFavourite() {
-        isFavourite = !isFavourite;
-    }
-
-    /**
      * Compares the current Exercise to another instance of Exercise
      *
      * @param other the instance of Exercise to compare to
@@ -116,12 +78,6 @@ public class Exercise {
     @Override
     public String toString()
     {
-        String result = "";
-
-        if (isFavourite)
-            result += " * ";
-        result += name + " - " + intensity + " intensity " + exerciseType + " exercise";
-
-        return result;
+        return name + " - " + intensity + " intensity " + exerciseType + " exercise";
     }
 }

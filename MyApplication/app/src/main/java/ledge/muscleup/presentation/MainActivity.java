@@ -24,7 +24,6 @@ import ledge.muscleup.business.AccessWorkoutSessions;
 import ledge.muscleup.business.AccessWorkouts;
 import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
 import ledge.muscleup.business.InterfaceAccessWorkouts;
-import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
 
 public class MainActivity extends Activity {
@@ -79,6 +78,17 @@ public class MainActivity extends Activity {
                 startActivity(suggestedWorkoutIntent);
             }
         });
+    }
+
+    /**
+     * Overrides the onBackPressed() method to exit the application when back is pressed while on the Main activity
+     */
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     /**

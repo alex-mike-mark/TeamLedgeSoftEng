@@ -10,8 +10,7 @@ import ledge.muscleup.model.exercise.WorkoutExercise;
 import static java.util.Collections.enumeration;
 
 /**
- * Stores information about workouts, which consists of a workout name, a set of exercises and
- * whether the workout is a favourite workout
+ * Stores information about workouts, which consists of a workout name and a set of exercises
  *
  * @author Alexander Mark
  * @version 1.0
@@ -20,7 +19,6 @@ import static java.util.Collections.enumeration;
 public class Workout {
     private String name;
     private List<WorkoutExercise> exerciseList;
-    private boolean isFavourite;
 
     /**
      * The constructor for the Workout, which creates an empty workout
@@ -33,7 +31,6 @@ public class Workout {
         }
         else {
             this.name = name;
-            this.isFavourite = false;
             exerciseList = new ArrayList<>();
         }
     }
@@ -41,17 +38,15 @@ public class Workout {
     /**
      * The constructor for the Workout, which creates a Workout based on a list of exercises
      * @param name the name of the workout
-     * @param isFavourite if the workout is a favourite workout
      * @param exercises the list of exercises that make up the workout
      * @throws IllegalArgumentException if passed a {@code null} parameter
      */
-    public Workout(String name, boolean isFavourite, WorkoutExercise[] exercises) throws IllegalArgumentException {
+    public Workout(String name, WorkoutExercise[] exercises) throws IllegalArgumentException {
         if (name == null || exercises == null) {
             throw (new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }
         else {
             this.name = name;
-            this.isFavourite = isFavourite;
 
             exerciseList = new ArrayList<>();
             for (int i = 0; i < exercises.length; i++)
@@ -104,20 +99,6 @@ public class Workout {
                 quantityUpdated = exerciseList.get(exerciseIndex).updateQuantity(quantity);
         }
         return quantityUpdated;
-    }
-
-    /**
-     * Returns {@code true} if the workout is a favourite workout, and {@code false} otherwise
-     *
-     * @return a boolean represeting whether this workout is a favourite workout
-     */
-    public boolean isFavourite() { return isFavourite; }
-
-    /**
-     * Toggle the favourite status of this workout
-     */
-    public void toggleFavourite() {
-        isFavourite = !isFavourite;
     }
 
     /**

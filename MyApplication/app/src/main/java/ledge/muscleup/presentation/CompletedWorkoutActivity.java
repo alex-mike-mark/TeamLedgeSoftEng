@@ -4,15 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -20,7 +17,6 @@ import android.widget.TextView;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -181,7 +177,9 @@ public class CompletedWorkoutActivity extends Activity {
             WorkoutSessionExercise sessionExercise = exerciseList.get(index);
 
             viewHolder.exerciseName.setText(sessionExercise.getName());
-            viewHolder.exerciseQuantity.setText(sessionExercise.getRecommendedQuantity().toString());
+            String recommendedQuantity = ExerciseQuantityDisplayStrings.getExerciseQuantityDisplayString(
+                    sessionExercise.getRecommendedQuantity());
+            viewHolder.exerciseQuantity.setText(recommendedQuantity);
             viewHolder.exerciseXP.setText("+" + String.valueOf(sessionExercise.getExperienceValue()) + " XP");
             return returnedView;
         }

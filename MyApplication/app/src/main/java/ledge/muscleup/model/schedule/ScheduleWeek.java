@@ -1,13 +1,11 @@
 package ledge.muscleup.model.schedule;
 
-import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
 import ledge.muscleup.model.workout.WorkoutSession;
 
 /**

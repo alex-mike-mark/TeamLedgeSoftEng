@@ -45,14 +45,14 @@ public class WorkoutTest extends TestCase {
                 new WorkoutExerciseSets(russianTwists, xpHighIntensity, new ExerciseSets(3, 20)),
                 new WorkoutExerciseSets(sitUps, xpHighIntensity,new ExerciseSets(3, 20))
         };
-        workout2 = new Workout("Get Your 6 Pack Abs", true, exerciseList1);
+        workout2 = new Workout("Get Your 6 Pack Abs", exerciseList1);
 
         exerciseList2 = new WorkoutExerciseSets[]{
                 new WorkoutExerciseSets(crunches, xpHighIntensity,new ExerciseSets(3, 20)),
                 new WorkoutExerciseSets(russianTwists, xpHighIntensity,new ExerciseSets(3, 20)),
                 new WorkoutExerciseSets(sitUps, xpHighIntensity,new ExerciseSets(3, 20))
         };
-        workout3 = new Workout("Get Your 6 Pack Abs", true, exerciseList2);
+        workout3 = new Workout("Get Your 6 Pack Abs", exerciseList2);
         workout4 = new Workout("Nothing does in this.");
     }
 
@@ -94,18 +94,6 @@ public class WorkoutTest extends TestCase {
 
         WorkoutExerciseSets workoutExerciseDuration3 = new WorkoutExerciseSets(new Exercise("Sit-ups", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY), xpHighIntensity,new ExerciseSets(3, 20));
         assertTrue(workout2.setRecommendedQuantity(workoutExerciseDuration3, new ExerciseSets(3, 10)));
-
-        assertEquals(false, workout1.isFavourite());
-        assertEquals(true, workout2.isFavourite());
-        assertEquals(true, workout3.isFavourite());
-
-        workout1.toggleFavourite();
-        workout2.toggleFavourite();
-        workout3.toggleFavourite();
-
-        assertEquals(true, workout1.isFavourite());
-        assertEquals(false, workout2.isFavourite());
-        assertEquals(false, workout3.isFavourite());
 
         assertEquals(0, workout1.numExercises());
         assertEquals(3, workout2.numExercises());

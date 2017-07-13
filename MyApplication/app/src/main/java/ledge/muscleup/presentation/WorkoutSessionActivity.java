@@ -195,7 +195,10 @@ public class WorkoutSessionActivity extends Activity {
             WorkoutSessionExercise sessionExercise = exerciseList.get(index);
 
             viewHolder.exerciseName.setText(sessionExercise.getName());
-            viewHolder.exerciseQuantity.setText(sessionExercise.getRecommendedQuantity().toString());
+            String exerciseQuantity = ExerciseQuantityDisplayStrings.getExerciseQuantityDisplayString(
+                    sessionExercise.getRecommendedQuantity()
+            );
+            viewHolder.exerciseQuantity.setText(exerciseQuantity);
 
             return returnedView;
         }

@@ -24,9 +24,9 @@ public class ExerciseTest extends TestCase {
      */
     @Before
     public void setUp(){
-        exercise1 = new Exercise("Bicep Curls ;)", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, true);
+        exercise1 = new Exercise("Bicep Curls ;)", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY);
         exercise2 = new Exercise("Tricep Extensions", ExerciseIntensity.LOW, ExerciseType.ARM);
-        exercise3 = new Exercise("Bicep Curls ;)", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY, true);
+        exercise3 = new Exercise("Bicep Curls ;)", ExerciseIntensity.HIGH, ExerciseType.FULL_BODY);
     }
 
     /**
@@ -49,15 +49,6 @@ public class ExerciseTest extends TestCase {
 
         assertEquals(ExerciseType.FULL_BODY, exercise1.getType());
         assertEquals(ExerciseType.ARM, exercise2.getType());
-
-        assertEquals(true, exercise1.isFavourite());
-        assertEquals(false, exercise2.isFavourite());
-
-        exercise1.toggleFavourite();
-        exercise2.toggleFavourite();
-
-        assertEquals(false, exercise1.isFavourite());
-        assertEquals(true, exercise2.isFavourite());
 
         assertFalse(exercise1.equals(exercise2));
         assertFalse(exercise2.equals(exercise1));
