@@ -12,7 +12,7 @@ import ledge.muscleup.model.exercise.Exercise;
  * @version 1.0
  * @since 2017-06-07
  */
-public interface InterfaceExerciseDataAccess extends InterfaceDataAccess{
+public interface InterfaceExerciseDataAccess {
 
     /**
      * Gets a list of all exercises in the database
