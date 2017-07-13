@@ -35,7 +35,7 @@ public class ProgressReportAcceptanceTest extends ActivityInstrumentationTestCas
 
     @Test
     public void testRun() {
-        solo.clickOnButton("Exercises");
+        solo.clickOnButton("Progress Report");
         solo.assertCurrentActivity("We aren't in the prog report activity!", ProgressReportActivity.class);
         //ensure it is displaying things.
         solo.goBack();
