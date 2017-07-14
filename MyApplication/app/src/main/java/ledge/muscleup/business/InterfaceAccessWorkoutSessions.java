@@ -37,7 +37,7 @@ public interface InterfaceAccessWorkoutSessions {
      * A method that returns a list of workout sessions scheduled in the current week
      * @return a list of all workout sessions scheduled in the current week
      */
-    List<WorkoutSession> getCurrentWeekSessions();
+    List<WorkoutSession> getCurrentWeekSessions(int weekStartDay);
 
     /**
      * Adds a new workout session to the database
@@ -84,5 +84,5 @@ public interface InterfaceAccessWorkoutSessions {
      * @param dayInWeek a day in the week to created a ScheduleWeek for
      * @return a ScheduleWeek, which contains all WorkoutSessions for the given week
      */
-    ScheduleWeek newScheduledWeek(LocalDate dayInWeek);
+    ScheduleWeek newScheduledWeek(int weekStartDay, LocalDate dayInWeek);
 }
