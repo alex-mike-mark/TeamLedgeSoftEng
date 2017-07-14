@@ -52,10 +52,23 @@ public class Services {
      * Creates and opens the database, using an alternative database implementation
      * @param altDataAccessService the alternative database implementation
      */
-    public static void createDataAccess(InterfaceDataAccess altDataAccessService) {
+    public static void createDataAccess(InterfaceDataAccess altDataAccessService,
+                                        InterfaceExerciseDataAccess altExerciseDataAccessService,
+                                        InterfaceExperienceDataAccess altExperienceDataAccess,
+                                        InterfaceWorkoutDataAccess altWorkoutDataAccess,
+                                        InterfaceWorkoutSessionDataAccess altWorkoutSessionDataAccess) {
         if (dataAccessService == null) {
             dataAccessService = altDataAccessService;
+            exerciseDataAccessService = altExerciseDataAccessService;
+            experienceDataAccessService = altExperienceDataAccess;
+            workoutDataAccessService = altWorkoutDataAccess;
+            workoutSessionDataAccessService = altWorkoutSessionDataAccess;
+
             dataAccessService.open(Main.getDBPathName());
+            exerciseDataAccessService.open(dataAccessService.getNewStatement());
+            experienceDataAccessService.open(dataAccessService.getNewStatement());
+            workoutDataAccessService.open(dataAccessService.getNewStatement());
+            workoutSessionDataAccessService.open(dataAccessService.getNewStatement());
         }
     }
 
