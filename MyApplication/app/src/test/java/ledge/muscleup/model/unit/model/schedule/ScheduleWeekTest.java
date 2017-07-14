@@ -6,12 +6,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import ledge.muscleup.business.AccessWorkoutSessions;
 import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
 import ledge.muscleup.model.exercise.WorkoutExerciseDistance;
 import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
@@ -39,7 +41,6 @@ import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
  * @version 1.0
  * @since 2017-06-06
  */
-
 public class ScheduleWeekTest {
     private ScheduleWeek scheduleWeek;
     InterfaceAccessWorkoutSessions dataAccess;
@@ -54,7 +55,7 @@ public class ScheduleWeekTest {
      */
     @Before
     public void testInit(){
-        dataAccess = new TemplateAccessWorkoutSessions();
+        dataAccess = new AccessWorkoutSessions(new TemplateWorkoutSessionDataAccess());
         scheduleWeek = new ScheduleWeek(dataAccess.getCurrentWeekSessions());
     }
 
@@ -148,171 +149,24 @@ public class ScheduleWeekTest {
 }
 
 /**
- * A template WorkoutSession accessor that creates a template database stub for use in testing
- */
-class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
-    TemplateDataAccessStub dataAccess;
-
-    /**
-     * The default constructor for the TemplateAccessWorkoutSessions
-     */
-    TemplateAccessWorkoutSessions() {
-        dataAccess = new TemplateDataAccessStub("testDB");
-        dataAccess.open("testDB");
-    }
-
-    /**
-     * This method gets a workout session from the database with the given date
-     *
-     * @param dateOfSession the date of the workout session
-     * @return a workout session from the database scheduled on the given date
-     */
-    @Override
-    public WorkoutSession getWorkoutSession(LocalDate dateOfSession) {
-        return dataAccess.getWorkoutSession(dateOfSession);
-    }
-
-    /**
-     * A method that returns a list of workout sessions scheduled in a date range
-     *
-     * @param startDate the first date of the date range
-     * @param endDate   the last date of the date range
-     * @return a list of all workout sessions scheduled between startDate and endDate, inclusive
-     */
-    @Override
-    public List<WorkoutSession> getSessionsInDateRange(LocalDate startDate, LocalDate endDate) {
-        return dataAccess.getSessionsInDateRange(startDate, endDate);
-    }
-
-    /**
-     * A method that returns a list of workout sessions scheduled in the current week
-     * @return a list of all workout sessions scheduled in the current week
-     */
-    @Override
-    public List<WorkoutSession> getCurrentWeekSessions() {
-        LocalDate firstOfThisWeek = new LocalDate().withDayOfWeek(DateTimeConstants.MONDAY);
-        return dataAccess.getSessionsInDateRange(firstOfThisWeek, firstOfThisWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
-    }
-
-    /**
-     * Adds a new workout session to the database
-     *
-     * @param workoutSession the workout session to be added to the database
-     */
-    @Override
-    public void insertWorkoutSession(WorkoutSession workoutSession) {
-        dataAccess.insertWorkoutSession(workoutSession);
-    }
-
-    /**
-     * Removes a workout session from the database, if it exists
-     *
-     * @param workoutSession the workout session to be removed
-     */
-    @Override
-    public void removeWorkoutSession(WorkoutSession workoutSession) {
-        dataAccess.removeWorkoutSession(workoutSession);
-    }
-
-    /**
-     * Toggles the completed state of a workout
-     *
-     * @param workoutSession the workout to change the state of
-     */
-    @Override
-    public void toggleWorkoutCompleted(WorkoutSession workoutSession) {
-        workoutSession.toggleCompleted();
-        dataAccess.toggleWorkoutComplete(workoutSession);
-    }
-
-    /**
-     * Creates a new ScheduleWeek based on the given date
-     *
-     * @param dayInWeek a day in the week to created a ScheduleWeek for
-     * @return a ScheduleWeek, which contains all WorkoutSessions for the given week
-     */
-    @Override
-    public ScheduleWeek newScheduledWeek(LocalDate dayInWeek) {
-        LocalDate firstDayOfWeek = dayInWeek.withDayOfWeek(DateTimeConstants.MONDAY);
-        return new ScheduleWeek(getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1)));
-    }
-
-    /**
-     * Sets the manager to contain the scheduled workouts for the previous week
-     *
-     * @param scheduleWeek the week to change
-     */
-    @Override
-    public void setToLastWeek(ScheduleWeek scheduleWeek) {
-        LocalDate firstDayOfWeek;
-        List<WorkoutSession> weekWorkouts;
-
-        firstDayOfWeek = scheduleWeek.getWeekday(DateTimeConstants.MONDAY).minusWeeks(1);
-        weekWorkouts = getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
-        scheduleWeek.lastWeek(weekWorkouts);
-    }
-
-    /**
-     * Sets the manager to contain the scheduled workouts for the following week
-     *
-     * @param scheduleWeek the week to change
-     */
-    @Override
-    public void setToNextWeek(ScheduleWeek scheduleWeek) {
-        LocalDate firstDayOfWeek;
-        List<WorkoutSession> weekWorkouts;
-
-        firstDayOfWeek = scheduleWeek.getWeekday(DateTimeConstants.MONDAY).plusWeeks(1);
-        weekWorkouts = getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
-        scheduleWeek.nextWeek(weekWorkouts);
-    }
-
-    /**
-     * Sets the manager to contain the scheduled workouts for the current week
-     * @param scheduleWeek the week to change
-     */
-    @Override
-    public void setToCurrentWeek(ScheduleWeek scheduleWeek) {
-        LocalDate firstDayOfWeek;
-        List<WorkoutSession> weekWorkouts;
-
-        firstDayOfWeek = LocalDate.now().withDayOfWeek(DateTimeConstants.MONDAY);
-        weekWorkouts = getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
-        scheduleWeek.currentWeek(weekWorkouts);
-    }
-}
-
-/**
- * A template database stub for use in testing the ScheduleWeek that needs an accessor, which in
- * turn needs a database stub
- * constructor parameter
+ * A template workout session access class for use in testing ScheduleWeek
  *
  * @author Cole Kehler
- * @version 1.0
- * @since 2017-06-07
+ * @version 3.0
+ * @since 2017-07-13
  */
-
-class TemplateDataAccessStub implements InterfaceExerciseDataAccess, InterfaceWorkoutDataAccess, InterfaceWorkoutSessionDataAccess {
-    private String dbName;
-    private String dbType = "testing template";
-
+class TemplateWorkoutSessionDataAccess implements InterfaceWorkoutSessionDataAccess {
     private Map<String, Workout> workoutsByName;
     private Map<String, Exercise> exercisesByName;
     private Map<LocalDate, WorkoutSession> workoutSessionsByDate;
 
     /**
-     * Constructor for DataAccessStub
-     * @param dbName the name of the database
+     * Opens a data access class
+     *
+     * @param statement the statement to use in data access queries
      */
-    public TemplateDataAccessStub (String dbName) {
-        this.dbName = dbName;
-    }
-
-    /**
-     * Opens the stub database and populates it with some default values
-     */
-    public void open(String dbPath) {
-
+    @Override
+    public void open(Statement statement) {
         Exercise exercise;
         WorkoutExercise workoutExercise;
         Workout workout;
@@ -414,77 +268,35 @@ class TemplateDataAccessStub implements InterfaceExerciseDataAccess, InterfaceWo
                 new LocalDate().plusWeeks(1).withDayOfWeek(DateTimeConstants.TUESDAY),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
-
-        System.out.println("Opened " + dbType + " database " + dbName);
     }
 
     /**
-     * Close the stub database
-     */
-    public void close() {
-        System.out.println("Closed " + dbType + " database " + dbName);
-    }
-
-    /**
-     * Gets a list of all exercises in the database
-     * @return a list of all exercises in the database
-     */
-    public List<Exercise> getExercisesList() {
-        return new ArrayList<>(exercisesByName.values());
-    }
-
-    /**
-     * Gets a list of all workouts in the database
-     * @return a list of all workouts in the database
-     */
-    public List<Workout> getWorkoutsList() {
-        return new ArrayList<>(workoutsByName.values());
-    }
-
-    /**
-     * Gets a list of names of all exercises in the database
-     * @return a list of names of all workouts in the database
-     */
-    public List<String> getWorkoutNamesList() {
-        return new ArrayList<>(workoutsByName.keySet());
-    }
-
-    /**
-     * Retrieves a workout from the database with the name given as parameter
-     * @param workoutName the name of the workout to retrieve from the database
-     * @return The workout with name workoutName, or null if no workout exists with that name
-     */
-    public Workout getWorkout(String workoutName) {
-        return workoutsByName.get(workoutName);
-    }
-
-    /**
-     * Retrieves the name of a the workout that has been completed the least amount of times
-     *
-     * @return the workout that has been ocmpleted the least amount of times
+     * Closes a data access class
      */
     @Override
-    public String getLeastCompletedWorkout() {
-        //TODO implement or remove
-        return null;
-    }
+    public void close() { }
 
     /**
-     * A method that returns a list of all workout sessions in the database
-     * @return a list of all workout sessions in the database
+     * Retrieves a workout session scheduled on the given date from the database, if it exists. If
+     * no workout session is found for that date, returns null.
+     *
+     * @param dateOfSession the date to get the workout session for
+     * @return the workout session scheduled on the given date
      */
-    public List<WorkoutSession> getWorkoutSessionsList() {
-        return new ArrayList<>(workoutSessionsByDate.values());
+    @Override
+    public WorkoutSession getWorkoutSession(LocalDate dateOfSession) {
+        return workoutSessionsByDate.get(dateOfSession);
     }
 
     /**
      * A method that returns a list of workout sessions scheduled in a date range
+     *
      * @param startDate the first date of the date range
-     * @param endDate the last date of the date range
+     * @param endDate   the last date of the date range
      * @return a list of all workout sessions scheduled between startDate and endDate, inclusive
      */
-    public List<WorkoutSession> getSessionsInDateRange(LocalDate startDate,
-                                                       LocalDate endDate) {
+    @Override
+    public List<WorkoutSession> getSessionsInDateRange(LocalDate startDate, LocalDate endDate) {
         List<WorkoutSession> sessionsInDateRange = new ArrayList<>();
 
         LocalDate currDate = startDate;
@@ -499,27 +311,21 @@ class TemplateDataAccessStub implements InterfaceExerciseDataAccess, InterfaceWo
     }
 
     /**
-     * Retrieves a workout session scheduled on the given date from the database, if it exists. If
-     * no workout session is found for that date, returns null.
-     * @param dateOfSession the date to get the workout session for
-     * @return the workout session scheduled on the given date
-     */
-    public WorkoutSession getWorkoutSession(LocalDate dateOfSession) {
-        return workoutSessionsByDate.get(dateOfSession);
-    }
-
-    /**
      * Inserts a new workout session into the database
+     *
      * @param workoutSession the new workout session to insert into the database
      */
+    @Override
     public void insertWorkoutSession(WorkoutSession workoutSession) {
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
     }
 
     /**
      * Removes a workout session from the database, if it exists
+     *
      * @param workoutSession the workout session to remove from the database
      */
+    @Override
     public void removeWorkoutSession(WorkoutSession workoutSession) {
         workoutSessionsByDate.remove(workoutSession.getDate());
     }
