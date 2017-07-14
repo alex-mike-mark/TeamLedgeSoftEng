@@ -27,6 +27,13 @@ public class AccessExercises implements InterfaceAccessExercises {
     }
 
     /**
+     * Constructor for AccessExercises, which initializes the dataAccess variable to a custom database
+     */
+    public AccessExercises(InterfaceExerciseDataAccess dataAccess) {
+        this.dataAccess = dataAccess;
+    }
+
+    /**
      * This method gets exercises stored in the database in the form of a list
      * @return a list of exercises in the database
      */

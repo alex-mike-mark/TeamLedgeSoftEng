@@ -29,6 +29,13 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
     }
 
     /**
+     * Constructor for AccessWorkoutSessions, which initializes the dataAccess variable to a custom database
+     */
+    public AccessWorkoutSessions(InterfaceWorkoutSessionDataAccess dataAccess) {
+        this.dataAccess = dataAccess;
+    }
+
+    /**
      * This method gets a workout session from the database with the given date
      * @param dateOfSession the date of the workout session
      * @return a workout session from the database scheduled on the given date

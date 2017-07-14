@@ -26,6 +26,13 @@ public class AccessWorkouts implements InterfaceAccessWorkouts {
     }
 
     /**
+     * Constructor for AccessWorkouts, which initializes the dataAccess variable to a custom database
+     */
+    public AccessWorkouts(InterfaceWorkoutDataAccess dataAccess) {
+        this.dataAccess = dataAccess;
+    }
+
+    /**
      * This method gets a workout from the database with the given name
      * @param workoutName the name of the workout
      * @return a workout from the database with the given name, if it exists. Otherwise, returns null

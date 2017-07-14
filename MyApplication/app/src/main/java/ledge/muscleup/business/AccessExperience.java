@@ -19,10 +19,17 @@ public class AccessExperience implements InterfaceAccessExperience {
     private InterfaceExperienceDataAccess dataAccess;
 
     /**
-     * Default constructor for the AccessExperience class, which initializes the dataAccess variable to the HSQL database
+     * Constructor for the AccessExperience class, which initializes the dataAccess variable to the HSQL database
      */
     public AccessExperience() {
         dataAccess = Services.getExperienceDataAccess();
+    }
+
+    /**
+     * Constructor for the AccessExperience class, which initializes the dataAccess variable to a custom database
+     */
+    public AccessExperience(InterfaceExperienceDataAccess dataAccess) {
+        this.dataAccess = dataAccess;
     }
 
     /**
