@@ -3,6 +3,7 @@ package ledge.muscleup.model.unit.persistence;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,9 +25,12 @@ import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
 import ledge.muscleup.model.exercise.enums.ExerciseType;
 import ledge.muscleup.model.exercise.enums.TimeUnit;
 import ledge.muscleup.model.exercise.enums.WeightUnit;
+import ledge.muscleup.model.experience.CompletedWorkoutRecord;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
+import ledge.muscleup.persistence.InterfaceDataAccess;
 import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
+import ledge.muscleup.persistence.InterfaceExperienceDataAccess;
 import ledge.muscleup.persistence.InterfaceWorkoutDataAccess;
 import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
 
@@ -40,8 +44,9 @@ import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
  * @since 2017-06-25
  */
 
-class TemplateDataAccessStub implements InterfaceExerciseDataAccess, InterfaceWorkoutDataAccess,
-        InterfaceWorkoutSessionDataAccess {
+class TemplateDataAccessStub implements InterfaceDataAccess, InterfaceExerciseDataAccess,
+                                        InterfaceWorkoutDataAccess, InterfaceWorkoutSessionDataAccess,
+                                        InterfaceExperienceDataAccess {
     private String dbName;
     private String dbType = "testing template";
 
@@ -168,10 +173,28 @@ class TemplateDataAccessStub implements InterfaceExerciseDataAccess, InterfaceWo
     }
 
     /**
+     * Opens a data access class
+     *
+     * @param statement the statement to use in data access queries
+     */
+    @Override
+    public void open(Statement statement) { }
+
+    /**
      * Close the stub database
      */
     public void close() {
         System.out.println("Closed " + dbType + " database " + dbName);
+    }
+
+    /**
+     * Get a new statement from the database connection
+     *
+     * @return a new statement
+     */
+    @Override
+    public Statement getNewStatement() {
+        return null;
     }
 
     /**
@@ -214,7 +237,7 @@ class TemplateDataAccessStub implements InterfaceExerciseDataAccess, InterfaceWo
      */
     @Override
     public String getLeastCompletedWorkout() {
-        //TODO implement or remove
+        //TODO implement and write test
         return null;
     }
 
@@ -282,4 +305,25 @@ class TemplateDataAccessStub implements InterfaceExerciseDataAccess, InterfaceWo
         workoutSessionsByDate.get(workoutSession.getDate()).toggleCompleted();
     }
 
+    /**
+     * Returns the list of all completed workout records
+     *
+     * @return a list of all completed workout records
+     */
+    @Override
+    public List<CompletedWorkoutRecord> getCompletedWorkouts() {
+        //TODO implement and write test
+        return null;
+    }
+
+    /**
+     * Returns the most recent completed workout
+     *
+     * @return the most recent completed workout
+     */
+    @Override
+    public CompletedWorkoutRecord getMostRecentCompletedWorkout() {
+        //TODO implement and write test
+        return null;
+    }
 }
