@@ -34,12 +34,17 @@ public class Services {
     public static void createDataAccess(String dbName) {
         if (dataAccessService == null) {
             dataAccessService = new DataAccess(dbName);
-            dataAccessService.open(Main.getDBPathName());
-
             exerciseDataAccessService = new ExerciseDataAccess();
             experienceDataAccessService = new ExperienceDataAccess();
             workoutDataAccessService = new WorkoutDataAccess();
             workoutSessionDataAccessService = new WorkoutSessionDataAccess();
+
+            dataAccessService.open(Main.getDBPathName());
+            exerciseDataAccessService.open(dataAccessService.getNewStatement());
+            experienceDataAccessService.open(dataAccessService.getNewStatement());
+            workoutDataAccessService.open(dataAccessService.getNewStatement());
+            workoutSessionDataAccessService.open(dataAccessService.getNewStatement());
+
         }
     }
 
