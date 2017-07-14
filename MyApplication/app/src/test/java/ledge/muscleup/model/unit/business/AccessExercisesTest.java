@@ -26,7 +26,7 @@ import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
  */
 
 public class AccessExercisesTest extends TestCase {
-    InterfaceAccessExercises dataAccess;
+    private InterfaceAccessExercises dataAccess;
 
     /**
      * Constructor for the AccessExercisesTest
