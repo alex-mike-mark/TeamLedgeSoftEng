@@ -348,23 +348,22 @@ class TemplateDataAccessStub implements InterfaceExerciseDataAccess, InterfaceWo
         WorkoutSession workoutSession;
 
         exercisesByName = new HashMap<>();
-        exercise = new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM, false);
+        exercise = new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM);
         exercisesByName.put(exercise.getName(), exercise);
-        exercise = new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM, false);
+        exercise = new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM);
         exercisesByName.put(exercise.getName(), exercise);
-        exercise = new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO, false);
+        exercise = new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO);
         exercisesByName.put(exercise.getName(), exercise);
         exercise = new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM,
-                ExerciseType.CARDIO, false);
+                ExerciseType.CARDIO);
         exercisesByName.put(exercise.getName(), exercise);
-        exercise = new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE, false);
+        exercise = new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE);
         exercisesByName.put(exercise.getName(), exercise);
-        exercise = new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE,
-                false);
+        exercise = new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE);
         exercisesByName.put(exercise.getName(), exercise);
-        exercise = new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false);
+        exercise = new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG);
         exercisesByName.put(exercise.getName(), exercise);
-        exercise = new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false);
+        exercise = new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG);
         exercisesByName.put(exercise.getName(), exercise);
 
         workoutsByName = new HashMap<>();
@@ -490,6 +489,17 @@ class TemplateDataAccessStub implements InterfaceExerciseDataAccess, InterfaceWo
 
     @Override
     public String getLeastCompletedWorkout() {
+        return null;
+    }
+
+    /**
+     * Retrieves the name of a the workout that has been completed the least amount of times
+     *
+     * @return the workout that has been ocmpleted the least amount of times
+     */
+    @Override
+    public String getLeastCompletedWorkout() {
+        //TODO implement or remove
         return null;
     }
 

@@ -64,25 +64,21 @@ public class AccessWorkoutsTest extends TestCase {
         assertNotNull(workout);
         assertEquals("Welcome to the Gun Show", workout.getName());
         assertEquals(2, workout.numExercises());
-        assertEquals(false, workout.isFavourite());
 
         workout = dataAccess.getWorkout("Never Skip Leg Day");
         assertNotNull(workout);
         assertEquals("Never Skip Leg Day", workout.getName());
         assertEquals(2, workout.numExercises());
-        assertEquals(false, workout.isFavourite());
 
         workout = dataAccess.getWorkout("Marathon Training Starts Here");
         assertNotNull(workout);
         assertEquals("Marathon Training Starts Here", workout.getName());
         assertEquals(2, workout.numExercises());
-        assertEquals(false, workout.isFavourite());
 
         workout = dataAccess.getWorkout("Work that Core, Get that Score!");
         assertNotNull(workout);
         assertEquals("Work that Core, Get that Score!", workout.getName());
         assertEquals(2, workout.numExercises());
-        assertEquals(false, workout.isFavourite());
 
         System.out.println("Finishing testGetWorkout\n");
     }
@@ -96,25 +92,25 @@ public class AccessWorkoutsTest extends TestCase {
 
         // Workouts by object already in list
         List<Workout> workoutList1 = new ArrayList<>();
-        workoutList1.add(new Workout("Never Skip Leg Day", false, new WorkoutExercise[]{
+        workoutList1.add(new Workout("Never Skip Leg Day", new WorkoutExercise[]{
                 new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
                         xpMediumIntensity, new ExerciseSets(4, 15)),
                 new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
                         xpMediumIntensity, new ExerciseSets(3, 10))
         }));
-        workoutList1.add(new Workout("Marathon Training Starts Here", false, new WorkoutExercise[]{
+        workoutList1.add(new Workout("Marathon Training Starts Here", new WorkoutExercise[]{
                 new WorkoutExerciseDistance(new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO),
                         xpHighIntensity, new ExerciseDistance(2.5, DistanceUnit.MILES)),
                 new WorkoutExerciseDuration(new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM, ExerciseType.CARDIO),
                         xpMediumIntensity, new ExerciseDuration(45, TimeUnit.MINUTES))
         }));
-        workoutList1.add(new Workout("Welcome to the Gun Show", false, new WorkoutExercise[]{
+        workoutList1.add(new Workout("Welcome to the Gun Show", new WorkoutExercise[]{
                 new WorkoutExerciseSetsAndWeight(new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM),
                         xpLowIntensity, new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS)),
                 new WorkoutExerciseSets(new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM),
                         xpHighIntensity, new ExerciseSets(2, 15))
         }));
-        workoutList1.add(new Workout("Work that Core, Get that Score!", false, new WorkoutExercise[]{
+        workoutList1.add(new Workout("Work that Core, Get that Score!", new WorkoutExercise[]{
                 new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE),
                         xpLowIntensity, new ExerciseSets(2, 25)),
                 new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
@@ -190,9 +186,15 @@ class TemplateAccessWorkouts implements InterfaceAccessWorkouts {
     public List<String> getWorkoutNamesList() {
         return dataAccess.getWorkoutNamesList();
     }
-
+    
+    /**
+     * Retrieves the name of the workout that is suggested for the user
+     *
+     * @return the workout that is suggested for the user
+     */
     @Override
     public String getSuggestedWorkout() {
+        //TODO implement or remove
         return null;
     }
 }
