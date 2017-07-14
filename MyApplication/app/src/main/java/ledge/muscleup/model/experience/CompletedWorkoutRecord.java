@@ -69,4 +69,14 @@ public class CompletedWorkoutRecord {
     public LocalDate getDateOfCompletion() {
         return dateOfCompletion.toLocalDate();
     }
+
+    /**
+     * Returns {@code true} if the CompletedWorkoutRecords are equal, or {@code false} otherwise
+     * @return a boolean representing if the items are equal
+     */
+    public boolean equals(CompletedWorkoutRecord other) {
+        return workoutName.equals(other.getWorkoutName()) && experienceGained == other.getExperienceGained() &&
+                experienceAfterCompletion == other.getExperienceAfterCompletion() &&
+                dateOfCompletion.equals(other.getDateOfCompletion());
+    }
 }
