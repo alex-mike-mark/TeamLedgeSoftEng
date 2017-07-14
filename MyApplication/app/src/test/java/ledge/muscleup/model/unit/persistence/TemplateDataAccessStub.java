@@ -208,6 +208,11 @@ class TemplateDataAccessStub implements InterfaceExerciseDataAccess, InterfaceWo
         return workoutsByName.get(workoutName);
     }
 
+    @Override
+    public String getLeastCompletedWorkout() {
+        return null;
+    }
+
     /**
      * A method that returns a list of all workout sessions in the database
      * @return a list of all workout sessions in the database

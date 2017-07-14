@@ -190,5 +190,10 @@ class TemplateAccessWorkouts implements InterfaceAccessWorkouts {
     public List<String> getWorkoutNamesList() {
         return dataAccess.getWorkoutNamesList();
     }
+
+    @Override
+    public String getSuggestedWorkout() {
+        return null;
+    }
 }
 
