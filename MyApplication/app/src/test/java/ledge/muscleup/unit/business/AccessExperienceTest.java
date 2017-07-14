@@ -1,6 +1,5 @@
 package ledge.muscleup.unit.business;
 
-import org.joda.time.DateTime;
 import org.joda.time.LocalDateTime;
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,13 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import ledge.muscleup.business.AccessExercises;
 import ledge.muscleup.business.AccessExperience;
-import ledge.muscleup.business.InterfaceAccessExercises;
 import ledge.muscleup.business.InterfaceAccessExperience;
-import ledge.muscleup.model.exercise.Exercise;
-import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
-import ledge.muscleup.model.exercise.enums.ExerciseType;
 import ledge.muscleup.model.experience.CompletedWorkoutRecord;
 import ledge.muscleup.persistence.InterfaceExperienceDataAccess;
 
@@ -30,7 +24,7 @@ import ledge.muscleup.persistence.InterfaceExperienceDataAccess;
 
 public class AccessExperienceTest {
     private InterfaceAccessExperience dataAccess;
-    private LocalDateTime currTime;
+    private LocalDateTime currTime = new LocalDateTime();
 
     /**
      * Default constructor for the AccessExperienceTest
@@ -48,7 +42,6 @@ public class AccessExperienceTest {
 
         templateDataAccess.open(null);
         dataAccess = new AccessExperience(templateDataAccess);
-        currTime = new LocalDateTime();
     }
 
     /**
@@ -71,7 +64,7 @@ public class AccessExperienceTest {
         completedWorkoutRecordList.add(new CompletedWorkoutRecord("Never Skip Leg Day", 150, 250, currTime.minusDays(12)));
         completedWorkoutRecordList.add(new CompletedWorkoutRecord("Welcome to the Gun Show", 0, 150, currTime.minusDays(13)));
 
-        Assert.assertEquals("Returned incorrect list of completed workout records", completedWorkoutRecordList, dataAccess.getCompletedWorkouts());
+        Assert.assertEquals("Returned incorrect list of completed workout records", completedWorkoutRecordList.toString(), dataAccess.getCompletedWorkouts().toString());
 
         System.out.println("Finishing testGetCompletedWorkouts\n");
     }
@@ -138,7 +131,7 @@ public class AccessExperienceTest {
          */
         @Override
         public CompletedWorkoutRecord getMostRecentCompletedWorkout() {
-            return completedWorkoutRecordList.get(completedWorkoutRecordList.size() - 1);
+            return completedWorkoutRecordList.get(0);
         }
     }
 }

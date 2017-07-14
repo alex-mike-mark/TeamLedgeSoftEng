@@ -3,6 +3,8 @@ package ledge.muscleup.model.experience;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 /**
  * A record of a completed workout, which contains the date the workout was completed, the experience
@@ -15,6 +17,8 @@ import org.joda.time.LocalDateTime;
  */
 
 public class CompletedWorkoutRecord {
+    private static final DateTimeFormatter FORMAT = DateTimeFormat.forPattern("yyyy/MM/dd");
+
     private String workoutName;
     private int experienceGained;
     private int experienceAfterCompletion;
@@ -79,5 +83,14 @@ public class CompletedWorkoutRecord {
         return workoutName.equals(other.getWorkoutName()) && experienceGained == other.getExperienceGained() &&
                 experienceAfterCompletion == other.getExperienceAfterCompletion() &&
                 getDateOfCompletion().equals(other.getDateOfCompletion());
+    }
+
+    /**
+     * Returns the {@link CompletedWorkoutRecord} as a {@link String}
+     * @return the {@link CompletedWorkoutRecord} as a {@link String}
+     */
+    public String toString() {
+        return workoutName + " (" + FORMAT.print(dateOfCompletion) + "): +" + experienceGained +
+                "xp gained. Total xp: " + experienceAfterCompletion;
     }
 }

@@ -24,7 +24,7 @@ import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
  */
 
 public class ExerciseDataAccessTest extends TestCase {
-    TemplateDataAccessStub dataAccess;
+    private TemplateDataAccessStub dataAccess;
 
     /**
      * Constructor for the ExerciseDataAccessTest
