@@ -26,7 +26,6 @@ import ledge.muscleup.model.workout.WorkoutSession;
  * @version 3.0
  * @since 2017-07-13
  */
-
 public class WorkoutSessionDataAccess implements InterfaceWorkoutSessionDataAccess {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormat.forPattern("yyyy-MM-dd");
     private static final int NULL_NUM = -1;
@@ -34,10 +33,17 @@ public class WorkoutSessionDataAccess implements InterfaceWorkoutSessionDataAcce
     private Statement statement;
     private ResultSet resultSet, resultSet2;
 
+    /**
+     * Opens the WorkoutSessionDataAccess
+     * @param statement the statement to use in WorkoutSessionDataAccess queries
+     */
     public void open(Statement statement) {
         this.statement = statement;
     }
 
+    /**
+     * Close the WorkoutSessionDataAccess
+     */
     public void close() {
         try {
             statement.close();

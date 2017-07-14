@@ -16,15 +16,21 @@ import ledge.muscleup.model.experience.CompletedWorkoutRecord;
  * @version 3.0
  * @since 2017-07-13
  */
-
 public class ExperienceDataAccess implements InterfaceExperienceDataAccess {
     private Statement statement;
     private ResultSet resultSet;
 
+    /**
+     * Opens the ExperienceDataAccess
+     * @param statement the statement to use in ExperienceDataAccess queries
+     */
     public void open(Statement statement) {
         this.statement = statement;
     }
 
+    /**
+     * Close the ExperienceDataAccess
+     */
     public void close() {
         try {
             statement.close();

@@ -12,7 +12,7 @@ import ledge.muscleup.model.workout.Workout;
  * @version 1.0
  * @since 2017-06-07
  */
-public interface InterfaceWorkoutDataAccess {
+public interface InterfaceWorkoutDataAccess extends InterfaceDataAccessComponent {
 
     /**
      * Gets a list of all workouts in the database

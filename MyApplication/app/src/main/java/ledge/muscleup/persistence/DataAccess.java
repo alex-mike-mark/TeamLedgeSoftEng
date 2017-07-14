@@ -26,7 +26,6 @@ import ledge.muscleup.model.exercise.enums.WeightUnit;
  * @version 2.0
  * @since 2017-06-27
  */
-
 public class DataAccess implements InterfaceDataAccess {
     private static final String SHUTDOWN_CMD = "shutdown compact";
 
@@ -85,7 +84,7 @@ public class DataAccess implements InterfaceDataAccess {
      * Get a new statement from the database connection
      * @return a new statement
      */
-    Statement getNewStatement() {
+    public Statement getNewStatement() {
         Statement statement = null;
 
         try {

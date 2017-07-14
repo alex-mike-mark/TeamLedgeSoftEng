@@ -14,7 +14,7 @@ import ledge.muscleup.model.workout.WorkoutSession;
  * @version 1.0
  * @since 2017-06-07
  */
-public interface InterfaceWorkoutSessionDataAccess {
+public interface InterfaceWorkoutSessionDataAccess extends InterfaceDataAccessComponent {
 
     /**
      * Retrieves a workout session scheduled on the given date from the database, if it exists. If

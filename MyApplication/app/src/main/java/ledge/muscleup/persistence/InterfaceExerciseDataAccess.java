@@ -1,5 +1,6 @@
 package ledge.muscleup.persistence;
 
+import java.sql.Statement;
 import java.util.List;
 
 import ledge.muscleup.model.exercise.Exercise;
@@ -12,7 +13,7 @@ import ledge.muscleup.model.exercise.Exercise;
  * @version 1.0
  * @since 2017-06-07
  */
-public interface InterfaceExerciseDataAccess {
+public interface InterfaceExerciseDataAccess extends InterfaceDataAccessComponent {
 
     /**
      * Gets a list of all exercises in the database

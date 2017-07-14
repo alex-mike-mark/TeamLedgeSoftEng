@@ -16,15 +16,21 @@ import ledge.muscleup.model.exercise.enums.ExerciseType;
  * @version 3.0
  * @since 2017-07-13
  */
-
 public class ExerciseDataAccess implements InterfaceExerciseDataAccess {
     private Statement statement;
     private ResultSet resultSet;
 
+    /**
+     * Opens the ExerciseDataAccess
+     * @param statement the statement to use in ExerciseDataAccess queries
+     */
     public void open(Statement statement) {
         this.statement = statement;
     }
 
+    /**
+     * Closes the ExerciseDataAccess
+     */
     public void close() {
         try {
             statement.close();

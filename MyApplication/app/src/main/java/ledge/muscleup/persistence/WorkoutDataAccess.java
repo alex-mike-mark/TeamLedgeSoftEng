@@ -22,17 +22,23 @@ import ledge.muscleup.model.workout.Workout;
  * @version 3.0
  * @since 2017-07-13
  */
-
 public class WorkoutDataAccess implements InterfaceWorkoutDataAccess {
     private static final int NULL_NUM = -1;
 
     private Statement statement;
     private ResultSet resultSet;
 
+    /**
+     * Opens the WorkoutDataAccess
+     * @param statement the statement to use in WorkoutDataAccess queries
+     */
     public void open(Statement statement) {
         this.statement = statement;
     }
 
+    /**
+     * Close the WorkoutDataAccess
+     */
     public void close() {
         try {
             statement.close();
