@@ -11,7 +11,7 @@ import ledge.muscleup.model.experience.CompletedWorkoutRecord;
  * @version 3.0
  * @since 2017-07-08
  */
-public interface InterfaceExperienceDataAccess extends InterfaceDataAccess {
+public interface InterfaceExperienceDataAccess extends InterfaceDataAccessComponent {
     /**
      * Returns the list of all completed workout records
      * @return a list of all completed workout records

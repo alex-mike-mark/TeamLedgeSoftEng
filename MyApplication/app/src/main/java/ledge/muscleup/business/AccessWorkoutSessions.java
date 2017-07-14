@@ -8,23 +8,31 @@ import ledge.muscleup.application.Services;
 import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.WorkoutSession;
 import ledge.muscleup.persistence.DataAccess;
+import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
 
 /**
  * This class contains methods for retrieving, adding, and removing workout sessions from the
- * database, by calling the methods defined in the InterfaceDataAccess interface.
+ * database, by calling the methods defined in the InterfaceWorkoutSessionDataAccess interface.
  *
  * @author Ryan Koop
  * @version 1.0
  * @since 2017-06-07
  */
 public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
-    private DataAccess dataAccess;
+    private InterfaceWorkoutSessionDataAccess dataAccess;
 
     /**
-     * Constructor for AccessWorkoutSessions, which initializes the dataAccess variable to the stub database
+     * Constructor for AccessWorkoutSessions, which initializes the dataAccess variable to the HSQL database
      */
     public AccessWorkoutSessions() {
-        dataAccess = (DataAccess) Services.getDataAccess();
+        dataAccess = Services.getWorkoutSessionDataAccess();
+    }
+
+    /**
+     * Constructor for AccessWorkoutSessions, which initializes the dataAccess variable to a custom database
+     */
+    public AccessWorkoutSessions(InterfaceWorkoutSessionDataAccess dataAccess) {
+        this.dataAccess = dataAccess;
     }
 
     /**
