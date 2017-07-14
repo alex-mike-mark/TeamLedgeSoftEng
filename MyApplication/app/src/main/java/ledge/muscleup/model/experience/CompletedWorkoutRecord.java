@@ -2,6 +2,7 @@ package ledge.muscleup.model.experience;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 /**
  * A record of a completed workout, which contains the date the workout was completed, the experience
@@ -17,7 +18,7 @@ public class CompletedWorkoutRecord {
     private String workoutName;
     private int experienceGained;
     private int experienceAfterCompletion;
-    private DateTime dateOfCompletion;
+    private LocalDateTime dateOfCompletion;
 
     /**
      * The default constructor for a CompletedWorkoutRecord
@@ -27,7 +28,7 @@ public class CompletedWorkoutRecord {
      * @param dateOfCompletion the date the workout was completed
      */
     public CompletedWorkoutRecord(String workoutName, int experienceBeforeCompletion,
-                                  int experienceAfterCompletion, DateTime dateOfCompletion) {
+                                  int experienceAfterCompletion, LocalDateTime dateOfCompletion) {
         if (workoutName == null || dateOfCompletion == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method"));
         else {
@@ -77,6 +78,6 @@ public class CompletedWorkoutRecord {
     public boolean equals(CompletedWorkoutRecord other) {
         return workoutName.equals(other.getWorkoutName()) && experienceGained == other.getExperienceGained() &&
                 experienceAfterCompletion == other.getExperienceAfterCompletion() &&
-                dateOfCompletion.equals(other.getDateOfCompletion());
+                getDateOfCompletion().equals(other.getDateOfCompletion());
     }
 }
