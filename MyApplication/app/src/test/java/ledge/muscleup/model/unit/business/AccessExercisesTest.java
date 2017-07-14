@@ -5,12 +5,17 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import ledge.muscleup.business.AccessExercises;
 import ledge.muscleup.business.InterfaceAccessExercises;
 import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.enums.*;
+import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
 
 /**
  * AccessExercisesTest.java used to test AccessExercises.java
@@ -35,7 +40,7 @@ public class AccessExercisesTest extends TestCase {
      */
     @Before
     public void setUp() {
-        dataAccess = new TemplateAccessExercises();
+        dataAccess = new AccessExercises(new TemplateExerciseDataAccess());
     }
 
     /**
@@ -66,26 +71,53 @@ public class AccessExercisesTest extends TestCase {
 }
 
 /**
- * A template Exercises accessor that creates a template database stub for use in testing
+ * A template data access class for use in testing
  */
-class TemplateAccessExercises implements InterfaceAccessExercises {
-    private TemplateDataAccessStub dataAccess;
+class TemplateExerciseDataAccess implements InterfaceExerciseDataAccess {
+    private Map<String, Exercise> exercisesByName;
 
     /**
-     * The default constructor for the TemplateAccessExercises
+     * Opens a data access class
+     *
+     * @param statement the statement to use in data access queries
      */
-    TemplateAccessExercises() {
-        dataAccess = new TemplateDataAccessStub("testDB");
-        dataAccess.open("testDB");
+    @Override
+    public void open(Statement statement) {
+        Exercise exercise;
+
+        exercisesByName = new HashMap<>();
+        exercise = new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM);
+        exercisesByName.put(exercise.getName(), exercise);
+        exercise = new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM);
+        exercisesByName.put(exercise.getName(), exercise);
+        exercise = new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO);
+        exercisesByName.put(exercise.getName(), exercise);
+        exercise = new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM,
+                ExerciseType.CARDIO);
+        exercisesByName.put(exercise.getName(), exercise);
+        exercise = new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE);
+        exercisesByName.put(exercise.getName(), exercise);
+        exercise = new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE);
+        exercisesByName.put(exercise.getName(), exercise);
+        exercise = new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG);
+        exercisesByName.put(exercise.getName(), exercise);
+        exercise = new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG);
+        exercisesByName.put(exercise.getName(), exercise);
     }
 
     /**
-     * This method gets exercises stored in the database in the form of a list
-     * @return a list of exercises in the database
+     * Closes a data access class
+     */
+    @Override
+    public void close() { }
+
+    /**
+     * Gets a list of all exercises in the database
+     *
+     * @return a list of all exercises in the database
      */
     @Override
     public List<Exercise> getExercisesList() {
-        return dataAccess.getExercisesList();
+        return new ArrayList<>(exercisesByName.values());
     }
 }
-
