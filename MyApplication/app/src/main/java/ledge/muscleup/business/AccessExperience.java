@@ -5,6 +5,7 @@ import java.util.List;
 import ledge.muscleup.application.Services;
 import ledge.muscleup.model.experience.CompletedWorkoutRecord;
 import ledge.muscleup.persistence.DataAccess;
+import ledge.muscleup.persistence.InterfaceExperienceDataAccess;
 
 /**
  * This class contains methods for retrieving information about the user's experience
@@ -15,13 +16,13 @@ import ledge.muscleup.persistence.DataAccess;
  * @since 2017-07-08
  */
 public class AccessExperience implements InterfaceAccessExperience {
-    private DataAccess dataAccess;
+    private InterfaceExperienceDataAccess dataAccess;
 
     /**
-     * Default constructor for the AccessExperience class
+     * Default constructor for the AccessExperience class, which initializes the dataAccess variable to the HSQL database
      */
     public AccessExperience() {
-        dataAccess = (DataAccess) Services.getDataAccess();
+        dataAccess = Services.getExperienceDataAccess();
     }
 
     /**

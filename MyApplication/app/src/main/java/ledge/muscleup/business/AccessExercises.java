@@ -5,23 +5,25 @@ import java.util.List;
 import ledge.muscleup.application.Services;
 import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.persistence.DataAccess;
+import ledge.muscleup.persistence.InterfaceDataAccess;
+import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
 
 /**
  * This class contains methods for retrieving, adding, and removing exercises from the database,
- * by calling the methods defined in the InterfaceDataAccess interface.
+ * by calling the methods defined in the InterfaceExerciseDataAccess interface.
  *
  * @author Ryan Koop
  * @version 1.0
  * @since 2017-06-05
  */
 public class AccessExercises implements InterfaceAccessExercises {
-    private DataAccess dataAccess;
+    private InterfaceExerciseDataAccess dataAccess;
 
     /**
-     * Constructor for AccessExercises, which initializes the dataAccess variable to the stub database
+     * Constructor for AccessExercises, which initializes the dataAccess variable to the HSQL database
      */
     public AccessExercises() {
-        dataAccess = (DataAccess) Services.getDataAccess();
+        dataAccess = Services.getExerciseDataAccess();
     }
 
     /**
