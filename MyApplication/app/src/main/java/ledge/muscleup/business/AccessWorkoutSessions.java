@@ -49,7 +49,8 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
 
     /**
      * A method that returns a list of workout sessions scheduled in the current week
-     * @return a list of all workout sessions scheduled in the current week
+     * @param weekStartDay day to start week at
+     * @returna list of all workout sessions scheduled in the current week
      */
     public List<WorkoutSession> getCurrentWeekSessions(int weekStartDay) {
         LocalDate firstOfThisWeek = new LocalDate().withDayOfWeek(weekStartDay);
@@ -87,7 +88,7 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
 
     /**
      * Creates a new ScheduleWeek based on the given date
-     *
+     * @param weekStartDay day to start week at
      * @param dayInWeek a day in the week to created a ScheduleWeek for
      * @return a ScheduleWeek, which contains all WorkoutSessions for the given week
      */

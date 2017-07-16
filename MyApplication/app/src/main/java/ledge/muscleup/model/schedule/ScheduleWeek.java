@@ -29,8 +29,8 @@ public class ScheduleWeek {
     /**
      * Constructor for a ScheduleWeek object, which takes the day of week the week should start on
      * as an int (1= Monday... 7 = Sunday), as well as a list of workout sessions
-     * @param weekStartDay
-     * @param workoutSessionList
+     * @param weekStartDay day to start week at
+     * @param workoutSessionList workout session to be scheduled
      */
     public ScheduleWeek(int weekStartDay, List<WorkoutSession> workoutSessionList) {
         if (workoutSessionList == null)
