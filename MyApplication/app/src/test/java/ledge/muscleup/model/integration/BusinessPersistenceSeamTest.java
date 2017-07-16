@@ -76,21 +76,26 @@ public class BusinessPersistenceSeamTest extends TestCase {
         // Exercises already in DB
         List<Exercise> exerciseList1 = new ArrayList<>();
         exerciseList1.add(new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM, false));
-        exerciseList1.add(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE, false));
-        exerciseList1.add(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false));
         exerciseList1.add(new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM, false));
         exerciseList1.add(new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO, false));
+        exerciseList1.add(new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM,
+                ExerciseType.CARDIO, false));
+        exerciseList1.add(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE, false));
         exerciseList1.add(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE,
                 false));
         exerciseList1.add(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false));
-        exerciseList1.add(new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM,
-                ExerciseType.CARDIO, false));
+        exerciseList1.add(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false));
+
+
+
+
+
 
         // TODO: Uncomment lines
-        // List<Exercise> exerciseList2 = accessExercises.getExercisesList();
+        List<Exercise> exerciseList2 = accessExercises.getExercisesList();
 
-        //assertNotNull(exerciseList2);
-        //assertEquals(exerciseList1.toString(), exerciseList2.toString());
+        assertNotNull(exerciseList2);
+        assertEquals(exerciseList1.toString(), exerciseList2.toString());
 
         System.out.println("Finishing Integration test of AccessExercises to persistence\n");
     }

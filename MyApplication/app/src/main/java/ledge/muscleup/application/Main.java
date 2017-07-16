@@ -9,7 +9,7 @@ package ledge.muscleup.application;
  */
 public class Main {
     public static final String dbName = "MU_DB";
-    private static String dbPathName = "database/MU_DB";
+    private static String dbPathName = "app/MU_DB";
 
     /**
      * Create the database
