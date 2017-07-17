@@ -11,6 +11,7 @@ import ledge.muscleup.model.workout.WorkoutSession;
 import ledge.muscleup.presentation.ExerciseActivity;
 import ledge.muscleup.presentation.MainActivity;
 import ledge.muscleup.presentation.ScheduleActivity;
+import ledge.muscleup.presentation.WorkoutSessionActivity;
 
 import com.robotium.solo.*;
 import android.test.ActivityInstrumentationTestCase2;
@@ -98,9 +99,11 @@ public class WorkoutScheduleAcceptanceTest extends ActivityInstrumentationTestCa
     }
 
     @Test
-    public void testRun() {
+    public void testScheduling() {
         solo.clickOnButton("Workout Schedule");
         solo.assertCurrentActivity("We aren't in the schedule activity!",  ScheduleActivity.class);
+
+        //schedule and remove some things.
         solo.clickOnButton(0);
         solo.clickInList(0);
         solo.clickOnButton(1);
@@ -111,14 +114,27 @@ public class WorkoutScheduleAcceptanceTest extends ActivityInstrumentationTestCa
         solo.clickInList(3);
         solo.clickOnButton(4);
         solo.clickInList(4);
-        solo.clickOnButton(4);
-        solo.clickInList(0);
 
-        //a doozy.
-        //bascally, need to check
-        //add a workout
-        //complete a workout
-        //remove a workout
+        assertTrue("Can't find added workout",solo.searchText("Welcome to the Gun Show"));
+        assertTrue("Can't find added workout",solo.searchText("Marathon Training Starts Here"));
+        assertTrue("Can't find added workout",solo.searchText("Work that Core, Get that Score!"));
+        assertTrue("Can't find added workout",solo.searchText("Never Skip Leg Day"));
+
+        solo.clickOnButton(4);
+
+
+        //Go to complete a workout.
+        solo.clickInList(0);
+        solo.assertCurrentActivity("we are't in the workout screen.", WorkoutSessionActivity.class);
+        solo.clickOnButton("Complete");
+        solo.clickOnButton("Back");
+
+        //Attempt to complete a workout you are not allowed to complete.
+        solo.assertCurrentActivity("We aren't in the schedule activity", ScheduleActivity.class);
+        solo.clickOnButton("Next");
+        solo.clickOnButton(5);
+        solo.clickInList(1);
+        solo.clickInList(6);
         solo.goBack();
     }
 }
