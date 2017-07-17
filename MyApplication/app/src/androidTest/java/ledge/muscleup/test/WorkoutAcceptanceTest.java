@@ -30,7 +30,7 @@ public class WorkoutAcceptanceTest extends ActivityInstrumentationTestCase2<Main
     }
 
     @Test
-    public void testRun() {
+    public void testWorkoutsActivity() {
         solo.clickOnButton("Workouts");
         solo.assertCurrentActivity("We aren't in the workout activity!", WorkoutActivity.class);
         //click on a workout to get some info.
@@ -38,7 +38,8 @@ public class WorkoutAcceptanceTest extends ActivityInstrumentationTestCase2<Main
         assertTrue(solo.searchText("Never Skip Leg Day"));
         assertTrue(solo.searchText("Marathon Training Starts Here"));
         assertTrue(solo.searchText("Work that Core, Get that Score!"));
-        solo.clickOnButton("Welcome to the Gun Show");//This fails. Why.
+        solo.clickOnButton("Welcome to the Gun Show");//This fails. Why. Because there ain't no button.
+        
         solo.assertCurrentActivity("We aren't in workout deets!", WorkoutDetailsActivity.class);
         solo.goBack();
         solo.assertCurrentActivity("We aren't in the workout activity!", WorkoutActivity.class);

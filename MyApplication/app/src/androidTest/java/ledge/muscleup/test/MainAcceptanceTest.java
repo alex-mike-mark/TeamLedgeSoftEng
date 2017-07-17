@@ -33,5 +33,6 @@ public class MainAcceptanceTest extends ActivityInstrumentationTestCase2<MainAct
 
     @Test
     public void testRun() {
+
     }
 }
