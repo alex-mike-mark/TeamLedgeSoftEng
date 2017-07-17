@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -49,12 +50,13 @@ public class ScheduleActivity extends Activity {
 
     private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd");
     private static final DateTimeFormatter monthDayYearFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
+    private int weekStartDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         aws = new AccessWorkoutSessions();
-
-        scheduleWeek = new ScheduleWeek(aws.getCurrentWeekSessions());
+        weekStartDay = DateTimeConstants.SUNDAY;
+        scheduleWeek = new ScheduleWeek(weekStartDay, aws.getCurrentWeekSessions(weekStartDay));
 
         aw = new AccessWorkouts();
 

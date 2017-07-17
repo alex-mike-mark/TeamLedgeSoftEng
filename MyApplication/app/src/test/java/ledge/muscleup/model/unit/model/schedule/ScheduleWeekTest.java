@@ -1,5 +1,6 @@
 package ledge.muscleup.model.unit.model.schedule;
 
+import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
@@ -7,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +44,7 @@ import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
 
 public class ScheduleWeekTest {
     private ScheduleWeek scheduleWeek;
+    private int weekStartDay;
     InterfaceAccessWorkoutSessions dataAccess;
 
     /**
@@ -55,7 +58,39 @@ public class ScheduleWeekTest {
     @Before
     public void testInit(){
         dataAccess = new TemplateAccessWorkoutSessions();
-        scheduleWeek = new ScheduleWeek(dataAccess.getCurrentWeekSessions());
+        weekStartDay = DateTimeConstants.MONDAY;
+        scheduleWeek = new ScheduleWeek(weekStartDay, dataAccess.getCurrentWeekSessions(weekStartDay));
+    }
+
+    /**
+     * Tests that getFirstDayOfWeek works properly
+     */
+    @Test
+    public void getFirstDayOfWeekTest() {
+        LocalDate firstDayOfWeek = LocalDate.now().withDayOfWeek(weekStartDay);
+        if (firstDayOfWeek.isAfter(LocalDate.now())){
+            firstDayOfWeek = firstDayOfWeek.minusWeeks(1);
+        }
+        Assert.assertTrue("Returned unexpected first day of week",
+                scheduleWeek.getFirstDayOfWeek().isEqual(firstDayOfWeek));
+
+        weekStartDay = DateTimeConstants.SUNDAY;
+        firstDayOfWeek = LocalDate.now().withDayOfWeek(weekStartDay);
+        scheduleWeek = new ScheduleWeek(weekStartDay, dataAccess.getCurrentWeekSessions(weekStartDay));
+        if (firstDayOfWeek.isAfter(LocalDate.now())){
+            firstDayOfWeek = firstDayOfWeek.minusWeeks(1);
+        }
+        Assert.assertTrue("Returned unexpected first day of week",
+                scheduleWeek.getFirstDayOfWeek().isEqual(firstDayOfWeek));
+
+        weekStartDay = DateTimeConstants.WEDNESDAY;
+        firstDayOfWeek = LocalDate.now().withDayOfWeek(weekStartDay);
+        scheduleWeek = new ScheduleWeek(weekStartDay, dataAccess.getCurrentWeekSessions(weekStartDay));
+        if (firstDayOfWeek.isAfter(LocalDate.now())){
+            firstDayOfWeek = firstDayOfWeek.minusWeeks(1);
+        }
+        Assert.assertTrue("Returned unexpected first day of week",
+                scheduleWeek.getFirstDayOfWeek().isEqual(firstDayOfWeek));
     }
 
     /**
@@ -163,24 +198,21 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
 
     /**
      * This method gets a workout session from the database with the given date
-     *
      * @param dateOfSession the date of the workout session
      * @return a workout session from the database scheduled on the given date
      */
-    @Override
     public WorkoutSession getWorkoutSession(LocalDate dateOfSession) {
         return dataAccess.getWorkoutSession(dateOfSession);
     }
 
     /**
      * A method that returns a list of workout sessions scheduled in a date range
-     *
      * @param startDate the first date of the date range
-     * @param endDate   the last date of the date range
+     * @param endDate the last date of the date range
      * @return a list of all workout sessions scheduled between startDate and endDate, inclusive
      */
-    @Override
-    public List<WorkoutSession> getSessionsInDateRange(LocalDate startDate, LocalDate endDate) {
+    public List<WorkoutSession> getSessionsInDateRange(LocalDate startDate,
+                                                       LocalDate endDate) {
         return dataAccess.getSessionsInDateRange(startDate, endDate);
     }
 
@@ -188,28 +220,26 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      * A method that returns a list of workout sessions scheduled in the current week
      * @return a list of all workout sessions scheduled in the current week
      */
-    @Override
-    public List<WorkoutSession> getCurrentWeekSessions() {
-        LocalDate firstOfThisWeek = new LocalDate().withDayOfWeek(DateTimeConstants.MONDAY);
+    public List<WorkoutSession> getCurrentWeekSessions(int weekStartDay) {
+        LocalDate firstOfThisWeek = new LocalDate().withDayOfWeek(weekStartDay);
+        if (firstOfThisWeek.isAfter(new LocalDate())) {
+            firstOfThisWeek = firstOfThisWeek.minusWeeks(1);
+        }
         return dataAccess.getSessionsInDateRange(firstOfThisWeek, firstOfThisWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
     }
 
     /**
      * Adds a new workout session to the database
-     *
      * @param workoutSession the workout session to be added to the database
      */
-    @Override
     public void insertWorkoutSession(WorkoutSession workoutSession) {
         dataAccess.insertWorkoutSession(workoutSession);
     }
 
     /**
      * Removes a workout session from the database, if it exists
-     *
      * @param workoutSession the workout session to be removed
      */
-    @Override
     public void removeWorkoutSession(WorkoutSession workoutSession) {
         dataAccess.removeWorkoutSession(workoutSession);
     }
@@ -219,11 +249,10 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      *
      * @param workoutSession the workout to change the state of
      */
-    @Override
     public void toggleWorkoutCompleted(WorkoutSession workoutSession) {
-        workoutSession.toggleCompleted();
         dataAccess.toggleWorkoutComplete(workoutSession);
     }
+
 
     /**
      * Creates a new ScheduleWeek based on the given date
@@ -232,9 +261,9 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      * @return a ScheduleWeek, which contains all WorkoutSessions for the given week
      */
     @Override
-    public ScheduleWeek newScheduledWeek(LocalDate dayInWeek) {
-        LocalDate firstDayOfWeek = dayInWeek.withDayOfWeek(DateTimeConstants.MONDAY);
-        return new ScheduleWeek(getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1)));
+    public ScheduleWeek newScheduledWeek(int weekStartDay, LocalDate dayInWeek) {
+        LocalDate firstDayOfWeek = dayInWeek.withDayOfWeek(weekStartDay);
+        return new ScheduleWeek(weekStartDay, getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1)));
     }
 
     /**
@@ -247,7 +276,7 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
         LocalDate firstDayOfWeek;
         List<WorkoutSession> weekWorkouts;
 
-        firstDayOfWeek = scheduleWeek.getWeekday(DateTimeConstants.MONDAY).minusWeeks(1);
+        firstDayOfWeek = scheduleWeek.getFirstDayOfWeek().minusWeeks(1);
         weekWorkouts = getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
         scheduleWeek.lastWeek(weekWorkouts);
     }
@@ -262,7 +291,7 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
         LocalDate firstDayOfWeek;
         List<WorkoutSession> weekWorkouts;
 
-        firstDayOfWeek = scheduleWeek.getWeekday(DateTimeConstants.MONDAY).plusWeeks(1);
+        firstDayOfWeek = scheduleWeek.getFirstDayOfWeek().plusWeeks(1);
         weekWorkouts = getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
         scheduleWeek.nextWeek(weekWorkouts);
     }
@@ -276,7 +305,7 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
         LocalDate firstDayOfWeek;
         List<WorkoutSession> weekWorkouts;
 
-        firstDayOfWeek = LocalDate.now().withDayOfWeek(DateTimeConstants.MONDAY);
+        firstDayOfWeek = LocalDate.now().withDayOfWeek(scheduleWeek.getFirstDayOfWeek().getDayOfWeek());
         weekWorkouts = getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
         scheduleWeek.currentWeek(weekWorkouts);
     }
@@ -458,14 +487,8 @@ class TemplateDataAccessStub implements InterfaceExerciseDataAccess, InterfaceWo
         return workoutsByName.get(workoutName);
     }
 
-    /**
-     * Retrieves the name of a the workout that has been completed the least amount of times
-     *
-     * @return the workout that has been ocmpleted the least amount of times
-     */
     @Override
     public String getLeastCompletedWorkout() {
-        //TODO implement or remove
         return null;
     }
 
