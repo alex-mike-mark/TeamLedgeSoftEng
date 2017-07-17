@@ -4,7 +4,6 @@ import org.joda.time.LocalDate;
 
 import java.util.List;
 
-import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.WorkoutSession;
 
@@ -36,9 +35,10 @@ public interface InterfaceAccessWorkoutSessions {
 
     /**
      * A method that returns a list of workout sessions scheduled in the current week
+     * @param weekStartDay day to start week at
      * @return a list of all workout sessions scheduled in the current week
      */
-    List<WorkoutSession> getCurrentWeekSessions();
+    List<WorkoutSession> getCurrentWeekSessions(int weekStartDay);
 
     /**
      * Adds a new workout session to the database
@@ -81,9 +81,9 @@ public interface InterfaceAccessWorkoutSessions {
 
     /**
      * Creates a new ScheduleWeek based on the given date
-     *
+     * @param weekStartDay day to start week at
      * @param dayInWeek a day in the week to created a ScheduleWeek for
      * @return a ScheduleWeek, which contains all WorkoutSessions for the given week
      */
-    ScheduleWeek newScheduledWeek(LocalDate dayInWeek);
+    ScheduleWeek newScheduledWeek(int weekStartDay, LocalDate dayInWeek);
 }

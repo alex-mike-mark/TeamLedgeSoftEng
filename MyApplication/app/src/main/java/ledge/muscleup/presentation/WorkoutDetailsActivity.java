@@ -5,22 +5,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import ledge.muscleup.R;
 import ledge.muscleup.business.AccessWorkouts;
 import ledge.muscleup.business.InterfaceAccessWorkouts;
-import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.workout.Workout;
 
@@ -35,6 +33,7 @@ import ledge.muscleup.model.workout.Workout;
 public class WorkoutDetailsActivity extends Activity {
     private ListItemAdapter adapter;
     private Workout workout;
+
     /**
      *  onCreate initializes WorkoutDetailsActivity
      * @param savedInstanceState contains context from last activity
@@ -44,7 +43,7 @@ public class WorkoutDetailsActivity extends Activity {
         List<WorkoutExercise> exerciseList;
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_display);
+        setContentView(R.layout.activity_workout_details);
 
         exerciseList = getExerciseList();
 
@@ -56,6 +55,15 @@ public class WorkoutDetailsActivity extends Activity {
 
         listView.setAdapter(adapter);
         listView.setItemsCanFocus(true);
+
+        Button goToSchedule = (Button) findViewById(R.id.goToSchedule);
+        goToSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(WorkoutDetailsActivity.this, ScheduleActivity.class));
+            }
+        });
+
     }
 
     /**
@@ -134,7 +142,7 @@ public class WorkoutDetailsActivity extends Activity {
             WorkoutExercise exercise = exerciseList.get(index);
 
             viewHolder.exerciseName.setText(exercise.getName());
-            String exerciseInfo = exercise.getQuantity().toString();
+            String exerciseInfo = ExerciseQuantityDisplayStrings.getExerciseQuantityDisplayString(exercise.getQuantity());
             viewHolder.exerciseInfo.setText(exerciseInfo);
 
             return returnedView;

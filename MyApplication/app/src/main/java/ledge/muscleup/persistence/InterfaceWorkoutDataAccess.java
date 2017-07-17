@@ -2,11 +2,6 @@ package ledge.muscleup.persistence;
 
 import java.util.List;
 
-
-import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
-import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
-import ledge.muscleup.model.exercise.WorkoutExercise;
-
 import ledge.muscleup.model.workout.Workout;
 
 /**
@@ -17,7 +12,7 @@ import ledge.muscleup.model.workout.Workout;
  * @version 1.0
  * @since 2017-06-07
  */
-public interface InterfaceWorkoutDataAccess extends InterfaceDataAccess{
+public interface InterfaceWorkoutDataAccess extends InterfaceDataAccessComponent {
 
     /**
      * Gets a list of all workouts in the database
@@ -37,4 +32,10 @@ public interface InterfaceWorkoutDataAccess extends InterfaceDataAccess{
      * @return The workout with name workoutName, or null if no workout exists with that name
      */
     Workout getWorkout(String workoutName);
+
+    /**
+     * Retrieves the name of a the workout that has been completed the least amount of times
+     * @return the workout that has been ocmpleted the least amount of times
+     */
+    String getLeastCompletedWorkout();
 }

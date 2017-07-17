@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -49,12 +50,13 @@ public class ScheduleActivity extends Activity {
 
     private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd");
     private static final DateTimeFormatter monthDayYearFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
+    private int weekStartDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         aws = new AccessWorkoutSessions();
-
-        scheduleWeek = new ScheduleWeek(aws.getCurrentWeekSessions());
+        weekStartDay = DateTimeConstants.SUNDAY;
+        scheduleWeek = new ScheduleWeek(weekStartDay, aws.getCurrentWeekSessions(weekStartDay));
 
         aw = new AccessWorkouts();
 
@@ -127,7 +129,7 @@ public class ScheduleActivity extends Activity {
                 if (workoutSessionList.get(position).getName() != null) {   //workout scheduled on day
                     Intent appInfo = new Intent(ScheduleActivity.this, WorkoutSessionActivity.class);
                     LocalDate date = workoutSessionList.get(position).getDate();
-                    DateTimeFormatter  formatter= DateTimeFormat.forPattern("MM/dd/yyyy");
+                    DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
 
                     appInfo.putExtra("workoutSessionDate", formatter.print(date));
                     startActivity(appInfo);
@@ -244,6 +246,11 @@ public class ScheduleActivity extends Activity {
             WorkoutSession session = sessionList.get(index);
 
             viewHolder.sessionDate.setText(formatter.print(session.getDate()));
+            if(session.getDate().isEqual(LocalDate.now())) {
+                viewHolder.sessionDate.setTextColor(Color.rgb(255, 128, 0));
+            } else {
+                viewHolder.sessionDate.setTextColor(Color.WHITE);
+            }
             viewHolder.sessionWorkoutName.setText(session.getName());
 
             if (session.isComplete()) { //display complete, hide add/remove button
@@ -251,7 +258,12 @@ public class ScheduleActivity extends Activity {
                 viewHolder.addOrRemoveButton.setVisibility(View.INVISIBLE);
             } else { //hide complete, display add/remove button
                 viewHolder.sessionCompleted.setVisibility(View.INVISIBLE);
-                viewHolder.addOrRemoveButton.setVisibility(View.VISIBLE);
+                if (session.getDate().isBefore(LocalDate.now().minusWeeks(1))) { //can't add or remove workouts from over a week ago
+                    viewHolder.addOrRemoveButton.setVisibility(View.INVISIBLE);
+                } else {
+                    viewHolder.addOrRemoveButton.setVisibility(View.VISIBLE);
+                }
+
             }
 
             if (session.getName() == null) {//no workout scheduled, add button

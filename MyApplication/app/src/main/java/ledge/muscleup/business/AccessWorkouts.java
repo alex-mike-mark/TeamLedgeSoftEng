@@ -3,27 +3,33 @@ package ledge.muscleup.business;
 import java.util.List;
 
 import ledge.muscleup.application.Services;
-import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
-import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.persistence.DataAccess;
+import ledge.muscleup.persistence.InterfaceWorkoutDataAccess;
 
 /**
  * This class contains methods for retrieving, adding, and removing workouts from the database, and
- * adding exercises to a workout, by calling the methods defined in the InterfaceDataAccess interface.
+ * adding exercises to a workout, by calling the methods defined in the InterfaceWorkoutDataAccess interface.
  *
  * @author Ryan Koop
  * @version 1.0
  * @since 2017-06-05
  */
 public class AccessWorkouts implements InterfaceAccessWorkouts {
-    private DataAccess dataAccess;
+    private InterfaceWorkoutDataAccess dataAccess;
 
     /**
-     * Constructor for AccessWorkouts, which initializes the dataAccess variable to the stub database
+     * Constructor for AccessWorkouts, which initializes the dataAccess variable to the HSQL database
      */
     public AccessWorkouts() {
-        dataAccess = (DataAccess) Services.getDataAccess();
+        dataAccess = Services.getWorkoutDataAccess();
+    }
+
+    /**
+     * Constructor for AccessWorkouts, which initializes the dataAccess variable to a custom database
+     */
+    public AccessWorkouts(InterfaceWorkoutDataAccess dataAccess) {
+        this.dataAccess = dataAccess;
     }
 
     /**
@@ -49,5 +55,13 @@ public class AccessWorkouts implements InterfaceAccessWorkouts {
      */
     public List<String> getWorkoutNamesList() {
         return dataAccess.getWorkoutNamesList();
+    }
+
+    /**
+     * Retrieves the name of the workout that is suggested for the user
+     * @return the workout that is suggested for the user
+     */
+    public String getSuggestedWorkout() {
+        return dataAccess.getLeastCompletedWorkout();
     }
 }

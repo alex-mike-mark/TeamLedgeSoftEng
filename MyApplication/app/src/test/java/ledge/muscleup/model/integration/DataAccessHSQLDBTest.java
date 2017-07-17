@@ -3,10 +3,15 @@ package ledge.muscleup.model.integration;
 import ledge.muscleup.application.Main;
 import ledge.muscleup.application.Services;
 import ledge.muscleup.persistence.InterfaceDataAccess;
+import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
+import ledge.muscleup.persistence.InterfaceWorkoutDataAccess;
+import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
 
 import junit.framework.TestCase;
 
-import static ledge.muscleup.application.Services.getDataAccess;
+import static ledge.muscleup.application.Services.getExerciseDataAccess;
+import static ledge.muscleup.application.Services.getWorkoutDataAccess;
+import static ledge.muscleup.application.Services.getWorkoutSessionDataAccess;
 
 /**
  * DataAccessHSQLDBTest.java used to test
@@ -27,7 +32,7 @@ public class DataAccessHSQLDBTest extends TestCase {
 
     public void testExerciseDataAccess()
     {
-        InterfaceDataAccess dataAccess;
+        InterfaceExerciseDataAccess dataAccess;
 
         Services.closeDataAccess();
 
@@ -35,7 +40,7 @@ public class DataAccessHSQLDBTest extends TestCase {
 
         // Use the following two statements to run with the real database
         Services.createDataAccess(dbName);
-        dataAccess = getDataAccess();
+        dataAccess = getExerciseDataAccess();
 
         // TODO: Uncomment and run test
         //ExerciseDataAccessTest.testGetExercisesList();
@@ -47,7 +52,7 @@ public class DataAccessHSQLDBTest extends TestCase {
 
     public void testWorkoutDataAccess()
     {
-        InterfaceDataAccess dataAccess;
+        InterfaceWorkoutDataAccess dataAccess;
 
         Services.closeDataAccess();
 
@@ -55,7 +60,7 @@ public class DataAccessHSQLDBTest extends TestCase {
 
         // Use the following two statements to run with the real database
         Services.createDataAccess(dbName);
-        dataAccess = getDataAccess();
+        dataAccess = getWorkoutDataAccess();
 
         // TODO: Uncomment and run test
         //WorkoutDataAccessTest.testGetWorkout();
@@ -69,7 +74,7 @@ public class DataAccessHSQLDBTest extends TestCase {
 
     public void testWorkoutSessionDataAccess()
     {
-        InterfaceDataAccess dataAccess;
+        InterfaceWorkoutSessionDataAccess dataAccess;
 
         Services.closeDataAccess();
 
@@ -77,7 +82,7 @@ public class DataAccessHSQLDBTest extends TestCase {
 
         // Use the following two statements to run with the real database
         Services.createDataAccess(dbName);
-        dataAccess = getDataAccess();
+        dataAccess = getWorkoutSessionDataAccess();
 
         // TODO: Uncomment and run test
         //WorkoutSessionDataAccessTest.testGetWorkoutSession();

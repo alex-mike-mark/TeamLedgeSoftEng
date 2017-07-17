@@ -48,7 +48,7 @@ public class WorkoutSessionActivity extends Activity {
         final InterfaceAccessWorkoutSessions aws = new AccessWorkoutSessions();
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_workout_session_in_progress);
+        setContentView(R.layout.activity_workout_session);
 
         ListView listView = (ListView) findViewById(R.id.checklist);
         final List<WorkoutSessionExercise> exerciseList = getExercisesInWorkoutSession();
@@ -67,6 +67,8 @@ public class WorkoutSessionActivity extends Activity {
 
         Button completeWorkoutButton = (Button) findViewById(R.id.btn_completeWorkout);
         if(workoutSession.isComplete()) {
+            TextView completedTextView = (TextView) findViewById(R.id.workoutSessionIsCompleted);
+            completedTextView.setVisibility(View.VISIBLE);
             completeWorkoutButton.setText("Back");
             completeWorkoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -75,17 +77,35 @@ public class WorkoutSessionActivity extends Activity {
                 }
             });
         } else {
-            completeWorkoutButton.setText("Complete");
-            completeWorkoutButton.setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    aws.toggleWorkoutCompleted(workoutSession);
-                    Intent appInfo = new Intent(WorkoutSessionActivity.this, CompletedWorkoutActivity.class);
-                    LocalDate date = workoutSession.getDate();
-                    appInfo.putExtra("workoutSessionDate", formatter.print(date));
-                    startActivity(appInfo);
-                }
-            });
+            if (workoutSession.getDate().isAfter(LocalDate.now())) {
+                completeWorkoutButton.setText("Back");
+                completeWorkoutButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(WorkoutSessionActivity.this, ScheduleActivity.class));
+                    }});
+            } else if (workoutSession.getDate().isBefore(LocalDate.now().minusWeeks(1))) {
+                TextView expiredTextView = (TextView) findViewById(R.id.workoutSessionIsExpired);
+                expiredTextView.setVisibility(View.VISIBLE);
+                completeWorkoutButton.setText("Back");
+                completeWorkoutButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(WorkoutSessionActivity.this, ScheduleActivity.class));
+                    }});
+            } else {
+                completeWorkoutButton.setText("Complete");
+                completeWorkoutButton.setOnClickListener(new Button.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        aws.toggleWorkoutCompleted(workoutSession);
+                        Intent appInfo = new Intent(WorkoutSessionActivity.this, CompletedWorkoutActivity.class);
+                        LocalDate date = workoutSession.getDate();
+                        appInfo.putExtra("workoutSessionDate", formatter.print(date));
+                        startActivity(appInfo);
+                    }
+                });
+            }
         }
 
     }
@@ -175,7 +195,10 @@ public class WorkoutSessionActivity extends Activity {
             WorkoutSessionExercise sessionExercise = exerciseList.get(index);
 
             viewHolder.exerciseName.setText(sessionExercise.getName());
-            viewHolder.exerciseQuantity.setText(sessionExercise.getRecommendedQuantity().toString());
+            String exerciseQuantity = ExerciseQuantityDisplayStrings.getExerciseQuantityDisplayString(
+                    sessionExercise.getRecommendedQuantity()
+            );
+            viewHolder.exerciseQuantity.setText(exerciseQuantity);
 
             return returnedView;
         }

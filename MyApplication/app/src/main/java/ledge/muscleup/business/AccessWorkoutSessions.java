@@ -5,27 +5,34 @@ import org.joda.time.LocalDate;
 import java.util.List;
 
 import ledge.muscleup.application.Services;
-import ledge.muscleup.model.exercise.WorkoutSessionExercise;
 import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.WorkoutSession;
 import ledge.muscleup.persistence.DataAccess;
+import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
 
 /**
  * This class contains methods for retrieving, adding, and removing workout sessions from the
- * database, by calling the methods defined in the InterfaceDataAccess interface.
+ * database, by calling the methods defined in the InterfaceWorkoutSessionDataAccess interface.
  *
  * @author Ryan Koop
  * @version 1.0
  * @since 2017-06-07
  */
 public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
-    private DataAccess dataAccess;
+    private InterfaceWorkoutSessionDataAccess dataAccess;
 
     /**
-     * Constructor for AccessWorkoutSessions, which initializes the dataAccess variable to the stub database
+     * Constructor for AccessWorkoutSessions, which initializes the dataAccess variable to the HSQL database
      */
     public AccessWorkoutSessions() {
-        dataAccess = (DataAccess) Services.getDataAccess();
+        dataAccess = Services.getWorkoutSessionDataAccess();
+    }
+
+    /**
+     * Constructor for AccessWorkoutSessions, which initializes the dataAccess variable to a custom database
+     */
+    public AccessWorkoutSessions(InterfaceWorkoutSessionDataAccess dataAccess) {
+        this.dataAccess = dataAccess;
     }
 
     /**
@@ -50,10 +57,14 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
 
     /**
      * A method that returns a list of workout sessions scheduled in the current week
-     * @return a list of all workout sessions scheduled in the current week
+     * @param weekStartDay day to start week at
+     * @returna list of all workout sessions scheduled in the current week
      */
-    public List<WorkoutSession> getCurrentWeekSessions() {
-        LocalDate firstOfThisWeek = new LocalDate().withDayOfWeek(DateTimeConstants.MONDAY);
+    public List<WorkoutSession> getCurrentWeekSessions(int weekStartDay) {
+        LocalDate firstOfThisWeek = new LocalDate().withDayOfWeek(weekStartDay);
+        if (firstOfThisWeek.isAfter(new LocalDate())) {
+            firstOfThisWeek = firstOfThisWeek.minusWeeks(1);
+        }
         return dataAccess.getSessionsInDateRange(firstOfThisWeek, firstOfThisWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
     }
 
@@ -85,14 +96,14 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
 
     /**
      * Creates a new ScheduleWeek based on the given date
-     *
+     * @param weekStartDay day to start week at
      * @param dayInWeek a day in the week to created a ScheduleWeek for
      * @return a ScheduleWeek, which contains all WorkoutSessions for the given week
      */
     @Override
-    public ScheduleWeek newScheduledWeek(LocalDate dayInWeek) {
-        LocalDate firstDayOfWeek = dayInWeek.withDayOfWeek(DateTimeConstants.MONDAY);
-        return new ScheduleWeek(getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1)));
+    public ScheduleWeek newScheduledWeek(int weekStartDay, LocalDate dayInWeek) {
+        LocalDate firstDayOfWeek = dayInWeek.withDayOfWeek(weekStartDay);
+        return new ScheduleWeek(weekStartDay, getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1)));
     }
 
     /**
@@ -105,7 +116,7 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
         LocalDate firstDayOfWeek;
         List<WorkoutSession> weekWorkouts;
 
-        firstDayOfWeek = scheduleWeek.getWeekday(DateTimeConstants.MONDAY).minusWeeks(1);
+        firstDayOfWeek = scheduleWeek.getFirstDayOfWeek().minusWeeks(1);
         weekWorkouts = getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
         scheduleWeek.lastWeek(weekWorkouts);
     }
@@ -120,7 +131,7 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
         LocalDate firstDayOfWeek;
         List<WorkoutSession> weekWorkouts;
 
-        firstDayOfWeek = scheduleWeek.getWeekday(DateTimeConstants.MONDAY).plusWeeks(1);
+        firstDayOfWeek = scheduleWeek.getFirstDayOfWeek().plusWeeks(1);
         weekWorkouts = getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
         scheduleWeek.nextWeek(weekWorkouts);
     }
@@ -134,7 +145,7 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
         LocalDate firstDayOfWeek;
         List<WorkoutSession> weekWorkouts;
 
-        firstDayOfWeek = LocalDate.now().withDayOfWeek(DateTimeConstants.MONDAY);
+        firstDayOfWeek = LocalDate.now().withDayOfWeek(scheduleWeek.getFirstDayOfWeek().getDayOfWeek());
         weekWorkouts = getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
         scheduleWeek.currentWeek(weekWorkouts);
     }

@@ -44,7 +44,7 @@ import ledge.muscleup.model.workout.WorkoutSession;
  */
 
 public class BusinessPersistenceSeamTest extends TestCase {
-
+    private int weekStartDay = DateTimeConstants.SUNDAY;
     final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
     final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
     final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
@@ -72,16 +72,15 @@ public class BusinessPersistenceSeamTest extends TestCase {
 
         // Exercises already in DB
         List<Exercise> exerciseList1 = new ArrayList<>();
-        exerciseList1.add(new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM, false));
-        exerciseList1.add(new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM, false));
-        exerciseList1.add(new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO, false));
+        exerciseList1.add(new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM));
+        exerciseList1.add(new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM));
+        exerciseList1.add(new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO));
         exerciseList1.add(new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM,
-                ExerciseType.CARDIO, false));
-        exerciseList1.add(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE, false));
-        exerciseList1.add(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE,
-                false));
-        exerciseList1.add(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false));
-        exerciseList1.add(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG, false));
+                ExerciseType.CARDIO));
+        exerciseList1.add(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE));
+        exerciseList1.add(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE));
+        exerciseList1.add(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG));
+        exerciseList1.add(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG));
 
         List<Exercise> exerciseList2 = accessExercises.getExercisesList();
 
@@ -101,36 +100,34 @@ public class BusinessPersistenceSeamTest extends TestCase {
         assertNotNull(workout);
         assertEquals("Welcome to the Gun Show", workout.getName());
         assertEquals(2, workout.numExercises());
-        assertEquals(false, workout.isFavourite());
 
         workout = accessWorkouts.getWorkout("Never Skip Leg Day");
         assertNotNull(workout);
         assertEquals("Never Skip Leg Day", workout.getName());
         assertEquals(2, workout.numExercises());
-        assertEquals(false, workout.isFavourite());
 
         // Workouts by object already in db
         List<Workout> workoutList1 = new ArrayList<>();
-        workoutList1.add(new Workout("Welcome to the Gun Show", false, new WorkoutExercise[]{
+        workoutList1.add(new Workout("Welcome to the Gun Show", new WorkoutExercise[]{
                 new WorkoutExerciseSets(new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM),
                         xpLowIntensity, new ExerciseSets(3, 15)),
                 new WorkoutExerciseSets(new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM),
                         xpHighIntensity, new ExerciseSets(2, 15))
         }));
-        workoutList1.add(new Workout("Never Skip Leg Day", false, new WorkoutExercise[]{
+        workoutList1.add(new Workout("Never Skip Leg Day", new WorkoutExercise[]{
                 new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
                         xpMediumIntensity, new ExerciseSets(4, 15)),
                 new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
                         xpMediumIntensity, new ExerciseSets(3, 10))
         }));
-        workoutList1.add(new Workout("Marathon Training Starts Here", false, new WorkoutExercise[]{
+        workoutList1.add(new Workout("Marathon Training Starts Here", new WorkoutExercise[]{
                 new WorkoutExerciseDistance(new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO),
                         xpHighIntensity, new ExerciseDistance(2, DistanceUnit.MILES)),
                 new WorkoutExerciseDuration(new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM, ExerciseType.CARDIO),
                         xpMediumIntensity, new ExerciseDuration(45, TimeUnit.MINUTES))
         }));
 
-        workoutList1.add(new Workout("Work that Core, Get that Score!", false, new WorkoutExercise[]{
+        workoutList1.add(new Workout("Work that Core, Get that Score!", new WorkoutExercise[]{
                 new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE),
                         xpLowIntensity, new ExerciseSets(2, 25)),
                 new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
@@ -169,11 +166,11 @@ public class BusinessPersistenceSeamTest extends TestCase {
         assertNull(workoutSession);
 
 
-        scheduleWeek = accessWorkoutSessions.newScheduledWeek(LocalDate.now());
+        scheduleWeek = accessWorkoutSessions.newScheduledWeek(weekStartDay, LocalDate.now());
         List<WorkoutSession> workoutSessionList1 = new ArrayList<>();
 
         workoutSessionList1.add(new WorkoutSession(
-                new Workout("Never Skip Leg Day", false, new WorkoutExercise[]{
+                new Workout("Never Skip Leg Day", new WorkoutExercise[]{
                         new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
                                 xpLowIntensity, new ExerciseSets(4, 15)),
                         new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
@@ -184,7 +181,7 @@ public class BusinessPersistenceSeamTest extends TestCase {
                 false));
 
         workoutSessionList1.add(new WorkoutSession(
-                new Workout("Work that Core, Get that Score!", false, new WorkoutExercise[]{
+                new Workout("Work that Core, Get that Score!", new WorkoutExercise[]{
                         new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE),
                                 xpLowIntensity, new ExerciseSets(2, 25)),
                         new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
@@ -194,7 +191,7 @@ public class BusinessPersistenceSeamTest extends TestCase {
                 false));
 
         workoutSessionList1.add(new WorkoutSession(
-                new Workout("Never Skip Leg Day", false, new WorkoutExercise[]{
+                new Workout("Never Skip Leg Day", new WorkoutExercise[]{
                         new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
                                 xpLowIntensity, new ExerciseSets(4, 15)),
                         new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
@@ -212,14 +209,14 @@ public class BusinessPersistenceSeamTest extends TestCase {
         assertEquals(workoutSessionList1.toString(), workoutSessionList2.toString());
 
 
-        assertNotNull(accessWorkoutSessions.getCurrentWeekSessions());
+        assertNotNull(accessWorkoutSessions.getCurrentWeekSessions(weekStartDay));
 
 
-        scheduleWeek = accessWorkoutSessions.newScheduledWeek(LocalDate.now());
+        scheduleWeek = accessWorkoutSessions.newScheduledWeek(weekStartDay, LocalDate.now());
         assertEquals(1, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
 
         accessWorkoutSessions.insertWorkoutSession(new WorkoutSession(
-                new Workout("Never Skip Leg Day", false, new WorkoutExercise[]{
+                new Workout("Never Skip Leg Day", new WorkoutExercise[]{
                         new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
                                 xpLowIntensity, new ExerciseSets(4, 15)),
                         new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
@@ -229,15 +226,15 @@ public class BusinessPersistenceSeamTest extends TestCase {
                 LocalDate.now().withDayOfWeek(DateTimeConstants.MONDAY),
                 false));
 
-        scheduleWeek = accessWorkoutSessions.newScheduledWeek(LocalDate.now());
+        scheduleWeek = accessWorkoutSessions.newScheduledWeek(weekStartDay, LocalDate.now());
         assertEquals(2, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
 
 
-        scheduleWeek = accessWorkoutSessions.newScheduledWeek(LocalDate.now());
+        scheduleWeek = accessWorkoutSessions.newScheduledWeek(weekStartDay, LocalDate.now());
         assertEquals(2, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));;
 
         accessWorkoutSessions.removeWorkoutSession(new WorkoutSession(
-                new Workout("Never Skip Leg Day", false, new WorkoutExercise[]{
+                new Workout("Never Skip Leg Day", new WorkoutExercise[]{
                         new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
                                 xpLowIntensity, new ExerciseSets(4, 15)),
                         new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
@@ -246,7 +243,7 @@ public class BusinessPersistenceSeamTest extends TestCase {
                 }),
                 LocalDate.now().withDayOfWeek(DateTimeConstants.MONDAY),
                 false));
-        scheduleWeek = accessWorkoutSessions.newScheduledWeek(LocalDate.now());
+        scheduleWeek = accessWorkoutSessions.newScheduledWeek(weekStartDay, LocalDate.now());
         assertEquals(1, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
 
 
@@ -262,7 +259,7 @@ public class BusinessPersistenceSeamTest extends TestCase {
         assertFalse(workoutSession1.isComplete());
 
 
-        scheduleWeek = accessWorkoutSessions.newScheduledWeek(new LocalDate(2017, 7, 16));
+        scheduleWeek = accessWorkoutSessions.newScheduledWeek(weekStartDay, new LocalDate(2017, 7, 16));
         assertNotNull(scheduleWeek);
         assertEquals(1, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
 
