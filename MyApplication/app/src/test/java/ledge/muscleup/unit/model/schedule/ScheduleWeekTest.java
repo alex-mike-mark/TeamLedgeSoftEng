@@ -43,7 +43,8 @@ import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
  */
 public class ScheduleWeekTest {
     private ScheduleWeek scheduleWeek;
-    InterfaceAccessWorkoutSessions dataAccess;
+    private int weekStartDay;
+    private InterfaceAccessWorkoutSessions dataAccess;
 
     /**
      * Constructor for the ScheduleWeekTest
@@ -59,7 +60,39 @@ public class ScheduleWeekTest {
 
         templateDataAccess.open(null);
         dataAccess = new AccessWorkoutSessions(templateDataAccess);
-        scheduleWeek = new ScheduleWeek(dataAccess.getCurrentWeekSessions());
+        weekStartDay = DateTimeConstants.MONDAY;
+        scheduleWeek = new ScheduleWeek(weekStartDay, dataAccess.getCurrentWeekSessions(weekStartDay));
+    }
+
+    /**
+     * Tests that getFirstDayOfWeek works properly
+     */
+    @Test
+    public void getFirstDayOfWeekTest() {
+        LocalDate firstDayOfWeek = LocalDate.now().withDayOfWeek(weekStartDay);
+        if (firstDayOfWeek.isAfter(LocalDate.now())){
+            firstDayOfWeek = firstDayOfWeek.minusWeeks(1);
+        }
+        Assert.assertTrue("Returned unexpected first day of week",
+                scheduleWeek.getFirstDayOfWeek().isEqual(firstDayOfWeek));
+
+        weekStartDay = DateTimeConstants.SUNDAY;
+        firstDayOfWeek = LocalDate.now().withDayOfWeek(weekStartDay);
+        scheduleWeek = new ScheduleWeek(weekStartDay, dataAccess.getCurrentWeekSessions(weekStartDay));
+        if (firstDayOfWeek.isAfter(LocalDate.now())){
+            firstDayOfWeek = firstDayOfWeek.minusWeeks(1);
+        }
+        Assert.assertTrue("Returned unexpected first day of week",
+                scheduleWeek.getFirstDayOfWeek().isEqual(firstDayOfWeek));
+
+        weekStartDay = DateTimeConstants.WEDNESDAY;
+        firstDayOfWeek = LocalDate.now().withDayOfWeek(weekStartDay);
+        scheduleWeek = new ScheduleWeek(weekStartDay, dataAccess.getCurrentWeekSessions(weekStartDay));
+        if (firstDayOfWeek.isAfter(LocalDate.now())){
+            firstDayOfWeek = firstDayOfWeek.minusWeeks(1);
+        }
+        Assert.assertTrue("Returned unexpected first day of week",
+                scheduleWeek.getFirstDayOfWeek().isEqual(firstDayOfWeek));
     }
 
     /**
