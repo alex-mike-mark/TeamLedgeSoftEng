@@ -156,6 +156,9 @@ public class ScheduleWeek {
      */
     public void currentWeek(List<WorkoutSession> workoutList) {
         firstDayOfWeek = LocalDate.now().withDayOfWeek(firstDayOfWeek.getDayOfWeek());
+        if (firstDayOfWeek.isAfter(LocalDate.now())) {
+            firstDayOfWeek = firstDayOfWeek.minusWeeks(1);
+        }
         populateWorkoutList(workoutList);
     }
 
