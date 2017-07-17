@@ -549,7 +549,7 @@ public class DataAccess implements InterfaceExerciseDataAccess, InterfaceWorkout
         try {
             statement.executeQuery(
                     "UPDATE     WorkoutSessions WS " +
-                    "SET        WS.Complete = True " +
+                    "SET        WS.Complete = " + !workoutSession.isComplete() + " " +
                     "WHERE      WS.ScheduledDate = DATE'" + format.print(workoutSession.getDate()) + "'");
         }
         catch(Exception e) {
