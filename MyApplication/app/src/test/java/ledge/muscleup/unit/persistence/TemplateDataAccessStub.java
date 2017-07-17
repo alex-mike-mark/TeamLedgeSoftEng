@@ -1,12 +1,18 @@
 package ledge.muscleup.unit.persistence;
 
+import android.support.annotation.NonNull;
+
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -53,6 +59,8 @@ class TemplateDataAccessStub implements InterfaceDataAccess, InterfaceExerciseDa
     private Map<String, Workout> workoutsByName;
     private Map<String, Exercise> exercisesByName;
     private Map<LocalDate, WorkoutSession> workoutSessionsByDate;
+    private List<CompletedWorkoutRecord> completedWorkoutRecords;
+
 
     /**
      * Constructor for DataAccessStub
@@ -169,6 +177,8 @@ class TemplateDataAccessStub implements InterfaceDataAccess, InterfaceExerciseDa
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
+        completedWorkoutRecords = new ArrayList<>();
+
         System.out.println("Opened " + dbType + " database " + dbName);
     }
 
@@ -237,8 +247,34 @@ class TemplateDataAccessStub implements InterfaceDataAccess, InterfaceExerciseDa
      */
     @Override
     public String getLeastCompletedWorkout() {
-        //TODO implement and write test
-        return null;
+        Map<String, Integer> workoutsByTimesCompleted = new HashMap<>();
+        for (String workoutName: getWorkoutNamesList()) {
+            workoutsByTimesCompleted.put(workoutName, 0);
+        }
+
+        for (CompletedWorkoutRecord record: completedWorkoutRecords) {
+            if(workoutsByTimesCompleted.containsKey(record.getWorkoutName())) {
+                workoutsByTimesCompleted.put(record.getWorkoutName(),
+                        workoutsByTimesCompleted.get(record.getWorkoutName()) + 1);
+            } else {
+                workoutsByTimesCompleted.put(record.getWorkoutName(), 1);
+            }
+        }
+
+        int min = Integer.MAX_VALUE;
+        String leastCompleted = null;
+        List<String> workoutNames = getWorkoutNamesList();
+        for (String workoutName: workoutNames) {
+            if(workoutsByTimesCompleted.get(workoutName) != null &&
+                    workoutsByTimesCompleted.get(workoutName) < min) {
+                min = workoutsByTimesCompleted.get(workoutName);
+                leastCompleted = workoutName;
+            }
+        }
+        if (leastCompleted == null) {
+            leastCompleted = workoutNames.get(0);
+        }
+        return leastCompleted;
     }
 
     /**
@@ -303,6 +339,24 @@ class TemplateDataAccessStub implements InterfaceDataAccess, InterfaceExerciseDa
      */
     public void toggleWorkoutComplete(WorkoutSession workoutSession) {
         workoutSessionsByDate.get(workoutSession.getDate()).toggleCompleted();
+        CompletedWorkoutRecord completedWorkoutRecord;
+        if (completedWorkoutRecords.isEmpty()) {
+            completedWorkoutRecord = new CompletedWorkoutRecord(
+                    workoutSession.getName(),
+                    0,
+                    workoutSession.getExperienceValue(),
+                    LocalDateTime.now()
+            );
+        } else {
+            CompletedWorkoutRecord mostRecentCompleted = completedWorkoutRecords.get(0);
+            completedWorkoutRecord = new CompletedWorkoutRecord(
+                    workoutSession.getName(),
+                    mostRecentCompleted.getExperienceAfterCompletion(),
+                    mostRecentCompleted.getExperienceAfterCompletion() + workoutSession.getExperienceValue(),
+                    LocalDateTime.now()
+            );
+        }
+        completedWorkoutRecords.add(0, completedWorkoutRecord);
     }
 
     /**
@@ -312,8 +366,7 @@ class TemplateDataAccessStub implements InterfaceDataAccess, InterfaceExerciseDa
      */
     @Override
     public List<CompletedWorkoutRecord> getCompletedWorkouts() {
-        //TODO implement and write test
-        return null;
+        return completedWorkoutRecords;
     }
 
     /**
@@ -323,7 +376,10 @@ class TemplateDataAccessStub implements InterfaceDataAccess, InterfaceExerciseDa
      */
     @Override
     public CompletedWorkoutRecord getMostRecentCompletedWorkout() {
-        //TODO implement and write test
-        return null;
+        CompletedWorkoutRecord mostRecent = null;
+        if (!completedWorkoutRecords.isEmpty()) {
+            mostRecent = completedWorkoutRecords.get(0);
+        }
+        return mostRecent;
     }
 }
