@@ -38,6 +38,8 @@ public class ProgressReportAcceptanceTest extends ActivityInstrumentationTestCas
         solo.clickOnButton("Progress Report");
         solo.assertCurrentActivity("We aren't in the prog report activity!", ProgressReportActivity.class);
         //ensure it is displaying things.
+        //go make and complete some workouts
+        //return to this screen, check stats.
         solo.goBack();
     }
 }

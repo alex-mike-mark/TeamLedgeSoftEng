@@ -38,7 +38,7 @@ public class WorkoutAcceptanceTest extends ActivityInstrumentationTestCase2<Main
         assertTrue(solo.searchText("Never Skip Leg Day"));
         assertTrue(solo.searchText("Marathon Training Starts Here"));
         assertTrue(solo.searchText("Work that Core, Get that Score!"));
-        solo.clickOnButton("Welcome to the Gun Show");//This fails. Why. Because there ain't no button.
+        solo.clickInList(1);//This fails. Why. Because there ain't no button.
         
         solo.assertCurrentActivity("We aren't in workout deets!", WorkoutDetailsActivity.class);
         solo.goBack();
