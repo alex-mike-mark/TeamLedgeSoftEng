@@ -16,6 +16,7 @@ import com.robotium.solo.*;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.TextView;
 
+import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -29,6 +30,7 @@ public class WorkoutScheduleAcceptanceTest extends ActivityInstrumentationTestCa
     private AccessWorkoutSessions aws;
     private ScheduleWeek scheduleWeek;
     private List<WorkoutSession> sessionList;
+    private int weekStartDay;
 
     private static final DateTimeFormatter monthDayYearFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
 
@@ -42,7 +44,8 @@ public class WorkoutScheduleAcceptanceTest extends ActivityInstrumentationTestCa
         getActivity();
 
         aws = new AccessWorkoutSessions();
-        scheduleWeek = new ScheduleWeek(aws.getCurrentWeekSessions());
+        weekStartDay = DateTimeConstants.SUNDAY;
+        scheduleWeek = new ScheduleWeek(weekStartDay, aws.getCurrentWeekSessions(weekStartDay));
         sessionList = scheduleWeek.getWorkoutSessionList();
     }
 
