@@ -101,7 +101,18 @@ public class WorkoutScheduleAcceptanceTest extends ActivityInstrumentationTestCa
     public void testRun() {
         solo.clickOnButton("Workout Schedule");
         solo.assertCurrentActivity("We aren't in the schedule activity!",  ScheduleActivity.class);
-
+        solo.clickOnButton(0);
+        solo.clickInList(0);
+        solo.clickOnButton(1);
+        solo.clickInList(1);
+        solo.clickOnButton(2);
+        solo.clickInList(2);
+        solo.clickOnButton(3);
+        solo.clickInList(3);
+        solo.clickOnButton(4);
+        solo.clickInList(4);
+        solo.clickOnButton(4);
+        solo.clickInList(0);
 
         //a doozy.
         //bascally, need to check
