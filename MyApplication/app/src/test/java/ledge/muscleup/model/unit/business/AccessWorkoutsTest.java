@@ -186,7 +186,7 @@ class TemplateAccessWorkouts implements InterfaceAccessWorkouts {
     public List<String> getWorkoutNamesList() {
         return dataAccess.getWorkoutNamesList();
     }
-
+    
     /**
      * Retrieves the name of the workout that is suggested for the user
      *

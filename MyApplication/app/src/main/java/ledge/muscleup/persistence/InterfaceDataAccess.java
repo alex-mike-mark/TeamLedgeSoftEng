@@ -1,5 +1,7 @@
 package ledge.muscleup.persistence;
 
+import java.sql.Statement;
+
 /**
  * An interface for general database access, such as opening or closing the database
  *
@@ -18,4 +20,10 @@ public interface InterfaceDataAccess {
      * Close the stub database
      */
     void close();
+
+    /**
+     * Get a new statement from the database connection
+     * @return a new statement
+     */
+    Statement getNewStatement();
 }
