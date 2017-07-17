@@ -101,13 +101,21 @@ public class WorkoutScheduleAcceptanceTest extends ActivityInstrumentationTestCa
     }
 
     @Test
+    public void testAddScheduledWorkout(){
+        String workoutName = "Never Skip Leg Day";
+        solo.clickOnButton("Workout Schedule");
+        solo.clickOnButton("+");
+        solo.clickOnText(workoutName);
+
+        assertTrue("Workout not added", solo.searchText(workoutName));
+        solo.goBack();
+    }
+
+    @Test
     public void testRun() {
         solo.clickOnButton("Workout Schedule");
         solo.assertCurrentActivity("We aren't in the schedule activity!",  ScheduleActivity.class);
 
-        //a doozy.
-        //bascally, need to check
-        //move from week to week
         //add a workout
         //complete a workout
         //remove a workout
