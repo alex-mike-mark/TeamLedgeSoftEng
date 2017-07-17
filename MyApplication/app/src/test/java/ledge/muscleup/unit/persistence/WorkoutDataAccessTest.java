@@ -2,6 +2,8 @@ package ledge.muscleup.unit.persistence;
 
 import junit.framework.TestCase;
 
+import org.joda.time.DateTimeConstants;
+import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +27,7 @@ import ledge.muscleup.model.exercise.enums.ExerciseType;
 import ledge.muscleup.model.exercise.enums.TimeUnit;
 import ledge.muscleup.model.exercise.enums.WeightUnit;
 import ledge.muscleup.model.workout.Workout;
+import ledge.muscleup.model.workout.WorkoutSession;
 
 /**
  * Used for testing the InterfaceWorkoutDataAccess persistence interface
@@ -164,7 +167,30 @@ public class WorkoutDataAccessTest extends TestCase {
     public void testGetLeastCompletedWorkout() {
         System.out.println("\nStarting testGetLeastCompletedWorkout");
 
-        assertNotNull("Test not implemented", dataAccess.getLeastCompletedWorkout());
+        //None is least completed since none are completed, getLeastCompleted() returns first one
+        assertEquals(dataAccess.getWorkoutNamesList().get(0), dataAccess.getLeastCompletedWorkout());
+
+        WorkoutSession session = dataAccess.getWorkoutSession(
+                LocalDate.now().minusWeeks(1).withDayOfWeek(DateTimeConstants.THURSDAY));
+        dataAccess.toggleWorkoutComplete(session);
+        assertFalse(dataAccess.getLeastCompletedWorkout().equals(session.getName()));
+
+        session = dataAccess.getWorkoutSession(
+                LocalDate.now().withDayOfWeek(DateTimeConstants.TUESDAY));
+        dataAccess.toggleWorkoutComplete(session);
+        assertFalse(dataAccess.getLeastCompletedWorkout().equals(session.getName()));
+
+        session = dataAccess.getWorkoutSession(
+                LocalDate.now().withDayOfWeek(DateTimeConstants.WEDNESDAY));
+        dataAccess.toggleWorkoutComplete(session);
+        assertFalse(dataAccess.getLeastCompletedWorkout().equals(session.getName()));
+
+        session = dataAccess.getWorkoutSession(
+                LocalDate.now().plusWeeks(1).withDayOfWeek(DateTimeConstants.TUESDAY));
+        dataAccess.toggleWorkoutComplete(session);
+
+        //all have been completed once now, check that getLeastCompleted() returns first one again
+        assertEquals(dataAccess.getWorkoutNamesList().get(0), dataAccess.getLeastCompletedWorkout());
 
         System.out.println("Finishing testGetLeastCompletedWorkout\n");
     }
