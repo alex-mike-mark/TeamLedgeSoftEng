@@ -11,11 +11,14 @@ import ledge.muscleup.presentation.ProgressReportActivity;
 import com.robotium.solo.*;
 import android.test.ActivityInstrumentationTestCase2;
 
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 
 
 public class ProgressReportAcceptanceTest extends ActivityInstrumentationTestCase2<MainActivity> {
     private Solo solo;
+    private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd");
 
     public ProgressReportAcceptanceTest() {
         super(MainActivity.class);
@@ -35,11 +38,27 @@ public class ProgressReportAcceptanceTest extends ActivityInstrumentationTestCas
 
     @Test
     public void testRun() {
+
+        //check that progress report exists, we start at level 0.
         solo.clickOnButton("Progress Report");
         solo.assertCurrentActivity("We aren't in the prog report activity!", ProgressReportActivity.class);
+        assertTrue("We ain't level 0",solo.searchText("LEVEL 0"));
         solo.goBack();
-        solo.clickOnButton("Workout Schedule");
 
+        //complete some workouts to boost our level.
+        solo.clickOnButton("Workout Schedule");
+        solo.clickOnButton(0);
+        solo.clickInList(0);
+        solo.clickOnButton(1);
+        solo.clickInList(1);
+        solo.clickOnButton(2);
+        solo.clickInList(2);
+        solo.clickOnButton(3);
+        solo.clickInList(3);
+
+        //use clickOnText(date);
+        //or rather, getButton? Get ListView?
+        //date is obv formatted.
 
 
         //ensure it is displaying things.
