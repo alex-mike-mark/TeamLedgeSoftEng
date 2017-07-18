@@ -52,7 +52,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
     public void setUp()
     {
         dataAccess = new TemplateDataAccessStub("Test Workout Sessions");
-        dataAccess.open("dbPath");
+        dataAccess.open("Test Workout Sessions");
     }
 
     /**
