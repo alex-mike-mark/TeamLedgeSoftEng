@@ -2,6 +2,9 @@ package ledge.muscleup.model.experience;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 /**
  * A record of a completed workout, which contains the date the workout was completed, the experience
@@ -14,10 +17,12 @@ import org.joda.time.LocalDate;
  */
 
 public class CompletedWorkoutRecord {
+    private static final DateTimeFormatter FORMAT = DateTimeFormat.forPattern("yyyy/MM/dd");
+
     private String workoutName;
     private int experienceGained;
     private int experienceAfterCompletion;
-    private DateTime dateOfCompletion;
+    private LocalDateTime dateOfCompletion;
 
     /**
      * The default constructor for a CompletedWorkoutRecord
@@ -27,7 +32,7 @@ public class CompletedWorkoutRecord {
      * @param dateOfCompletion the date the workout was completed
      */
     public CompletedWorkoutRecord(String workoutName, int experienceBeforeCompletion,
-                                  int experienceAfterCompletion, DateTime dateOfCompletion) {
+                                  int experienceAfterCompletion, LocalDateTime dateOfCompletion) {
         if (workoutName == null || dateOfCompletion == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method"));
         else {
@@ -68,5 +73,24 @@ public class CompletedWorkoutRecord {
      */
     public LocalDate getDateOfCompletion() {
         return dateOfCompletion.toLocalDate();
+    }
+
+    /**
+     * Returns {@code true} if the CompletedWorkoutRecords are equal, or {@code false} otherwise
+     * @return a boolean representing if the items are equal
+     */
+    public boolean equals(CompletedWorkoutRecord other) {
+        return workoutName.equals(other.getWorkoutName()) && experienceGained == other.getExperienceGained() &&
+                experienceAfterCompletion == other.getExperienceAfterCompletion() &&
+                getDateOfCompletion().equals(other.getDateOfCompletion());
+    }
+
+    /**
+     * Returns the {@link CompletedWorkoutRecord} as a {@link String}
+     * @return the {@link CompletedWorkoutRecord} as a {@link String}
+     */
+    public String toString() {
+        return workoutName + " (" + FORMAT.print(dateOfCompletion) + "): +" + experienceGained +
+                "xp gained. Total xp: " + experienceAfterCompletion;
     }
 }
