@@ -1,10 +1,10 @@
-package ledge.muscleup.model.integration;
+package ledge.muscleup.integration;
 
 import ledge.muscleup.application.Main;
 import ledge.muscleup.application.Services;
-import ledge.muscleup.model.unit.persistence.ExerciseDataAccessTest;
-import ledge.muscleup.model.unit.persistence.WorkoutDataAccessTest;
-import ledge.muscleup.model.unit.persistence.WorkoutSessionDataAccessTest;
+import ledge.muscleup.unit.persistence.ExerciseDataAccessTest;
+import ledge.muscleup.unit.persistence.WorkoutDataAccessTest;
+import ledge.muscleup.unit.persistence.WorkoutSessionDataAccessTest;
 import ledge.muscleup.persistence.InterfaceDataAccess;
 
 import junit.framework.TestCase;
