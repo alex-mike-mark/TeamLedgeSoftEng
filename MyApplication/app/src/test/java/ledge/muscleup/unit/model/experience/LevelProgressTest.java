@@ -1,6 +1,7 @@
 package ledge.muscleup.unit.model.experience;
 
 import junit.framework.Assert;
+import junit.framework.TestCase;
 
 import org.joda.time.LocalDateTime;
 import org.junit.Before;
