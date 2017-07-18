@@ -1,5 +1,7 @@
 package ledge.muscleup.unit.persistence;
 
+import junit.framework.TestCase;
+
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 import org.junit.After;
