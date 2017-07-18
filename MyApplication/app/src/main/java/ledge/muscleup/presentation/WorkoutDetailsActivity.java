@@ -73,7 +73,6 @@ public class WorkoutDetailsActivity extends Activity {
         String workoutName;
         Intent intent;
         InterfaceAccessWorkouts aw = new AccessWorkouts();
-        List retList = new ArrayList();
 
         //get name of workout
         intent = getIntent();

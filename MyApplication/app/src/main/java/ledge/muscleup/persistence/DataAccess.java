@@ -148,9 +148,6 @@ public class DataAccess implements InterfaceDataAccess {
      */
     static void sqlError(Exception e)
     {
-        String result; //the error message to print
-
-        result = "SQL Error: " + e.getMessage();
         e.printStackTrace();
     }
 }

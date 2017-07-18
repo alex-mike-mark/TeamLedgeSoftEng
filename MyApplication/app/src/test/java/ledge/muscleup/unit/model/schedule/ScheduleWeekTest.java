@@ -128,7 +128,6 @@ public class ScheduleWeekTest {
     @Test
     public void changeWeekTest(){
         LocalDate currWeekStart = scheduleWeek.getWeekday(DateTimeConstants.MONDAY);
-        List<WorkoutSession> workoutList;
 
         dataAccess.setToNextWeek(scheduleWeek);
 

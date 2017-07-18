@@ -175,7 +175,6 @@ public class Workout {
     public boolean removeExercise(WorkoutExercise exercise) throws IllegalArgumentException {
         boolean exerciseRemoved = false;
         int exerciseIndex = -1;
-        WorkoutExercise listExercise;
 
         if (exercise == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
