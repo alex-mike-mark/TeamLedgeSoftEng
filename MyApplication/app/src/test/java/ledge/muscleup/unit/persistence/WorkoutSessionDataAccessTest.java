@@ -3,6 +3,7 @@ package ledge.muscleup.unit.persistence;
 import junit.framework.TestCase;
 
 import org.joda.time.DateTimeConstants;
+import org.joda.time.Duration;
 import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Before;
@@ -12,11 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ledge.muscleup.model.exercise.Exercise;
+import ledge.muscleup.model.exercise.ExerciseDistance;
+import ledge.muscleup.model.exercise.ExerciseDuration;
 import ledge.muscleup.model.exercise.ExerciseSets;
 import ledge.muscleup.model.exercise.WorkoutExercise;
+import ledge.muscleup.model.exercise.WorkoutExerciseDistance;
+import ledge.muscleup.model.exercise.WorkoutExerciseDuration;
 import ledge.muscleup.model.exercise.WorkoutExerciseSets;
+import ledge.muscleup.model.exercise.enums.DistanceUnit;
 import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
 import ledge.muscleup.model.exercise.enums.ExerciseType;
+import ledge.muscleup.model.exercise.enums.TimeUnit;
 import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
@@ -252,7 +259,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
                                 XP_LOW_INTENSITY, new ExerciseSets(3, 10))
 
                 }),
-                new LocalDate(2016, 06, 25),
+                new LocalDate(2017, 06, 25),
                 false));
 
         assertEquals(3, dataAccess.getWorkoutSessionsList().size());
@@ -260,14 +267,14 @@ public class WorkoutSessionDataAccessTest extends TestCase {
         // Remove Last WorkoutSession in list
         assertEquals(3, dataAccess.getWorkoutSessionsList().size());
         dataAccess.removeWorkoutSession(new WorkoutSession(
-                new Workout("Never Skip Leg Day", new WorkoutExercise[]{
-                        new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
-                                XP_MEDIUM_INTENSITY, new ExerciseSets(4, 15)),
-                        new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
-                                XP_LOW_INTENSITY, new ExerciseSets(3, 10))
+                new Workout("Marathon Training Starts Here", new WorkoutExercise[]{
+                        new WorkoutExerciseDistance(new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO),
+                                XP_HIGH_INTENSITY, new ExerciseDistance(2.5, DistanceUnit.MILES)),
+                        new WorkoutExerciseDuration(new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM, ExerciseType.CARDIO),
+                                XP_MEDIUM_INTENSITY, new ExerciseDuration(45, TimeUnit.MINUTES))
 
                 }),
-                new LocalDate(2017, 06, 29),
+                new LocalDate(2017, 07, 05),
                 false));
 
         assertEquals(2, dataAccess.getWorkoutSessionsList().size());
