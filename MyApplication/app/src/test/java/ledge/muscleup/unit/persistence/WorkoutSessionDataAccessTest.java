@@ -90,7 +90,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
         assertEquals("Marathon Training Starts Here", workoutSession.getName());
         assertEquals(new LocalDate().plusWeeks(1).withDayOfWeek(DateTimeConstants.TUESDAY), workoutSession.getDate());
 
-        workoutSession = dataAccess.getWorkoutSession(new LocalDate(2000, 01, 01));
+        workoutSession = dataAccess.getWorkoutSession(new LocalDate(2000, 1, 1));
         assertNull(workoutSession);
 
         System.out.println("Finishing testGetWorkoutSession\n");

@@ -145,7 +145,6 @@ public class DataAccess implements InterfaceDataAccess {
     /**
      * Gets the error message message of an SQL exception and prints the stack trace
      * @param e the exception thrown
-     * @return the error message for the SQL exception
      */
     static void sqlError(Exception e)
     {
