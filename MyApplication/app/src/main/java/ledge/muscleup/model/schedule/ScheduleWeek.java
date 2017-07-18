@@ -1,15 +1,11 @@
 package ledge.muscleup.model.schedule;
 
-import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 import ledge.muscleup.model.workout.WorkoutSession;
 
@@ -102,9 +98,9 @@ public class ScheduleWeek {
     public List<WorkoutSession> getWorkoutSessionList() {
         ArrayList<WorkoutSession> workoutList = new ArrayList<>();
 
-        for (int i = 0; i < workoutSessions.length; i++)
-            if (workoutSessions[i] != null)
-                workoutList.add(workoutSessions[i]);
+        for (WorkoutSession workoutSession : workoutSessions)
+            if (workoutSession != null)
+                workoutList.add(workoutSession);
 
         return workoutList;
     }
@@ -198,8 +194,8 @@ public class ScheduleWeek {
     public String toString() {
         String result = "";
 
-        for (int i = 0; i < workoutSessions.length; i++)
-            result += workoutSessions[i].toString() + "\n";
+        for (WorkoutSession workoutSession : workoutSessions)
+            result += workoutSession.toString() + "\n";
 
         return result;
     }

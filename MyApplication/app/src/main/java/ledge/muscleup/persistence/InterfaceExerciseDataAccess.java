@@ -1,6 +1,5 @@
 package ledge.muscleup.persistence;
 
-import java.sql.Statement;
 import java.util.List;
 
 import ledge.muscleup.model.exercise.Exercise;

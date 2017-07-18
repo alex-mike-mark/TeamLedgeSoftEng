@@ -50,10 +50,11 @@ public class ScheduleActivity extends Activity {
 
     private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd");
     private static final DateTimeFormatter monthDayYearFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
-    private int weekStartDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        int weekStartDay;
+
         aws = new AccessWorkoutSessions();
         weekStartDay = DateTimeConstants.SUNDAY;
         scheduleWeek = new ScheduleWeek(weekStartDay, aws.getCurrentWeekSessions(weekStartDay));
@@ -141,7 +142,7 @@ public class ScheduleActivity extends Activity {
     /**
      * clears current list and repopulates with next week's scheduled workouts
      */
-    public void showNextWeek(){
+    private void showNextWeek(){
         adapter.clear();
 
         aws.setToNextWeek(scheduleWeek);
@@ -154,7 +155,7 @@ public class ScheduleActivity extends Activity {
     /**
      * clears current list and repopulates with last week's scheduled workouts
      */
-    public void showLastWeek(){
+    private void showLastWeek(){
         adapter.clear();
 
         aws.setToLastWeek(scheduleWeek);
@@ -164,7 +165,7 @@ public class ScheduleActivity extends Activity {
         setWeekRangeTitle();
     }
 
-    public void showCurrentWeek() {
+    private void showCurrentWeek() {
         adapter.clear();
         aws.setToCurrentWeek(scheduleWeek);
         sessionList = scheduleWeek.getWorkoutSessionList();
@@ -176,7 +177,7 @@ public class ScheduleActivity extends Activity {
     /**
      * Sets the Activity title shown on screen to display the range of dates for current week
      */
-    public void setWeekRangeTitle() {
+    private void setWeekRangeTitle() {
         TextView titleView = (TextView) findViewById(R.id.activity_title);
         LocalDate startOfWeek = sessionList.get(0).getDate();
         LocalDate endOfWeek = sessionList.get(sessionList.size() - 1).getDate();
@@ -187,7 +188,7 @@ public class ScheduleActivity extends Activity {
     /**
      * A custom extension of the ArrayAdapter class, used for displaying workout session date and name
      */
-    private class ListItemAdapter extends ArrayAdapter {
+    private class ListItemAdapter extends ArrayAdapter<WorkoutSession> {
         private List<WorkoutSession> sessionList;
         Context context;
 

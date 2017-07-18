@@ -1,14 +1,10 @@
 package ledge.muscleup.unit.model.experience;
 
 import junit.framework.Assert;
-import junit.framework.TestCase;
 
-import org.joda.time.DateTime;
 import org.joda.time.LocalDateTime;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.logging.Level;
 
 import ledge.muscleup.model.experience.CompletedWorkoutRecord;
 import ledge.muscleup.model.experience.LevelProgress;
@@ -20,6 +16,7 @@ import ledge.muscleup.model.experience.LevelProgress;
  * @version 3.0
  * @since 2017-07-08
  */
+
 public class LevelProgressTest extends TestCase {
     private final String WORKOUT_NAME = "placeholder name";
     private final int EXPERIENCE_BEFORE = 1025;

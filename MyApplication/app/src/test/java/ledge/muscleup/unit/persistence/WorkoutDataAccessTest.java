@@ -32,8 +32,8 @@ import ledge.muscleup.model.workout.WorkoutSession;
 /**
  * Used for testing the InterfaceWorkoutDataAccess persistence interface
  *
- * @author: Ryan Koop
- * @version: 1.0
+ * @author Ryan Koop
+ * @version 1.0
  * @since 2017-06-29
  *
  */
