@@ -70,12 +70,10 @@ public class ProgressReportAcceptanceTest extends ActivityInstrumentationTestCas
         ws0 = new WorkoutSession(wList.get(3),today,false);
         ws1 = new WorkoutSession(wList.get(2),oneAgo,false);
         ws2 = new WorkoutSession(wList.get(1),twoAgo,false);
-        //ws3 = new WorkoutSession(wList.get(0),threeAgo,false);
 
         aws.insertWorkoutSession(ws0);
         aws.insertWorkoutSession(ws1);
         aws.insertWorkoutSession(ws2);
-        //aws.insertWorkoutSession(ws3);
 
 
         //check that progress report exists, we start at level 0.
