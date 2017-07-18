@@ -43,6 +43,7 @@ public class SuggestedAcceptanceTest extends ActivityInstrumentationTestCase2<Ma
     @Test
     public void testSuggestedWorkout() {
         String suggestedWorkoutName;
+        InterfaceAccessWorkouts dataAccess = new AccessWorkouts();
 
         suggestedWorkoutName = dataAccess.getSuggestedWorkout();
 
