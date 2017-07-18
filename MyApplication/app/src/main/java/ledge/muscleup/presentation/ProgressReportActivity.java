@@ -115,7 +115,7 @@ public class ProgressReportActivity extends Activity {
      * A custom extension of the ArrayAdapter class, used for displaying date workout was completed,
      * completed workout name, and xp gained from completed workout
      */
-    private class ListItemAdapter extends ArrayAdapter {
+    private class ListItemAdapter extends ArrayAdapter<CompletedWorkoutRecord> {
         private List<CompletedWorkoutRecord> recordList;
         Context context;
 

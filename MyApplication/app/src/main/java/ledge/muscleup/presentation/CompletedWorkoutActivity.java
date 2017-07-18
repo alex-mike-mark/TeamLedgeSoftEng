@@ -117,7 +117,7 @@ public class CompletedWorkoutActivity extends Activity {
      * A custom extension of the ArrayAdapter class, used for displaying completed exercises in the
      * workout session, with name and quantity completed, as well as xp gained for completing it
      */
-    private class ListItemAdapter extends ArrayAdapter {
+    private class ListItemAdapter extends ArrayAdapter<WorkoutSessionExercise> {
         private List<WorkoutSessionExercise> exerciseList;
         Context context;
 

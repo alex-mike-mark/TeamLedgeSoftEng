@@ -139,7 +139,7 @@ public class WorkoutSessionActivity extends Activity {
      * A custom extension of the ArrayAdapter class, used for displaying exercise name and quantity
      *
      */
-    private class ListItemAdapter extends ArrayAdapter {
+    private class ListItemAdapter extends ArrayAdapter<WorkoutSessionExercise> {
         private List<WorkoutSessionExercise> exerciseList;
         Context context;
 

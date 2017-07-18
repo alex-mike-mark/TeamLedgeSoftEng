@@ -69,7 +69,7 @@ public class WorkoutDetailsActivity extends Activity {
      * getExerciseList will get the workout that was clicked on in WorkoutActivity and return the exercises associated
      * @return list of exercises for a workout
      */
-    private List getExerciseList(){
+    private List<WorkoutExercise> getExerciseList(){
         String workoutName;
         Intent intent;
         InterfaceAccessWorkouts aw = new AccessWorkouts();
@@ -85,7 +85,7 @@ public class WorkoutDetailsActivity extends Activity {
         return workout.getExerciseList();
     }
 
-    private class ListItemAdapter extends ArrayAdapter {
+    private class ListItemAdapter extends ArrayAdapter<WorkoutExercise> {
         private List<WorkoutExercise> exerciseList;
         Context context;
 

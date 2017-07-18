@@ -188,7 +188,7 @@ public class ScheduleActivity extends Activity {
     /**
      * A custom extension of the ArrayAdapter class, used for displaying workout session date and name
      */
-    private class ListItemAdapter extends ArrayAdapter {
+    private class ListItemAdapter extends ArrayAdapter<WorkoutSession> {
         private List<WorkoutSession> sessionList;
         Context context;
 

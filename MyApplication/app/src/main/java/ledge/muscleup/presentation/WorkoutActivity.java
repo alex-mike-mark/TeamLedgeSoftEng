@@ -77,7 +77,7 @@ public class WorkoutActivity extends Activity {
     /**
      * A custom extension of the ArrayAdapter class, used for displaying workout name
      */
-    private class ListItemAdapter extends ArrayAdapter {
+    private class ListItemAdapter extends ArrayAdapter<Workout> {
         private List<Workout> workoutList;
         Context context;
 
