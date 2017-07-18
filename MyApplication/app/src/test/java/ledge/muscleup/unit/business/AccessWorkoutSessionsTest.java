@@ -284,7 +284,7 @@ public class AccessWorkoutSessionsTest extends TestCase {
 
         // Remove middle WorkoutSession from list
         scheduleWeek = dataAccess.newScheduledWeek(weekStartDay, LocalDate.now());
-        assertEquals(3, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));;
+        assertEquals(3, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
 
         dataAccess.removeWorkoutSession(new WorkoutSession(
                 new Workout("Work that Core, Get that Score!", new WorkoutExercise[]{

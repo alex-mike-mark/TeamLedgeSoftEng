@@ -73,7 +73,7 @@ public class WorkoutDetailsActivity extends Activity {
     private List getExerciseList(){
         String workoutName;
         Intent intent;
-        InterfaceAccessWorkouts aw = (InterfaceAccessWorkouts) new AccessWorkouts();
+        InterfaceAccessWorkouts aw = new AccessWorkouts();
         List retList = new ArrayList();
 
         //get name of workout
@@ -81,7 +81,7 @@ public class WorkoutDetailsActivity extends Activity {
         workoutName = intent.getStringExtra("workoutName");
 
         //get Workout from db
-        workout = (Workout) aw.getWorkout(workoutName);
+        workout = aw.getWorkout(workoutName);
 
         return workout.getExerciseList();
     }

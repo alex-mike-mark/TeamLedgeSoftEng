@@ -127,12 +127,12 @@ public class WorkoutSessionActivity extends Activity {
     private List<WorkoutSessionExercise> getExercisesInWorkoutSession(){
         LocalDate workoutSessionDate;
         Intent intent;
-        InterfaceAccessWorkoutSessions aws = (InterfaceAccessWorkoutSessions) new AccessWorkoutSessions();
+        InterfaceAccessWorkoutSessions aws = new AccessWorkoutSessions();
 
         //get workout session date
         intent = getIntent();
         workoutSessionDate = formatter.parseLocalDate(intent.getStringExtra("workoutSessionDate"));
-        workoutSession = (WorkoutSession) aws.getWorkoutSession(workoutSessionDate);
+        workoutSession = aws.getWorkoutSession(workoutSessionDate);
         return workoutSession.getWorkoutSessionExercises();
     }
 
