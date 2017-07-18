@@ -3,6 +3,7 @@ package ledge.muscleup.model.unit.business;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -264,4 +265,11 @@ class TemplateDataAccessStub implements InterfaceDataAccess {
         workoutSessionsByDate.get(workoutSession.getDate()).toggleCompleted();
     }
 
+    /**
+     * Not used
+     * @return
+     */
+    public  Statement getNewStatement(){
+        return null;
+    }
 }
