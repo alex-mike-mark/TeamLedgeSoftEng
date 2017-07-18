@@ -10,7 +10,7 @@ import ledge.muscleup.unit.persistence.PersistenceTests;
  * Created by matthewsmidt on 2017-07-18.
  */
 
-public class RunUnitTests
+public class AllUnitTests
 {
     public static TestSuite suite;
 
