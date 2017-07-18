@@ -457,7 +457,7 @@ public class WorkoutSessionDataAccess implements InterfaceWorkoutSessionDataAcce
      */
     @Override
     public void toggleWorkoutComplete(WorkoutSession workoutSession) {
-        int workoutSessionID, previousXPValue = 0;
+        int workoutSessionID, workoutSessionExerciseID, previousXPValue = 0;
 
         try {
             //get the ID of the workout session to be updated
@@ -467,6 +467,19 @@ public class WorkoutSessionDataAccess implements InterfaceWorkoutSessionDataAcce
                     "WHERE      WS.ScheduledDate = DATE'" + DATE_TIME_FORMATTER.print(workoutSession.getDate()) + "'");
             if (resultSet.next()) {
                 workoutSessionID = resultSet.getInt("ID");
+
+                //mark each exercise as complete
+                resultSet = statement.executeQuery(
+                        "SELECT     WSC.ExerciseID " +
+                        "FROM       WorkoutSessionContents WSC " +
+                        "WHERE      WSC.WorkoutSessionID = " + workoutSessionID);
+                while (resultSet.next()) {
+                    workoutSessionExerciseID = resultSet.getInt("ExerciseID");
+                    statement.executeQuery(
+                            "UPDATE     WorkoutSessionExercises WSE " +
+                            "SET        WSE.Complete = True " + 
+                            "WHERE      WSE.ID = " + workoutSessionExerciseID);
+                }
 
                 //mark the workout as complete
                 statement.executeQuery(
