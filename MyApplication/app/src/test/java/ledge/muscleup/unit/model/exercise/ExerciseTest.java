@@ -17,7 +17,7 @@ import ledge.muscleup.model.exercise.enums.ExerciseType;
  * @since 2017-06-07
  */
 public class ExerciseTest extends TestCase {
-    Exercise exercise1, exercise2, exercise3;
+    private Exercise exercise1, exercise2, exercise3;
 
     /**
      * Initializes several instances of Exercise to setup testing

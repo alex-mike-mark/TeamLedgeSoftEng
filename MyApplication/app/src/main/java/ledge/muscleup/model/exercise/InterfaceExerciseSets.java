@@ -9,7 +9,7 @@ package ledge.muscleup.model.exercise;
  * @since 2017-06-03
  */
 
-public interface InterfaceExerciseSets extends InterfaceExerciseQuantity {
+interface InterfaceExerciseSets extends InterfaceExerciseQuantity {
     /**
      * Returns the number of sets for the exercise
      * @return the number of sets for the exercise

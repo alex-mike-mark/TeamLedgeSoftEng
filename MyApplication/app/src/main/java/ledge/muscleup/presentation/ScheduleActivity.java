@@ -142,7 +142,7 @@ public class ScheduleActivity extends Activity {
     /**
      * clears current list and repopulates with next week's scheduled workouts
      */
-    public void showNextWeek(){
+    private void showNextWeek(){
         adapter.clear();
 
         aws.setToNextWeek(scheduleWeek);
@@ -155,7 +155,7 @@ public class ScheduleActivity extends Activity {
     /**
      * clears current list and repopulates with last week's scheduled workouts
      */
-    public void showLastWeek(){
+    private void showLastWeek(){
         adapter.clear();
 
         aws.setToLastWeek(scheduleWeek);
@@ -165,7 +165,7 @@ public class ScheduleActivity extends Activity {
         setWeekRangeTitle();
     }
 
-    public void showCurrentWeek() {
+    private void showCurrentWeek() {
         adapter.clear();
         aws.setToCurrentWeek(scheduleWeek);
         sessionList = scheduleWeek.getWorkoutSessionList();
@@ -177,7 +177,7 @@ public class ScheduleActivity extends Activity {
     /**
      * Sets the Activity title shown on screen to display the range of dates for current week
      */
-    public void setWeekRangeTitle() {
+    private void setWeekRangeTitle() {
         TextView titleView = (TextView) findViewById(R.id.activity_title);
         LocalDate startOfWeek = sessionList.get(0).getDate();
         LocalDate endOfWeek = sessionList.get(sessionList.size() - 1).getDate();

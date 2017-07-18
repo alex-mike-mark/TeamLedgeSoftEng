@@ -11,7 +11,7 @@ public abstract class WorkoutExercise {
     private Exercise exercise;
     private int experienceValue;
 
-    public WorkoutExercise(Exercise exercise, int xpValue) throws IllegalArgumentException {
+    WorkoutExercise(Exercise exercise, int xpValue) throws IllegalArgumentException {
         if(exercise==null) {
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
         }

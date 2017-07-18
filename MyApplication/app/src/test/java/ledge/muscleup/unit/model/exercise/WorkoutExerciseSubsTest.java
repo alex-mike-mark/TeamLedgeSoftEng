@@ -25,18 +25,18 @@ import ledge.muscleup.model.exercise.enums.WeightUnit;
  */
 
 public class WorkoutExerciseSubsTest extends TestCase{
-    int xp;
-    Exercise exercise1;
+    private int xp;
+    private Exercise exercise1;
 
-    ExerciseSets sets;
-    ExerciseSetsAndWeight setsAndWeight;
-    ExerciseDistance distance;
-    ExerciseDuration duration;
+    private ExerciseSets sets;
+    private ExerciseSetsAndWeight setsAndWeight;
+    private ExerciseDistance distance;
+    private ExerciseDuration duration;
 
-    WorkoutExerciseSets WESets;
-    WorkoutExerciseSetsAndWeight WESetsAndWeight;
-    WorkoutExerciseDistance WEDistance;
-    WorkoutExerciseDuration WEDuration;
+    private WorkoutExerciseSets WESets;
+    private WorkoutExerciseSetsAndWeight WESetsAndWeight;
+    private WorkoutExerciseDistance WEDistance;
+    private WorkoutExerciseDuration WEDuration;
 
 
     @Before

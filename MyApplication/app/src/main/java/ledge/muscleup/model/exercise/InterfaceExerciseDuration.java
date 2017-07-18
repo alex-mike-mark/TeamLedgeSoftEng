@@ -11,7 +11,7 @@ import ledge.muscleup.model.exercise.enums.TimeUnit;
  * @since 2017-06-03
  */
 
-public interface InterfaceExerciseDuration extends InterfaceExerciseQuantity {
+interface InterfaceExerciseDuration extends InterfaceExerciseQuantity {
     /**
      * Get the number for time exercised
      * @return the number for time exercised

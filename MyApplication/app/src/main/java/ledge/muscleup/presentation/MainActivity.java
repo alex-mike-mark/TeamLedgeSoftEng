@@ -174,7 +174,7 @@ public class MainActivity extends Activity {
      * @param directory the directory to copy to
      * @throws IOException when an error occuring while reading or writing
      */
-    public void copyAssetsToDirectory(String[] assets, File directory) throws IOException {
+    private void copyAssetsToDirectory(String[] assets, File directory) throws IOException {
         AssetManager assetManager = getAssets();
 
         for (String asset : assets) {

@@ -20,7 +20,7 @@ import ledge.muscleup.model.exercise.InterfaceExerciseQuantity;
  * @since 2017-07-10
  */
 
-public final class ExerciseQuantityDisplayStrings {
+final class ExerciseQuantityDisplayStrings {
     private static final HashMap<Class, String> formatStringMap;
 
     static {
