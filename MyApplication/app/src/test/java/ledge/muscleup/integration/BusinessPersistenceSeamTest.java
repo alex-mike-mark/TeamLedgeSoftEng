@@ -478,20 +478,20 @@ public class BusinessPersistenceSeamTest extends TestCase {
                 false)
         );
 
-      /*  accessWorkoutSessions.toggleWorkoutCompleted(
+      accessWorkoutSessions.toggleWorkoutCompleted(
                 accessWorkoutSessions.getWorkoutSession(LocalDate.now().withDayOfWeek(DateTimeConstants.TUESDAY)));
         assertEquals(2, accessExperience.getCompletedWorkouts().size());
         assertEquals("Work that Core, Get that Score!", accessExperience.getCompletedWorkouts().get(0).getWorkoutName());
         assertEquals("Never Skip Leg Day", accessExperience.getCompletedWorkouts().get(1).getWorkoutName());
         assertTrue(accessExperience.getCompletedWorkouts().get(0).getExperienceAfterCompletion() >
                 accessExperience.getCompletedWorkouts().get(1).getExperienceAfterCompletion());
-*/
-      /*  assertEquals("Work that Core, Get that Score!",
+
+        assertEquals("Work that Core, Get that Score!",
                 accessExperience.getMostRecentCompletedWorkout().getWorkoutName());
         assertEquals(accessExperience.getMostRecentCompletedWorkout().getExperienceGained(),
                 accessWorkoutSessions.getWorkoutSession(LocalDate.now().withDayOfWeek(DateTimeConstants.TUESDAY))
                 .getExperienceValue());
-*/
+
         System.out.println("Finishing Integration test of AccessExperience to persistence\n");
     }
 }

@@ -170,23 +170,19 @@ public class WorkoutDataAccessTest extends TestCase {
         //None is least completed since none are completed, getLeastCompleted() returns first one
         assertEquals(dataAccess.getWorkoutNamesList().get(0), dataAccess.getLeastCompletedWorkout());
 
-        WorkoutSession session = dataAccess.getWorkoutSession(
-                LocalDate.now().minusWeeks(1).withDayOfWeek(DateTimeConstants.THURSDAY));
+        WorkoutSession session = dataAccess.getWorkoutSession(new LocalDate(2017, 06, 21));
         dataAccess.toggleWorkoutComplete(session);
         assertFalse(dataAccess.getLeastCompletedWorkout().equals(session.getName()));
 
-        session = dataAccess.getWorkoutSession(
-                LocalDate.now().withDayOfWeek(DateTimeConstants.TUESDAY));
+        session = dataAccess.getWorkoutSession(new LocalDate(2017, 06, 25));
         dataAccess.toggleWorkoutComplete(session);
         assertFalse(dataAccess.getLeastCompletedWorkout().equals(session.getName()));
 
-        session = dataAccess.getWorkoutSession(
-                LocalDate.now().withDayOfWeek(DateTimeConstants.WEDNESDAY));
+        session = dataAccess.getWorkoutSession(new LocalDate(2017, 06, 26));
         dataAccess.toggleWorkoutComplete(session);
         assertFalse(dataAccess.getLeastCompletedWorkout().equals(session.getName()));
 
-        session = dataAccess.getWorkoutSession(
-                LocalDate.now().plusWeeks(1).withDayOfWeek(DateTimeConstants.TUESDAY));
+        session = dataAccess.getWorkoutSession(new LocalDate(2017, 07, 05));
         dataAccess.toggleWorkoutComplete(session);
 
         //all have been completed once now, check that getLeastCompleted() returns first one again

@@ -55,13 +55,13 @@ public class ExperienceDataAccessTest extends TestCase {
         System.out.println("\nStarting testGetCompletedWorkouts");
 
         Assert.assertEquals(0, dataAccess.getCompletedWorkouts().size());
-        WorkoutSession session1 = dataAccess.getWorkoutSession(LocalDate.now().withDayOfWeek(DateTimeConstants.TUESDAY));
+        WorkoutSession session1 = dataAccess.getWorkoutSession(new LocalDate(2017, 06, 21));
         dataAccess.toggleWorkoutComplete(session1);
         Assert.assertEquals(1, dataAccess.getCompletedWorkouts().size());
         Assert.assertEquals(session1.getName(), dataAccess.getCompletedWorkouts().get(0).getWorkoutName());
         Assert.assertEquals(session1.getExperienceValue(), dataAccess.getCompletedWorkouts().get(0).getExperienceGained());
 
-        WorkoutSession session2 = dataAccess.getWorkoutSession(LocalDate.now().withDayOfWeek(DateTimeConstants.WEDNESDAY));
+        WorkoutSession session2 = dataAccess.getWorkoutSession(new LocalDate(2017, 06, 25));
         dataAccess.toggleWorkoutComplete(session2);
         Assert.assertEquals(2, dataAccess.getCompletedWorkouts().size());
         Assert.assertEquals(session2.getName(), dataAccess.getCompletedWorkouts().get(0).getWorkoutName());
@@ -80,12 +80,12 @@ public class ExperienceDataAccessTest extends TestCase {
         System.out.println("\nStarting testGetMostRecentCompletedWorkout");
 
         Assert.assertNull("Returned unexpected Most Recent Completed", dataAccess.getMostRecentCompletedWorkout());
-        WorkoutSession session = dataAccess.getWorkoutSession(LocalDate.now().withDayOfWeek(DateTimeConstants.TUESDAY));
+        WorkoutSession session = dataAccess.getWorkoutSession(new LocalDate(2017, 06, 21));
         dataAccess.toggleWorkoutComplete(session);
         Assert.assertEquals(session.getName(), dataAccess.getMostRecentCompletedWorkout().getWorkoutName());
         Assert.assertEquals(session.getExperienceValue(), dataAccess.getMostRecentCompletedWorkout().getExperienceGained());
 
-        session = dataAccess.getWorkoutSession(LocalDate.now().withDayOfWeek(DateTimeConstants.WEDNESDAY));
+        session = dataAccess.getWorkoutSession(new LocalDate(2017, 06, 25));
         dataAccess.toggleWorkoutComplete(session);
         Assert.assertEquals(session.getName(), dataAccess.getMostRecentCompletedWorkout().getWorkoutName());
         Assert.assertEquals(session.getExperienceValue(), dataAccess.getMostRecentCompletedWorkout().getExperienceGained());

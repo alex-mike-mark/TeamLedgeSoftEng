@@ -70,25 +70,25 @@ public class WorkoutSessionDataAccessTest extends TestCase {
     public static void testGetWorkoutSession() {
         System.out.println("\nStarting testGetWorkoutSession");
 
-        WorkoutSession workoutSession = dataAccess.getWorkoutSession(new LocalDate().minusWeeks(1).withDayOfWeek(DateTimeConstants.THURSDAY));
+        WorkoutSession workoutSession = dataAccess.getWorkoutSession(new LocalDate(2017, 06, 21));
         assertNotNull(workoutSession);
         assertEquals("Welcome to the Gun Show", workoutSession.getName());
-        assertEquals(new LocalDate().minusWeeks(1).withDayOfWeek(DateTimeConstants.THURSDAY), workoutSession.getDate());
+        assertEquals(new LocalDate(2017, 06, 21), workoutSession.getDate());
 
-        workoutSession = dataAccess.getWorkoutSession(new LocalDate().withDayOfWeek(DateTimeConstants.TUESDAY));
+        workoutSession = dataAccess.getWorkoutSession(new LocalDate(2017, 06, 25));
         assertNotNull(workoutSession);
         assertEquals("Never Skip Leg Day", workoutSession.getName());
-        assertEquals(new LocalDate().withDayOfWeek(DateTimeConstants.TUESDAY), workoutSession.getDate());
+        assertEquals(new LocalDate(2017, 06, 25), workoutSession.getDate());
 
-        workoutSession = dataAccess.getWorkoutSession(new LocalDate().withDayOfWeek(DateTimeConstants.WEDNESDAY));
+        workoutSession = dataAccess.getWorkoutSession(new LocalDate(2017, 06, 26));
         assertNotNull(workoutSession);
         assertEquals("Work that Core, Get that Score!", workoutSession.getName());
-        assertEquals(new LocalDate().withDayOfWeek(DateTimeConstants.WEDNESDAY), workoutSession.getDate());
+        assertEquals(new LocalDate(2017, 06, 26), workoutSession.getDate());
 
-        workoutSession = dataAccess.getWorkoutSession(new LocalDate().plusWeeks(1).withDayOfWeek(DateTimeConstants.TUESDAY));
+        workoutSession = dataAccess.getWorkoutSession(new LocalDate(2017, 07, 05));
         assertNotNull(workoutSession);
         assertEquals("Marathon Training Starts Here", workoutSession.getName());
-        assertEquals(new LocalDate().plusWeeks(1).withDayOfWeek(DateTimeConstants.TUESDAY), workoutSession.getDate());
+        assertEquals(new LocalDate(2017, 07, 05), workoutSession.getDate());
 
         workoutSession = dataAccess.getWorkoutSession(new LocalDate(2000, 1, 1));
         assertNull(workoutSession);
@@ -114,7 +114,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
                                 XP_LOW_INTENSITY, new ExerciseSets(3, 10))
 
                 }),
-                new LocalDate().withDayOfWeek(DateTimeConstants.TUESDAY),
+                new LocalDate(2017, 06, 25),
                 false));
 
         workoutSessionList1.add(new WorkoutSession(
@@ -124,7 +124,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
                         new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
                                 XP_HIGH_INTENSITY, new ExerciseSets(2, 15))
                 }),
-                new LocalDate().withDayOfWeek(DateTimeConstants.WEDNESDAY),
+                new LocalDate(2017, 06, 26),
                 false));
 
         workoutSessionList1.add(new WorkoutSession(
@@ -135,11 +135,11 @@ public class WorkoutSessionDataAccessTest extends TestCase {
                                 XP_LOW_INTENSITY, new ExerciseSets(3, 10))
 
                 }),
-                new LocalDate().withDayOfWeek(DateTimeConstants.FRIDAY),
+                new LocalDate(2017, 06, 29),
                 false));
 
         List<WorkoutSession> workoutSessionList2 = dataAccess
-                .getSessionsInDateRange(LocalDate.now().withDayOfWeek(DateTimeConstants.MONDAY), LocalDate.now().withDayOfWeek(DateTimeConstants.SUNDAY));
+                .getSessionsInDateRange(new LocalDate(2017, 06, 24), new LocalDate(2017, 06, 30));
 
         assertNotNull(workoutSessionList2);
         assertEquals(3, workoutSessionList2.size());
@@ -147,19 +147,19 @@ public class WorkoutSessionDataAccessTest extends TestCase {
 
         // First WorkoutSession in List
         workoutSessionList2 = dataAccess
-                .getSessionsInDateRange(LocalDate.now().withDayOfWeek(DateTimeConstants.TUESDAY), LocalDate.now().withDayOfWeek(DateTimeConstants.TUESDAY));
+                .getSessionsInDateRange(new LocalDate(2017, 06, 25), new LocalDate(2017, 06, 25));
         assertNotNull(workoutSessionList2);
         assertEquals(1, workoutSessionList2.size());
 
         // Last WorkoutSession in List
         workoutSessionList2 = dataAccess
-                .getSessionsInDateRange(LocalDate.now().withDayOfWeek(DateTimeConstants.WEDNESDAY), LocalDate.now().withDayOfWeek(DateTimeConstants.WEDNESDAY));
+                .getSessionsInDateRange(new LocalDate(2017, 06, 29), new LocalDate(2017, 06, 29));
         assertNotNull(workoutSessionList2);
         assertEquals(1, workoutSessionList2.size());
 
         // No WorkoutSession in range
         workoutSessionList2 = dataAccess
-                .getSessionsInDateRange(LocalDate.now().withDayOfWeek(DateTimeConstants.THURSDAY), LocalDate.now().withDayOfWeek(DateTimeConstants.THURSDAY));
+                .getSessionsInDateRange(new LocalDate(2017, 06, 27), new LocalDate(2017, 06, 27));
         assertNotNull(workoutSessionList2);
 
         assertEquals(0, workoutSessionList2.size());
@@ -223,7 +223,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
                         new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
                                 XP_HIGH_INTENSITY, new ExerciseSets(2, 15))
                 }),
-                new LocalDate().withDayOfWeek(DateTimeConstants.WEDNESDAY),
+                new LocalDate(2017, 06, 29),
                 false));
 
         assertEquals(4, dataAccess.getWorkoutSessionsList().size());
@@ -236,7 +236,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
                         new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
                                 XP_HIGH_INTENSITY, new ExerciseSets(2, 15))
                 }),
-                new LocalDate().withDayOfWeek(DateTimeConstants.WEDNESDAY),
+                new LocalDate(2017, 06, 29),
                 false));
 
         assertEquals(4, dataAccess.getWorkoutSessionsList().size());
@@ -252,7 +252,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
                                 XP_LOW_INTENSITY, new ExerciseSets(3, 10))
 
                 }),
-                new LocalDate().withDayOfWeek(DateTimeConstants.TUESDAY),
+                new LocalDate(2016, 06, 25),
                 false));
 
         assertEquals(3, dataAccess.getWorkoutSessionsList().size());
@@ -267,7 +267,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
                                 XP_LOW_INTENSITY, new ExerciseSets(3, 10))
 
                 }),
-                new LocalDate().withDayOfWeek(DateTimeConstants.FRIDAY),
+                new LocalDate(2017, 06, 29),
                 false));
 
         assertEquals(2, dataAccess.getWorkoutSessionsList().size());
@@ -282,7 +282,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
     public static void testToggleWorkoutCompleted() {
         System.out.println("\nStarting testToggleWorkoutCompleted");
 
-        LocalDate localDate = new LocalDate(LocalDate.now().withDayOfWeek(DateTimeConstants.TUESDAY));
+        LocalDate localDate = new LocalDate(2017, 06, 21);
 
         WorkoutSession workoutSession1 = dataAccess.getWorkoutSession(localDate);
         assertFalse(workoutSession1.isComplete());
