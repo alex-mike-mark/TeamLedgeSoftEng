@@ -1,9 +1,10 @@
-package ledge.muscleup.model.unit.model.experience;
+package ledge.muscleup.unit.model.experience;
 
 import junit.framework.Assert;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,7 +22,7 @@ public class CompletedWorkoutRecordTest {
     private final String WORKOUT_NAME = "placeholder name";
     private final int EXPERIENCE_BEFORE = 1025;
     private final int EXPERIENCE_AFTER = 1550;
-    private final DateTime COMPLETE_DATE = new DateTime(2017, 10, 20, 8, 30);
+    private final LocalDateTime COMPLETE_DATE = new LocalDateTime(2017, 10, 20, 8, 30);
 
     private CompletedWorkoutRecord completedWorkoutRecord;
 

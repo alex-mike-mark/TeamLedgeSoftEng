@@ -1,7 +1,9 @@
-package ledge.muscleup.model.unit.persistence;
+package ledge.muscleup.unit.persistence;
 
 import junit.framework.TestCase;
 
+import org.joda.time.DateTimeConstants;
+import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +27,7 @@ import ledge.muscleup.model.exercise.enums.ExerciseType;
 import ledge.muscleup.model.exercise.enums.TimeUnit;
 import ledge.muscleup.model.exercise.enums.WeightUnit;
 import ledge.muscleup.model.workout.Workout;
-import ledge.muscleup.persistence.InterfaceWorkoutDataAccess;
+import ledge.muscleup.model.workout.WorkoutSession;
 
 /**
  * Used for testing the InterfaceWorkoutDataAccess persistence interface
@@ -36,10 +38,11 @@ import ledge.muscleup.persistence.InterfaceWorkoutDataAccess;
  *
  */
 public class WorkoutDataAccessTest extends TestCase {
-    InterfaceWorkoutDataAccess dataAccess;
-    final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
-    final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
-    final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
+    private final int XP_HIGH_INTENSITY = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
+    private final int XP_MEDIUM_INTENSITY = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
+    private final int XP_LOW_INTENSITY = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
+
+    private TemplateDataAccessStub dataAccess;
 
     /**
      * Constructor for the WorkoutDataAccessTest
@@ -107,27 +110,27 @@ public class WorkoutDataAccessTest extends TestCase {
         List<Workout> workoutList1 = new ArrayList<>();
         workoutList1.add(new Workout("Never Skip Leg Day", new WorkoutExercise[]{
                 new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
-                        xpMediumIntensity, new ExerciseSets(4, 15)),
+                        XP_MEDIUM_INTENSITY, new ExerciseSets(4, 15)),
                 new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
-                        xpMediumIntensity, new ExerciseSets(3, 10))
+                        XP_MEDIUM_INTENSITY, new ExerciseSets(3, 10))
         }));
         workoutList1.add(new Workout("Marathon Training Starts Here", new WorkoutExercise[]{
                 new WorkoutExerciseDistance(new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO),
-                        xpHighIntensity, new ExerciseDistance(2.5, DistanceUnit.MILES)),
+                        XP_HIGH_INTENSITY, new ExerciseDistance(2.5, DistanceUnit.MILES)),
                 new WorkoutExerciseDuration(new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM, ExerciseType.CARDIO),
-                        xpMediumIntensity, new ExerciseDuration(45, TimeUnit.MINUTES))
+                        XP_MEDIUM_INTENSITY, new ExerciseDuration(45, TimeUnit.MINUTES))
         }));
         workoutList1.add(new Workout("Welcome to the Gun Show", new WorkoutExercise[]{
                 new WorkoutExerciseSetsAndWeight(new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM),
-                        xpLowIntensity, new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS)),
+                        XP_LOW_INTENSITY, new ExerciseSetsAndWeight(3, 10, 15, WeightUnit.LBS)),
                 new WorkoutExerciseSets(new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM),
-                        xpHighIntensity, new ExerciseSets(2, 15))
+                        XP_HIGH_INTENSITY, new ExerciseSets(2, 15))
         }));
         workoutList1.add(new Workout("Work that Core, Get that Score!", new WorkoutExercise[]{
                 new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE),
-                        xpLowIntensity, new ExerciseSets(2, 25)),
+                        XP_LOW_INTENSITY, new ExerciseSets(2, 25)),
                 new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
-                        xpHighIntensity, new ExerciseSets(2, 15))
+                        XP_HIGH_INTENSITY, new ExerciseSets(2, 15))
         }));
 
         List<Workout> workoutList2 = dataAccess.getWorkoutsList();
@@ -155,5 +158,40 @@ public class WorkoutDataAccessTest extends TestCase {
         assertEquals(namesList, dataAccess.getWorkoutNamesList());
 
         System.out.println("Finishing testGetWorkoutNamesList\n");
+    }
+
+    /**
+     * Tests that the least completed workout is returned from the database
+     */
+    @Test
+    public void testGetLeastCompletedWorkout() {
+        System.out.println("\nStarting testGetLeastCompletedWorkout");
+
+        //None is least completed since none are completed, getLeastCompleted() returns first one
+        assertEquals(dataAccess.getWorkoutNamesList().get(0), dataAccess.getLeastCompletedWorkout());
+
+        WorkoutSession session = dataAccess.getWorkoutSession(
+                LocalDate.now().minusWeeks(1).withDayOfWeek(DateTimeConstants.THURSDAY));
+        dataAccess.toggleWorkoutComplete(session);
+        assertFalse(dataAccess.getLeastCompletedWorkout().equals(session.getName()));
+
+        session = dataAccess.getWorkoutSession(
+                LocalDate.now().withDayOfWeek(DateTimeConstants.TUESDAY));
+        dataAccess.toggleWorkoutComplete(session);
+        assertFalse(dataAccess.getLeastCompletedWorkout().equals(session.getName()));
+
+        session = dataAccess.getWorkoutSession(
+                LocalDate.now().withDayOfWeek(DateTimeConstants.WEDNESDAY));
+        dataAccess.toggleWorkoutComplete(session);
+        assertFalse(dataAccess.getLeastCompletedWorkout().equals(session.getName()));
+
+        session = dataAccess.getWorkoutSession(
+                LocalDate.now().plusWeeks(1).withDayOfWeek(DateTimeConstants.TUESDAY));
+        dataAccess.toggleWorkoutComplete(session);
+
+        //all have been completed once now, check that getLeastCompleted() returns first one again
+        assertEquals(dataAccess.getWorkoutNamesList().get(0), dataAccess.getLeastCompletedWorkout());
+
+        System.out.println("Finishing testGetLeastCompletedWorkout\n");
     }
 }

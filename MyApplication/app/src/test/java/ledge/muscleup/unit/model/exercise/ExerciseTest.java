@@ -1,4 +1,4 @@
-package ledge.muscleup.model.unit.model.exercise;
+package ledge.muscleup.unit.model.exercise;
 
 import junit.framework.TestCase;
 

@@ -1,4 +1,4 @@
-package ledge.muscleup.model.unit.persistence;
+package ledge.muscleup.unit.persistence;
 
 import junit.framework.TestCase;
 
@@ -30,10 +30,11 @@ import ledge.muscleup.model.workout.WorkoutSession;
  *
  */
 public class WorkoutSessionDataAccessTest extends TestCase {
-    TemplateDataAccessStub dataAccess;
-    final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
-    final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
-    final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
+    private final int XP_HIGH_INTENSITY = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
+    private final int XP_MEDIUM_INTENSITY = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
+    private final int XP_LOW_INTENSITY = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
+
+    private TemplateDataAccessStub dataAccess;
 
     ScheduleWeek scheduleWeek;
     /**
@@ -51,7 +52,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
     public void setUp()
     {
         dataAccess = new TemplateDataAccessStub("Test Workout Sessions");
-        dataAccess.open("dbPath");
+        dataAccess.open("Test Workout Sessions");
     }
 
     /**
@@ -108,9 +109,9 @@ public class WorkoutSessionDataAccessTest extends TestCase {
         workoutSessionList1.add(new WorkoutSession(
                 new Workout("Never Skip Leg Day", new WorkoutExercise[]{
                         new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
-                                xpLowIntensity, new ExerciseSets(4, 15)),
+                                XP_LOW_INTENSITY, new ExerciseSets(4, 15)),
                         new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
-                                xpLowIntensity, new ExerciseSets(3, 10))
+                                XP_LOW_INTENSITY, new ExerciseSets(3, 10))
 
                 }),
                 new LocalDate().withDayOfWeek(DateTimeConstants.TUESDAY),
@@ -119,9 +120,9 @@ public class WorkoutSessionDataAccessTest extends TestCase {
         workoutSessionList1.add(new WorkoutSession(
                 new Workout("Work that Core, Get that Score!", new WorkoutExercise[]{
                         new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE),
-                                xpLowIntensity, new ExerciseSets(2, 25)),
+                                XP_LOW_INTENSITY, new ExerciseSets(2, 25)),
                         new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
-                                xpHighIntensity, new ExerciseSets(2, 15))
+                                XP_HIGH_INTENSITY, new ExerciseSets(2, 15))
                 }),
                 new LocalDate().withDayOfWeek(DateTimeConstants.WEDNESDAY),
                 false));
@@ -129,9 +130,9 @@ public class WorkoutSessionDataAccessTest extends TestCase {
         workoutSessionList1.add(new WorkoutSession(
                 new Workout("Never Skip Leg Day", new WorkoutExercise[]{
                         new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
-                                xpLowIntensity, new ExerciseSets(4, 15)),
+                                XP_LOW_INTENSITY, new ExerciseSets(4, 15)),
                         new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
-                                xpLowIntensity, new ExerciseSets(3, 10))
+                                XP_LOW_INTENSITY, new ExerciseSets(3, 10))
 
                 }),
                 new LocalDate().withDayOfWeek(DateTimeConstants.FRIDAY),
@@ -180,9 +181,9 @@ public class WorkoutSessionDataAccessTest extends TestCase {
         dataAccess.insertWorkoutSession(new WorkoutSession(
                 new Workout("Work that Core, Get that Score!", new WorkoutExercise[]{
                         new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE),
-                                xpLowIntensity, new ExerciseSets(2, 25)),
+                                XP_LOW_INTENSITY, new ExerciseSets(2, 25)),
                         new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
-                                xpHighIntensity, new ExerciseSets(2, 15))
+                                XP_HIGH_INTENSITY, new ExerciseSets(2, 15))
                 }),
                 LocalDate.now().withDayOfWeek(DateTimeConstants.THURSDAY),
                 false));
@@ -193,9 +194,9 @@ public class WorkoutSessionDataAccessTest extends TestCase {
         dataAccess.insertWorkoutSession(new WorkoutSession(
                 new Workout("Work that Core, Get that Score!", new WorkoutExercise[]{
                         new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE),
-                                xpLowIntensity, new ExerciseSets(2, 25)),
+                                XP_LOW_INTENSITY, new ExerciseSets(2, 25)),
                         new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
-                                xpHighIntensity, new ExerciseSets(2, 15))
+                                XP_HIGH_INTENSITY, new ExerciseSets(2, 15))
                 }),
                 LocalDate.now().withDayOfWeek(DateTimeConstants.THURSDAY),
                 false));
@@ -218,9 +219,9 @@ public class WorkoutSessionDataAccessTest extends TestCase {
         dataAccess.removeWorkoutSession(new WorkoutSession(
                 new Workout("Work that Core, Get that Score!", new WorkoutExercise[]{
                         new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE),
-                                xpLowIntensity, new ExerciseSets(2, 25)),
+                                XP_LOW_INTENSITY, new ExerciseSets(2, 25)),
                         new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
-                                xpHighIntensity, new ExerciseSets(2, 15))
+                                XP_HIGH_INTENSITY, new ExerciseSets(2, 15))
                 }),
                 new LocalDate().withDayOfWeek(DateTimeConstants.WEDNESDAY),
                 false));
@@ -231,9 +232,9 @@ public class WorkoutSessionDataAccessTest extends TestCase {
         dataAccess.removeWorkoutSession(new WorkoutSession(
                 new Workout("Work that Core, Get that Score!", new WorkoutExercise[]{
                         new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE),
-                                xpLowIntensity, new ExerciseSets(2, 25)),
+                                XP_LOW_INTENSITY, new ExerciseSets(2, 25)),
                         new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
-                                xpHighIntensity, new ExerciseSets(2, 15))
+                                XP_HIGH_INTENSITY, new ExerciseSets(2, 15))
                 }),
                 new LocalDate().withDayOfWeek(DateTimeConstants.WEDNESDAY),
                 false));
@@ -246,9 +247,9 @@ public class WorkoutSessionDataAccessTest extends TestCase {
         dataAccess.removeWorkoutSession(new WorkoutSession(
                 new Workout("Never Skip Leg Day", new WorkoutExercise[]{
                         new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
-                                xpMediumIntensity, new ExerciseSets(4, 15)),
+                                XP_MEDIUM_INTENSITY, new ExerciseSets(4, 15)),
                         new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
-                                xpLowIntensity, new ExerciseSets(3, 10))
+                                XP_LOW_INTENSITY, new ExerciseSets(3, 10))
 
                 }),
                 new LocalDate().withDayOfWeek(DateTimeConstants.TUESDAY),
@@ -261,9 +262,9 @@ public class WorkoutSessionDataAccessTest extends TestCase {
         dataAccess.removeWorkoutSession(new WorkoutSession(
                 new Workout("Never Skip Leg Day", new WorkoutExercise[]{
                         new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
-                                xpMediumIntensity, new ExerciseSets(4, 15)),
+                                XP_MEDIUM_INTENSITY, new ExerciseSets(4, 15)),
                         new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
-                                xpLowIntensity, new ExerciseSets(3, 10))
+                                XP_LOW_INTENSITY, new ExerciseSets(3, 10))
 
                 }),
                 new LocalDate().withDayOfWeek(DateTimeConstants.FRIDAY),
