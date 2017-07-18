@@ -3,7 +3,6 @@
     <string name="btn_workouts">Workouts</string>
     <string name="btn_exercises">Exercises</string>
     <string name="btn_schedule">Workout Schedule</string>
-    <string name="btn_completeWorkout">COMPLETE WORKOUT</string>
     <string name="btn_next">Next</string>
     <string name="btn_previous">Previous</string>
     <string name="warning">Warning</string>
@@ -11,7 +10,6 @@
     <string name="text_workoutCompleted">Workout Completed!</string>
     <string name="text_exercisesCompleted">Exercises Completed:</string>
     <string name="btn_back">Back</string>
-    <string name="text_levelUp">LEVEL UP!</string>
     <string name="text_completed">Completed</string>
     <string name="text_workoutSessionExpired"> Workout Session Expired: Incomplete</string>
     <string name="btn_goToSchedule">Go To Workout Schedule</string>
