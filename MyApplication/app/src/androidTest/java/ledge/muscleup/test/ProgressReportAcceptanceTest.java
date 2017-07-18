@@ -11,6 +11,7 @@ import ledge.muscleup.presentation.ProgressReportActivity;
 import com.robotium.solo.*;
 import android.test.ActivityInstrumentationTestCase2;
 
+import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
@@ -18,6 +19,7 @@ import org.junit.Test;
 
 public class ProgressReportAcceptanceTest extends ActivityInstrumentationTestCase2<MainActivity> {
     private Solo solo;
+    private LocalDate today;
     private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd");
 
     public ProgressReportAcceptanceTest() {
@@ -28,6 +30,8 @@ public class ProgressReportAcceptanceTest extends ActivityInstrumentationTestCas
         super.setUp();
         solo = new Solo(getInstrumentation());
         getActivity();
+
+        today = new LocalDate();
     }
 
     @Override
@@ -56,7 +60,7 @@ public class ProgressReportAcceptanceTest extends ActivityInstrumentationTestCas
         solo.clickOnButton(3);
         solo.clickInList(3);
 
-        //use clickOnText(date);
+        //use clickOnText(date) extensively.
         //or rather, getButton? Get ListView?
         //date is obv formatted.
 
