@@ -1,4 +1,4 @@
-package ledge.muscleup;
+package ledge.muscleup.integration;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -17,9 +17,8 @@ public class IntegrationTests {
     public static Test suite()
     {
         suite = new TestSuite("Integration tests");
-        // TODO: Move to /test/integration, uncomment lines
-        //suite.addTestSuite(BusinessPersistenceSeamTest.class);
-        //suite.addTestSuite(DataAccessHSQLDBTest.class);
+        suite.addTestSuite(BusinessPersistenceSeamTest.class);
+        suite.addTestSuite(DataAccessHSQLDBTest.class);
         return suite;
     }
 }

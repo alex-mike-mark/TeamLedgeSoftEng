@@ -3,6 +3,8 @@ package ledge.muscleup;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import ledge.muscleup.integration.IntegrationTests;
+
 /**
  * RunIntegrationTests.java used to run all integration tests.
  *
