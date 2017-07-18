@@ -135,6 +135,5 @@ public class Services {
      */
     private static void handleUninitializedDB() {
         System.out.println("Connection to data access has not been established");
-        System.exit(1);
     }
 }
