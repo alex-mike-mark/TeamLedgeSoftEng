@@ -49,7 +49,7 @@ public class ExerciseActivity extends Activity {
         exerciseList = ae.getExercisesList();
 
         TextView title = (TextView) findViewById(R.id.activity_title);
-        title.setText("Exercise Collection");
+        title.setText(R.string.text_exerciseCollection);
 
         adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_exercise, exerciseList);
         listView.setAdapter(adapter);

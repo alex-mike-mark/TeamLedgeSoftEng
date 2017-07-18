@@ -47,7 +47,7 @@ public class WorkoutActivity extends Activity {
         workoutList = aw.getWorkoutsList();
 
         TextView title = (TextView) findViewById(R.id.activity_title);
-        title.setText("Workout Collection");
+        title.setText(R.string.text_workoutCollection);
 
         adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_workout, workoutList);
         listView.setAdapter(adapter);

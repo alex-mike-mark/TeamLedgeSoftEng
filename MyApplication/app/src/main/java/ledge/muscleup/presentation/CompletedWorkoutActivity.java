@@ -58,7 +58,7 @@ public class CompletedWorkoutActivity extends Activity {
         completedWorkoutNameTextView.setText(workoutSession.getName());
 
         TextView completedWorkoutTotalXP = (TextView) findViewById(R.id.completedWorkoutTotalXP);
-        completedWorkoutTotalXP.setText("Total Experience Gained:  +" + String.valueOf(workoutSession.getExperienceValue() + " XP"));
+        completedWorkoutTotalXP.setText(getResources().getString(R.string.text_experienceGained, workoutSession.getExperienceValue()));
 
         adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_completed_exercise, workoutSession.getWorkoutSessionExercises());
         listView.setAdapter(adapter);

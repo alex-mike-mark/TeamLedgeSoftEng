@@ -22,4 +22,8 @@
     <string name="text_xpGained">XP Gained</string>
     <string name="text_levelsGained">Levels Gained</string>
     <string name="text_recentlyCompletedWorkouts">Recently Completed Workouts</string>
+    <string name="text_experienceGained">Total Experience Gained:  +%d XP</string>
+    <string name="text_exerciseCollection">Exercise Collection</string>
+    <string name="text_workoutCollection">Workout Collection</string>
+    <string name="btn_complete">Complete</string>
 </resources>
