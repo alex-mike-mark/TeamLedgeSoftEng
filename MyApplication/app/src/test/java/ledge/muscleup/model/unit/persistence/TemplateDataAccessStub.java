@@ -3,6 +3,7 @@ package ledge.muscleup.model.unit.persistence;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -60,7 +61,8 @@ class TemplateDataAccessStub implements InterfaceExerciseDataAccess, InterfaceWo
     /**
      * Opens the stub database and populates it with some default values
      */
-    public void open(String dbPath) {
+    @Override
+    public void open(Statement statement) {
 
         Exercise exercise;
         WorkoutExercise workoutExercise;
