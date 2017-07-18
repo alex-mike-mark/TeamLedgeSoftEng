@@ -1,4 +1,4 @@
-package ledge.muscleup;
+package ledge.muscleup.test;
 
 /**
  * Created by Alexander on 2017-07-18.
