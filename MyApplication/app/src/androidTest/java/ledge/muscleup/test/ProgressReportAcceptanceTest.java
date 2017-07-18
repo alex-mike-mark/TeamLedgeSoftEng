@@ -4,6 +4,8 @@ package ledge.muscleup.test;
  * Created by Alexander on 2017-07-08.
  */
 
+import ledge.muscleup.business.AccessWorkoutSessions;
+import ledge.muscleup.business.AccessWorkouts;
 import ledge.muscleup.presentation.ExerciseActivity;
 import ledge.muscleup.presentation.MainActivity;
 import ledge.muscleup.presentation.ProgressReportActivity;
@@ -21,6 +23,8 @@ public class ProgressReportAcceptanceTest extends ActivityInstrumentationTestCas
     private Solo solo;
     private LocalDate today;
     private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd");
+    private AccessWorkouts aw;
+    private AccessWorkoutSessions aws;
 
     public ProgressReportAcceptanceTest() {
         super(MainActivity.class);
