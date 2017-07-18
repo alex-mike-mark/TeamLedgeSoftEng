@@ -198,9 +198,10 @@ class TemplateDataAccessStub implements InterfaceDataAccess, InterfaceExerciseDa
     }
 
     /**
-     * Get a new statement from the database connection
+     * Must override getNewStatement from InterfaceDataAccess, however TemplateDataAccessStub
+     * doesn't use SQL, so just return null
      *
-     * @return a new statement
+     * @return null
      */
     @Override
     public Statement getNewStatement() {
