@@ -7,6 +7,9 @@ package ledge.muscleup;
  * @since 2017-05-30
  */
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -35,40 +38,51 @@ import ledge.muscleup.unit.persistence.ExperienceDataAccessTest;
 import ledge.muscleup.unit.persistence.WorkoutDataAccessTest;
 import ledge.muscleup.unit.persistence.WorkoutSessionDataAccessTest;
 
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
-        // model/exercise
-        ExerciseDistanceTest.class,
-        ExerciseDurationTest.class,
-        ExerciseQuantityTest.class,
-        ExerciseSetsAndWeightTest.class,
-        ExerciseSetsTest.class,
-        ExerciseTest.class,
-        WorkoutExerciseDurationTest.class,
-        WorkoutExerciseTest.class,
-        WorkoutSessionExerciseTest.class,
-        WorkoutExerciseSubsTest.class,
-        // model/workout
-        WorkoutSessionTest.class,
-        WorkoutTest.class,
-        // model/experience
-        CompletedWorkoutRecordTest.class,
-        ExperienceHistoryTest.class,
-        LevelProgressTest.class,
-        // model/schedule
-        ScheduleWeekTest.class,
-        // business
-        AccessExercisesTest.class,
-        AccessWorkoutsTest.class,
-        AccessWorkoutSessionsTest.class,
-        AccessExperienceTest.class,
-        //persistence
-        ExerciseDataAccessTest.class,
-        WorkoutDataAccessTest.class,
-        WorkoutSessionDataAccessTest.class,
-        ExperienceDataAccessTest.class
-})
-
 public class AllTests {
+    public static TestSuite suite;
 
+    public static Test suite()
+    {
+        suite = new TestSuite("All tests");
+        testModels();
+        testBusiness();
+        testPersistence();
+        return suite;
+    }
+
+    private static void testModels()
+    {
+        suite.addTestSuite(ExerciseDistanceTest.class);
+        suite.addTestSuite(ExerciseDurationTest.class);
+        suite.addTestSuite(ExerciseQuantityTest.class);
+        suite.addTestSuite(ExerciseSetsAndWeightTest.class);
+        suite.addTestSuite(ExerciseSetsTest.class);
+        suite.addTestSuite(ExerciseTest.class);
+        suite.addTestSuite(WorkoutExerciseDurationTest.class);
+        suite.addTestSuite(WorkoutExerciseTest.class);
+        suite.addTestSuite(WorkoutSessionExerciseTest.class);
+        suite.addTestSuite(WorkoutExerciseSubsTest.class);
+        suite.addTestSuite(WorkoutSessionTest.class);
+        suite.addTestSuite(WorkoutTest.class);
+        suite.addTestSuite(CompletedWorkoutRecordTest.class);
+        suite.addTestSuite(ExperienceHistoryTest.class);
+        suite.addTestSuite(LevelProgressTest.class);
+        suite.addTestSuite(ScheduleWeekTest.class);
+    }
+
+    private static void testBusiness()
+    {
+        suite.addTestSuite(AccessExercisesTest.class);
+        suite.addTestSuite(AccessWorkoutsTest.class);
+        suite.addTestSuite(AccessWorkoutSessionsTest.class);
+        suite.addTestSuite(AccessExperienceTest.class);
+    }
+
+    private static void testPersistence()
+    {
+        suite.addTestSuite(ExerciseDataAccessTest.class);
+        suite.addTestSuite(WorkoutDataAccessTest.class);
+        suite.addTestSuite(WorkoutSessionDataAccessTest.class);
+        suite.addTestSuite(ExperienceDataAccessTest.class);
+    }
 }

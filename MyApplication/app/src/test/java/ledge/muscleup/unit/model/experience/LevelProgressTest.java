@@ -20,7 +20,7 @@ import ledge.muscleup.model.experience.LevelProgress;
  * @version 3.0
  * @since 2017-07-08
  */
-public class LevelProgressTest {
+public class LevelProgressTest extends TestCase {
     private final String WORKOUT_NAME = "placeholder name";
     private final int EXPERIENCE_BEFORE = 1025;
     private final int EXPERIENCE_AFTER = 1550;

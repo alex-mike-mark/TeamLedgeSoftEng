@@ -1,6 +1,7 @@
 package ledge.muscleup.unit.model.experience;
 
 import junit.framework.Assert;
+import junit.framework.TestCase;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
@@ -18,7 +19,7 @@ import ledge.muscleup.model.experience.LevelProgress;
  * @version 3.0
  * @since 2017-07-08
  */
-public class CompletedWorkoutRecordTest {
+public class CompletedWorkoutRecordTest extends TestCase {
     private final String WORKOUT_NAME = "placeholder name";
     private final int EXPERIENCE_BEFORE = 1025;
     private final int EXPERIENCE_AFTER = 1550;
