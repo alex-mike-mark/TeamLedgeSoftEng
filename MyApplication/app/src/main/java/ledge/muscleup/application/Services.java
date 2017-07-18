@@ -118,8 +118,15 @@ public class Services {
     public static void closeDataAccess() {
         if (dataAccessService != null) {
             dataAccessService.close();
-            exerciseDataAccessService.close();
             dataAccessService = null;
+            exerciseDataAccessService.close();
+            exerciseDataAccessService = null;
+            experienceDataAccessService.close();
+            experienceDataAccessService = null;
+            workoutDataAccessService.close();
+            workoutDataAccessService = null;
+            workoutSessionDataAccessService.close();
+            workoutSessionDataAccessService = null;
         }
     }
 
