@@ -60,5 +60,8 @@ public class TodayAcceptanceTest extends ActivityInstrumentationTestCase2<MainAc
 
         solo.clickOnButton(0); //today's scheduled workout
         assertTrue("Today's workout not showing", solo.searchText(currentDaySession.getName()));
+
+        solo.goBack();
+        solo.clickOnButton(date.getDayOfWeek());
     }
 }

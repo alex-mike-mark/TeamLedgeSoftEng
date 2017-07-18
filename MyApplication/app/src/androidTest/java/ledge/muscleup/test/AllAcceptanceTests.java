@@ -11,12 +11,13 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+        TodayAcceptanceTest.class,
+        WorkoutScheduleAcceptanceTest.class,
         ExerciseAcceptanceTest.class,
         ProgressReportAcceptanceTest.class,
         SuggestedAcceptanceTest.class,
-        TodayAcceptanceTest.class,
         WorkoutAcceptanceTest.class,
-        WorkoutScheduleAcceptanceTest.class
+
 })
 
 
