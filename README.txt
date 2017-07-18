@@ -125,3 +125,7 @@ The log for iteration 3 is in this google doc: <https://docs.google.com/document
 		  constructor that is quite large, and takes in 5 parameters, we found that all the parameters were necessary and
 		  it didn't make sense to make it such that some of the parameters could be specified. For these reasons, we decided
 		  not to apply the builder pattern in the end, as we felt it was not necessary.
+
+###Known Issues###
+-The Robotium acceptance tests are extending a deprecated method "ActivityInstrumentationTestCase2" but we were unable to find a 
+		replacement in the given time frame
