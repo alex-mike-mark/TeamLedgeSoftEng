@@ -7,12 +7,18 @@ import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Before;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
 import ledge.muscleup.application.Services;
 import ledge.muscleup.application.Main;
 import ledge.muscleup.business.AccessExercises;
+import ledge.muscleup.business.AccessExperience;
 import ledge.muscleup.business.AccessWorkoutSessions;
 import ledge.muscleup.business.AccessWorkouts;
 import ledge.muscleup.model.exercise.Exercise;
@@ -30,6 +36,7 @@ import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
 import ledge.muscleup.model.exercise.enums.ExerciseType;
 import ledge.muscleup.model.exercise.enums.TimeUnit;
 import ledge.muscleup.model.exercise.enums.WeightUnit;
+import ledge.muscleup.model.experience.CompletedWorkoutRecord;
 import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
@@ -62,8 +69,30 @@ public class BusinessPersistenceSeamTest extends TestCase {
     }
 
     @After
-    public void tearDown() {
+    public void tearDown() throws IOException{
         Services.closeDataAccess();
+    /*    File sourceFile = new File("/app/src/main/assets/db/MU_DB.script");
+        File destFile = new File("/app/MU_DB.script");
+            if(!destFile.exists()) {
+                destFile.createNewFile();
+            }
+
+            FileChannel source = null;
+            FileChannel destination = null;
+
+            try {
+                source = new FileInputStream(sourceFile).getChannel();
+                destination = new FileOutputStream(destFile).getChannel();
+                destination.transferFrom(source, 0, source.size());
+            }
+            finally {
+                if (source != null) {
+                    source.close();
+                }
+                if (destination != null) {
+                    destination.close();
+                }
+            } */
     }
 
     public void testAccessExercises() {
@@ -358,5 +387,87 @@ public class BusinessPersistenceSeamTest extends TestCase {
         assertEquals(0, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
 
         System.out.println("Finishing Integration test of AccessWorkoutSessions to persistence\n");
+    }
+
+    public void testAccessExperience() {
+        System.out.println("\nStarting Integration test of AccessExperience to persistence");
+
+        AccessExperience accessExperience = new AccessExperience();
+        AccessWorkoutSessions accessWorkoutSessions = new AccessWorkoutSessions(); //needed in order to complete workouts
+
+        assertEquals(0, accessExperience.getCompletedWorkouts().size());
+        assertNull(accessExperience.getMostRecentCompletedWorkout());
+
+        accessWorkoutSessions.insertWorkoutSession(new WorkoutSession(
+                new Workout("Never Skip Leg Day", new WorkoutExercise[]{
+                        new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
+                                xpLowIntensity, new ExerciseSets(4, 15)),
+                        new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
+                                xpLowIntensity, new ExerciseSets(3, 10))
+
+                }),
+                LocalDate.now().withDayOfWeek(DateTimeConstants.MONDAY),
+                false)
+        );
+
+        accessWorkoutSessions.toggleWorkoutCompleted(
+                accessWorkoutSessions.getWorkoutSession(LocalDate.now().withDayOfWeek(DateTimeConstants.MONDAY)));
+        assertEquals(1, accessExperience.getCompletedWorkouts().size());
+        assertNotNull(accessExperience.getCompletedWorkouts().get(0));
+        assertEquals("Never Skip Leg Day", accessExperience.getCompletedWorkouts().get(0).getWorkoutName());
+
+        assertEquals(accessExperience.getMostRecentCompletedWorkout().getWorkoutName(), "Never Skip Leg Day");
+        assertEquals(accessExperience.getMostRecentCompletedWorkout().getExperienceGained(),
+                accessWorkoutSessions.getWorkoutSession(LocalDate.now().withDayOfWeek(DateTimeConstants.MONDAY))
+                .getExperienceValue());
+
+        accessWorkoutSessions.insertWorkoutSession(new WorkoutSession(
+                new Workout("Work that Core, Get that Score!", new WorkoutExercise[]{
+                        new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE),
+                                xpLowIntensity, new ExerciseSets(2, 25)),
+                        new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
+                                xpHighIntensity, new ExerciseSets(2, 25))
+                }),
+                LocalDate.now().withDayOfWeek(DateTimeConstants.TUESDAY),
+                false)
+        );
+        accessWorkoutSessions.toggleWorkoutCompleted(
+                accessWorkoutSessions.getWorkoutSession(LocalDate.now().withDayOfWeek(DateTimeConstants.TUESDAY)));
+        assertEquals(2, accessExperience.getCompletedWorkouts().size());
+        assertEquals("Never Skip Leg Day", accessExperience.getCompletedWorkouts().get(0).getWorkoutName());
+        assertEquals("Work that Core, Get that Score!", accessExperience.getCompletedWorkouts().get(1).getWorkoutName());
+        assertTrue(accessExperience.getCompletedWorkouts().get(0).getExperienceAfterCompletion() >
+                accessExperience.getCompletedWorkouts().get(1).getExperienceAfterCompletion());
+
+        assertEquals("Work that Core, Get that Score!",
+                accessExperience.getMostRecentCompletedWorkout().getWorkoutName());
+        assertEquals(accessExperience.getMostRecentCompletedWorkout().getExperienceGained(),
+                accessWorkoutSessions.getWorkoutSession(LocalDate.now().withDayOfWeek(DateTimeConstants.TUESDAY))
+                .getExperienceValue());
+
+        accessWorkoutSessions.removeWorkoutSession(new WorkoutSession(
+                new Workout("Never Skip Leg Day", new WorkoutExercise[]{
+                        new WorkoutExerciseSets(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
+                                xpLowIntensity, new ExerciseSets(4, 15)),
+                        new WorkoutExerciseSets(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG),
+                                xpLowIntensity, new ExerciseSets(3, 10))
+
+                }),
+                LocalDate.now().withDayOfWeek(DateTimeConstants.MONDAY),
+                false)
+        );
+
+        accessWorkoutSessions.removeWorkoutSession(new WorkoutSession(
+                new Workout("Work that Core, Get that Score!", new WorkoutExercise[]{
+                        new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE),
+                                xpLowIntensity, new ExerciseSets(2, 25)),
+                        new WorkoutExerciseSets(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE),
+                                xpHighIntensity, new ExerciseSets(2, 25))
+                }),
+                LocalDate.now().withDayOfWeek(DateTimeConstants.TUESDAY),
+                false)
+        );
+
+        System.out.println("Finishing Integration test of AccessExperience to persistence\n");
     }
 }
