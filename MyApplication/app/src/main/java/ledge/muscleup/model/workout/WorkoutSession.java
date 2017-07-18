@@ -6,6 +6,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 
 import ledge.muscleup.model.exercise.WorkoutExercise;
@@ -132,7 +133,17 @@ public class WorkoutSession {
      * Toggles the completed state of this workout
      */
     public void toggleCompleted() {
+        Iterator<WorkoutSessionExercise> exerciseIterator;
+        WorkoutSessionExercise workoutSessionExercise;
+
         isComplete = !isComplete;
+        exerciseIterator = exerciseList.iterator();
+        while(exerciseIterator.hasNext()) {
+            workoutSessionExercise = exerciseIterator.next();
+            if (!workoutSessionExercise.isComplete())
+                workoutSessionExercise.toggleCompleted();
+        }
+
     }
 
     /**
