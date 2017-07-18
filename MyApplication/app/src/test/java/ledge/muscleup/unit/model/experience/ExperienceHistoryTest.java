@@ -1,6 +1,7 @@
 package ledge.muscleup.unit.model.experience;
 
 import junit.framework.Assert;
+import junit.framework.TestCase;
 
 import org.joda.time.LocalDateTime;
 import org.junit.Before;
@@ -22,7 +23,7 @@ import static java.util.Collections.enumeration;
  * @version 3.0
  * @since 2017-07-13
  */
-public class ExperienceHistoryTest {
+public class ExperienceHistoryTest extends TestCase {
     private ExperienceHistory experienceHistory;
 
     /**

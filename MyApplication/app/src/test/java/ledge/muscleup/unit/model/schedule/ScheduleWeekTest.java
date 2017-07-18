@@ -1,5 +1,7 @@
 package ledge.muscleup.unit.model.schedule;
 
+import junit.framework.TestCase;
+
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
@@ -39,7 +41,7 @@ import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
  * @version 1.0
  * @since 2017-06-06
  */
-public class ScheduleWeekTest {
+public class ScheduleWeekTest extends TestCase {
     private ScheduleWeek scheduleWeek;
     private int weekStartDay;
     private InterfaceAccessWorkoutSessions dataAccess;
