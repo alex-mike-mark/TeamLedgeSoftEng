@@ -36,19 +36,19 @@ public class ExerciseDataAccessTest extends TestCase {
     /**
      * Initializes the ExerciseDataAccess to be used in the test
      */
-  /* @Before
+   @Before
     public void setUp() {
         dataAccess = new TemplateDataAccessStub("Test Exercise");
         dataAccess.open(null);
-    }*/
+    }
 
     /**
      * Closes the DataAccess connection
      */
-  /* @After
+   @After
     public void tearDown() {
         dataAccess.close();
-    }*/
+    }
 
 
     public void testExerciseDataAccess()
