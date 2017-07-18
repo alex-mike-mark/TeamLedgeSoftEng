@@ -57,7 +57,7 @@ public class WorkoutActivity extends Activity {
 
     /**
      * Places listeners on each list item so clicking will open WorkoutDetailsActivity
-     * @param workoutArray
+     * @param workoutArray a list of workouts
      */
     private void setupListeners(final List workoutArray) {
         ListView list = (ListView) findViewById(R.id.list_panel);

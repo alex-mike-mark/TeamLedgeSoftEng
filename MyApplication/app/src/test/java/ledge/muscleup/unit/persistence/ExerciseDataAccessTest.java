@@ -17,8 +17,8 @@ import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
 /**
  * Used for testing the InterfaceExerciseDataAccess persistence interface
  *
- * @author: Ryan Koop
- * @version: 1.0
+ * @author Ryan Koop
+ * @version 1.0
  * @since 2017-06-29
  *
  */

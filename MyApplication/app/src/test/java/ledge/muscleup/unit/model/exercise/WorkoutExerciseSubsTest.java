@@ -21,7 +21,11 @@ import ledge.muscleup.model.exercise.enums.TimeUnit;
 import ledge.muscleup.model.exercise.enums.WeightUnit;
 
 /**
- * Created by Alexander on 2017-06-27.
+ * Tests workout exercise subclasses
+ *
+ * @author Alexander
+ * @version 2.0
+ * @since 2017-06-27
  */
 
 public class WorkoutExerciseSubsTest extends TestCase{

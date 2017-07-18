@@ -4,7 +4,11 @@ import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
 import ledge.muscleup.model.exercise.enums.ExerciseType;
 
 /**
- * Created by Alexander on 2017-06-24.
+ * An abstract exercise which contains a contains a suggested amount of exercise
+ *
+ * @author Alexander
+ * @version 2.0
+ * @since 2017-06-24
  */
 
 public abstract class WorkoutExercise {
@@ -61,8 +65,8 @@ public abstract class WorkoutExercise {
      * Note, this method takes in a generic InterfaceExerciseQuantity where specific subclasses require
      * specific implementations of that interface. Type checking MUST happen in the implementation.
      * I am quite aware this isn't great but whatever.
-     * @param quantity
-     * @return
+     * @param quantity the quantity of exercise to update the workout exercise with
+     * @return a boolean representing whether the quantity was updated or not
      */
     public abstract boolean updateQuantity(InterfaceExerciseQuantity quantity);
 

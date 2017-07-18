@@ -236,7 +236,7 @@ public class Workout {
 
     /**
      * Returns the experience value of a workout, which is the sum of the xp values of its exercises
-     * @return
+     * @returns the experience value of a workout
      */
     public int getExperienceValue() {
         int total = 0;
