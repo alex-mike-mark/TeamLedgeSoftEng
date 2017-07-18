@@ -172,9 +172,9 @@ public class MainActivity extends Activity {
      * Copies all assets files to a given directory, provided they don't already exists
      * @param assets the files in the assets folder
      * @param directory the directory to copy to
-     * @throws IOException when an error occuring while reading or writing
+     * @throws IOException when an error occurring while reading or writing
      */
-    public void copyAssetsToDirectory(String[] assets, File directory) throws IOException {
+    private void copyAssetsToDirectory(String[] assets, File directory) throws IOException {
         AssetManager assetManager = getAssets();
 
         for (String asset : assets) {
@@ -185,7 +185,7 @@ public class MainActivity extends Activity {
 
             File outFile = new File(copyPath);
 
-            //if (!outFile.exists()) {
+            if (!outFile.exists()) {
                 InputStreamReader in = new InputStreamReader(assetManager.open(asset));
                 FileWriter out = new FileWriter(outFile);
 
@@ -197,7 +197,7 @@ public class MainActivity extends Activity {
 
                 out.close();
                 in.close();
-            //}
+            }
         }
     }
 }

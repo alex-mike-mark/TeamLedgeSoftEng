@@ -28,7 +28,6 @@ import ledge.muscleup.model.workout.WorkoutSession;
  */
 public class WorkoutSessionDataAccess implements InterfaceWorkoutSessionDataAccess {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormat.forPattern("yyyy-MM-dd");
-    private static final int NULL_NUM = -1;
 
     private Statement statement;
     private ResultSet resultSet, resultSet2;
@@ -137,28 +136,28 @@ public class WorkoutSessionDataAccess implements InterfaceWorkoutSessionDataAcce
                 xpValue = DataAccess.XP_PER_INTENSITY * (ExerciseIntensity.valueOf(resultSet.getString("Intensity")).ordinal() + 1);
                 distance = resultSet.getDouble("Distance");
                 if (resultSet.wasNull())
-                    distance = NULL_NUM;
+                    distance = DataAccess.NULL_NUM;
                 distanceUnitString = resultSet.getString("DistanceUnit");
                 if (!resultSet.wasNull())
                     distanceUnit = DistanceUnit.valueOf(distanceUnitString);
 
                 duration = resultSet.getInt("Duration");
                 if (resultSet.wasNull())
-                    duration = NULL_NUM;
+                    duration = DataAccess.NULL_NUM;
                 timeUnitString = resultSet.getString("DurationUnit");
                 if (!resultSet.wasNull())
                     timeUnit = TimeUnit.valueOf(timeUnitString);
 
                 sets = resultSet.getInt("Sets");
                 if (resultSet.wasNull())
-                    sets = NULL_NUM;
+                    sets = DataAccess.NULL_NUM;
                 reps = resultSet.getInt("Reps");
                 if (resultSet.wasNull())
-                    reps = NULL_NUM;
+                    reps = DataAccess.NULL_NUM;
 
                 weight = resultSet.getDouble("Weight");
                 if (resultSet.wasNull())
-                    weight = NULL_NUM;
+                    weight = DataAccess.NULL_NUM;
                 weightUnitString = resultSet.getString("WeightUnit");
                 if (!resultSet.wasNull())
                     weightUnit = WeightUnit.valueOf(weightUnitString);
@@ -279,28 +278,28 @@ public class WorkoutSessionDataAccess implements InterfaceWorkoutSessionDataAcce
                 xpValue = DataAccess.XP_PER_INTENSITY * (ExerciseIntensity.valueOf(resultSet.getString("Intensity")).ordinal() + 1);
                 distance = resultSet.getDouble("Distance");
                 if (resultSet.wasNull())
-                    distance = NULL_NUM;
+                    distance = DataAccess.NULL_NUM;
                 distanceUnitString = resultSet.getString("DistanceUnit");
                 if (!resultSet.wasNull())
                     distanceUnit = DistanceUnit.valueOf(distanceUnitString);
 
                 duration = resultSet.getInt("Duration");
                 if (resultSet.wasNull())
-                    duration = NULL_NUM;
+                    duration = DataAccess.NULL_NUM;
                 timeUnitString = resultSet.getString("DurationUnit");
                 if (!resultSet.wasNull())
                     timeUnit = TimeUnit.valueOf(timeUnitString);
 
                 sets = resultSet.getInt("Sets");
                 if (resultSet.wasNull())
-                    sets = NULL_NUM;
+                    sets = DataAccess.NULL_NUM;
                 reps = resultSet.getInt("Reps");
                 if (resultSet.wasNull())
-                    reps = NULL_NUM;
+                    reps = DataAccess.NULL_NUM;
 
                 weight = resultSet.getDouble("Weight");
                 if (resultSet.wasNull())
-                    weight = NULL_NUM;
+                    weight = DataAccess.NULL_NUM;
                 weightUnitString = resultSet.getString("WeightUnit");
                 if (!resultSet.wasNull())
                     weightUnit = WeightUnit.valueOf(weightUnitString);
@@ -457,7 +456,7 @@ public class WorkoutSessionDataAccess implements InterfaceWorkoutSessionDataAcce
      */
     @Override
     public void toggleWorkoutComplete(WorkoutSession workoutSession) {
-        int workoutSessionID, previousXPValue = 0;
+        int workoutSessionID, workoutSessionExerciseID, previousXPValue = 0;
 
         try {
             //get the ID of the workout session to be updated
@@ -467,6 +466,19 @@ public class WorkoutSessionDataAccess implements InterfaceWorkoutSessionDataAcce
                     "WHERE      WS.ScheduledDate = DATE'" + DATE_TIME_FORMATTER.print(workoutSession.getDate()) + "'");
             if (resultSet.next()) {
                 workoutSessionID = resultSet.getInt("ID");
+
+                //mark each exercise as complete
+                resultSet = statement.executeQuery(
+                        "SELECT     WSC.ExerciseID " +
+                        "FROM       WorkoutSessionContents WSC " +
+                        "WHERE      WSC.WorkoutSessionID = " + workoutSessionID);
+                while (resultSet.next()) {
+                    workoutSessionExerciseID = resultSet.getInt("ExerciseID");
+                    statement.executeQuery(
+                            "UPDATE     WorkoutSessionExercises WSE " +
+                            "SET        WSE.Complete = True " + 
+                            "WHERE      WSE.ID = " + workoutSessionExerciseID);
+                }
 
                 //mark the workout as complete
                 statement.executeQuery(

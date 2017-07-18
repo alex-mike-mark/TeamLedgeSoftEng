@@ -7,7 +7,6 @@ import java.util.List;
 import ledge.muscleup.application.Services;
 import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.WorkoutSession;
-import ledge.muscleup.persistence.DataAccess;
 import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
 
 /**
@@ -58,7 +57,7 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
     /**
      * A method that returns a list of workout sessions scheduled in the current week
      * @param weekStartDay day to start week at
-     * @returna list of all workout sessions scheduled in the current week
+     * @return list of all workout sessions scheduled in the current week
      */
     public List<WorkoutSession> getCurrentWeekSessions(int weekStartDay) {
         LocalDate firstOfThisWeek = new LocalDate().withDayOfWeek(weekStartDay);

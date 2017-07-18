@@ -4,8 +4,6 @@ import java.util.List;
 
 import ledge.muscleup.application.Services;
 import ledge.muscleup.model.exercise.Exercise;
-import ledge.muscleup.persistence.DataAccess;
-import ledge.muscleup.persistence.InterfaceDataAccess;
 import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
 
 /**

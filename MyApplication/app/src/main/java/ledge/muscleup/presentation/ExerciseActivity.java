@@ -30,7 +30,6 @@ import ledge.muscleup.model.exercise.Exercise;
  */
 
 public class ExerciseActivity extends Activity {
-    private ListItemAdapter adapter;
     private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
     /**
      *  onCreate initializes ExerciseActivity
@@ -40,7 +39,7 @@ public class ExerciseActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         InterfaceAccessExercises ae = new AccessExercises();
 
-        List exerciseList;
+        List<Exercise> exerciseList;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_display);
@@ -49,9 +48,9 @@ public class ExerciseActivity extends Activity {
         exerciseList = ae.getExercisesList();
 
         TextView title = (TextView) findViewById(R.id.activity_title);
-        title.setText("Exercise Collection");
+        title.setText(R.string.text_exerciseCollection);
 
-        adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_exercise, exerciseList);
+        ListItemAdapter adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_exercise, exerciseList);
         listView.setAdapter(adapter);
         listView.setItemsCanFocus(true);
     }
@@ -60,7 +59,7 @@ public class ExerciseActivity extends Activity {
      * A custom extension of the ArrayAdapter class, used for displaying exercise name as well
      * as exercise type and intensity
      */
-    private class ListItemAdapter extends ArrayAdapter {
+    private class ListItemAdapter extends ArrayAdapter<Exercise> {
         private List<Exercise> exerciseList;
         Context context;
 

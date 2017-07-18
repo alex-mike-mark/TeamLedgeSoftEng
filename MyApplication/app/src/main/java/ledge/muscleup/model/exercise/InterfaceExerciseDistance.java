@@ -10,7 +10,7 @@ import ledge.muscleup.model.exercise.enums.DistanceUnit;
  * @since 2017-06-03
  */
 
-public interface InterfaceExerciseDistance extends InterfaceExerciseQuantity {
+interface InterfaceExerciseDistance extends InterfaceExerciseQuantity {
     /**
      * Returns the distance for which an exercise is completed
      * @return the distance

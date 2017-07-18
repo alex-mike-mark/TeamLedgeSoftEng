@@ -20,13 +20,13 @@ import ledge.muscleup.model.exercise.enums.ExerciseType;
  * @since 2017-06-07
  */
 public class WorkoutSessionExerciseTest extends TestCase {
-    WorkoutSessionExercise workoutSessionExercise1, workoutSessionExercise2, workoutSessionExercise3;
+    private WorkoutSessionExercise workoutSessionExercise1, workoutSessionExercise2, workoutSessionExercise3;
 
-    WorkoutExerciseSets powerClean1, powerClean2, deadlift;
+    private WorkoutExerciseSets powerClean1, powerClean2, deadlift;
 
-    final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
-    final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
-    final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
+    private final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
+    private final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
+    private final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
 
 
     /**

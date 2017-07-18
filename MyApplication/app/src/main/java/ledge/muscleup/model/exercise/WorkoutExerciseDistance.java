@@ -41,8 +41,8 @@ public class WorkoutExerciseDistance extends WorkoutExercise{
      * Note, this method takes in a generic InterfaceExerciseQuantity where specific subclasses require
      * specific implementations of that interface. Type checking MUST happen in the implementation.
      * I am quite aware this isn't great but whatever.
-     * @param quantity
-     * @return
+     * @param quantity the quantity of exercise to update the workout exercise with
+     * @return a boolean representing whether the quantity was updated or not
      */
     @Override
     public boolean updateQuantity(InterfaceExerciseQuantity quantity) {

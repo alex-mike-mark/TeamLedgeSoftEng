@@ -1,7 +1,5 @@
 package ledge.muscleup.unit.persistence;
 
-import junit.framework.TestCase;
-
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 import org.junit.After;
@@ -9,15 +7,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Date;
-
 import ledge.muscleup.model.workout.WorkoutSession;
 
 /**
  * Used for testing the InterfaceExperienceDataAccess persistence interface
  *
- * @author: Cole Kehler
- * @version: 3.0
+ * @author Cole Kehler
+ * @version 3.0
  * @since 2017-07-14
  *
  */
