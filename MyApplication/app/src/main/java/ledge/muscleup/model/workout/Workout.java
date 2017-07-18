@@ -49,8 +49,8 @@ public class Workout {
             this.name = name;
 
             exerciseList = new ArrayList<>();
-            for (int i = 0; i < exercises.length; i++)
-                exerciseList.add(exercises[i]);
+            for (WorkoutExercise exercise : exercises)
+                exerciseList.add(exercise);
         }
     }
 

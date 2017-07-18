@@ -98,9 +98,9 @@ public class ScheduleWeek {
     public List<WorkoutSession> getWorkoutSessionList() {
         ArrayList<WorkoutSession> workoutList = new ArrayList<>();
 
-        for (int i = 0; i < workoutSessions.length; i++)
-            if (workoutSessions[i] != null)
-                workoutList.add(workoutSessions[i]);
+        for (WorkoutSession workoutSession : workoutSessions)
+            if (workoutSession != null)
+                workoutList.add(workoutSession);
 
         return workoutList;
     }
@@ -194,8 +194,8 @@ public class ScheduleWeek {
     public String toString() {
         String result = "";
 
-        for (int i = 0; i < workoutSessions.length; i++)
-            result += workoutSessions[i].toString() + "\n";
+        for (WorkoutSession workoutSession : workoutSessions)
+            result += workoutSession.toString() + "\n";
 
         return result;
     }
