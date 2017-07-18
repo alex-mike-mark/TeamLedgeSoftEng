@@ -24,7 +24,7 @@ import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
  */
 
 public class ExerciseDataAccessTest extends TestCase {
-    static InterfaceExerciseDataAccess dataAccess;
+    static TemplateDataAccessStub dataAccess;
 
     /**
      * Constructor for the ExerciseDataAccessTest
@@ -39,7 +39,7 @@ public class ExerciseDataAccessTest extends TestCase {
    @Before
     public void setUp() {
         dataAccess = new TemplateDataAccessStub("Test Exercise");
-        dataAccess.open(null);
+        dataAccess.open("Test Exercise");
     }
 
     /**
@@ -50,26 +50,6 @@ public class ExerciseDataAccessTest extends TestCase {
         dataAccess.close();
     }
 
-
-    public void testExerciseDataAccess()
-    {
-        TemplateDataAccessStub dataAccess;
-
-        Services.closeDataAccess();
-
-        System.out.println("\nStarting Persistence test ExerciseDataAccess (using stub)");
-
-        // Use the following statement to run with the stub database
-        dataAccess = new TemplateDataAccessStub("Test Exercise");
-        dataAccess.open("Test Exercise");
-
-        testGetExercisesList();
-
-        dataAccess.close();
-        System.out.println("Finished Persistence test DataAccess (using stub)");
-    }
-
-
     /**
      * Tests that getting the list of exercises works properly
      */
@@ -77,20 +57,17 @@ public class ExerciseDataAccessTest extends TestCase {
     public static void testGetExercisesList() {
         System.out.println("\nStarting testGetExercisesList");
 
-        InterfaceExerciseDataAccess dataAccess;
-        dataAccess = Services.getExerciseDataAccess();
-
         // Exercises by object already in list
         List<Exercise> exerciseList1 = new ArrayList<>();
         exerciseList1.add(new Exercise("Bicep Curls", ExerciseIntensity.LOW, ExerciseType.ARM));
+        exerciseList1.add(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE));
+        exerciseList1.add(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG));
         exerciseList1.add(new Exercise("Push-Ups", ExerciseIntensity.HIGH, ExerciseType.ARM));
         exerciseList1.add(new Exercise("Running", ExerciseIntensity.HIGH, ExerciseType.CARDIO));
-        exerciseList1.add(new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM,
-                ExerciseType.CARDIO));
-        exerciseList1.add(new Exercise("Crunches", ExerciseIntensity.LOW, ExerciseType.CORE));
         exerciseList1.add(new Exercise("Bicycle Kicks", ExerciseIntensity.HIGH, ExerciseType.CORE));
         exerciseList1.add(new Exercise("Squats", ExerciseIntensity.MEDIUM, ExerciseType.LEG));
-        exerciseList1.add(new Exercise("Lunges", ExerciseIntensity.MEDIUM, ExerciseType.LEG));
+        exerciseList1.add(new Exercise("Exercise Bike", ExerciseIntensity.MEDIUM,
+                ExerciseType.CARDIO));
 
         List<Exercise> exerciseList2 = dataAccess.getExercisesList();
         assertNotNull(exerciseList2);
