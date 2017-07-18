@@ -1,4 +1,4 @@
-This is the submission for iteration 2 of MuscleUp.
+This is the submission for iteration 3 of MuscleUp.
 MuscleUp is an app intended to help people create and stick to their fitness goals. 
 The app is intended to feature a variety of exercises and workouts, the ability to create custom workouts, schedule sessions and gamify their progress.
 Created by: Cole Kehler, Ryan Koop, Matt Smidt, Alex Mark and Jon Ingram
@@ -8,7 +8,7 @@ https://github.com/kerosenecity/TeamLedgeSoftEng
 
 ###Contents of this .zip###
 This readme plus our source code. The log is found in a google doc linked far below.
-Also contained is our hopes, dreams and endless passion for working out, though they don't compress so well.
+Also contained is our endless ambitions for a future society in which all lifeforms feel inspired to MuscleUp, though they don't compress so well.
 
 ###Packages###
 	main
@@ -107,19 +107,21 @@ Also contained is our hopes, dreams and endless passion for working out, though 
 ###Log Location###
 The log for iteration 1 is in this google doc: <https://docs.google.com/document/d/18dOXb27PLIrS7kjHcLGODmWes66gZQpesqNNg8ew2Go/edit>
 The log for iteration 2 is in this google doc: <https://docs.google.com/document/d/1U3ojEM5CPwwEfbJQhXPyOEgiolTkioJ4-ktY7Vx_Tt4/edit>
+The log for iteration 3 is in this google doc: <https://docs.google.com/document/d/1YRsWGrI4YPK1E0Yw9NCT6QUgqCC_UO3N1V3NLjMwXoY/edit>
 
 ###New Features and Where to Find Them###
-The major features implemented in this release are:
-New and improved look and feel
-The ability to view and navigate a weekly view under Scheduled Workouts (press "next" or "previous")
-The ability to jump to the current date when navigating Scheduled Workouts (press "current week" button)
-The ability to add and remove scheduled workouts in Scheduled Workouts (press "+" or "x")
-The ability to complete a scheduled workout and view experience points gained (check all exercises and click "Complete Workout")
+-The major features implemented in this release are:
+-The ability to gain experience points and levels from completing workouts
+-The ability to view a current progress report of experience gained, level, and recently completed workouts in Progress Report
+-The ability to quickly navigate to today's scheduled workout right from the main menu screen
+-Provide users with a daily suggested workout on the main menu screen, and the ability to view this suggested workout by clicking on
+ the suggested workout
+-The ability to navigate straight to the schedule when viewing the contents of a workout in Workouts
 
 ###Known Code Smells###
--The builder pattern should be used to help construct objects 
--The presentation layer is calling toString() methods for exercise quantities
--The queries we have written for accessing our database are potentially insecure, as no measures have yet been taken to prevent SQL injection. 
-
-We are aware that these code smells still exist, and thus realize we have technical debt, but did not have time to fix these up in Iteration
-2. Our plan is to make fixing these smells up a priority early in Iteration 3.
+-Builder pattern- We investigated applying the Builder pattern, however after we ended up removing some parameters from constructors
+		  that weren't necessary due to changed/axed features (such as isFavourite), we found that the majority of our
+		  constructors were much smaller and the objects were much easier to build than previously. While there is still one
+		  constructor that is quite large, and takes in 5 parameters, we found that all the parameters were necessary and
+		  it didn't make sense to make it such that some of the parameters could be specified. For these reasons, we decided
+		  not to apply the builder pattern in the end, as we felt it was not necessary.
