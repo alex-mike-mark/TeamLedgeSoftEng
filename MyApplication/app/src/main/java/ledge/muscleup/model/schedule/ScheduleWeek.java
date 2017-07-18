@@ -1,15 +1,11 @@
 package ledge.muscleup.model.schedule;
 
-import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 import ledge.muscleup.model.workout.WorkoutSession;
 

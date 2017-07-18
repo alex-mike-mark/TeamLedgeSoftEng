@@ -1,6 +1,5 @@
 package ledge.muscleup.presentation;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 
 import ledge.muscleup.model.exercise.ExerciseDistance;

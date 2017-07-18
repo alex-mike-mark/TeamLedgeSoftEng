@@ -7,7 +7,6 @@ import java.util.List;
 import ledge.muscleup.application.Services;
 import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.WorkoutSession;
-import ledge.muscleup.persistence.DataAccess;
 import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
 
 /**

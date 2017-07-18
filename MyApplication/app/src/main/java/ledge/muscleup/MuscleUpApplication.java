@@ -13,7 +13,7 @@ import net.danlew.android.joda.JodaTimeAndroid;
  * @since 2017-06-05
  */
 
-final class MuscleUpApplication extends Application {
+public final class MuscleUpApplication extends Application {
     /**
      * Called when the application is starting, and calls the default application {@code onCreate()}
      * and then initializes any necessary libraries

@@ -30,8 +30,6 @@ import ledge.muscleup.model.exercise.WorkoutExercise;
 import ledge.muscleup.model.schedule.ScheduleWeek;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
-import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
-import ledge.muscleup.persistence.InterfaceWorkoutDataAccess;
 import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
 
 /**

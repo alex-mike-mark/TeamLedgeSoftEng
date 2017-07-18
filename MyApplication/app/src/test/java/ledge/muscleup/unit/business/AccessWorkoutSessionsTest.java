@@ -32,7 +32,6 @@ import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
 import ledge.muscleup.model.exercise.enums.*;
 import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
-import ledge.muscleup.persistence.WorkoutSessionDataAccess;
 
 /**
  * AccessWorkoutSessionsTest.java used to test AccessWorkoutSessions.java

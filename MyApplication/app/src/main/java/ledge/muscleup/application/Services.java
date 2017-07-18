@@ -1,6 +1,5 @@
 package ledge.muscleup.application;
 
-import ledge.muscleup.business.InterfaceAccessWorkoutSessions;
 import ledge.muscleup.persistence.DataAccess;
 import ledge.muscleup.persistence.ExerciseDataAccess;
 import ledge.muscleup.persistence.ExperienceDataAccess;

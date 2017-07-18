@@ -1,15 +1,11 @@
 package ledge.muscleup.unit.persistence;
 
-import junit.framework.TestCase;
-
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Date;
 
 import ledge.muscleup.model.workout.WorkoutSession;
 

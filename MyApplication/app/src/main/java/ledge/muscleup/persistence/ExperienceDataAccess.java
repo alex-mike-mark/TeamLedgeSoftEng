@@ -1,6 +1,5 @@
 package ledge.muscleup.persistence;
 
-import org.joda.time.DateTime;
 import org.joda.time.LocalDateTime;
 
 import java.sql.ResultSet;

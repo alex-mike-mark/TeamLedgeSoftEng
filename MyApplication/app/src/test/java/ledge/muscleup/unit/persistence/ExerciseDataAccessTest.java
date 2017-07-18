@@ -12,7 +12,6 @@ import java.util.List;
 import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
 import ledge.muscleup.model.exercise.enums.ExerciseType;
-import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
 
 /**
  * Used for testing the InterfaceExerciseDataAccess persistence interface
