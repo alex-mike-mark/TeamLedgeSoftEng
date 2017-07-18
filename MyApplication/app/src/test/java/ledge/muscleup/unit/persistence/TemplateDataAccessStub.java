@@ -1,18 +1,13 @@
 package ledge.muscleup.unit.persistence;
 
-import android.support.annotation.NonNull;
-
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -244,7 +239,7 @@ class TemplateDataAccessStub implements InterfaceDataAccess, InterfaceExerciseDa
     /**
      * Retrieves the name of a the workout that has been completed the least amount of times
      *
-     * @return the workout that has been ocmpleted the least amount of times
+     * @return the workout that has been completed the least amount of times
      */
     @Override
     public String getLeastCompletedWorkout() {

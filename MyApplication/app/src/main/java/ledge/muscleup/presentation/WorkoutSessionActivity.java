@@ -36,7 +36,6 @@ import ledge.muscleup.model.workout.WorkoutSession;
 public class WorkoutSessionActivity extends Activity {
 
     private WorkoutSession workoutSession;  //the workout session in view
-    private ListItemAdapter adapter;
     private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
 
     /**
@@ -60,7 +59,7 @@ public class WorkoutSessionActivity extends Activity {
         TextView sessionNameTextView = (TextView) findViewById(R.id.workoutSessionName);
         sessionNameTextView.setText(workoutSession.getName());
 
-        adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_workout_session_exercise, exerciseList);
+        ListItemAdapter adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_workout_session_exercise, exerciseList);
 
         listView.setAdapter(adapter);
         listView.setItemsCanFocus(true);
@@ -69,7 +68,7 @@ public class WorkoutSessionActivity extends Activity {
         if(workoutSession.isComplete()) {
             TextView completedTextView = (TextView) findViewById(R.id.workoutSessionIsCompleted);
             completedTextView.setVisibility(View.VISIBLE);
-            completeWorkoutButton.setText("Back");
+            completeWorkoutButton.setText(R.string.btn_back);
             completeWorkoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -78,7 +77,7 @@ public class WorkoutSessionActivity extends Activity {
             });
         } else {
             if (workoutSession.getDate().isAfter(LocalDate.now())) {
-                completeWorkoutButton.setText("Back");
+                completeWorkoutButton.setText(R.string.btn_back);
                 completeWorkoutButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -87,14 +86,14 @@ public class WorkoutSessionActivity extends Activity {
             } else if (workoutSession.getDate().isBefore(LocalDate.now().minusWeeks(1))) {
                 TextView expiredTextView = (TextView) findViewById(R.id.workoutSessionIsExpired);
                 expiredTextView.setVisibility(View.VISIBLE);
-                completeWorkoutButton.setText("Back");
+                completeWorkoutButton.setText(R.string.btn_back);
                 completeWorkoutButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startActivity(new Intent(WorkoutSessionActivity.this, ScheduleActivity.class));
                     }});
             } else {
-                completeWorkoutButton.setText("Complete");
+                completeWorkoutButton.setText(R.string.btn_complete);
                 completeWorkoutButton.setOnClickListener(new Button.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -127,12 +126,12 @@ public class WorkoutSessionActivity extends Activity {
     private List<WorkoutSessionExercise> getExercisesInWorkoutSession(){
         LocalDate workoutSessionDate;
         Intent intent;
-        InterfaceAccessWorkoutSessions aws = (InterfaceAccessWorkoutSessions) new AccessWorkoutSessions();
+        InterfaceAccessWorkoutSessions aws = new AccessWorkoutSessions();
 
         //get workout session date
         intent = getIntent();
         workoutSessionDate = formatter.parseLocalDate(intent.getStringExtra("workoutSessionDate"));
-        workoutSession = (WorkoutSession) aws.getWorkoutSession(workoutSessionDate);
+        workoutSession = aws.getWorkoutSession(workoutSessionDate);
         return workoutSession.getWorkoutSessionExercises();
     }
 
@@ -140,7 +139,7 @@ public class WorkoutSessionActivity extends Activity {
      * A custom extension of the ArrayAdapter class, used for displaying exercise name and quantity
      *
      */
-    private class ListItemAdapter extends ArrayAdapter {
+    private class ListItemAdapter extends ArrayAdapter<WorkoutSessionExercise> {
         private List<WorkoutSessionExercise> exerciseList;
         Context context;
 

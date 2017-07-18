@@ -2,14 +2,11 @@ package ledge.muscleup.unit.model.experience;
 
 import junit.framework.Assert;
 
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.junit.Before;
 import org.junit.Test;
 
 import ledge.muscleup.model.experience.CompletedWorkoutRecord;
-import ledge.muscleup.model.experience.LevelProgress;
 
 /**
  * Tests for the CompletedWorkoutRecord class

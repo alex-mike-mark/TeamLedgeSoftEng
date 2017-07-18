@@ -31,7 +31,6 @@ import ledge.muscleup.model.workout.Workout;
  */
 
 public class WorkoutDetailsActivity extends Activity {
-    private ListItemAdapter adapter;
     private Workout workout;
 
     /**
@@ -49,7 +48,7 @@ public class WorkoutDetailsActivity extends Activity {
 
         ListView listView = (ListView) findViewById(R.id.list_panel);
 
-        adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_workout_exercise, exerciseList);
+        ListItemAdapter adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_workout_exercise, exerciseList);
         TextView title = (TextView) findViewById(R.id.activity_title);
         title.setText(workout.getName());
 
@@ -70,23 +69,22 @@ public class WorkoutDetailsActivity extends Activity {
      * getExerciseList will get the workout that was clicked on in WorkoutActivity and return the exercises associated
      * @return list of exercises for a workout
      */
-    private List getExerciseList(){
+    private List<WorkoutExercise> getExerciseList(){
         String workoutName;
         Intent intent;
-        InterfaceAccessWorkouts aw = (InterfaceAccessWorkouts) new AccessWorkouts();
-        List retList = new ArrayList();
+        InterfaceAccessWorkouts aw = new AccessWorkouts();
 
         //get name of workout
         intent = getIntent();
         workoutName = intent.getStringExtra("workoutName");
 
         //get Workout from db
-        workout = (Workout) aw.getWorkout(workoutName);
+        workout = aw.getWorkout(workoutName);
 
         return workout.getExerciseList();
     }
 
-    private class ListItemAdapter extends ArrayAdapter {
+    private class ListItemAdapter extends ArrayAdapter<WorkoutExercise> {
         private List<WorkoutExercise> exerciseList;
         Context context;
 
@@ -105,7 +103,7 @@ public class WorkoutDetailsActivity extends Activity {
 
         /**
          * A wrapper class holding the different elements of a single list item in the list view.
-         * Contains 1 TextView for exercise name, and 1 TextView that contians the quantity
+         * Contains 1 TextView for exercise name, and 1 TextView that contains the quantity
          */
         private class ViewHolder {
             TextView exerciseName;

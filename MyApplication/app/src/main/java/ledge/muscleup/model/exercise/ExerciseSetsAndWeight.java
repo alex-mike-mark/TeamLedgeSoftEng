@@ -12,8 +12,8 @@ import ledge.muscleup.model.exercise.enums.WeightUnit;
  */
 
 public class ExerciseSetsAndWeight extends ExerciseSets implements InterfaceExerciseSetsAndWeight {
-    double weight;
-    WeightUnit unitOfMeasure;
+    private double weight;
+    private WeightUnit unitOfMeasure;
 
     /**
      * The default constructor for the ExerciseSets class

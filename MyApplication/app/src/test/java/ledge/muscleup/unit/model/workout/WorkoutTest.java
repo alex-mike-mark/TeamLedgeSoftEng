@@ -24,12 +24,12 @@ import ledge.muscleup.model.workout.Workout;
  * @since 2017-06-07
  */
 public class WorkoutTest extends TestCase {
-    Workout workout1, workout2, workout3, workout4;
-    WorkoutExercise[] exerciseList1, exerciseList2;
-    Exercise crunches, russianTwists, sitUps;
-    final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
-    final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
-    final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
+    private Workout workout1, workout2, workout3, workout4;
+    private WorkoutExercise[] exerciseList1, exerciseList2;
+    private Exercise crunches, russianTwists, sitUps;
+    private final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
+    private final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
+    private final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
     /**
      * Initializes several new instances of Workout to setup testing
      */

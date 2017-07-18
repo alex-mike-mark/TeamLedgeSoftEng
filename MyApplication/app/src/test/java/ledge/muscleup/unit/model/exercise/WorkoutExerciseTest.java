@@ -21,12 +21,12 @@ import ledge.muscleup.model.exercise.enums.*;
  * @since 2017-06-07
  */
 public class WorkoutExerciseTest extends TestCase {
-    WorkoutExercise workoutExercise1, workoutExercise2, workoutExercise3, workoutExercise4;
-    Exercise exercise1, exercise2;
+    private WorkoutExercise workoutExercise1, workoutExercise2, workoutExercise3, workoutExercise4;
+    private Exercise exercise1, exercise2;
 
-    final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
-    final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
-    final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
+    private final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
+    private final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
+    private final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
     /**
      * Initializes several instances of WorkoutExercise to set up testing
      */

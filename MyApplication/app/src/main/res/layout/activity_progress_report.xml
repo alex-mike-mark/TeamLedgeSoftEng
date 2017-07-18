@@ -71,7 +71,7 @@
                 android:layout_column="0"
                 />
             <TextView
-                android:text="Last 7 Days"
+                android:text="@string/text_lastWeek"
                 android:layout_weight="1"
                 android:layout_column="1"
                 android:textAlignment="center"
@@ -80,7 +80,7 @@
                 android:textStyle="bold"
                 />
             <TextView
-                android:text="Last 30 Days"
+                android:text="@string/text_lastMonth"
                 android:layout_weight="1"
                 android:layout_column="2"
                 android:textAlignment="center"
@@ -92,7 +92,7 @@
         <TableRow
             android:paddingBottom="20sp">
             <TextView
-                android:text="Workouts Completed"
+                android:text="@string/text_workoutsCompleted"
                 android:layout_weight="1"
                 android:layout_column="0"
                 android:textAlignment="center"
@@ -123,7 +123,7 @@
         <TableRow
             android:paddingBottom="20sp">
             <TextView
-                android:text="XP Gained"
+                android:text="@string/text_xpGained"
                 android:layout_weight="1"
                 android:layout_column="0"
                 android:textAlignment="center"
@@ -154,7 +154,7 @@
         <TableRow
             android:paddingBottom="20sp">
             <TextView
-                android:text="Levels Gained"
+                android:text="@string/text_levelsGained"
                 android:layout_weight="1"
                 android:layout_column="0"
                 android:textAlignment="center"
@@ -185,7 +185,7 @@
     </TableLayout>
 
     <TextView
-        android:text="Recently Completed Workouts"
+        android:text="@string/text_recentlyCompletedWorkouts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"

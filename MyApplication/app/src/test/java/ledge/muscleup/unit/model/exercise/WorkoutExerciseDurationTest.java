@@ -21,11 +21,11 @@ import ledge.muscleup.model.exercise.enums.TimeUnit;
  * @since 2017-06-07
  */
 public class WorkoutExerciseDurationTest extends TestCase {
-    WorkoutExerciseDuration workoutExerciseDuration1, workoutExerciseDuration2, workoutExerciseDuration3;
-    Exercise exercise1;
+    private WorkoutExerciseDuration workoutExerciseDuration1, workoutExerciseDuration2, workoutExerciseDuration3;
+    private Exercise exercise1;
 
-    final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
-    final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
+    private final int xpHighIntensity = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
+    private final int xpMediumIntensity = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
     final int xpLowIntensity = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
 
     /**

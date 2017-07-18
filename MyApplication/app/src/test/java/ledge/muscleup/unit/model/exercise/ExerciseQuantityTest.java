@@ -20,7 +20,7 @@ import ledge.muscleup.model.exercise.enums.TimeUnit;
  * @since 2017-05-29
  */
 public class ExerciseQuantityTest  extends TestCase {
-    InterfaceExerciseQuantity quantity1, quantity2, quantity3, quantity4;
+    private InterfaceExerciseQuantity quantity1, quantity2, quantity3, quantity4;
 
     /**
      * Initializes several new instances of classes that implement InterfaceExerciseQuantity to setup

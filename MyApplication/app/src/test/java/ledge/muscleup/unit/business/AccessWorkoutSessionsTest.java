@@ -32,7 +32,6 @@ import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
 import ledge.muscleup.model.exercise.enums.*;
 import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
-import ledge.muscleup.persistence.WorkoutSessionDataAccess;
 
 /**
  * AccessWorkoutSessionsTest.java used to test AccessWorkoutSessions.java
@@ -98,7 +97,7 @@ public class AccessWorkoutSessionsTest extends TestCase {
         assertEquals("Marathon Training Starts Here", workoutSession.getName());
         assertEquals(new LocalDate().plusWeeks(1).withDayOfWeek(DateTimeConstants.TUESDAY), workoutSession.getDate());
 
-        workoutSession = dataAccess.getWorkoutSession(new LocalDate(2000, 01, 01));
+        workoutSession = dataAccess.getWorkoutSession(new LocalDate(2000, 1, 1));
         assertNull(workoutSession);
 
         System.out.println("Finishing testGetWorkoutSession\n");
@@ -284,7 +283,7 @@ public class AccessWorkoutSessionsTest extends TestCase {
 
         // Remove middle WorkoutSession from list
         scheduleWeek = dataAccess.newScheduledWeek(weekStartDay, LocalDate.now());
-        assertEquals(3, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));;
+        assertEquals(3, scheduleWeek.getNumSessionsInWeek(scheduleWeek.getWorkoutSessionList()));
 
         dataAccess.removeWorkoutSession(new WorkoutSession(
                 new Workout("Work that Core, Get that Score!", new WorkoutExercise[]{

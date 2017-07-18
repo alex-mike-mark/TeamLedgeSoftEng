@@ -289,7 +289,7 @@ public class AccessWorkoutsTest extends TestCase {
         /**
          * Retrieves the name of a the workout that has been completed the least amount of times
          *
-         * @return the workout that has been ocmpleted the least amount of times
+         * @return the workout that has been completed the least amount of times
          */
         @Override
         public String getLeastCompletedWorkout() {

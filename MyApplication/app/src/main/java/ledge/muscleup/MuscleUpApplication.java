@@ -5,7 +5,7 @@ import android.app.Application;
 import net.danlew.android.joda.JodaTimeAndroid;
 
 /**
- * The application, for which the only change needed is to initialize libaries when the application
+ * The application, for which the only change needed is to initialize libraries when the application
  * is created
  *
  * @author Cole Kehler
