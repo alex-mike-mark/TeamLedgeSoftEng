@@ -112,15 +112,15 @@ public class WorkoutSessionTest extends TestCase {
         assertNotNull(workoutSession3.getExerciseEnumeration());
         assertTrue(workoutSession3.getExerciseEnumeration() instanceof Enumeration);
 
-        assertTrue(workoutSession1.completeExercise(
+        assertFalse(workoutSession1.completeExercise(
                 new WorkoutSessionExercise(new WorkoutExerciseSets(new Exercise("Crunches", ExerciseIntensity.HIGH,
-                        ExerciseType.FULL_BODY), xpHighIntensity, new ExerciseSets(3, 20)), false)));
-        assertTrue(workoutSession1.completeExercise(
+                        ExerciseType.FULL_BODY), xpHighIntensity, new ExerciseSets(3, 20)), true)));
+        assertFalse(workoutSession1.completeExercise(
                 new WorkoutSessionExercise(new WorkoutExerciseSets(new Exercise("Russian Twists", ExerciseIntensity.HIGH,
-                        ExerciseType.FULL_BODY), xpHighIntensity, new ExerciseSets(3, 20)), false)));
-        assertTrue(workoutSession1.completeExercise(
+                        ExerciseType.FULL_BODY), xpHighIntensity, new ExerciseSets(3, 20)), true)));
+        assertFalse(workoutSession1.completeExercise(
                 new WorkoutSessionExercise(new WorkoutExerciseSets(new Exercise("Sit-ups", ExerciseIntensity.HIGH,
-                        ExerciseType.FULL_BODY), xpHighIntensity, new ExerciseSets(3, 20)), false)));
+                        ExerciseType.FULL_BODY), xpHighIntensity, new ExerciseSets(3, 20)), true)));
 
 
         assertNotNull(workoutSession1);
