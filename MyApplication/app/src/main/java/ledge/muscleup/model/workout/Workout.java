@@ -1,6 +1,7 @@
 package ledge.muscleup.model.workout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -49,8 +50,7 @@ public class Workout {
             this.name = name;
 
             exerciseList = new ArrayList<>();
-            for (WorkoutExercise exercise : exercises)
-                exerciseList.add(exercise);
+            Collections.addAll(exerciseList, exercises);
         }
     }
 
