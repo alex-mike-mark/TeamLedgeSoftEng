@@ -2,19 +2,14 @@ package ledge.muscleup.integration;
 
 import ledge.muscleup.application.Main;
 import ledge.muscleup.application.Services;
-<<<<<<< HEAD:MyApplication/app/src/test/java/ledge/muscleup/model/integration/DataAccessHSQLDBTest.java
+
 import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
 import ledge.muscleup.persistence.InterfaceWorkoutDataAccess;
 import ledge.muscleup.persistence.InterfaceWorkoutSessionDataAccess;
 import ledge.muscleup.unit.persistence.ExerciseDataAccessTest;
 import ledge.muscleup.unit.persistence.WorkoutDataAccessTest;
 import ledge.muscleup.unit.persistence.WorkoutSessionDataAccessTest;
-=======
-import ledge.muscleup.unit.persistence.ExerciseDataAccessTest;
-import ledge.muscleup.unit.persistence.WorkoutDataAccessTest;
-import ledge.muscleup.unit.persistence.WorkoutSessionDataAccessTest;
-import ledge.muscleup.persistence.InterfaceDataAccess;
->>>>>>> 276a489593f317968cb37a22eedb978cf56fe62d:MyApplication/app/src/test/java/ledge/muscleup/integration/DataAccessHSQLDBTest.java
+
 
 import junit.framework.TestCase;
 
