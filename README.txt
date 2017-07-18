@@ -14,20 +14,21 @@ Also contained is our endless ambitions for a future society in which all lifefo
 	main
 		assets
 			db
-				MU_DB.backup
 				MU_DB.script
-				restoreDefaultDatabase.bat
 		java
 			ledge.muscleup
 				application
 					Services (Performs set up tasks. Currently linking db to app)
+					Main
 				business
 					AccessExercises (performs actions on database regarding exercises)
 					AccessWorkouts  (performs actions on database regarding workouts)
-					AccessWorkoutSessions 
+					AccessWorkoutSessions
+					AccessExperience
 					InterfaceAccessExercises
 					InterfaceAccessWorkouts
 					InterfaceAccessWorkoutSessions
+					InterfaceAccessExperience
 				model
 					exercise
 							enums
@@ -52,6 +53,10 @@ Also contained is our endless ambitions for a future society in which all lifefo
 						WorkoutExerciseSets
 						WorkoutExerciseSetsAndWeight
 						WorkoutSessionExercise (A WorkoutExercise wrapped for appropriate use by a WorkoutSession)
+					experience
+						CompletedWorkoutRecord
+						ExperienceHistory
+						LevelProgress
 					schedule
 						ScheduleWeek (Manages a week of scheduled workouts)
 					workout
@@ -59,55 +64,84 @@ Also contained is our endless ambitions for a future society in which all lifefo
 						WorkoutSession (Contains a set of WorkoutSessionExercises, used to track actual workouts)
 				persistence
 					DataAccess
-					DataAccessStub
+					ExerciseDataAccess
+					ExperienceDataAccess
 					InterfaceDataAccess
+					InterfaceDataAccessComponent
 					InterfaceExerciseDataAccess
 					InterfaceWorkoutDataAccess
 					InterfaceWorkoutSessionDataAccess
+					WorkoutDataAccess
+					WorkoutSesssionDataAccess
 				presentation
 					CompleteWorkoutActivity
 					ExerciseActivity
+					ExerciseQuantityDisplayStrings (a class used for converting exercise quantities to proper presentation strings)
 					Main Activity
+					ProgressReportActivity
 					ScheduleActivity
 					WorkoutActivity
 					WorkoutDetailsActivity
 					WorkoutSessionActivity
 				MuscleUpApplication (sets up JODA for date, time tracking)
 	test
-		ledge.muscleup.model
+		ledge.muscleup (test)
 			business
 				AccessExercisesTest
-					AccessExercisesTest
-					TemplateAccessExercises
-				AccessWorkoutSessions
+				AccessExperienceTest
+				AccessWorkoutSessionsTest
 				AccessWorkoutsTest
-					AccessWorkoutsTest
-					TemplateAccessWorkouts
+				BusinessTests
+			model
+				exercise
+					ExerciseDistanceTest
+					ExerciseDurationTest
+					ExerciseQuantityTest
+					ExerciseSetsAndWeightTest
+					ExerciseSetsTest
+					ExerciseTest
+					WorkoutExerciseDurationTest
+					WorkoutExerciseSubsTest
+					WorkoutExerciseTest
+					WorkoutSessionExerciseTest
+				experience
+					CompletedWorkoutRecordTest
+					ExperienceHistoryTest
+					LevelProgressTest
+				schedule
+					ScheduleWeekTest
+				workout
+					WorkoutSessionTest
+					WorkoutTest
+				ModelTests
+			persistence
+				ExerciseDataAccessTest
+				ExperienceDataAccessTest
+				PersistenceTests
 				TemplateDataAccessStub
-			exercise
-				ExerciseDistanceTest
-				ExerciseDurationTest
-				ExerciseQuantityTest
-				ExerciseSetsAndWeightTest
-				ExerciseSetsTest
-				ExerciseTest
-				WorkoutExerciseDurationTest
-				WorkoutExerciseSubsTest
-				WorkoutExerciseTest
-				WorkoutSessionExerciseTest
-			workout
-				WorkoutSessionTest
-				WorkoutTest
+				WorkoutDataAccessTest
+				WorkoutSessionDataAccessTest
 			AllTests
-			ScheduleManagerTest.java
-				ScheduleManagerTest
-				TemplateAccessWorkoutSessions
-				TemplateDataAccessStub
+			IntegrationTests
+			RunIntegrationTests
+			RunUnitTests
+		
+		ledge.muscleup.test (androidTest)
+			AllAcceptanceTests
+			ExerciseAcceptanceTest
+			ProgressReportAcceptanceTest
+			SuggestedAcceptanceTest
+			TodayAcceptanceTest
+			WorkoutAcceptanceTest
+			WorkoutScheduleAcceptanceTest
 
 ###Log Location###
 The log for iteration 1 is in this google doc: <https://docs.google.com/document/d/18dOXb27PLIrS7kjHcLGODmWes66gZQpesqNNg8ew2Go/edit>
 The log for iteration 2 is in this google doc: <https://docs.google.com/document/d/1U3ojEM5CPwwEfbJQhXPyOEgiolTkioJ4-ktY7Vx_Tt4/edit>
 The log for iteration 3 is in this google doc: <https://docs.google.com/document/d/1YRsWGrI4YPK1E0Yw9NCT6QUgqCC_UO3N1V3NLjMwXoY/edit>
+
+###Canonical copy of database file###
+app/src/main/assets/db/MU_DB.script
 
 ###New Features and Where to Find Them###
 -The major features implemented in this release are:
