@@ -135,9 +135,9 @@ public class WorkoutScheduleAcceptanceTest extends ActivityInstrumentationTestCa
         //Attempt to complete a workout you are not allowed to complete.
         solo.assertCurrentActivity("We aren't in the schedule activity", ScheduleActivity.class);
         solo.clickOnButton("Next");
-        solo.clickOnButton(3);
+        solo.clickOnButton(5);
         solo.clickInList(1);
-        solo.clickInList(4);
+        solo.clickInList(6);
         solo.goBack();
     }
 }
