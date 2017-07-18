@@ -8,10 +8,11 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import ledge.muscleup.application.*;
 import ledge.muscleup.model.exercise.Exercise;
 import ledge.muscleup.model.exercise.enums.ExerciseIntensity;
 import ledge.muscleup.model.exercise.enums.ExerciseType;
+import ledge.muscleup.persistence.InterfaceExerciseDataAccess;
 
 /**
  * Used for testing the InterfaceExerciseDataAccess persistence interface
@@ -23,7 +24,7 @@ import ledge.muscleup.model.exercise.enums.ExerciseType;
  */
 
 public class ExerciseDataAccessTest extends TestCase {
-    private TemplateDataAccessStub dataAccess;
+    static TemplateDataAccessStub dataAccess;
 
     /**
      * Constructor for the ExerciseDataAccessTest
@@ -35,7 +36,7 @@ public class ExerciseDataAccessTest extends TestCase {
     /**
      * Initializes the ExerciseDataAccess to be used in the test
      */
-    @Before
+   @Before
     public void setUp() {
         dataAccess = new TemplateDataAccessStub("Test Exercise");
         dataAccess.open("Test Exercise");
@@ -44,7 +45,7 @@ public class ExerciseDataAccessTest extends TestCase {
     /**
      * Closes the DataAccess connection
      */
-    @After
+   @After
     public void tearDown() {
         dataAccess.close();
     }
@@ -53,7 +54,7 @@ public class ExerciseDataAccessTest extends TestCase {
      * Tests that getting the list of exercises works properly
      */
     @Test
-    public void testGetExercisesList() {
+    public static void testGetExercisesList() {
         System.out.println("\nStarting testGetExercisesList");
 
         // Exercises by object already in list
@@ -72,6 +73,7 @@ public class ExerciseDataAccessTest extends TestCase {
         assertNotNull(exerciseList2);
         assertEquals(exerciseList1.toString(), exerciseList2.toString());
 
+        Services.closeDataAccess();
         System.out.println("Finishing testGetExercisesList\n");
     }
 }

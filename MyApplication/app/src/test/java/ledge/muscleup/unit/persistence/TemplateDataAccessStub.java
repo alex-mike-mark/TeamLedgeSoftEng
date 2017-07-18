@@ -144,31 +144,31 @@ class TemplateDataAccessStub implements InterfaceDataAccess, InterfaceExerciseDa
         workoutSessionsByDate = new TreeMap<>();
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Welcome to the Gun Show")),
-                new LocalDate().minusWeeks(1).withDayOfWeek(DateTimeConstants.THURSDAY),
+                new LocalDate(2017, 06, 21),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Never Skip Leg Day")),
-                new LocalDate().withDayOfWeek(DateTimeConstants.TUESDAY),
+                new LocalDate(2017, 06, 25),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Work that Core, Get that Score!")),
-                new LocalDate().withDayOfWeek(DateTimeConstants.WEDNESDAY),
+                new LocalDate(2017, 06, 26),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Never Skip Leg Day")),
-                new LocalDate().withDayOfWeek(DateTimeConstants.FRIDAY),
+                new LocalDate(2017, 06, 29),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 
         workoutSession = new WorkoutSession(
                 (workoutsByName.get("Marathon Training Starts Here")),
-                new LocalDate().plusWeeks(1).withDayOfWeek(DateTimeConstants.TUESDAY),
+                new LocalDate(2017, 07, 05),
                 false);
         workoutSessionsByDate.put(workoutSession.getDate(), workoutSession);
 

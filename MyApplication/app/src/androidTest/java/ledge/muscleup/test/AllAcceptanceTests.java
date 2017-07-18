@@ -1,26 +1,26 @@
-package ledge.muscleup;
+package ledge.muscleup.test;
+
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 /**
  * Created by Alexander on 2017-07-18.
  */
 
-import ledge.muscleup.test.*;
+public class AllAcceptanceTests
+{
+    public static TestSuite suite;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
-        TodayAcceptanceTest.class,
-        WorkoutScheduleAcceptanceTest.class,
-        ExerciseAcceptanceTest.class,
-        ProgressReportAcceptanceTest.class,
-        SuggestedAcceptanceTest.class,
-        WorkoutAcceptanceTest.class,
-
-})
-
-
-public class AllAcceptanceTests {
-
+    public static Test suite()
+    {
+        suite = new TestSuite("Acceptance tests");
+        suite.addTestSuite(TodayAcceptanceTest.class);
+        suite.addTestSuite(WorkoutScheduleAcceptanceTest.class);
+        suite.addTestSuite(ExerciseAcceptanceTest.class);
+        suite.addTestSuite(ProgressReportAcceptanceTest.class);
+        suite.addTestSuite(SuggestedAcceptanceTest.class);
+        suite.addTestSuite(WorkoutAcceptanceTest.class);
+        return suite;
+    }
 }
+
