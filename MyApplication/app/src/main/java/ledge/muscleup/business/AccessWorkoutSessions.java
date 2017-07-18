@@ -146,6 +146,10 @@ public class AccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
         List<WorkoutSession> weekWorkouts;
 
         firstDayOfWeek = LocalDate.now().withDayOfWeek(scheduleWeek.getFirstDayOfWeek().getDayOfWeek());
+        if (firstDayOfWeek.isAfter(LocalDate.now())) {
+            firstDayOfWeek = firstDayOfWeek.minusWeeks(1);
+        }
+
         weekWorkouts = getSessionsInDateRange(firstDayOfWeek, firstDayOfWeek.plusDays(DateTimeConstants.DAYS_PER_WEEK - 1));
         scheduleWeek.currentWeek(weekWorkouts);
     }
