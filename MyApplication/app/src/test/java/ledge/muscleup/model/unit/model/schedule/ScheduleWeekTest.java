@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -193,7 +194,7 @@ class TemplateAccessWorkoutSessions implements InterfaceAccessWorkoutSessions {
      */
     TemplateAccessWorkoutSessions() {
         dataAccess = new TemplateDataAccessStub("testDB");
-        dataAccess.open("testDB");
+        dataAccess.open(null);
     }
 
     /**
@@ -340,7 +341,7 @@ class TemplateDataAccessStub implements InterfaceExerciseDataAccess, InterfaceWo
     /**
      * Opens the stub database and populates it with some default values
      */
-    public void open(String dbPath) {
+    public void open(Statement statement) {
 
         Exercise exercise;
         WorkoutExercise workoutExercise;

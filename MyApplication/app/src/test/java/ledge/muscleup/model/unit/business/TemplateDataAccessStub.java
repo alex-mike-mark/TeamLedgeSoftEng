@@ -3,6 +3,7 @@ package ledge.muscleup.model.unit.business;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -165,6 +166,16 @@ class TemplateDataAccessStub implements InterfaceDataAccess {
      */
     public void close() {
         System.out.println("Closed " + dbType + " database " + dbName);
+    }
+
+    /**
+     * Must override getNewStatement() from InterfaceDataAccess, however TemplateDataAccessStub
+     * doesn't use SQL, so just return null
+     * @return null
+     */
+    @Override
+    public Statement getNewStatement() {
+        return null;
     }
 
     /**
