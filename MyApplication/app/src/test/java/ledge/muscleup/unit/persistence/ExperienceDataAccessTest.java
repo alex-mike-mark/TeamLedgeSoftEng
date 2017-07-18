@@ -18,7 +18,7 @@ import ledge.muscleup.model.workout.WorkoutSession;
  *
  */
 
-public class ExperienceDataAccessTest {
+public class ExperienceDataAccessTest extends TestCase {
     private TemplateDataAccessStub dataAccess;
 
     /**

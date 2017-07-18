@@ -1,5 +1,7 @@
 package ledge.muscleup.unit.business;
 
+import junit.framework.TestCase;
+
 import org.joda.time.LocalDateTime;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,7 +24,7 @@ import ledge.muscleup.persistence.InterfaceExperienceDataAccess;
  * @since 2017-07-13
  */
 
-public class AccessExperienceTest {
+public class AccessExperienceTest extends TestCase {
     private InterfaceAccessExperience dataAccess;
     private LocalDateTime currTime = new LocalDateTime();
 
