@@ -30,11 +30,11 @@ import ledge.muscleup.model.workout.WorkoutSession;
  *
  */
 public class WorkoutSessionDataAccessTest extends TestCase {
-    private final int XP_HIGH_INTENSITY = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
-    private final int XP_MEDIUM_INTENSITY = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
-    private final int XP_LOW_INTENSITY = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
+    static private final int XP_HIGH_INTENSITY = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
+    static private final int XP_MEDIUM_INTENSITY = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
+    static private final int XP_LOW_INTENSITY = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
 
-    private TemplateDataAccessStub dataAccess;
+    private static TemplateDataAccessStub dataAccess;
 
     ScheduleWeek scheduleWeek;
     /**
@@ -67,7 +67,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
      * Tests that getting a workout session with given date works properly
      */
     @Test
-    public void testGetWorkoutSession() {
+    public static void testGetWorkoutSession() {
         System.out.println("\nStarting testGetWorkoutSession");
 
         WorkoutSession workoutSession = dataAccess.getWorkoutSession(new LocalDate().minusWeeks(1).withDayOfWeek(DateTimeConstants.THURSDAY));
@@ -101,7 +101,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
      * Tests getting workout sessions in a specified date range works properly
      */
     @Test
-    public void testGetSessionsInDateRange() {
+    public static void testGetSessionsInDateRange() {
         System.out.println("\nStarting testGetSessionsInDateRange");
 
         List<WorkoutSession> workoutSessionList1 = new ArrayList<>();
@@ -172,7 +172,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
      * Tests that inserting a workout session works properly
      */
     @Test
-    public void testInsertWorkoutSession() {
+    public static void testInsertWorkoutSession() {
         System.out.println("\nStarting testInsertWorkoutSession");
 
         // Insert new WorkoutSession
@@ -210,7 +210,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
      * Tests that removing a workout session works properly
      */
     @Test
-    public void testRemoveWorkoutSession() {
+    public static void testRemoveWorkoutSession() {
         System.out.println("\nStarting testRemoveWorkoutSession");
 
         // Remove middle WorkoutSession from list
@@ -279,7 +279,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
      * Tests that toggling workout completed works properly
      */
     @Test
-    public void testToggleWorkoutCompleted() {
+    public static void testToggleWorkoutCompleted() {
         System.out.println("\nStarting testToggleWorkoutCompleted");
 
         LocalDate localDate = new LocalDate(LocalDate.now().withDayOfWeek(DateTimeConstants.TUESDAY));

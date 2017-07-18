@@ -38,11 +38,11 @@ import ledge.muscleup.model.workout.WorkoutSession;
  *
  */
 public class WorkoutDataAccessTest extends TestCase {
-    private final int XP_HIGH_INTENSITY = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
-    private final int XP_MEDIUM_INTENSITY = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
-    private final int XP_LOW_INTENSITY = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
+    private static final int XP_HIGH_INTENSITY = (ExerciseIntensity.HIGH.ordinal() + 1) * 15;
+    private static final int XP_MEDIUM_INTENSITY = (ExerciseIntensity.MEDIUM.ordinal() + 1) * 15;
+    private static final int XP_LOW_INTENSITY = (ExerciseIntensity.LOW.ordinal() + 1) * 15;
 
-    private TemplateDataAccessStub dataAccess;
+    private static TemplateDataAccessStub dataAccess;
 
     /**
      * Constructor for the WorkoutDataAccessTest
@@ -72,7 +72,7 @@ public class WorkoutDataAccessTest extends TestCase {
      * Tests that getting a workout works properly
      */
     @Test
-    public void testGetWorkout() {
+    public static void testGetWorkout() {
         System.out.println("\nStarting testGetWorkout");
 
         // Workouts should already be in db
@@ -103,7 +103,7 @@ public class WorkoutDataAccessTest extends TestCase {
      * Tests that getting the list of workouts works properly
      */
     @Test
-    public void testGetWorkoutsList() {
+    public static void testGetWorkoutsList() {
         System.out.println("\nStarting testGetWorkoutsList");
 
         // Workouts by object already in list
@@ -144,7 +144,7 @@ public class WorkoutDataAccessTest extends TestCase {
      * Tests that getting the list of workout names works properly
      */
     @Test
-    public void testGetWorkoutNamesList() {
+    public static void testGetWorkoutNamesList() {
         System.out.println("\nStarting testGetWorkoutNamesList");
 
         // Workouts by name already in list
