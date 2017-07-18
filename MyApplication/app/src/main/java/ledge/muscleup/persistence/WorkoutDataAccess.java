@@ -23,8 +23,6 @@ import ledge.muscleup.model.workout.Workout;
  * @since 2017-07-13
  */
 public class WorkoutDataAccess implements InterfaceWorkoutDataAccess {
-    private static final int NULL_NUM = -1;
-
     private Statement statement;
     private ResultSet resultSet;
 
@@ -125,28 +123,28 @@ public class WorkoutDataAccess implements InterfaceWorkoutDataAccess {
                 xpValue = DataAccess.XP_PER_INTENSITY * (ExerciseIntensity.valueOf(resultSet.getString("Intensity")).ordinal() + 1);
                 distance = resultSet.getDouble("Distance");
                 if (resultSet.wasNull())
-                    distance = NULL_NUM;
+                    distance = DataAccess.NULL_NUM;
                 distanceUnitString = resultSet.getString("DistanceUnit");
                 if (!resultSet.wasNull())
                     distanceUnit = DistanceUnit.valueOf(distanceUnitString);
 
                 duration = resultSet.getInt("Duration");
                 if (resultSet.wasNull())
-                    duration = NULL_NUM;
+                    duration = DataAccess.NULL_NUM;
                 timeUnitString = resultSet.getString("DurationUnit");
                 if (!resultSet.wasNull())
                     timeUnit = TimeUnit.valueOf(timeUnitString);
 
                 sets = resultSet.getInt("Sets");
                 if (resultSet.wasNull())
-                    sets = NULL_NUM;
+                    sets = DataAccess.NULL_NUM;
                 reps = resultSet.getInt("Reps");
                 if (resultSet.wasNull())
-                    reps = NULL_NUM;
+                    reps = DataAccess.NULL_NUM;
 
                 weight = resultSet.getDouble("Weight");
                 if (resultSet.wasNull())
-                    weight = NULL_NUM;
+                    weight = DataAccess.NULL_NUM;
                 weightUnitString = resultSet.getString("WeightUnit");
                 if (!resultSet.wasNull())
                     weightUnit = WeightUnit.valueOf(weightUnitString);
