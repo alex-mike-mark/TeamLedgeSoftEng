@@ -30,14 +30,13 @@ import ledge.muscleup.model.workout.Workout;
 
 public class WorkoutActivity extends Activity {
 
-    private ListItemAdapter adapter;
     /**
      *  onCreate initializes WorkoutActivity
      * @param savedInstanceState contains context from last activity (eg MainActivity)
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        InterfaceAccessWorkouts aw = (InterfaceAccessWorkouts) new AccessWorkouts();
+        InterfaceAccessWorkouts aw = new AccessWorkouts();
         final List<Workout> workoutList;
 
         super.onCreate(savedInstanceState);
@@ -47,9 +46,9 @@ public class WorkoutActivity extends Activity {
         workoutList = aw.getWorkoutsList();
 
         TextView title = (TextView) findViewById(R.id.activity_title);
-        title.setText("Workout Collection");
+        title.setText(R.string.text_workoutCollection);
 
-        adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_workout, workoutList);
+        ListItemAdapter adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_workout, workoutList);
         listView.setAdapter(adapter);
         listView.setItemsCanFocus(true);
 
@@ -58,7 +57,7 @@ public class WorkoutActivity extends Activity {
 
     /**
      * Places listeners on each list item so clicking will open WorkoutDetailsActivity
-     * @param workoutArray
+     * @param workoutArray a list of workouts
      */
     private void setupListeners(final List workoutArray) {
         ListView list = (ListView) findViewById(R.id.list_panel);
@@ -78,7 +77,7 @@ public class WorkoutActivity extends Activity {
     /**
      * A custom extension of the ArrayAdapter class, used for displaying workout name
      */
-    private class ListItemAdapter extends ArrayAdapter {
+    private class ListItemAdapter extends ArrayAdapter<Workout> {
         private List<Workout> workoutList;
         Context context;
 

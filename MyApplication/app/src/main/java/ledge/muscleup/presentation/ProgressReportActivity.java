@@ -37,7 +37,6 @@ import ledge.muscleup.model.experience.ExperienceHistory;
  * @since 2017-07-07
  */
 public class ProgressReportActivity extends Activity {
-    private ListItemAdapter adapter;
     private static final InterfaceAccessExperience ae = new AccessExperience();
     private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd");
     /**
@@ -98,7 +97,7 @@ public class ProgressReportActivity extends Activity {
             count++;
         }
 
-        adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_progress_report, recentlyCompleted);
+        ListItemAdapter adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_progress_report, recentlyCompleted);
         ListView listView = (ListView) findViewById(R.id.recentlyCompletedWorkouts);
         listView.setAdapter(adapter);
     }
@@ -116,7 +115,7 @@ public class ProgressReportActivity extends Activity {
      * A custom extension of the ArrayAdapter class, used for displaying date workout was completed,
      * completed workout name, and xp gained from completed workout
      */
-    private class ListItemAdapter extends ArrayAdapter {
+    private class ListItemAdapter extends ArrayAdapter<CompletedWorkoutRecord> {
         private List<CompletedWorkoutRecord> recordList;
         Context context;
 

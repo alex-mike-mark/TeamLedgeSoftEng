@@ -1,5 +1,5 @@
 This is the submission for iteration 1 of MuscleUp.
-MuscleUp is an app intended to help people create and stick to their fitness goals. The app is inteded to feature a variety of exercises, the ability to create custom workouts, schedule sessions and gamify their progress.
+MuscleUp is an app intended to help people create and stick to their fitness goals. The app is intended to feature a variety of exercises, the ability to create custom workouts, schedule sessions and gamify their progress.
 
 ###Contents of this .zip###
 [WHATEVER GOES HERE]

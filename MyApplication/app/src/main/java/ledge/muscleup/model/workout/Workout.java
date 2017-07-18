@@ -1,6 +1,7 @@
 package ledge.muscleup.model.workout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -49,8 +50,7 @@ public class Workout {
             this.name = name;
 
             exerciseList = new ArrayList<>();
-            for (int i = 0; i < exercises.length; i++)
-                exerciseList.add(exercises[i]);
+            Collections.addAll(exerciseList, exercises);
         }
     }
 
@@ -175,7 +175,6 @@ public class Workout {
     public boolean removeExercise(WorkoutExercise exercise) throws IllegalArgumentException {
         boolean exerciseRemoved = false;
         int exerciseIndex = -1;
-        WorkoutExercise listExercise;
 
         if (exercise == null)
             throw(new IllegalArgumentException("Invalid or null data passed to a method!!!"));
@@ -236,7 +235,7 @@ public class Workout {
 
     /**
      * Returns the experience value of a workout, which is the sum of the xp values of its exercises
-     * @return
+     * @return the experience value of a workout
      */
     public int getExperienceValue() {
         int total = 0;

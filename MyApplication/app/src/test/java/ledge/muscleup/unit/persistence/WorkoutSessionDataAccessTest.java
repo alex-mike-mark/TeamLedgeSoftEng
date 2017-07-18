@@ -24,8 +24,8 @@ import ledge.muscleup.model.workout.WorkoutSession;
 /**
  * Used for testing the InterfaceWorkoutSessionDataAccess persistence interface
  *
- * @author: Ryan Koop
- * @version: 1.0
+ * @author Ryan Koop
+ * @version 1.0
  * @since 2017-06-29
  *
  */
@@ -38,7 +38,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
 
     ScheduleWeek scheduleWeek;
     /**
-     * Constructor for the WorkoutSessoionDataAccessTest
+     * Constructor for the WorkoutSessionDataAccessTest
      */
     public WorkoutSessionDataAccessTest(String arg0)
     {
@@ -90,7 +90,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
         assertEquals("Marathon Training Starts Here", workoutSession.getName());
         assertEquals(new LocalDate().plusWeeks(1).withDayOfWeek(DateTimeConstants.TUESDAY), workoutSession.getDate());
 
-        workoutSession = dataAccess.getWorkoutSession(new LocalDate(2000, 01, 01));
+        workoutSession = dataAccess.getWorkoutSession(new LocalDate(2000, 1, 1));
         assertNull(workoutSession);
 
         System.out.println("Finishing testGetWorkoutSession\n");

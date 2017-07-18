@@ -1,6 +1,5 @@
 package ledge.muscleup.persistence;
 
-import org.joda.time.DateTime;
 import org.joda.time.LocalDateTime;
 
 import java.sql.ResultSet;
@@ -49,7 +48,7 @@ public class ExperienceDataAccess implements InterfaceExperienceDataAccess {
     @Override
     public List<CompletedWorkoutRecord> getCompletedWorkouts() {
         List<CompletedWorkoutRecord> completedWorkoutRecordList = new ArrayList<>();
-        CompletedWorkoutRecord completedWorkoutRecord = null;
+        CompletedWorkoutRecord completedWorkoutRecord;
         String workoutName = null;
         LocalDateTime loggedDate = null;
         int currentXP = -1;
