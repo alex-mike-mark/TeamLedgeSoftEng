@@ -8,7 +8,6 @@ import ledge.muscleup.business.AccessWorkoutSessions;
 import ledge.muscleup.business.AccessWorkouts;
 import ledge.muscleup.model.workout.Workout;
 import ledge.muscleup.model.workout.WorkoutSession;
-import ledge.muscleup.presentation.ExerciseActivity;
 import ledge.muscleup.presentation.MainActivity;
 import ledge.muscleup.presentation.ProgressReportActivity;
 import ledge.muscleup.presentation.WorkoutSessionActivity;
@@ -57,9 +56,7 @@ public class ProgressReportAcceptanceTest extends ActivityInstrumentationTestCas
         //a lot of set up to add some workout sessions into the schedule
         //rationale: figuring out how to do that without the recorder was eating up
         //a lot of time. Working through the db is much simpler.
-        LocalDate oneAgo;
-        LocalDate twoAgo;
-        LocalDate threeAgo;
+        LocalDate oneAgo, twoAgo, threeAgo;
         WorkoutSession ws0,ws1,ws2,ws3;
         boolean onCurrWeek = false;
 
@@ -69,6 +66,7 @@ public class ProgressReportAcceptanceTest extends ActivityInstrumentationTestCas
 
         List<Workout> wList = aw.getWorkoutsList();
 
+        //create and insert the workouts to be used to grind to level 1.
         ws0 = new WorkoutSession(wList.get(3),today,false);
         ws1 = new WorkoutSession(wList.get(2),oneAgo,false);
         ws2 = new WorkoutSession(wList.get(1),twoAgo,false);
@@ -87,10 +85,12 @@ public class ProgressReportAcceptanceTest extends ActivityInstrumentationTestCas
         solo.goBack();
 
         //complete some workouts to boost our level.
+        //we go chronologically here to simplify flipping between weeks.
         solo.clickOnButton("Workout Schedule");
         solo.clickOnButton("Previous");
 
         for(int i = 0;i<4;i++){
+            //if we can't find the workout we want to complete last week, all the rest are this week.
             if(!solo.searchText(wList.get(i).getName())){
                 onCurrWeek = true;
                 solo.clickOnButton("Next");
@@ -99,10 +99,15 @@ public class ProgressReportAcceptanceTest extends ActivityInstrumentationTestCas
             solo.assertCurrentActivity("Somehow we aren't in the workout session activity", WorkoutSessionActivity.class);
             solo.clickOnText("Complete");
             solo.clickOnText("Back");
+
+            //this activity defaults tot he current week, so
+            //if we're still in last week, we have to go back again.
             if(!onCurrWeek){
                 solo.clickOnButton("Previous");
             }
         }
+
+        //double check on our progress report.
         solo.goBack();
         solo.clickOnButton("Progress Report");
         solo.assertCurrentActivity("We aren't in the prog report activity!", ProgressReportActivity.class);
