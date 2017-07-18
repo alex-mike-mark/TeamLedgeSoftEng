@@ -16,11 +16,12 @@ import ledge.muscleup.model.experience.LevelProgress;
  * @version 3.0
  * @since 2017-07-08
  */
-public class LevelProgressTest {
-    private static final String WORKOUT_NAME = "placeholder name";
-    private static final int EXPERIENCE_BEFORE = 1025;
-    private static final int EXPERIENCE_AFTER = 1550;
-    private static final LocalDateTime COMPLETE_DATE = new LocalDateTime(2017, 10, 20, 8, 30);
+
+public class LevelProgressTest extends TestCase {
+    private final String WORKOUT_NAME = "placeholder name";
+    private final int EXPERIENCE_BEFORE = 1025;
+    private final int EXPERIENCE_AFTER = 1550;
+    private final LocalDateTime COMPLETE_DATE = new LocalDateTime(2017, 10, 20, 8, 30);
 
     private LevelProgress levelProgress;
 
