@@ -38,7 +38,7 @@ public class WorkoutSessionDataAccessTest extends TestCase {
 
     ScheduleWeek scheduleWeek;
     /**
-     * Constructor for the WorkoutSessoionDataAccessTest
+     * Constructor for the WorkoutSessionDataAccessTest
      */
     public WorkoutSessionDataAccessTest(String arg0)
     {

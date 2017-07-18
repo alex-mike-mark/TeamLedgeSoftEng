@@ -103,7 +103,7 @@ public class WorkoutDetailsActivity extends Activity {
 
         /**
          * A wrapper class holding the different elements of a single list item in the list view.
-         * Contains 1 TextView for exercise name, and 1 TextView that contians the quantity
+         * Contains 1 TextView for exercise name, and 1 TextView that contains the quantity
          */
         private class ViewHolder {
             TextView exerciseName;

@@ -39,7 +39,7 @@ public class WorkoutExerciseSetsAndWeight extends WorkoutExercise{
     public InterfaceExerciseSetsAndWeight getQuantity() { return recommendedSetsAndWeight; }
 
     /**
-     * Updates the recommendedSestAndWeight
+     * Updates the recommendedSetsAndWeight
      * Note, this method takes in a generic InterfaceExerciseQuantity where specific subclasses require
      * specific implementations of that interface. Type checking MUST happen in the implementation.
      * I am quite aware this isn't great but whatever.

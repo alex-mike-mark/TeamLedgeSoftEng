@@ -1,7 +1,7 @@
 package ledge.muscleup.model.exercise;
 
 /**
- * The interface for tracking the number of sets and the number of reps in each set for repetative
+ * The interface for tracking the number of sets and the number of reps in each set for repetitive
  * exercises
  *
  * @author Cole Kehler

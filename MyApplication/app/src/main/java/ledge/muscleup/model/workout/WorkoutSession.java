@@ -121,7 +121,7 @@ public class WorkoutSession {
     }
 
     /**
-     * Returns {@code true} if the worokout has been completed, or {@code false} otherwise
+     * Returns {@code true} if the workout has been completed, or {@code false} otherwise
      *
      * @return a boolean representing if the workout has been completed
      */
@@ -252,7 +252,7 @@ public class WorkoutSession {
 
     /**
      * Returns the list of workout session exercises
-     * @return the list of workout session exercices
+     * @return the list of workout session exercises
      */
     public List<WorkoutSessionExercise> getWorkoutSessionExercises(){
         return exerciseList;
