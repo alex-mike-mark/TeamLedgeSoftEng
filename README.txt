@@ -86,6 +86,11 @@ Also contained is our endless ambitions for a future society in which all lifefo
 				MuscleUpApplication (sets up JODA for date, time tracking)
 	test
 		ledge.muscleup (test)
+			integration
+				BusinessPersistenceSeamTest
+				DataAccessHSQLDBTest
+			model.unit.business
+				TemplateDataAccessStub
 			business
 				AccessExercisesTest
 				AccessExperienceTest
