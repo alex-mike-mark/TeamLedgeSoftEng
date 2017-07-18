@@ -31,7 +31,6 @@ import ledge.muscleup.model.workout.Workout;
  */
 
 public class WorkoutDetailsActivity extends Activity {
-    private ListItemAdapter adapter;
     private Workout workout;
 
     /**
@@ -49,7 +48,7 @@ public class WorkoutDetailsActivity extends Activity {
 
         ListView listView = (ListView) findViewById(R.id.list_panel);
 
-        adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_workout_exercise, exerciseList);
+        ListItemAdapter adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_workout_exercise, exerciseList);
         TextView title = (TextView) findViewById(R.id.activity_title);
         title.setText(workout.getName());
 

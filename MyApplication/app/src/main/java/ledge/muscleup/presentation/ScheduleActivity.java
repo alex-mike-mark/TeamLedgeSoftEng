@@ -50,10 +50,11 @@ public class ScheduleActivity extends Activity {
 
     private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd");
     private static final DateTimeFormatter monthDayYearFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
-    private int weekStartDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        int weekStartDay;
+
         aws = new AccessWorkoutSessions();
         weekStartDay = DateTimeConstants.SUNDAY;
         scheduleWeek = new ScheduleWeek(weekStartDay, aws.getCurrentWeekSessions(weekStartDay));

@@ -28,13 +28,13 @@ import ledge.muscleup.model.exercise.enums.WeightUnit;
  */
 public class DataAccess implements InterfaceDataAccess {
     private static final String SHUTDOWN_CMD = "shutdown compact";
+    private static final String DB_PATH_PREFIX = "jdbc:hsqldb:file:";
 
     static final int NULL_NUM = -1;
     static final int XP_PER_INTENSITY = 50;
 
     private String dbName;
     private String dbType = "HSQLDB";
-    private String dbPathPrefix = "jdbc:hsqldb:file:";
     private Connection connection;
 
     /**
@@ -53,7 +53,7 @@ public class DataAccess implements InterfaceDataAccess {
     public void open(String dbPath) {
         try {
             Class.forName("org.hsqldb.jdbcDriver").newInstance();
-            connection = DriverManager.getConnection(dbPathPrefix + dbPath, "SA", "");
+            connection = DriverManager.getConnection(DB_PATH_PREFIX + dbPath, "SA", "");
         }
         catch (Exception e) {
             sqlError(e);

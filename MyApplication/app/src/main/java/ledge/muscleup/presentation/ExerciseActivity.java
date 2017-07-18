@@ -30,7 +30,6 @@ import ledge.muscleup.model.exercise.Exercise;
  */
 
 public class ExerciseActivity extends Activity {
-    private ListItemAdapter adapter;
     private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
     /**
      *  onCreate initializes ExerciseActivity
@@ -51,7 +50,7 @@ public class ExerciseActivity extends Activity {
         TextView title = (TextView) findViewById(R.id.activity_title);
         title.setText(R.string.text_exerciseCollection);
 
-        adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_exercise, exerciseList);
+        ListItemAdapter adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_exercise, exerciseList);
         listView.setAdapter(adapter);
         listView.setItemsCanFocus(true);
     }

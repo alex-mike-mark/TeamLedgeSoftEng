@@ -30,7 +30,6 @@ import ledge.muscleup.model.workout.Workout;
 
 public class WorkoutActivity extends Activity {
 
-    private ListItemAdapter adapter;
     /**
      *  onCreate initializes WorkoutActivity
      * @param savedInstanceState contains context from last activity (eg MainActivity)
@@ -49,7 +48,7 @@ public class WorkoutActivity extends Activity {
         TextView title = (TextView) findViewById(R.id.activity_title);
         title.setText(R.string.text_workoutCollection);
 
-        adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_workout, workoutList);
+        ListItemAdapter adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_workout, workoutList);
         listView.setAdapter(adapter);
         listView.setItemsCanFocus(true);
 

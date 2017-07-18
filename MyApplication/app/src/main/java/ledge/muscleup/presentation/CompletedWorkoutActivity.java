@@ -41,7 +41,6 @@ import ledge.muscleup.model.workout.WorkoutSession;
 public class CompletedWorkoutActivity extends Activity {
 
     private static final DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
-    private ListItemAdapter adapter;
     private WorkoutSession workoutSession;  //the workout session in view
     private final InterfaceAccessExperience ae = new AccessExperience();
 
@@ -60,7 +59,7 @@ public class CompletedWorkoutActivity extends Activity {
         TextView completedWorkoutTotalXP = (TextView) findViewById(R.id.completedWorkoutTotalXP);
         completedWorkoutTotalXP.setText(getResources().getString(R.string.text_experienceGained, workoutSession.getExperienceValue()));
 
-        adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_completed_exercise, workoutSession.getWorkoutSessionExercises());
+        ListItemAdapter adapter = new ListItemAdapter(getApplicationContext(), R.layout.list_item_completed_exercise, workoutSession.getWorkoutSessionExercises());
         listView.setAdapter(adapter);
 
         Button backToScheduleButton = (Button) findViewById(R.id.backToScheduleButton);
